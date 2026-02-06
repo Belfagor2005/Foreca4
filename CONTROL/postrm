@@ -1,0 +1,4 @@
+#!/bin/bash
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/Foreca4  > /dev/null 2>&1
+echo 'Package removed.'
+exit 0
