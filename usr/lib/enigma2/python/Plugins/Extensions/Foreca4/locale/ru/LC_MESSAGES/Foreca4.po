@@ -1,0 +1,611 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-02-06 21:42+0100\n"
+"Last-Translator: Warder <ciksa@seznam.cz>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 3.8\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ui.py\n"
+
+msgid "0 - Today"
+msgstr "0 - Сегодня"
+
+msgid "1 - Today + 1 day"
+msgstr "1 - Сегодня + 1 день"
+
+msgid "2 - Today + 2 days"
+msgstr "2 - Сегодня + 2 дня"
+
+msgid "3 - Today + 3 days"
+msgstr "3 - Сегодня + 3 дня"
+
+msgid "4 - Today + 4 days"
+msgstr "4 - Сегодня + 4 дня"
+
+msgid "5 - Today + 5 days"
+msgstr "5 - Сегодня + 5 дней"
+
+msgid "6 - Today + 6 days"
+msgstr "6 - Сегодня + 6 дней"
+
+msgid "7 - Today + 7 days"
+msgstr "7 - Сегодня + 7 дней"
+
+msgid "8 - Today + 8 days"
+msgstr "8 - Сегодня + 8 дней"
+
+msgid "9 - Today + 9 days"
+msgstr "9 - Сегодня + 9 дней"
+
+msgid "<< ver."
+msgstr "<< вер."
+
+msgid "Afternoon"
+msgstr "Полдень"
+
+msgid "An error occurred during search!"
+msgstr "Произошла ошибка во время поиска!"
+
+msgid "Assign to Favorite 1"
+msgstr "Назначить в Избранное 1"
+
+msgid "Assign to Favorite 2"
+msgstr "Назначить в Избранное 2"
+
+msgid "Assign to Home"
+msgstr "Назначить как Домашнее"
+
+msgid "Australia"
+msgstr "Австралия"
+
+msgid "Austria"
+msgstr "Австрия"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "Baden-Wuerttemberg"
+msgstr "Баден-Вюртемберг"
+
+msgid "Bavaria"
+msgstr "Бавария"
+
+msgid "Belgium"
+msgstr "Бельгия"
+
+msgid "Berlin"
+msgstr "Берлин"
+
+msgid "Blue"
+msgstr "Синий"
+
+msgid "Blue - Home"
+msgstr "Синяя кнопка - Домой"
+
+msgid "Brandenburg"
+msgstr "Бранденбург"
+
+msgid "Bremen"
+msgstr "Бремен"
+
+msgid "City Selection"
+msgstr "Выбор города"
+
+msgid "City list file not found!"
+msgstr "Файл списка городов не найден!"
+
+msgid "Clear"
+msgstr "Ясно"
+
+msgid "Cloudy"
+msgstr "Облачно"
+
+msgid "Cloudy and light rain"
+msgstr "Облачно и мелкий дождь"
+
+msgid "Cloudy and light snow"
+msgstr "Облачно и мелкий снег"
+
+msgid "Cloudy and light wet snow"
+msgstr "Облачно и легкий мокрый снег"
+
+msgid "Cloudy and showers"
+msgstr "Облачно и дожди"
+
+msgid "Cloudy and snow showers"
+msgstr "Облачно и ливневый снег"
+
+msgid "Cloudy and wet snow showers"
+msgstr "Облачно, дожди и снегопады"
+
+msgid "Cloudy, thunderstorms with rain"
+msgstr "Облачно, грозы с дождем"
+
+msgid "Color data"
+msgstr "Данные цвета"
+
+msgid "Color file not found"
+msgstr "Файл цвета не найден"
+
+msgid "Color name"
+msgstr "Название цвета"
+
+msgid "Color selection"
+msgstr "Выбор цвета"
+
+msgid "Continents Weather Maps"
+msgstr "Погодные карты континентов"
+
+msgid "Current weather and forecast"
+msgstr "Текущая погода и прогноз погоды"
+
+msgid "Current weather and forecast for the next 10 days"
+msgstr "Текущая погода и прогноз на следующие 10 дней"
+
+msgid "Czech Republic"
+msgstr "Чешская Республика"
+
+msgid "Denmark"
+msgstr "Дания"
+
+msgid "Dewpoint"
+msgstr "Точка росы"
+
+msgid "Down - Next page"
+msgstr "Вниз - Следующая страница"
+
+msgid "Downloading images..."
+msgstr "Загрузка изображений..."
+
+msgid "East Asia"
+msgstr "Восточная Азия"
+
+msgid "Error loading city list!"
+msgstr "Ошибка загрузки списка городов!"
+
+msgid "Error loading colors"
+msgstr "Ошибка загрузки цветов"
+
+msgid "Error loading maps. Check connection."
+msgstr "Ошибка загрузки карт. Проверьте соединение."
+
+msgid "Error saving favorite!"
+msgstr "Ошибка сохранения избранного!"
+
+msgid "Europe"
+msgstr "Европа"
+
+msgid "European Weather Maps"
+msgstr "Европейские погодные карты"
+
+msgid "Evening"
+msgstr "Вечер"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Exit - End"
+msgstr "Выход - Закрыть"
+
+msgid "Faster: {}s"
+msgstr "Быстрее: {}с"
+
+msgid "Favorite 1"
+msgstr "Избранное 1"
+
+msgid "Favorite 2"
+msgstr "Избранное 2"
+
+msgid "Feels like"
+msgstr "Ощущается как"
+
+msgid "Feels like:"
+msgstr "По ощущениям:"
+
+msgid "Finland"
+msgstr "Финляндия"
+
+msgid "Fog"
+msgstr "Туман"
+
+msgid "Foreca 4"
+msgstr "Foreca 4"
+
+msgid "Foreca 4 Weather and Forecast"
+msgstr "Погода и прогноз Foreca 4"
+
+msgid "Foreca Live Maps (API)"
+msgstr "Foreca Live Карты (API)"
+
+msgid "Foreca Menu"
+msgstr "Меню Foreca"
+
+msgid "Foreca Weather Forecast"
+msgstr "Прогноз Погоды в Фореке"
+
+msgid "Forecast"
+msgstr "Прогноз"
+
+msgid "France"
+msgstr "Франция"
+
+msgid "German States Weather Maps"
+msgstr "Погодные карты немецких земель"
+
+msgid "Germany"
+msgstr "Германия"
+
+msgid "Great Britain"
+msgstr "Великобритания"
+
+msgid "Greece"
+msgstr "Греция"
+
+msgid "Green"
+msgstr "Зеленый"
+
+msgid "Green - Favorite 1"
+msgstr "Зелёная кнопка - Избранное 1"
+
+msgid "Gust"
+msgstr "Порыв ветра"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "Hamburg"
+msgstr "Гамбург"
+
+msgid "Hesse"
+msgstr "Гессен"
+
+msgid "Home"
+msgstr "Домашнее"
+
+msgid "Humidity:"
+msgstr "Влажность:"
+
+msgid "Hungary"
+msgstr "Венгрия"
+
+msgid "Image not available"
+msgstr "Изображение недоступно"
+
+msgid "Info - About"
+msgstr "Инфо - О программе"
+
+msgid "Ireland"
+msgstr "Ирландия"
+
+msgid "Italy"
+msgstr "Италия"
+
+msgid "Jump 100 down"
+msgstr "Перейти на 100 вниз"
+
+msgid "Jump 100 up"
+msgstr "Перейти на 100 вверх"
+
+msgid "Jump 500 down"
+msgstr "Перейти на 500 вниз"
+
+msgid "Jump 500 up"
+msgstr "Перейти на 500 вверх"
+
+msgid "Keyboard"
+msgstr "Клавиатура"
+
+msgid "Latvia"
+msgstr "Латвия"
+
+msgid "Left - Previous day"
+msgstr "Налево - Предыдущий день"
+
+msgid "Left arrow - Previous day"
+msgstr "Стрелка влево - Предыдущий день"
+
+msgid "Loading available maps..."
+msgstr "Загрузка доступных карт..."
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Lower Saxony"
+msgstr "Нижняя Саксония"
+
+msgid "Luxembourg"
+msgstr "Люксембург"
+
+msgid "Mecklenburg-Vorpommern"
+msgstr "Мекленбург-Передняя Померания"
+
+msgid "Menu - Settings"
+msgstr "Меню - Настройки"
+
+msgid "Meteogram"
+msgstr "Метеограмма"
+
+msgid "Middle America"
+msgstr "Центральная Америка"
+
+msgid "Middle Asia"
+msgstr "Центральная Азия"
+
+msgid "Middle East"
+msgstr "Ближний Восток"
+
+msgid "Morning"
+msgstr "Утро"
+
+msgid "Mostly clear"
+msgstr "В основном ясно"
+
+msgid "N/A"
+msgstr "Н/Д"
+
+msgid "Netherlands"
+msgstr "Нидерланды"
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "Next page"
+msgstr "Следующая страница"
+
+msgid "No City found in search!!!"
+msgstr "Город не найден в поиске!!!"
+
+msgid "No data available"
+msgstr "Данные недоступны"
+
+msgid "North Africa"
+msgstr "Северная Африка"
+
+msgid "North America"
+msgstr "Северная Америка"
+
+msgid "North Rhine-Westphalia"
+msgstr "Северный Рейн-Вестфалия"
+
+msgid "Norway"
+msgstr "Норвегия"
+
+msgid "OK - Ext Info"
+msgstr "ОК - Доп. инфо"
+
+msgid "Open Keyboard"
+msgstr "Открыть клавиатуру"
+
+msgid "Overcast"
+msgstr "Сплошная облачность"
+
+msgid "Overcast and light rain"
+msgstr "Пасмурно и мелкий дождь"
+
+msgid "Overcast and light snow"
+msgstr "Пасмурно и легкий снег"
+
+msgid "Overcast and light wet snow"
+msgstr "Пасмурно и легкий мокрый снег"
+
+msgid "Overcast and rain"
+msgstr "Пасмурно и дождь"
+
+msgid "Overcast and showers"
+msgstr "Пасмурно и ливни"
+
+msgid "Overcast and snow"
+msgstr "Пасмурно и снег"
+
+msgid "Overcast and snow showers"
+msgstr "Пасмурно и ливневый снег"
+
+msgid "Overcast and wet snow"
+msgstr "Пасмурно и мокрый снег"
+
+msgid "Overcast and wet snow showers"
+msgstr "Пасмурно и ливни со снегопадом"
+
+msgid "Overcast, thunderstorms with rain"
+msgstr "Пасмурно, грозы с дождем"
+
+msgid "Overnight"
+msgstr "Ночь"
+
+msgid "Partly cloudy"
+msgstr "Переменная облачность"
+
+msgid "Partly cloudy and light rain"
+msgstr "Переменная облачность и небольшой дождь"
+
+msgid "Partly cloudy and light snow"
+msgstr "Переменная облачность и небольшой снег"
+
+msgid "Partly cloudy and light wet snow"
+msgstr "Переменная облачность и небольшой мокрый снег"
+
+msgid "Partly cloudy and showers"
+msgstr "Переменная облачность и ливни"
+
+msgid "Partly cloudy and snow showers"
+msgstr "Переменная облачность и ливневый снег"
+
+msgid "Partly cloudy and wet snow showers"
+msgstr "Переменная облачность и сильный снег"
+
+msgid "Partly cloudy, possible thunderstorms with rain"
+msgstr "Переменная облачность, возможны грозы с дождем"
+
+msgid "Please wait ..."
+msgstr "Пожалуйста, подождите ..."
+
+msgid "Poland"
+msgstr "Польша"
+
+msgid "Portugal"
+msgstr "Португалия"
+
+msgid "Precipitations:"
+msgstr "Вероятность осадков:"
+
+msgid "Previous"
+msgstr "Предыдущий"
+
+msgid "Previous page"
+msgstr "Предыдущая страница"
+
+msgid "Red"
+msgstr "Красный"
+
+msgid "Red - Color select"
+msgstr "Красная кнопка - Выбор цвета"
+
+msgid "Rhineland-Palatine"
+msgstr "Рейнланд-Пфальц"
+
+msgid "Right - Next day"
+msgstr "Направо - Следующий день"
+
+msgid "Right arrow - Next day"
+msgstr "Стрелка вправо - Следующий день"
+
+msgid "Russia"
+msgstr "Россия"
+
+msgid "Saarland"
+msgstr "Саар"
+
+msgid "Satellite Photos"
+msgstr "Спутниковые снимки"
+
+msgid "Satellite photos coming soon!"
+msgstr "Спутниковые снимки скоро!"
+
+msgid "Saxony"
+msgstr "Саксония"
+
+msgid "Saxony-Anhalt"
+msgstr "Саксония-Анхальт"
+
+msgid "Schleswig-Holstein"
+msgstr "Шлезвиг-Гольштейн"
+
+msgid "Search your City"
+msgstr "Поиск вашего города"
+
+msgid "Select"
+msgstr "Выбрать"
+
+msgid "Select a city"
+msgstr "Выберите город"
+
+msgid "Select a map with OK"
+msgstr "Выберите карту с OK"
+
+msgid "Show info"
+msgstr "Показать информацию"
+
+msgid "Slovakia"
+msgstr "Словакия"
+
+msgid "Slower: {}s"
+msgstr "Медленнее: {}с"
+
+msgid "South Africa"
+msgstr "Южная Африка"
+
+msgid "South America"
+msgstr "Южная Америка"
+
+msgid "Southeast Asia"
+msgstr "Юго-Восточная Азия"
+
+msgid "Spain"
+msgstr "Испания"
+
+msgid "Sunrise"
+msgstr "Восход"
+
+msgid "Sunset"
+msgstr "Закат"
+
+msgid "Sweden"
+msgstr "Швеция"
+
+msgid "Switzerland"
+msgstr "Швейцария"
+
+msgid "Temp"
+msgstr "Темп"
+
+msgid "Thin upper cloud"
+msgstr "Дымка"
+
+msgid "Thuringia"
+msgstr "Тюрингия"
+
+msgid "Transparency Settings"
+msgstr "Настройки прозрачности"
+
+msgid "Transparency level"
+msgstr "Уровень прозрачности"
+
+msgid "Unknown"
+msgstr "Неизвестно"
+
+msgid "Up - Previous page"
+msgstr "Вверх - Предыдущая страница"
+
+msgid "Weather Maps"
+msgstr "Погодные карты"
+
+msgid "Weather Maps & Satellite"
+msgstr "Погодные карты и спутник"
+
+msgid "Weather Maps (Wetterkontor)"
+msgstr "Погодные карты (Wetterkontor)"
+
+msgid "Weather Maps Slideshow"
+msgstr "Слайд-шоу погодных карт"
+
+msgid "Weather Radar"
+msgstr "Метеорологический радар"
+
+msgid "Weather today"
+msgstr "Погода сегодня"
+
+msgid "Weather tomorrow"
+msgstr "Погода завтра"
+
+msgid "Wind"
+msgstr "Ветер"
+
+msgid "Wind speed"
+msgstr "Скорость ветра"
+
+msgid "Window transparency"
+msgstr "Прозрачность окон"
+
+msgid "Yellow - Favorite 2"
+msgstr "Желтая кнопка - Избранное 2"
+
+msgid "hPa"
+msgstr "гПа"
+
+msgid "km/h"
+msgstr "км/ч"
+
+msgid "mm"
+msgstr "мм"
+
+msgid "v."
+msgstr "в."

@@ -1,0 +1,613 @@
+# Foreca4 translations
+# Copyright (C) 2025 Lululla Team
+# This file is distributed under the same license as the Lululla package.
+# [lululla] <ekekaz@gmail.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Foreca4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-02-06 21:29+0100\n"
+"Last-Translator: root <EMAIL@ADDRESS>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+msgid "0 - Today"
+msgstr "0 - Oggi"
+
+msgid "1 - Today + 1 day"
+msgstr "1 - Oggi + 1 giorno"
+
+msgid "2 - Today + 2 days"
+msgstr "2 - Oggi + 2 giorni"
+
+msgid "3 - Today + 3 days"
+msgstr "3 - Oggi + 3 giorni"
+
+msgid "4 - Today + 4 days"
+msgstr "4 - Oggi + 4 giorni"
+
+msgid "5 - Today + 5 days"
+msgstr "5 - Oggi + 5 giorni"
+
+msgid "6 - Today + 6 days"
+msgstr "6 - Oggi + 6 giorni"
+
+msgid "7 - Today + 7 days"
+msgstr "7 - Oggi + 7 giorni"
+
+msgid "8 - Today + 8 days"
+msgstr "8 - Oggi + 8 giorni"
+
+msgid "9 - Today + 9 days"
+msgstr "9 - Oggi + 9 giorni"
+
+msgid "<< ver."
+msgstr "<< ver."
+
+msgid "Afternoon"
+msgstr "Pomeriggio"
+
+msgid "An error occurred during search!"
+msgstr "Si è verificato un errore durante la ricerca!"
+
+msgid "Assign to Favorite 1"
+msgstr "Assegna a Preferito 1"
+
+msgid "Assign to Favorite 2"
+msgstr "Assegna a Preferito 2"
+
+msgid "Assign to Home"
+msgstr "Assegna a Casa"
+
+msgid "Australia"
+msgstr "Australia"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "Back"
+msgstr "Indietro"
+
+msgid "Baden-Wuerttemberg"
+msgstr "Baden-Württemberg"
+
+msgid "Bavaria"
+msgstr "Baviera"
+
+msgid "Belgium"
+msgstr "Belgio"
+
+msgid "Berlin"
+msgstr "Berlino"
+
+msgid "Blue"
+msgstr "Blu"
+
+msgid "Blue - Home"
+msgstr "Blu - Principale"
+
+msgid "Brandenburg"
+msgstr "Brandeburgo"
+
+msgid "Bremen"
+msgstr "Brema"
+
+msgid "City Selection"
+msgstr "Selezione Città"
+
+msgid "City list file not found!"
+msgstr "File lista città non trovato!"
+
+msgid "Clear"
+msgstr "Sereno"
+
+msgid "Cloudy"
+msgstr "Nuvoloso"
+
+msgid "Cloudy and light rain"
+msgstr "Nuvoloso e pioggia leggera"
+
+msgid "Cloudy and light snow"
+msgstr "Nuvoloso e neve leggera"
+
+msgid "Cloudy and light wet snow"
+msgstr "Nuvoloso e neve bagnata leggera"
+
+msgid "Cloudy and showers"
+msgstr "Nuvoloso e rovesci"
+
+msgid "Cloudy and snow showers"
+msgstr "Nuvoloso e rovesci di neve"
+
+msgid "Cloudy and wet snow showers"
+msgstr "Nuvoloso e rovesci di neve bagnata"
+
+msgid "Cloudy, thunderstorms with rain"
+msgstr "Nuvoloso, temporali con pioggia"
+
+msgid "Color data"
+msgstr "Dati colore"
+
+msgid "Color file not found"
+msgstr "File colore non trovato"
+
+msgid "Color name"
+msgstr "Nome colore"
+
+msgid "Color selection"
+msgstr "Selezione del colore"
+
+msgid "Continents Weather Maps"
+msgstr "Mappe Meteo dei Continenti"
+
+msgid "Current weather and forecast"
+msgstr "Meteo attuale e previsioni"
+
+msgid "Current weather and forecast for the next 10 days"
+msgstr "Meteo attuale e previsioni per i prossimi 10 giorni"
+
+msgid "Czech Republic"
+msgstr "Repubblica Ceca"
+
+msgid "Denmark"
+msgstr "Danimarca"
+
+msgid "Dewpoint"
+msgstr "Punto di rugiada"
+
+msgid "Down - Next page"
+msgstr "Giù - Pagina successiva"
+
+msgid "Downloading images..."
+msgstr "Download immagini in corso..."
+
+msgid "East Asia"
+msgstr "Asia Orientale"
+
+msgid "Error loading city list!"
+msgstr "Errore nel caricamento della lista città!"
+
+msgid "Error loading colors"
+msgstr "Errore nel caricamento dei colori"
+
+msgid "Error loading maps. Check connection."
+msgstr ""
+
+msgid "Error saving favorite!"
+msgstr ""
+
+msgid "Europe"
+msgstr "Europa"
+
+msgid "European Weather Maps"
+msgstr "Mappe Meteo Europee"
+
+msgid "Evening"
+msgstr "Sera"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Exit - End"
+msgstr "Uscita - Fine"
+
+msgid "Faster: {}s"
+msgstr "Più veloce: {}s"
+
+msgid "Favorite 1"
+msgstr "Preferito 1"
+
+msgid "Favorite 2"
+msgstr "Preferito 2"
+
+msgid "Feels like"
+msgstr "Percepita"
+
+msgid "Feels like:"
+msgstr "Percepita:"
+
+msgid "Finland"
+msgstr "Finlandia"
+
+msgid "Fog"
+msgstr "Nebbia"
+
+msgid "Foreca 4"
+msgstr "Foreca 4"
+
+msgid "Foreca 4 Weather and Forecast"
+msgstr "Meteo e previsioni Foreca 4"
+
+msgid "Foreca Live Maps (API)"
+msgstr "Foreca Mappe Live (API)"
+
+msgid "Foreca Menu"
+msgstr "Menu Foreca"
+
+msgid "Foreca Weather Forecast"
+msgstr "Previsioni del tempo Foreca"
+
+msgid "Forecast"
+msgstr "Previsione"
+
+msgid "France"
+msgstr "Francia"
+
+msgid "German States Weather Maps"
+msgstr "Mappe Meteo degli Stati Tedeschi"
+
+msgid "Germany"
+msgstr "Germania"
+
+msgid "Great Britain"
+msgstr "Gran Bretagna"
+
+msgid "Greece"
+msgstr "Grecia"
+
+msgid "Green"
+msgstr "Verde"
+
+msgid "Green - Favorite 1"
+msgstr "Verde - Favorito 1"
+
+msgid "Gust"
+msgstr "Raffica"
+
+msgid "HTML"
+msgstr "HTML"
+
+msgid "Hamburg"
+msgstr "Amburgo"
+
+msgid "Hesse"
+msgstr "Assia"
+
+msgid "Home"
+msgstr ""
+
+msgid "Humidity:"
+msgstr "Umidità:"
+
+msgid "Hungary"
+msgstr "Ungheria"
+
+msgid "Image not available"
+msgstr "Immagine non disponibile"
+
+msgid "Info - About"
+msgstr "Info - Informazioni"
+
+msgid "Ireland"
+msgstr "Irlanda"
+
+msgid "Italy"
+msgstr "Italia"
+
+msgid "Jump 100 down"
+msgstr "Salta 100 in giù"
+
+msgid "Jump 100 up"
+msgstr "Salta 100 in su"
+
+msgid "Jump 500 down"
+msgstr "Salta 500 in giù"
+
+msgid "Jump 500 up"
+msgstr "Salta 500 in su"
+
+msgid "Keyboard"
+msgstr "Tastiera"
+
+msgid "Latvia"
+msgstr "Lettonia"
+
+msgid "Left - Previous day"
+msgstr "Sinistra - Giorno precedente"
+
+msgid "Left arrow - Previous day"
+msgstr "Freccia sinistra - Giorno precedente"
+
+msgid "Loading available maps..."
+msgstr "Caricamento mappe disponibili..."
+
+msgid "Loading..."
+msgstr "Caricamento..."
+
+msgid "Lower Saxony"
+msgstr "Bassa Sassonia"
+
+msgid "Luxembourg"
+msgstr "Lussemburgo"
+
+msgid "Mecklenburg-Vorpommern"
+msgstr "Meclemburgo-Pomerania Anteriore"
+
+msgid "Menu - Settings"
+msgstr "Menu - Impostazioni"
+
+msgid "Meteogram"
+msgstr "Meteogramma"
+
+msgid "Middle America"
+msgstr "America Centrale"
+
+msgid "Middle Asia"
+msgstr "Asia Centrale"
+
+msgid "Middle East"
+msgstr "Medio Oriente"
+
+msgid "Morning"
+msgstr "Mattina"
+
+msgid "Mostly clear"
+msgstr "Per lo più sereno"
+
+msgid "N/A"
+msgstr "N/D"
+
+msgid "Netherlands"
+msgstr "Paesi Bassi"
+
+msgid "Next"
+msgstr "Avanti"
+
+msgid "Next page"
+msgstr "Pagina successiva"
+
+msgid "No City found in search!!!"
+msgstr "Nessuna città trovata nella ricerca!!!"
+
+msgid "No data available"
+msgstr "Nessun dato disponibile"
+
+msgid "North Africa"
+msgstr "Africa del Nord"
+
+msgid "North America"
+msgstr "America del Nord"
+
+msgid "North Rhine-Westphalia"
+msgstr "Renania Settentrionale-Vestfalia"
+
+msgid "Norway"
+msgstr "Norvegia"
+
+msgid "OK - Ext Info"
+msgstr "OK - Informazioni estese"
+
+msgid "Open Keyboard"
+msgstr "Apri Tastiera"
+
+msgid "Overcast"
+msgstr "Coperto"
+
+msgid "Overcast and light rain"
+msgstr "Coperto e pioggia leggera"
+
+msgid "Overcast and light snow"
+msgstr "Coperto e neve leggera"
+
+msgid "Overcast and light wet snow"
+msgstr "Coperto e neve bagnata leggera"
+
+msgid "Overcast and rain"
+msgstr "Coperto e pioggia"
+
+msgid "Overcast and showers"
+msgstr "Coperto e rovesci"
+
+msgid "Overcast and snow"
+msgstr "Coperto e neve"
+
+msgid "Overcast and snow showers"
+msgstr "Coperto e rovesci di neve"
+
+msgid "Overcast and wet snow"
+msgstr "Coperto e neve bagnata"
+
+msgid "Overcast and wet snow showers"
+msgstr "Coperto e rovesci di neve bagnata"
+
+msgid "Overcast, thunderstorms with rain"
+msgstr "Coperto, temporali con pioggia"
+
+msgid "Overnight"
+msgstr "Di notte"
+
+msgid "Partly cloudy"
+msgstr "Parzialmente nuvoloso"
+
+msgid "Partly cloudy and light rain"
+msgstr "Parzialmente nuvoloso e pioggia leggera"
+
+msgid "Partly cloudy and light snow"
+msgstr "Parzialmente nuvoloso e neve leggera"
+
+msgid "Partly cloudy and light wet snow"
+msgstr "Parzialmente nuvoloso e neve bagnata leggera"
+
+msgid "Partly cloudy and showers"
+msgstr "Parzialmente nuvoloso e rovesci"
+
+msgid "Partly cloudy and snow showers"
+msgstr "Parzialmente nuvoloso e rovesci di neve"
+
+msgid "Partly cloudy and wet snow showers"
+msgstr "Parzialmente nuvoloso e rovesci di neve bagnata"
+
+msgid "Partly cloudy, possible thunderstorms with rain"
+msgstr "Parzialmente nuvoloso, possibili temporali con pioggia"
+
+msgid "Please wait ..."
+msgstr "Attendere prego ..."
+
+msgid "Poland"
+msgstr "Polonia"
+
+msgid "Portugal"
+msgstr "Portogallo"
+
+msgid "Precipitations:"
+msgstr "Precipitazioni:"
+
+msgid "Previous"
+msgstr "Precedente"
+
+msgid "Previous page"
+msgstr "Pagina precedente"
+
+msgid "Red"
+msgstr "Rosso"
+
+msgid "Red - Color select"
+msgstr "Rosso - Seleziona colore"
+
+msgid "Rhineland-Palatine"
+msgstr "Renania-Palatinato"
+
+msgid "Right - Next day"
+msgstr "Destra - Il giorno dopo"
+
+msgid "Right arrow - Next day"
+msgstr "Freccia destra - Giorno successivo"
+
+msgid "Russia"
+msgstr "Russia"
+
+msgid "Saarland"
+msgstr "Saarland"
+
+msgid "Satellite Photos"
+msgstr "Foto Satellitari"
+
+msgid "Satellite photos coming soon!"
+msgstr "Foto satellitari in arrivo!"
+
+msgid "Saxony"
+msgstr "Sassonia"
+
+msgid "Saxony-Anhalt"
+msgstr "Sassonia-Anhalt"
+
+msgid "Schleswig-Holstein"
+msgstr "Schleswig-Holstein"
+
+msgid "Search your City"
+msgstr "Cerca la tua Città"
+
+msgid "Select"
+msgstr "Seleziona"
+
+msgid "Select a city"
+msgstr "Seleziona una città"
+
+msgid "Select a map with OK"
+msgstr "Seleziona una mappa con OK"
+
+msgid "Show info"
+msgstr "Mostra info"
+
+msgid "Slovakia"
+msgstr "Slovacchia"
+
+msgid "Slower: {}s"
+msgstr "Più lento: {}s"
+
+msgid "South Africa"
+msgstr "Sudafrica"
+
+msgid "South America"
+msgstr "America del Sud"
+
+msgid "Southeast Asia"
+msgstr "Sud-est Asiatico"
+
+msgid "Spain"
+msgstr "Spagna"
+
+msgid "Sunrise"
+msgstr "Alba"
+
+msgid "Sunset"
+msgstr "Tramonto"
+
+msgid "Sweden"
+msgstr "Svezia"
+
+msgid "Switzerland"
+msgstr "Svizzera"
+
+msgid "Temp"
+msgstr "Temperatura"
+
+msgid "Thin upper cloud"
+msgstr "Nubi alte sottili"
+
+msgid "Thuringia"
+msgstr "Turingia"
+
+msgid "Transparency Settings"
+msgstr "Impostazioni Trasparenza"
+
+msgid "Transparency level"
+msgstr "Livello trasparenza"
+
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+msgid "Up - Previous page"
+msgstr "Su - Pagina precedente"
+
+msgid "Weather Maps"
+msgstr "Mappe Meteo"
+
+msgid "Weather Maps & Satellite"
+msgstr "Mappe Meteo & Satellite"
+
+msgid "Weather Maps (Wetterkontor)"
+msgstr "Mappe Meteo (Wetterkontor)"
+
+msgid "Weather Maps Slideshow"
+msgstr "Presentazione Mappe Meteo"
+
+msgid "Weather Radar"
+msgstr "Radar Meteo"
+
+msgid "Weather today"
+msgstr "Meteo oggi"
+
+msgid "Weather tomorrow"
+msgstr "Meteo domani"
+
+msgid "Wind"
+msgstr "Vento"
+
+msgid "Wind speed"
+msgstr "Velocità del vento"
+
+msgid "Window transparency"
+msgstr "Trasparenza Finestra"
+
+msgid "Yellow - Favorite 2"
+msgstr "Giallo - Favorito 2"
+
+msgid "hPa"
+msgstr "hPa"
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "mm"
+msgstr "mm"
+
+msgid "v."
+msgstr "v."
