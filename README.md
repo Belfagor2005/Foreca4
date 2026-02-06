@@ -1,130 +1,406 @@
 # Foreca4
-Foreca Weather  API Map System
 
-Authentication: Read from api_config.txt → JWT token (30 days)
-Dynamic Layers: Show layers menu from /api/v1/capabilities (Temperature, Precipitation, Wind, Clouds, Pressure, etc.)
-Viewer: 3x3 grid tiles, timeline, overlay on background maps
-Cache: Unified foreca4_map_cache/ folder for tokens, capabilities, and tiles
-Integration: "Foreca Live Maps (API)" menu item in the main plugin
-Background Mapping System
-Smart mapping layer → background PNG:
-temperature → temp_map.png
-precipitation → rain_map.png
-cloud → cloud_map.png
-pressure → pressure_map.png
-wind → europa.png (fallback - no wind_map.png) (existing)
-radar → rain_map.png
-Hierarchical fallback: regional map → europe.png
+<p align="center">
+  <img src="https://github.com/Belfagor2005/Foreca4/blob/main/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca_4.png" alt="Foreca4">
+</p>
 
-End User Documentation
-Registration Guide: https://developer.foreca.com (FREE 30-day trial)
+<p align="center">
+  <a href="https://github.com/Belfagor2005/Foreca4/actions/workflows/pylint.yml">
+    <img src="https://github.com/Belfagor2005/Foreca4/actions/workflows/pylint.yml/badge.svg" alt="Python package">
+  </a>
+  <a href="https://github.com/Belfagor2005/Foreca4">
+    <img src="https://img.shields.io/badge/Version-1.3.4_r2-blue.svg" alt="Version">
+  </a>
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">
+    <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License">
+  </a>
+  <a href="https://python.org">
+    <img src="https://img.shields.io/badge/Python-2.7%2F3.x-yellow.svg" alt="Python">
+  </a>
+</p>
 
-Configuration: Create api_config.txt with:
+---
+
+## Overview
+
+**Foreca4** is a Weather Map System based on the **Foreca Weather API**, providing live and dynamic weather layers integrated into Enigma2.
+
+---
+
+## Features
+
+- **Authentication**
+  - Credentials read from `api_config.txt`
+  - JWT token valid for 30 days
+
+- **Dynamic Layers**
+  - Layers loaded dynamically from `/api/v1/capabilities`
+  - Temperature, Precipitation, Wind, Clouds, Pressure, Radar, etc.
+
+- **Viewer**
+  - 3x3 grid tiles
+  - Timeline support
+  - Overlay on background maps
+
+- **Cache System**
+  - Unified `foreca4_map_cache/` directory
+  - Stores tokens, capabilities, and tiles
+
+- **Integration**
+  - Menu entry: **“Foreca Live Maps (API)”**
+  - Fully integrated in the main plugin menu
+
+---
+
+## Background Mapping System
+
+Smart mapping of Foreca layers to background PNGs:
+
+| Layer           | Background PNG       |
+|-----------------|----------------------|
+| Temperature     | `temp_map.png`       |
+| Precipitation   | `rain_map.png`       |
+| Clouds          | `cloud_map.png`      |
+| Pressure        | `pressure_map.png`   |
+| Wind            | `europa.png` *(fallback)* |
+| Radar           | `rain_map.png`       |
+
+**Fallback logic:**  
+Regional map → `europe.png`
+
+---
+
+## End User Documentation
+
+### Registration
+- Foreca Developer Portal:  
+  👉 https://developer.foreca.com  
+- Free **30-day trial**
+
+### Configuration
+
+Create `api_config.txt`:
+
+```ini
 API_USER=your_user
 API_PASSWORD=your_password
 TOKEN_EXPIRE_HOURS=720
 MAP_SERVER=map-eu.foreca.com
 AUTH_SERVER=pfa.foreca.com
+````
 
-CRITICAL LINKS AND RESOURCES
-Official API Documentation: https://developer.foreca.com
-Trial Registration: Module on developer.foreca.com (1000 requests/day)
-Available PNG Backgrounds: /thumb/[temp|rain|cloud|pressure]_map.png + regional maps
-Old Plugin (reference): https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py
-Configuration File: Foreca4/api_config.txt (template in api_config.txt.example)
+Template available in:
 
-CURRENT LIMITS/CONSIDERATIONS
-Trial Account: 1000 tile requests/day, expires after 30 days
-Mandatory Attribution: Show "Foreca" + specific attributions for radar/satellite data
-Wind Map Background: No existing wind_map.png → use europa.png as background
-Satellite Data: API supports satellite layers (EUMETSAT/NOAA) but not yet implemented
+```
+api_config.txt.example
+```
 
-@Lululla
+---
+
+## Critical Links & Resources
+
+* **Official API Documentation**
+  [https://developer.foreca.com](https://developer.foreca.com)
+
+* **Trial Registration**
+
+  * 1000 requests/day
+
+* **Available PNG Backgrounds**
+
+  ```
+  /thumb/[temp|rain|cloud|pressure]_map.png
+  + regional maps
+  ```
+
+* **Old Plugin (Reference)**
+  [https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py](https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py)
+
+* **Configuration File**
+
+  ```
+  Foreca4/api_config.txt
+  ```
+
+---
+
+## Current Limits & Considerations
+
+* **Trial Account**
+
+  * 1000 tile requests/day
+  * Expires after 30 days
+
+* **Mandatory Attribution**
+
+  * “Foreca” attribution required
+  * Additional attribution for radar/satellite data
+
+* **Wind Map**
+
+  * No `wind_map.png` available
+  * Uses `europa.png` as fallback
+
+* **Satellite Data**
+
+  * Supported by API (EUMETSAT / NOAA)
+  * Not yet implemented
+
+---
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0**.
+
+---
+
+© Lululla
 
 
 
-Sistema Mappe API Foreca (FULLY IMPLEMENTED)
+## Sistema Mappe API Foreca (FULLY IMPLEMENTED)
 
-Autenticazione: Lettura da api_config.txt → token JWT (30 giorni)
-Layer Dinamici: Menu mostra layer da /api/v1/capabilities (Temperature, Precipitazione, Vento, Nuvole, Pressione, etc.)
-Visualizzatore: Griglia 3x3 tile, timeline, overlay su mappe di background
-Cache: Cartella unificata foreca4_map_cache/ per token, capabilities e tile
-Integrazione: Voce menu "Foreca Live Maps (API)" in plugin principale
-Background Mapping System
-Mappatura intelligente layer→background PNG:
-temperature → temp_map.png
-precipitation → rain_map.png
-cloud → cloud_map.png
-pressure → pressure_map.png
-wind → europa.png (fallback - nessun wind_map.png esistente)
-radar → rain_map.png
-Fallback gerarchico: mappa regionale → europa.png
+- **Autenticazione**
+  - Lettura da `api_config.txt`
+  - Token JWT valido 30 giorni
 
-Documentazione Utente Finale
-Guida registrazione: https://developer.foreca.com (FREE 30-day trial)
+- **Layer Dinamici**
+  - Menu dinamico da `/api/v1/capabilities`
+  - Temperature, Precipitazione, Vento, Nuvole, Pressione, ecc.
 
-Configurazione: Creare api_config.txt con:
+- **Visualizzatore**
+  - Griglia tile 3x3
+  - Timeline
+  - Overlay su mappe di background
+
+- **Cache**
+  - Cartella unificata `foreca4_map_cache/`
+  - Token, capabilities e tile
+
+- **Integrazione**
+  - Voce menu **“Foreca Live Maps (API)”** nel plugin principale
+
+---
+
+## Background Mapping System
+
+Mappatura intelligente **layer → background PNG**:
+
+| Layer         | Background PNG |
+|--------------|----------------|
+| Temperature  | `temp_map.png` |
+| Precipitazione | `rain_map.png` |
+| Nuvole       | `cloud_map.png` |
+| Pressione    | `pressure_map.png` |
+| Vento        | `europa.png` *(fallback)* |
+| Radar        | `rain_map.png` |
+
+**Fallback gerarchico:**  
+mappa regionale → `europa.png`
+
+---
+
+## Documentazione Utente Finale
+
+- **Guida Registrazione**
+  - https://developer.foreca.com  
+  - Free **30-day trial**
+
+### Configurazione
+
+Creare il file `api_config.txt`:
+
+```ini
 API_USER=tuo_user
 API_PASSWORD=tua_password
 TOKEN_EXPIRE_HOURS=720
 MAP_SERVER=map-eu.foreca.com
 AUTH_SERVER=pfa.foreca.com
+````
 
-LINK E RISORSE CRITICHE
-Documentazione Ufficiale API: https://developer.foreca.com
-Registrazione Trial: Modulo su developer.foreca.com (1000 richieste/giorno)
-Background PNG Disponibili: /thumb/[temp|rain|cloud|pressure]_map.png + mappe regionali
-Vecchio Plugin (riferimento): https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py
-File di Configurazione: Foreca4/api_config.txt (template in api_config.txt.example)
+Template disponibile in:
 
-LIMITI/CONSIDERAZIONI ATTUALI
-Account Trial: 1000 richieste tile/giorno, scade dopo 30 giorni
-Attribuzione Obbligatoria: Mostrare "Foreca" + attribuzioni specifiche per dati radar/satellite
-Wind Map Background: Nessun wind_map.png esistente → usa europa.png come sfondo
-Satellite Data: API supporta layer satellite (EUMETSAT/NOAA) ma non ancora implementato
+```
+api_config.txt.example
+```
 
-@Lululla
+---
+
+## Link e Risorse Critiche
+
+* **Documentazione Ufficiale API**
+  [https://developer.foreca.com](https://developer.foreca.com)
+
+* **Registrazione Trial**
+
+  * 1000 richieste/giorno
+
+* **Background PNG Disponibili**
+
+  ```
+  /thumb/[temp|rain|cloud|pressure]_map.png
+  + mappe regionali
+  ```
+
+* **Vecchio Plugin (riferimento)**
+  [https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py](https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py)
+
+* **File di Configurazione**
+
+  ```
+  Foreca4/api_config.txt
+  ```
+
+---
+
+## Limiti e Considerazioni Attuali
+
+* **Account Trial**
+
+  * 1000 richieste tile/giorno
+  * Scadenza dopo 30 giorni
+
+* **Attribuzione Obbligatoria**
+
+  * Visualizzare “Foreca”
+  * Attribuzioni specifiche per dati radar/satellite
+
+* **Wind Map Background**
+
+  * Nessun `wind_map.png` disponibile
+  * Usa `europa.png` come sfondo
+
+* **Satellite Data**
+
+  * Supportati da API (EUMETSAT / NOAA)
+  * Non ancora implementati
+
+---
+
+© Lululla
 
 
-Система карт Foreca API (ПОЛНОСТЬЮ РЕАЛИЗОВАНА)
 
-Аутентификация: Чтение из api_config.txt → JWT-токен (30 дней)
-Динамические слои: Отображение меню слоев из /api/v1/capabilities (Температура, Осадки, Ветер, Облачность, Давление и т. д.)
-Просмотрщик: Сетка 3x3, временная шкала, наложение на фоновые карты
-Кэш: Единая папка foreca4_map_cache/ для токенов, возможностей и тайлов
-Интеграция: Пункт меню "Foreca Live Maps (API)" в основном плагине
-Система фонового картографирования
-Слой интеллектуального картографирования → фоновый PNG:
-температура → temp_map.png
-осадки → rain_map.png
-облака → cloud_map.png
-давление → pressure_map.png
-ветер → europa.png (резервный вариант) - нет wind_map.png) (существует)
-радар → rain_map.png
-Иерархический резерв: региональная карта → europe.png
 
-Документация для конечного пользователя
-Руководство по регистрации: https://developer.foreca.com (БЕСПЛАТНАЯ 30-дневная пробная версия)
+## Система карт Foreca API (ПОЛНОСТЬЮ РЕАЛИЗОВАНА)
 
-Конфигурация: Создайте файл api_config.txt со следующим содержимым:
+- **Аутентификация**
+  - Чтение из `api_config.txt`
+  - JWT-токен действителен 30 дней
+
+- **Динамические слои**
+  - Меню слоев из `/api/v1/capabilities`
+  - Температура, Осадки, Ветер, Облачность, Давление и т. д.
+
+- **Просмотрщик**
+  - Сетка 3×3 тайлов
+  - Временная шкала
+  - Наложение на фоновые карты
+
+- **Кэш**
+  - Единая папка `foreca4_map_cache/`
+  - Хранение токенов, возможностей и тайлов
+
+- **Интеграция**
+  - Пункт меню **«Foreca Live Maps (API)»** в основном плагине
+
+---
+
+## Система фонового картографирования
+
+Интеллектуальное сопоставление **слой → фоновый PNG**:
+
+| Слой          | Фоновый PNG |
+|---------------|-------------|
+| Температура   | `temp_map.png` |
+| Осадки        | `rain_map.png` |
+| Облака        | `cloud_map.png` |
+| Давление      | `pressure_map.png` |
+| Ветер         | `europa.png` *(резервный вариант)* |
+| Радар         | `rain_map.png` |
+
+**Иерархический резерв:**  
+региональная карта → `europe.png`
+
+---
+
+## Документация для конечного пользователя
+
+- **Руководство по регистрации**
+  - https://developer.foreca.com  
+  - Бесплатная **30-дневная пробная версия**
+
+### Конфигурация
+
+Создайте файл `api_config.txt` со следующим содержимым:
+
+```ini
 API_USER=ваш_пользователь
 API_PASSWORD=ваш_пароль
 TOKEN_EXPIRE_HOURS=720
 MAP_SERVER=map-eu.foreca.com
 AUTH_SERVER=pfa.foreca.com
+````
 
-ВАЖНЫЕ ССЫЛКИ И РЕСУРСЫ
-Официальная документация API: https://developer.foreca.com
-Регистрация пробной версии: Модуль на developer.foreca.com (1000 запросов в день)
-Доступные фоновые изображения PNG: /thumb/[temp|rain|cloud|pressure]_map.png + региональные карты
-Старый плагин (ссылка): https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py
-Файл конфигурации: Foreca4/api_config.txt (шаблон в api_config.txt.example)
+Шаблон доступен в:
 
-ТЕКУЩИЕ ОГРАНИЧЕНИЯ/СООБРАЖЕНИЯ
-Пробный аккаунт: 1000 запросов тайлов в день, истекает через 30 дней
-Обязательная атрибуция: Отображать "Foreca" + конкретные атрибуции для радиолокационных/спутниковых данных
-Фон карты ветра: Нет существующего файла wind_map.png → использовать europa.png в качестве фона
-Спутниковые данные: API поддерживает спутниковые слои (EUMETSAT/NOAA), но пока не реализовано
+```
+api_config.txt.example
+```
 
-@Lululla
+---
+
+## Важные ссылки и ресурсы
+
+* **Официальная документация API**
+  [https://developer.foreca.com](https://developer.foreca.com)
+
+* **Регистрация пробной версии**
+
+  * 1000 запросов в день
+
+* **Доступные фоновые PNG**
+
+  ```
+  /thumb/[temp|rain|cloud|pressure]_map.png
+  + региональные карты
+  ```
+
+* **Старый плагин (ссылка)**
+  [https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py](https://github.com/Belfagor2005/e2openplugin-Foreca/blob/master/plugin/ui.py)
+
+* **Файл конфигурации**
+
+  ```
+  Foreca4/api_config.txt
+  ```
+
+---
+
+## Текущие ограничения и соображения
+
+* **Пробный аккаунт**
+
+  * 1000 запросов тайлов в день
+  * Истекает через 30 дней
+
+* **Обязательная атрибуция**
+
+  * Отображать «Foreca»
+  * Дополнительные атрибуции для радиолокационных/спутниковых данных
+
+* **Фон карты ветра**
+
+  * Файл `wind_map.png` отсутствует
+  * Используется `europa.png` в качестве фона
+
+* **Спутниковые данные**
+
+  * Поддерживаются API (EUMETSAT / NOAA)
+  * Пока не реализованы
+
+---
+
+© Lululla
+
 
