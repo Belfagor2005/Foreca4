@@ -50,7 +50,8 @@ def is_mostly_arabic(text):
     for ch in t:
         code = ord(ch)
 
-        if (0x0041 <= code <= 0x005A) or (0x0061 <= code <= 0x007A) or (0x0600 <= code <= 0x06FF):
+        if (0x0041 <= code <= 0x005A) or (
+                0x0061 <= code <= 0x007A) or (0x0600 <= code <= 0x06FF):
             total_letters += 1
             if 0x0600 <= code <= 0x06FF:
                 arabic_letters += 1
@@ -150,7 +151,8 @@ def post_process_arabic_text(original, translated):
 
         if is_arabic_word(ow) and is_arabic_word(tw):
 
-            if len(ow) >= 3 and levenshtein_distance(ow, tw, max_distance=1) <= 1:
+            if len(ow) >= 3 and levenshtein_distance(
+                    ow, tw, max_distance=1) <= 1:
 
                 new_t_words[i] = ow
 

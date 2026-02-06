@@ -37,8 +37,9 @@ def getPageF_F(MAIN_PAGE, page=None):
     try:
         req = Request(url, headers=HEADERS)
         resp = urlopen(req, timeout=10)
-        return getForecaPageF_F(resp.read().decode('utf-8') if PY3 else resp.read())
-    except:
+        return getForecaPageF_F(
+            resp.read().decode('utf-8') if PY3 else resp.read())
+    except BaseException:
         return ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a'
 
 
@@ -51,7 +52,7 @@ def getForecaPageF_F(html):
         fulltext = compile(r',"defaultName":"(.+?)",".+?', DOTALL)
         town = str(fulltext.findall(html)[1])
         mylogwrite(town)
-    except:
+    except BaseException:
         town = er
 
     try:
@@ -69,7 +70,7 @@ def getForecaPageF_F(html):
             mytime.append(mt1)
         mylogwrite(date)
         mylogwrite(mytime)
-    except:
+    except BaseException:
         mydate = er
         mytime = er
 
@@ -80,7 +81,7 @@ def getForecaPageF_F(html):
         symb2 = symb1.split("']")[0]
         symb3 = symb2.split("', '")
         mylogwrite(symb3)
-    except:
+    except BaseException:
         symb3 = er
 
     try:
@@ -90,7 +91,7 @@ def getForecaPageF_F(html):
         cur_temp2 = cur_temp1.split("']")[0]
         cur_temp3 = cur_temp2.split("', '")
         mylogwrite(cur_temp3)
-    except:
+    except BaseException:
         cur_temp3 = er
 
     try:
@@ -100,7 +101,7 @@ def getForecaPageF_F(html):
         flike_temp2 = flike_temp1.split("']")[0]
         flike_temp3 = flike_temp2.split("', '")
         mylogwrite(flike_temp3)
-    except:
+    except BaseException:
         flike_temp3 = er
 
     try:
@@ -110,7 +111,7 @@ def getForecaPageF_F(html):
         wind2 = wind1.split("']")[0]
         wind3 = wind2.split("', '")
         mylogwrite(wind3)
-    except:
+    except BaseException:
         wind3 = er
 
     """
@@ -132,7 +133,7 @@ def getForecaPageF_F(html):
         wind_speed2 = wind_speed1.split("']")[0]
         wind_speed3 = wind_speed2.split("', '")
         mylogwrite(wind_speed3)
-    except:
+    except BaseException:
         wind_speed3 = er
 
     try:
@@ -142,7 +143,7 @@ def getForecaPageF_F(html):
         precipitation2 = precipitation1.split("']")[0]
         precipitation3 = precipitation2.split("', '")
         mylogwrite(precipitation3)
-    except:
+    except BaseException:
         precipitation3 = er
 
     try:
@@ -152,14 +153,14 @@ def getForecaPageF_F(html):
         rel_hum2 = rel_hum1.split("']")[0]
         rel_hum3 = rel_hum2.split("', '")
         mylogwrite(rel_hum3)
-    except:
+    except BaseException:
         rel_hum3 = er
 
     try:
         fulltext = compile(r'<div class="dayName">(.+?)</div>.+?', DOTALL)
         day = str(fulltext.findall(html)[0])
         mylogwrite(day)
-    except:
+    except BaseException:
         day = er
 
     return town, date, mytime, symb3, cur_temp3, flike_temp3, wind3, wind_speed3, precipitation3, rel_hum3, day
@@ -171,8 +172,10 @@ def getForecaPageF_F(html):
 def first_start(indata):
     # MAIN_PAGE = 'https://www.foreca.com/100659935/Forssa-Finland/hourly?day=' + str(indata)
     # MAIN_PAGE = 'https://www.foreca.com/100457954/Liep%c4%81ja-Latvia/hourly?day=' + str(indata)
-    MAIN_PAGE = 'https://www.foreca.com/100688148/Yenakiyeve-Donetsk-Oblast-Ukraine/hourly?day=' + str(indata)
-    mytown, mydate, mytime, mysymb, mycur_temp, myflike_temp, mywind, mywind_speed, myprecipitation, myrel_hum, myday = getPageF_F(MAIN_PAGE)
+    MAIN_PAGE = 'https://www.foreca.com/100688148/Yenakiyeve-Donetsk-Oblast-Ukraine/hourly?day=' + \
+        str(indata)
+    mytown, mydate, mytime, mysymb, mycur_temp, myflike_temp, mywind, mywind_speed, myprecipitation, myrel_hum, myday = getPageF_F(
+        MAIN_PAGE)
     print(mytown)
     print(mydate)
     print(mytime)
