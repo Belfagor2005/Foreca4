@@ -165,9 +165,6 @@ msgstr "Λήψη εικόνων..."
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
 
-msgid "Error loading city list!"
-msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
-
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
 
@@ -347,6 +344,10 @@ msgstr "Επόμενη σελίδα"
 
 msgid "No City found in search!!!"
 msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
+
+#, fuzzy
+msgid "No city selected"
+msgstr "Επιλογή Πόλης"
 
 msgid "No data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
@@ -576,6 +577,33 @@ msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
 
 msgid "v."
 msgstr "έκδ."
+
+msgid "• BLUE to save as Home\n"
+msgstr ""
+
+msgid "• CH+/CH- to jump 500 cities\n"
+msgstr ""
+
+msgid "• GREEN to save as Favorite 1\n"
+msgstr ""
+
+msgid "• OK to select city\n"
+msgstr ""
+
+msgid "• RED to open search keyboard\n"
+msgstr ""
+
+msgid "• Use arrow keys to navigate\n"
+msgstr ""
+
+msgid "• VOL+/VOL- to jump 100 cities"
+msgstr ""
+
+msgid "• YELLOW to save as Favorite 2\n"
+msgstr ""
+
+#~ msgid "Error loading city list!"
+#~ msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
 
 #~ msgid "Dewpoint"
 #~ msgstr "Σημείο δρόσου"

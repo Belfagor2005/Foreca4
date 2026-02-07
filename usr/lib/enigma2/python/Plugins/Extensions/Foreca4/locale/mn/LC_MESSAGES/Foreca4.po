@@ -163,9 +163,6 @@ msgstr ""
 msgid "East Asia"
 msgstr ""
 
-msgid "Error loading city list!"
-msgstr ""
-
 msgid "Error loading colors"
 msgstr ""
 
@@ -344,6 +341,9 @@ msgid "Next page"
 msgstr ""
 
 msgid "No City found in search!!!"
+msgstr ""
+
+msgid "No city selected"
 msgstr ""
 
 msgid "No data available"
@@ -572,4 +572,28 @@ msgid "Yellow - Favorite 2"
 msgstr ""
 
 msgid "v."
+msgstr ""
+
+msgid "• BLUE to save as Home\n"
+msgstr ""
+
+msgid "• CH+/CH- to jump 500 cities\n"
+msgstr ""
+
+msgid "• GREEN to save as Favorite 1\n"
+msgstr ""
+
+msgid "• OK to select city\n"
+msgstr ""
+
+msgid "• RED to open search keyboard\n"
+msgstr ""
+
+msgid "• Use arrow keys to navigate\n"
+msgstr ""
+
+msgid "• VOL+/VOL- to jump 100 cities"
+msgstr ""
+
+msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
