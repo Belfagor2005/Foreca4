@@ -27,11 +27,20 @@ from enigma import eTimer, ePicLoad, getDesktop
 import os
 import requests
 from threading import Thread
+
+from .skin import (
+    ForecaMapsMenu_UHD,
+    ForecaMapsMenu_FHD,
+    ForecaMapsMenu_HD,
+    ForecaSlideshow_UHD,
+    ForecaSlideshow_FHD,
+    ForecaSlideshow_HD
+)
 from . import _
+
 
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
 WETTERKONTOR_CACHE = os.path.join(CACHE_BASE, "wetterkontor/")
-CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
 
 if not os.path.exists(WETTERKONTOR_CACHE):
     os.makedirs(WETTERKONTOR_CACHE, exist_ok=True)
@@ -99,39 +108,17 @@ REGION_MAPS_CONTINENTS = [
 
 class ForecaSlideshow(Screen):
     """Slideshow for Wetterkontor weather maps"""
+    sz_w = getDesktop(0).size().width()
+    if sz_w == 1920:
+        skin = ForecaSlideshow_FHD
+    elif sz_w == 2560:
+        skin = ForecaSlideshow_UHD
+    else:
+        skin = ForecaSlideshow_HD
 
     def __init__(self, session, region_code, region_name):
         print("[Foreca4] ForecaSlideshow class loaded")
         print(f"[Foreca4] Region code: {region_code}, Name: {region_name}")
-
-        self.desktop = getDesktop(0)
-        self.size_w = self.desktop.size().width()
-        self.size_h = self.desktop.size().height()
-
-        if self.size_w == 1920:
-            self.skin = """
-            <screen position="0,0" size="1920,1080" flags="wfNoBorder">
-                <widget name="image" position="0,0" size="1920,1080" zPosition="1" />
-                <widget name="title" position="50,50" size="1820,60" font="Regular;40"
-                        foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1"
-                        halign="center" valign="center" />
-                <widget name="info" position="50,1020" size="1820,40"
-                        font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000"
-                        transparent="1" halign="center" />
-            </screen>"""
-        else:
-            # HD skin (1280x720)
-            self.skin = """
-            <screen position="0,0" size="1280,720" flags="wfNoBorder">
-                <widget name="image" position="0,0" size="1280,720" zPosition="1" />
-                <widget name="title" position="30,30" size="1220,40" font="Regular;28"
-                        foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1"
-                        halign="center" valign="center" />
-                <widget name="info" position="30,680" size="1220,30"
-                        font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000"
-                        transparent="1" halign="center" />
-            </screen>"""
-
         Screen.__init__(self, session)
         self.setTitle(_("Weather Maps Slideshow"))
 
@@ -149,7 +136,7 @@ class ForecaSlideshow(Screen):
         self.slide_interval = 5000  # 5 seconds
 
         self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
-                                    {
+        {
             "cancel": self.exit,
             "ok": self.play_pause,
             "left": self.previous_image,
@@ -185,9 +172,7 @@ class ForecaSlideshow(Screen):
 
         for i in range(self.total_images):
             url = f"http://img.wetterkontor.de/karten/{self.region_code}{i}.jpg"
-            cache_file = os.path.join(
-                WETTERKONTOR_CACHE,
-                f"{self.region_code}_{i}.jpg")
+            cache_file = os.path.join(WETTERKONTOR_CACHE, f"{self.region_code}_{i}.jpg")
             if not os.path.exists(cache_file):
                 try:
                     response = requests.get(url, timeout=10)
@@ -206,9 +191,7 @@ class ForecaSlideshow(Screen):
         """Show specific image"""
         if 0 <= index < self.total_images:
             self.current_image = index
-            cache_file = os.path.join(
-                WETTERKONTOR_CACHE,
-                f"{self.region_code}_{index}.jpg")
+            cache_file = os.path.join(WETTERKONTOR_CACHE, f"{self.region_code}_{index}.jpg")
 
             if os.path.exists(cache_file):
                 self["info"].setText(f"{index + 1}/{self.total_images}")
@@ -241,13 +224,11 @@ class ForecaSlideshow(Screen):
         """Pause or resume slideshow"""
         if self.is_playing:
             self.slide_timer.stop()
-            self["info"].setText(
-                f"⏸ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(f"⏸ {self.current_image + 1}/{self.total_images}")
             self.is_playing = False
         else:
             self.slide_timer.start(self.slide_interval)
-            self["info"].setText(
-                f"▶ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(f"▶ {self.current_image + 1}/{self.total_images}")
             self.is_playing = True
 
     def increase_speed(self):
@@ -256,9 +237,7 @@ class ForecaSlideshow(Screen):
             self.slide_interval -= 1000
             if self.is_playing:
                 self.slide_timer.start(self.slide_interval)
-            self["info"].setText(
-                _("Faster: {}s").format(
-                    self.slide_interval // 1000))
+            self["info"].setText(_("Faster: {}s").format(self.slide_interval // 1000))
 
     def decrease_speed(self):
         """Decrease slideshow speed"""
@@ -266,9 +245,7 @@ class ForecaSlideshow(Screen):
             self.slide_interval += 1000
             if self.is_playing:
                 self.slide_timer.start(self.slide_interval)
-            self["info"].setText(
-                _("Slower: {}s").format(
-                    self.slide_interval // 1000))
+            self["info"].setText(_("Slower: {}s").format(self.slide_interval // 1000))
 
     def exit(self):
         """Exit slideshow"""
@@ -278,26 +255,17 @@ class ForecaSlideshow(Screen):
 
 
 class ForecaMapsMenu(Screen):
+    sz_w = getDesktop(0).size().width()
+    if sz_w == 1920:
+        skin = ForecaMapsMenu_FHD
+    elif sz_w == 2560:
+        skin = ForecaMapsMenu_UHD
+    else:
+        skin = ForecaMapsMenu_HD
 
     def __init__(self, session, map_type):
         self.session = session
         self.map_type = map_type  # 'europe', 'germany', 'continents'
-
-        # Setup skin
-        self.size_w = getDesktop(0).size().width()
-        if self.size_w == 1920:
-            self.skin = """
-            <screen position="center,center" size="1200,900" title="Select Region">
-                <widget name="list" position="100,100" size="1000,700" itemHeight="35" font="Regular;32" enableWrapAround="1"
-                        scrollbarMode="showOnDemand" />
-            </screen>"""
-        else:
-            self.skin = """
-            <screen position="center,center" size="800,600" title="Select Region">
-                <widget name="list" position="50,50" size="700,500" itemHeight="35" font="Regular;24" enableWrapAround="1"
-                        scrollbarMode="showOnDemand" />
-            </screen>"""
-
         Screen.__init__(self, session)
 
         if map_type == 'europe':
@@ -315,7 +283,7 @@ class ForecaMapsMenu(Screen):
 
         self.populate_list()
         self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
-                                    {
+        {
             "cancel": self.exit,
             "ok": self.select_region,
             "up": self.up,

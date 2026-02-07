@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version='1.3.4_r2'
-changelog='\nRecoded Foreca'
+version='1.3.4_r3'
+changelog='\nRecoded Foreca step2'
 
 TMPPATH=/tmp/Foreca4-install
 FILEPATH=/tmp/Foreca4-main.tar.gz

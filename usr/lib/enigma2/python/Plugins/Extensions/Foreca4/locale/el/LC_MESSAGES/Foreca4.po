@@ -156,6 +156,9 @@ msgstr "Τσεχική Δημοκρατία"
 msgid "Denmark"
 msgstr "Δανία"
 
+msgid "Dewpoint"
+msgstr "Σημείο δρόσου"
+
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
 
@@ -164,6 +167,9 @@ msgstr "Λήψη εικόνων..."
 
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
+
+msgid "Error loading city list!"
+msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
 
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
@@ -197,6 +203,9 @@ msgstr "Αγαπημένο 1"
 
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
+
+msgid "Feels like"
+msgstr "Αίσθηση"
 
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -242,6 +251,9 @@ msgstr "Πράσινο"
 
 msgid "Green - Favorite 1"
 msgstr "Πράσινο κουμπί - Αγαπημένο 1"
+
+msgid "Gust"
+msgstr "Ρίπες"
 
 msgid "HTML"
 msgstr "HTML"
@@ -344,10 +356,6 @@ msgstr "Επόμενη σελίδα"
 
 msgid "No City found in search!!!"
 msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
-
-#, fuzzy
-msgid "No city selected"
-msgstr "Επιλογή Πόλης"
 
 msgid "No data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
@@ -569,6 +577,9 @@ msgstr "Καιρός σήμερα"
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
 
+msgid "Wind speed"
+msgstr "Ταχύτητα ανέμου"
+
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
@@ -577,45 +588,6 @@ msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
 
 msgid "v."
 msgstr "έκδ."
-
-msgid "• BLUE to save as Home\n"
-msgstr ""
-
-msgid "• CH+/CH- to jump 500 cities\n"
-msgstr ""
-
-msgid "• GREEN to save as Favorite 1\n"
-msgstr ""
-
-msgid "• OK to select city\n"
-msgstr ""
-
-msgid "• RED to open search keyboard\n"
-msgstr ""
-
-msgid "• Use arrow keys to navigate\n"
-msgstr ""
-
-msgid "• VOL+/VOL- to jump 100 cities"
-msgstr ""
-
-msgid "• YELLOW to save as Favorite 2\n"
-msgstr ""
-
-#~ msgid "Error loading city list!"
-#~ msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
-
-#~ msgid "Dewpoint"
-#~ msgstr "Σημείο δρόσου"
-
-#~ msgid "Feels like"
-#~ msgstr "Αίσθηση"
-
-#~ msgid "Gust"
-#~ msgstr "Ρίπες"
-
-#~ msgid "Wind speed"
-#~ msgstr "Ταχύτητα ανέμου"
 
 #~ msgid "hPa"
 #~ msgstr "hPa"

@@ -20,28 +20,33 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Label import Label
+from enigma import getDesktop
 
+from .skin import (
+    ForecaMapMenu_UHD,
+    ForecaMapMenu_FHD,
+    ForecaMapMenu_HD
+)
 from . import _
 
 
 class ForecaMapMenu(Screen):
     """Menu to select Foreca map layers"""
+    sz_w = getDesktop(0).size().width()
+    if sz_w == 1920:
+        skin = ForecaMapMenu_FHD
+    elif sz_w == 2560:
+        skin = ForecaMapMenu_UHD
+    else:
+        skin = ForecaMapMenu_HD
 
     def __init__(self, session, api):
         self.session = session
         self.api = api
         self.layers = []
-        self.skin = """
-        <screen position="center,center" size="800,700" title="Foreca Live Maps">
-            <widget name="list" position="46,7" size="700,650" itemHeight="35" font="Regular;32" scrollbarMode="showNever" />
-            <widget name="info" position="50,665" size="700,30" font="Regular;24" halign="center" />
-        </screen>"""
-
         Screen.__init__(self, session)
-
         self["list"] = MenuList([])
         self["info"] = Label(_("Loading available maps..."))
-
         self["actions"] = ActionMap(
             ["OkCancelActions", "DirectionActions"],
             {
@@ -52,7 +57,6 @@ class ForecaMapMenu(Screen):
             },
             -1
         )
-
         self.onLayoutFinish.append(self.load_layers)
 
     def load_layers(self):
