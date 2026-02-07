@@ -1,5 +1,3 @@
-# Foreca4
-
 <p align="center">
   <img src="https://github.com/Belfagor2005/Foreca4/blob/main/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca_4.png" alt="Foreca4">
 </p>
@@ -19,7 +17,131 @@
   </a>
 </p>
 
+
+
+# Foreca Weather Forecast E2
+
+Foreca Weather Forecast E2 is an **Enigma2 plugin** that retrieves and displays **actual weather forecasts for up to 10 days** using data provided by **Foreca**.
+
+> We wish all users wonderful weather! ☀️🌦️
+
 ---
+
+## 📅 Project Information
+
+* **First release date:** 11/03/2025
+* **Weather data source:** [https://www.foreca.com](https://www.foreca.com)
+
+---
+
+## 🔢 Version History
+
+### 3.3.4
+
+* Changed URLs
+* Many code improvements
+* Cache path moved
+* FAlog moved
+* Secure image removal from cache folder
+* Removed ICC profiles from problematic images
+
+### 3.3.5
+
+* Changed URLs
+* Many code improvements
+* Planned: add online server URL
+
+### 3.3.6
+
+* Fixed translations
+* Many code improvements
+
+### 3.3.7
+
+* Removed `.cfg` files
+* Added **TV button** for Menu Configuration
+
+### 3.3.8
+
+* Major cleanup: removed unnecessary code
+* Added full Python 3 support
+* Translation ~90% complete
+
+---
+
+## 🌍 Foreca 4 Weather and Forecast
+
+* **Original code:** (C) Evg77734, 2025
+* **Base version:** v1.3.4
+* **Current mod:** @lululla — 2026-01-25 — v1.3.4_r2
+
+---
+
+## 🧠 Core Components
+
+### Core API
+
+* Authentication system
+* Token and tile cache management
+* Module: `foreca_map_api.py`
+
+### Interface
+
+* Layer selection menu
+* Basic map viewer with timeline
+* Modules:
+
+  * `foreca_map_menu.py`
+  * `foreca_map_viewer.py`
+
+### Integration
+
+* Menu item integrated into the main plugin
+* Configuration loaded from file
+
+---
+
+## 🗺️ Map Features
+
+* Download and merge **3×3 tile grids**
+* Overlay tiles on existing background maps
+
+  * Examples: `temp_map.png`, `europa.png`, etc.
+
+---
+
+## ⚠️ Trial Plan Limitations
+
+The code is compatible with the **Foreca trial plan** limitations:
+
+* **Maximum:** 1,000 tiles per day
+* A **local cache system** is implemented to reuse already downloaded tiles
+* This helps avoid exceeding the daily limit
+
+---
+
+## 🌐 Language & Translation
+
+* Full implementation of **GetText** for translations
+* Integrated **Google AI / Google Translate API**
+* Major translation fixes applied
+
+---
+
+## 📝 To Do
+
+* Add choice list for pressure and other menu options
+* Verify all URLs and fetch methods
+* Add online server URL selection
+
+---
+
+## ✅ Status
+
+* Actively maintained
+* Python 3 ready
+* Stable and optimized for Enigma2 environments
+
 
 ## Overview
 
@@ -148,6 +270,14 @@ api_config.txt.example
 
 ---
 
+## 👥 Credits
+
+* **Design and original idea:** @Bauernbub
+* **Enigma2 modifications:** mogli123
+* **Major recode and maintenance:** Lululla
+* **EUMETSAT screen picxview restore:** thanks to Orlandoxx
+
+---
 ## License
 
 This project is licensed under the **GNU General Public License v3.0**.
@@ -277,6 +407,15 @@ api_config.txt.example
 
 ---
 
+## 👥 Crediti
+
+* **Progettazione e idea originale:** @Bauernbub
+* **Modifiche a Enigma2:** mogli123
+* **Ricodifica e manutenzione importanti:** Lululla
+* **Ripristino della schermata PicxView di EUMETSAT:** grazie a Orlandoxx
+
+---
+
 © Lululla
 
 
@@ -400,6 +539,10 @@ api_config.txt.example
   * Пока не реализованы
 
 ---
+* **Дизайн и оригинальная идея:** @Bauernbub
+* **Модификации Enigma2:** mogli123
+* **Основная переработка кода и поддержка:** Lululla
+* **Восстановление picxview на экране EUMETSAT:** спасибо Orlandoxx
 
 © Lululla
 
