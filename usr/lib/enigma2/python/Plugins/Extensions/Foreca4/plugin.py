@@ -227,7 +227,7 @@ from .tt_weather import getPageTT
 VERSION = "1.3.4_r2"
 try:
     TARGET_LANG = config.misc.language.value.split('_')[0]
-except:
+except BaseException:
     TARGET_LANG = "en"
 
 
@@ -246,7 +246,7 @@ if os.path.exists(home_file):
     try:
         with open(home_file, "r") as f:
             path_loc0 = f.read().strip()
-    except:
+    except BaseException:
         pass
 
 # Favorite 1
@@ -255,7 +255,7 @@ if os.path.exists(fav1_file):
     try:
         with open(fav1_file, "r") as f:
             path_loc1 = f.read().strip()
-    except:
+    except BaseException:
         pass
 
 # Favorite 2
@@ -264,7 +264,7 @@ if os.path.exists(fav2_file):
     try:
         with open(fav2_file, "r") as f:
             path_loc2 = f.read().strip()
-    except:
+    except BaseException:
         pass
 
 
@@ -335,14 +335,15 @@ def conv_alpha(insel):
 def readsetalpha():
     global alpha
     alpha = '#40000000'
-    if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf") is True:
+    if os.path.exists(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf") is True:
         try:
             with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf", "r") as file:
                 contents = file.readlines()
                 a = str(contents[0])
                 alpha = a.rstrip()
                 file.close()
-        except:
+        except BaseException:
             alpha = '#40000000'
     # else:
         # alpha = '#40000000'
@@ -352,7 +353,9 @@ readsetalpha()
 
 
 def savesetalpha(indata):
-    f = open('/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf', 'w')
+    f = open(
+        '/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf',
+        'w')
     f.write(indata)
     f.close()
 
@@ -364,7 +367,7 @@ def conv_day_len(indata):
         in2 = _(str(inall[1]))
         in3 = _(str(inall[3]))
         rez = inall[0] + ' ' + str(in2) + ' ' + inall[2] + ' ' + str(in3)
-    except:
+    except BaseException:
         rez = indata
     return rez
 
@@ -378,7 +381,7 @@ def mywindSpeed(indata, metka):
         else:
             rez = '%.01f' % float(int(indata))
             return float(rez)
-    except:
+    except BaseException:
         return 0.00
 
 
@@ -405,7 +408,8 @@ def load_translation_cache():
                     if '=' in line:
                         original, translated = line.strip().split('=', 1)
                         _translation_cache[original] = translated
-            print(f"[Foreca4] Loaded {len(_translation_cache)} translations from cache")
+            print(
+                f"[Foreca4] Loaded {len(_translation_cache)} translations from cache")
         except Exception as e:
             print(f"[Foreca4] Cache loading error: {e}")
 
@@ -488,7 +492,8 @@ def translate_batch_strings(texts):
             translated_batch = translate_batch(to_translate)
 
             # Update cache and results
-            for idx, (original, translated) in enumerate(zip(to_translate, translated_batch)):
+            for idx, (original, translated) in enumerate(
+                    zip(to_translate, translated_batch)):
                 if translated and translated != original:
                     _translation_cache[original] = translated
                     # Update result at correct index
@@ -569,7 +574,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         try:
             # DEVI usare le variabili GLOBALI già dichiarate sopra
             result_current = getPageF(MAIN_PAGE_F)
-            print(f"[Foreca4] Current weather result: {result_current[:5]}...")  # Prima 5 elementi
+            # Prima 5 elementi
+            print(f"[Foreca4] Current weather result: {result_current[:5]}...")
 
             # Assegna alle variabili GLOBALI
             town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
@@ -597,7 +603,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         print(f"[Foreca4] Fetching forecast from: {MAIN_PAGE_FF}")
         try:
             result_forecast = getPageF_F(MAIN_PAGE_FF)
-            print(f"[Foreca4] Forecast result length: {len(result_forecast[1]) if result_forecast and len(result_forecast) > 1 else 'N/A'}")
+            print(
+                f"[Foreca4] Forecast result length: {len(result_forecast[1]) if result_forecast and len(result_forecast) > 1 else 'N/A'}")
 
             # Assegna alle variabili GLOBALI
             f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
@@ -786,8 +793,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt.example"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10
-                )
+                    timeout=10)
                 return
             self.session.open(ForecaMapMenu, api)
         except Exception as e:
@@ -806,7 +812,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
             self.session.open(ExtInfo_2_Foreca4_FHD)
 
     def savesetcolor(self, indata):
-        f = open('/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf', 'w')
+        f = open(
+            '/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf',
+            'w')
         f.write(indata)
         f.close()
 
@@ -815,7 +823,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         rgbmyr = 0
         rgbmyg = 80
         rgbmyb = 239
-        if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf") is True:
+        if os.path.exists(
+                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf") is True:
             try:
                 with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf", "r") as file:
                     contents = file.readlines()
@@ -825,7 +834,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     rgbmyg = rez.split(' ')[1]
                     rgbmyb = rez.split(' ')[2]
                     file.close()
-            except:
+            except BaseException:
                 rgbmyr = 0
                 rgbmyg = 80
                 rgbmyb = 239
@@ -855,7 +864,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         """Debug function to check data"""
         print(f"[Foreca4 DEBUG] town: {town}")
         print(f"[Foreca4 DEBUG] country: {country}")
-        print(f"[Foreca4 DEBUG] f_date type: {type(f_date)}, length: {len(f_date)}")
+        print(
+            f"[Foreca4 DEBUG] f_date type: {type(f_date)}, length: {len(f_date)}")
         print(f"[Foreca4 DEBUG] f_date content: {f_date}")
         print(f"[Foreca4 DEBUG] f_day: {f_day}")
 
@@ -870,17 +880,23 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.debug_data()
 
         self.readsetcolor()
-        self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
+        self["pic"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
         self["pic"].instance.show()
-        self["wind"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
+        self["wind"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
         self["wind"].instance.show()
-        self["pressure_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
+        self["pressure_pic"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
         self["pressure_pic"].instance.show()
-        self["rain_mm_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
+        self["rain_mm_pic"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
         self["rain_mm_pic"].instance.show()
-        self["hum_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
+        self["hum_pic"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
         self["hum_pic"].instance.show()
-        self["sun"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
+        self["sun"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
         self["sun"].instance.show()
 
         # TRANSLATE widget titles
@@ -896,7 +912,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         day_str = trans(f_day) if f_day and f_day != ' n/a' else ""
 
         # TRANSLATE the title widget
-        self["Titel"].text = trans(str(town)) + ', ' + trans(str(country)) + ' - ' + date_str
+        self["Titel"].text = trans(str(town)) + ', ' + \
+            trans(str(country)) + ' - ' + date_str
         if day_str:
             self["Titel"].text += ' - ' + day_str
 
@@ -951,10 +968,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def mypicload(self):
         # global lon, lat
-        download_pic = '/tmp/385.png ' + 'https://map-cf.foreca.net/teaser/map/light/rain/6/' + str(lon) + '/' + str(lat) + '/317/385.png?names'
+        download_pic = '/tmp/385.png ' + 'https://map-cf.foreca.net/teaser/map/light/rain/6/' + \
+            str(lon) + '/' + str(lat) + '/317/385.png?names'
         try:
             os.system('wget -O ' + str(download_pic))
-        except:
+        except BaseException:
             pass
 
     def my_forecast_weather(self):
@@ -968,12 +986,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
         descriptions_to_translate = []
         for symb in f_symb:
             if symb != ' n/a':
-                descriptions_to_translate.append(self.symbolToCondition(str(symb)))
+                descriptions_to_translate.append(
+                    self.symbolToCondition(str(symb)))
             else:
                 descriptions_to_translate.append("Unknown")
 
         # Translate all descriptions at once
-        translated_descriptions = translate_batch_strings(descriptions_to_translate)
+        translated_descriptions = translate_batch_strings(
+            descriptions_to_translate)
 
         while n <= i - 1:
             if int(f_cur_temp[n]) >= 0:
@@ -982,33 +1002,48 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 myf_cur_temp = str(f_cur_temp[n])
 
             try:
-                minipng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_symb[n]) + ".png"))
-            except:
-                minipng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/n600.png"))
+                minipng = LoadPixmap(cached=True, path=resolveFilename(
+                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_symb[n]) + ".png"))
+            except BaseException:
+                minipng = LoadPixmap(cached=True, path=resolveFilename(
+                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/n600.png"))
 
             try:
                 f_myw = int(f_wind[n])
                 f_myw1 = self.degreesToWindDirection(f_myw)
-                minipng1 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_myw1) + ".png"))
-            except:
-                minipng1 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/w360.png"))
+                minipng1 = LoadPixmap(
+                    cached=True,
+                    path=resolveFilename(
+                        SCOPE_PLUGINS,
+                        "Extensions/Foreca4/thumb/" +
+                        str(f_myw1) +
+                        ".png"))
+            except BaseException:
+                minipng1 = LoadPixmap(cached=True, path=resolveFilename(
+                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/w360.png"))
 
             try:
-                f_w_s = str(mywindSpeed(f_wind_speed[n], for_wind_speed_recalc)) + ' ' + trans('km/h')
-            except:
+                f_w_s = str(
+                    mywindSpeed(
+                        f_wind_speed[n],
+                        for_wind_speed_recalc)) + ' ' + trans('km/h')
+            except BaseException:
                 f_w_s = '0.00' + ' ' + trans('km/h')
 
             # Use translated description
-            f_description = translated_descriptions[n] if n < len(translated_descriptions) else descriptions_to_translate[n]
+            f_description = translated_descriptions[n] if n < len(
+                translated_descriptions) else descriptions_to_translate[n]
 
             if int(f_flike_temp[n]) >= 0:
                 myf_flike_temp = '+' + str(f_flike_temp[n])
             else:
                 myf_flike_temp = str(f_flike_temp[n])
 
-            pos8 = trans('Feels like: ') + str(myf_flike_temp) + six.ensure_str(six.unichr(176)) + 'C'
+            pos8 = trans('Feels like: ') + str(myf_flike_temp) + \
+                six.ensure_str(six.unichr(176)) + 'C'
 
-            pos9 = trans('Precipitations:') + ' ' + str(f_precipitation[n]) + '%'
+            pos9 = trans('Precipitations:') + ' ' + \
+                str(f_precipitation[n]) + '%'
 
             pos10 = trans('Humidity:') + ' ' + str(f_rel_hum[n]) + '%'
 
@@ -1034,7 +1069,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
         # Translate city and country
         translated_town = _(str(town)) if town != ' n/a' else _("N/A")
-        # translated_country = _(str(country)) if country != ' n/a' else ""  # RIMUOVI O COMMENTA
+        # translated_country = _(str(country)) if country != ' n/a' else ""  #
+        # RIMUOVI O COMMENTA
 
         self["town"].setText(translated_town)
 
@@ -1062,8 +1098,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
             if os.path.exists(icon_path):
                 self["pic"].instance.setPixmapFromFile(icon_path)
             else:
-                self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/n600.png")
-        except:
+                self["pic"].instance.setPixmapFromFile(
+                    "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/n600.png")
+        except BaseException:
             pass
 
         # Weather description
@@ -1081,13 +1118,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 wind_icon = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{myw1}.png"
                 if os.path.exists(wind_icon):
                     self["wind"].instance.setPixmapFromFile(wind_icon)
-        except:
+        except BaseException:
             pass
 
         # Wind speed
         if wind_speed != ' n/a':
             speed = mywindSpeed(wind_speed, cur_wind_speed_recalc)
-            self["wind_speed"].setText(_('Wind speed ') + f"{speed} " + _('km/h'))
+            self["wind_speed"].setText(
+                _('Wind speed ') + f"{speed} " + _('km/h'))
         else:
             self["wind_speed"].setText(_('Wind speed ') + _('N/A'))
 
@@ -1099,13 +1137,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
             self["wind_gust"].setText(_('Gust ') + _('N/A'))
 
         # Precipitation
-        self["rain_mm"].setText(f"{rain_mm} " + _('mm') if rain_mm != ' n/a' else _("N/A"))
+        self["rain_mm"].setText(f"{rain_mm} " +
+                                _('mm') if rain_mm != ' n/a' else _("N/A"))
 
         # Humidity
         self["hum"].setText(f"{hum}%" if hum != ' n/a' else _("N/A"))
 
         # Pressure
-        self["pressure"].setText(f"{pressure} " + _('hPa') if pressure != ' n/a' else _("N/A"))
+        self["pressure"].setText(
+            f"{pressure} " +
+            _('hPa') if pressure != ' n/a' else _("N/A"))
 
     """
     # def my_cur_weather(self):
@@ -1157,7 +1198,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         day_str = trans(f_day) if f_day and f_day != ' n/a' else ""
 
         # TRANSLATE the title widget
-        self["Titel"].text = trans(str(town)) + ', ' + trans(str(country)) + ' - ' + date_str
+        self["Titel"].text = trans(str(town)) + ', ' + \
+            trans(str(country)) + ' - ' + date_str
         if day_str:
             self["Titel"].text += ' - ' + day_str
 
@@ -1178,12 +1220,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
         global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 0
         MAIN_PAGE_F = str(BASEURL) + path_loc0
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
+            MAIN_PAGE_F)
 
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+            MAIN_PAGE_FF)
         self.my_forecast_weather()
 
         self.update_widget_translations()
@@ -1202,12 +1246,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
         global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 1
         MAIN_PAGE_F = str(BASEURL) + path_loc1
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
+            MAIN_PAGE_F)
 
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc1 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+            MAIN_PAGE_FF)
         self.my_forecast_weather()
 
         self.update_widget_translations()
@@ -1226,12 +1272,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
         global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 2
         MAIN_PAGE_F = str(BASEURL) + path_loc2
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
+            MAIN_PAGE_F)
 
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc2 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+            MAIN_PAGE_FF)
 
         self.my_forecast_weather()
 
@@ -1252,16 +1300,22 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.tag = ztag
 
         if myloc == 0:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc0 + \
+                '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+                MAIN_PAGE_FF)
             self.my_forecast_weather()
         elif myloc == 1:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc1 + '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc1 + \
+                '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+                MAIN_PAGE_FF)
             self.my_forecast_weather()
         elif myloc == 2:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc2 + '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc2 + \
+                '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+                MAIN_PAGE_FF)
             self.my_forecast_weather()
 
         self.StartPage()
@@ -1293,38 +1347,68 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def symbolToCondition(self, symbol):
         symbol_map = {
-            'd000': _('Clear'), 'n000': _('Clear'),
-            'd100': _('Mostly clear'), 'n100': _('Mostly clear'),
-            'd200': _('Partly cloudy'), 'n200': _('Partly cloudy'),
-            'd210': _('Partly cloudy and light rain'), 'n210': _('Partly cloudy and light rain'),
-            'd211': _('Partly cloudy and light wet snow'), 'n211': _('Partly cloudy and light wet snow'),
-            'd212': _('Partly cloudy and light snow'), 'n212': _('Partly cloudy and light snow'),
-            'd220': _('Partly cloudy and showers'), 'n220': _('Partly cloudy and showers'),
-            'd221': _('Partly cloudy and wet snow showers'), 'n221': _('Partly cloudy and wet snow showers'),
-            'd222': _('Partly cloudy and snow showers'), 'n222': _('Partly cloudy and snow showers'),
-            'd240': _('Partly cloudy, possible thunderstorms with rain'), 'n240': _('Partly cloudy, possible thunderstorms with rain'),
-            'd300': _('Cloudy'), 'n300': _('Cloudy'),
-            'd310': _('Cloudy and light rain'), 'n310': _('Cloudy and light rain'),
-            'd311': _('Cloudy and light wet snow'), 'n311': _('Cloudy and light wet snow'),
-            'd312': _('Cloudy and light snow'), 'n312': _('Cloudy and light snow'),
-            'd320': _('Cloudy and showers'), 'n320': _('Cloudy and showers'),
-            'd321': _('Cloudy and wet snow showers'), 'n321': _('Cloudy and wet snow showers'),
-            'd322': _('Cloudy and snow showers'), 'n322': _('Cloudy and snow showers'),
-            'd340': _('Cloudy, thunderstorms with rain'), 'n340': _('Cloudy, thunderstorms with rain'),
-            'd400': _('Overcast'), 'n400': _('Overcast'),
-            'd410': _('Overcast and light rain'), 'n410': _('Overcast and light rain'),
-            'd411': _('Overcast and light wet snow'), 'n411': _('Overcast and light wet snow'),
-            'd412': _('Overcast and light snow'), 'n412': _('Overcast and light snow'),
-            'd430': _('Overcast and showers'), 'n430': _('Overcast and showers'),
-            'd421': _('Overcast and wet snow showers'), 'n421': _('Overcast and wet snow showers'),
-            'd432': _('Overcast and snow showers'), 'n432': _('Overcast and snow showers'),
-            'd420': _('Overcast and rain'), 'n420': _('Overcast and rain'),
-            'd431': _('Overcast and wet snow'), 'n431': _('Overcast and wet snow'),
-            'd422': _('Overcast and snow'), 'n422': _('Overcast and snow'),
-            'd440': _('Overcast, thunderstorms with rain'), 'n440': _('Overcast, thunderstorms with rain'),
-            'd500': _('Thin upper cloud'), 'n500': _('Thin upper cloud'),
-            'd600': _('Fog'), 'n600': _('Fog')
-        }
+            'd000': _('Clear'),
+            'n000': _('Clear'),
+            'd100': _('Mostly clear'),
+            'n100': _('Mostly clear'),
+            'd200': _('Partly cloudy'),
+            'n200': _('Partly cloudy'),
+            'd210': _('Partly cloudy and light rain'),
+            'n210': _('Partly cloudy and light rain'),
+            'd211': _('Partly cloudy and light wet snow'),
+            'n211': _('Partly cloudy and light wet snow'),
+            'd212': _('Partly cloudy and light snow'),
+            'n212': _('Partly cloudy and light snow'),
+            'd220': _('Partly cloudy and showers'),
+            'n220': _('Partly cloudy and showers'),
+            'd221': _('Partly cloudy and wet snow showers'),
+            'n221': _('Partly cloudy and wet snow showers'),
+            'd222': _('Partly cloudy and snow showers'),
+            'n222': _('Partly cloudy and snow showers'),
+            'd240': _('Partly cloudy, possible thunderstorms with rain'),
+            'n240': _('Partly cloudy, possible thunderstorms with rain'),
+            'd300': _('Cloudy'),
+            'n300': _('Cloudy'),
+            'd310': _('Cloudy and light rain'),
+            'n310': _('Cloudy and light rain'),
+            'd311': _('Cloudy and light wet snow'),
+            'n311': _('Cloudy and light wet snow'),
+            'd312': _('Cloudy and light snow'),
+            'n312': _('Cloudy and light snow'),
+            'd320': _('Cloudy and showers'),
+            'n320': _('Cloudy and showers'),
+            'd321': _('Cloudy and wet snow showers'),
+            'n321': _('Cloudy and wet snow showers'),
+            'd322': _('Cloudy and snow showers'),
+            'n322': _('Cloudy and snow showers'),
+            'd340': _('Cloudy, thunderstorms with rain'),
+            'n340': _('Cloudy, thunderstorms with rain'),
+            'd400': _('Overcast'),
+            'n400': _('Overcast'),
+            'd410': _('Overcast and light rain'),
+            'n410': _('Overcast and light rain'),
+            'd411': _('Overcast and light wet snow'),
+            'n411': _('Overcast and light wet snow'),
+            'd412': _('Overcast and light snow'),
+            'n412': _('Overcast and light snow'),
+            'd430': _('Overcast and showers'),
+            'n430': _('Overcast and showers'),
+            'd421': _('Overcast and wet snow showers'),
+            'n421': _('Overcast and wet snow showers'),
+            'd432': _('Overcast and snow showers'),
+            'n432': _('Overcast and snow showers'),
+            'd420': _('Overcast and rain'),
+            'n420': _('Overcast and rain'),
+            'd431': _('Overcast and wet snow'),
+            'n431': _('Overcast and wet snow'),
+            'd422': _('Overcast and snow'),
+            'n422': _('Overcast and snow'),
+            'd440': _('Overcast, thunderstorms with rain'),
+            'n440': _('Overcast, thunderstorms with rain'),
+            'd500': _('Thin upper cloud'),
+            'n500': _('Thin upper cloud'),
+            'd600': _('Fog'),
+            'n600': _('Fog')}
         return symbol_map.get(symbol, _('Unknown'))
 
     def degreesToWindDirection(self, degrees):
@@ -1332,7 +1416,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
             index = round(degrees / 45) % 8
             return "w" + directions[int(index)]
-        except:
+        except BaseException:
             return "w360"
 
     def red(self):
@@ -1399,13 +1483,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
             # Update sunrise/sunset times
             if hasattr(self, 'sunrise_val'):
-                self["sunrise_val"].setText(str(sunrise) if sunrise != ' n/a' else "N/A")
+                self["sunrise_val"].setText(
+                    str(sunrise) if sunrise != ' n/a' else "N/A")
             if hasattr(self, 'sunset_val'):
-                self["sunset_val"].setText(str(sunset) if sunset != ' n/a' else "N/A")
+                self["sunset_val"].setText(
+                    str(sunset) if sunset != ' n/a' else "N/A")
 
             # Update current weather widgets
             if hasattr(self, 'town'):
-                self["town"].setText(trans(str(town)) if town != ' n/a' else "N/A")
+                self["town"].setText(
+                    trans(str(town)) if town != ' n/a' else "N/A")
 
             if hasattr(self, 'description_w'):
                 if pic != ' n/a':
@@ -1424,13 +1511,15 @@ class ForecaPreview_4(Screen, HelpableScreen):
             # CORREZIONE CRITICA: Usa le variabili globali corrette
             if hasattr(self, 'fl_temp'):
                 if fl_temp != ' n/a':
-                    self["fl_temp"].setText(trans('Feels like ') + f"{fl_temp}°C")
+                    self["fl_temp"].setText(
+                        trans('Feels like ') + f"{fl_temp}°C")
                 else:
                     self["fl_temp"].setText(trans('Feels like ') + "N/A")
 
             if hasattr(self, 'dewpoint'):
                 if dewpoint != ' n/a':
-                    self["dewpoint"].setText(trans('Dewpoint ') + f"{dewpoint}°C")
+                    self["dewpoint"].setText(
+                        trans('Dewpoint ') + f"{dewpoint}°C")
                 else:
                     self["dewpoint"].setText(trans('Dewpoint ') + "N/A")
 
@@ -1438,14 +1527,17 @@ class ForecaPreview_4(Screen, HelpableScreen):
             if hasattr(self, 'wind_speed'):
                 if wind_speed != ' n/a':
                     speed = mywindSpeed(wind_speed, cur_wind_speed_recalc)
-                    self["wind_speed"].setText(trans('Wind speed ') + f"{speed} " + trans('km/h'))
+                    self["wind_speed"].setText(
+                        trans('Wind speed ') + f"{speed} " + trans('km/h'))
                 else:
-                    self["wind_speed"].setText(trans('Wind speed ') + trans('N/A'))
+                    self["wind_speed"].setText(
+                        trans('Wind speed ') + trans('N/A'))
 
             if hasattr(self, 'wind_gust'):
                 if wind_gust != ' n/a':
                     gust = mywindSpeed(wind_gust, cur_wind_speed_recalc)
-                    self["wind_gust"].setText(trans('Gust ') + f"{gust} " + trans('km/h'))
+                    self["wind_gust"].setText(
+                        trans('Gust ') + f"{gust} " + trans('km/h'))
                 else:
                     self["wind_gust"].setText(trans('Gust ') + trans('N/A'))
 
@@ -1493,7 +1585,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         widget.instance.invalidate()
                     elif hasattr(widget, 'invalidate'):
                         widget.invalidate()
-            except:
+            except BaseException:
                 pass
 
     def clean_foreca_cache(self):
@@ -1517,26 +1609,30 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     continue
 
                 if os.path.isfile(filepath):
-                    # Delete temporary display files (they start with 'display_' or 'merged_')
-                    if filename.startswith(('display_', 'merged_', 'foreca4_merged_', 'foreca4_display_')):
+                    # Delete temporary display files (they start with
+                    # 'display_' or 'merged_')
+                    if filename.startswith(
+                            ('display_', 'merged_', 'foreca4_merged_', 'foreca4_display_')):
                         try:
                             os.remove(filepath)
                             deleted += 1
-                        except:
+                        except BaseException:
                             pass
                     else:
-                        # For tile cache files, keep if recent (less than 1 day)
+                        # For tile cache files, keep if recent (less than 1
+                        # day)
                         file_age = current_time - os.path.getmtime(filepath)
                         if file_age > 86400:  # 1 day
                             try:
                                 os.remove(filepath)
                                 deleted += 1
-                            except:
+                            except BaseException:
                                 pass
                         else:
                             kept += 1
 
-            print(f"[Foreca4] Cache cleanup: {deleted} files deleted, {kept} files kept")
+            print(
+                f"[Foreca4] Cache cleanup: {deleted} files deleted, {kept} files kept")
 
         except Exception as e:
             print(f"[Foreca4] Error cleaning cache: {e}")
@@ -1654,7 +1750,8 @@ class Color_Select(Screen):
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print(f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
+            print(
+                f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
             translated_any = False
             for i in range(start_idx, end_idx_actual):
                 if self.display_names[i] == self.original_names[i]:
@@ -1667,7 +1764,8 @@ class Color_Select(Screen):
 
             if translated_any:
                 self.update_gui()
-                print(f"[Color_Select] Range {start_idx}-{end_idx_actual} translated")
+                print(
+                    f"[Color_Select] Range {start_idx}-{end_idx_actual} translated")
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
@@ -1691,7 +1789,8 @@ class Color_Select(Screen):
                         translated_parts.append("")
 
                 result = '-'.join(translated_parts)
-                print(f"[Color_Select] Result with iphen: '{color_name}' -> '{result}'")
+                print(
+                    f"[Color_Select] Result with iphen: '{color_name}' -> '{result}'")
                 return result
 
             result = trans(color_name)
@@ -1807,7 +1906,10 @@ class InfoBox1(Screen):
 
         Screen.__init__(self, session)
 
-        self['ver'] = StaticText(_('Foreca 4 Weather and Forecast') + ' ver. ' + str(VERSION))
+        self['ver'] = StaticText(
+            _('Foreca 4 Weather and Forecast') +
+            ' ver. ' +
+            str(VERSION))
 
         self["plate0"] = Label("N/A")
         self["plate1"] = Label("N/A")
@@ -1857,7 +1959,8 @@ class ExtInfo_Foreca4_FHD(Screen):
         elif myloc == 2:
             MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc2)
 
-        self.mytown, self.mytext1, self.myh_temp, self.myl_temp, self.mytext2, self.mytext3, self.myh2_temp, self.myl2_temp, self.mytext4, self.mysymb_mo1, self.mysymb_mo2, self.myt_mo1, self.myt_mo2, self.mysymb_af1, self.mysymb_af2, self.myt_af1, self.myt_af2, self.mysymb_ev1, self.mysymb_ev2, self.myt_ev1, self.myt_ev2, self.mysymb_ov1, self.mysymb_ov2, self.myt_ov1, self.myt_ov2 = getPageTT(MAIN_PAGE_TT)
+        self.mytown, self.mytext1, self.myh_temp, self.myl_temp, self.mytext2, self.mytext3, self.myh2_temp, self.myl2_temp, self.mytext4, self.mysymb_mo1, self.mysymb_mo2, self.myt_mo1, self.myt_mo2, self.mysymb_af1, self.mysymb_af2, self.myt_af1, self.myt_af2, self.mysymb_ev1, self.mysymb_ev2, self.myt_ev1, self.myt_ev2, self.mysymb_ov1, self.mysymb_ov2, self.myt_ov1, self.myt_ov2 = getPageTT(
+            MAIN_PAGE_TT)
 
         self['title1'] = StaticText(_('Weather Radar'))
         self['title2'] = StaticText()
@@ -1926,10 +2029,12 @@ class ExtInfo_Foreca4_FHD(Screen):
 
         self['title2'].text = str(self.mytown)
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
+        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
+            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
         self["text1"].text = str(t1)
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
+        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
+            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
         self["text2"].text = str(t2)
 
         self['mo1'].text = _('Morning')
@@ -1955,10 +2060,12 @@ class ExtInfo_Foreca4_FHD(Screen):
 
         self['title2'].text = str(trans(self.mytown))
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
+        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
+            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
         self["text1"].text = str(trans(t1))
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
+        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
+            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
         self["text2"].text = str(trans(t2))
 
     def Start1(self):
@@ -1967,27 +2074,37 @@ class ExtInfo_Foreca4_FHD(Screen):
             self["pic"].instance.setPixmapFromFile("/tmp/385.png")
             self["pic"].instance.show()
 
-        self["pic_af1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af1) + ".png")
+        self["pic_af1"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af1) + ".png")
         self["pic_af1"].instance.show()
-        self["pic_ev1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev1) + ".png")
+        self["pic_ev1"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev1) + ".png")
         self["pic_ev1"].instance.show()
-        self["pic_ov1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov1) + ".png")
+        self["pic_ov1"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov1) + ".png")
         self["pic_ov1"].instance.show()
-        self["pic_mo1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo1) + ".png")
+        self["pic_mo1"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo1) + ".png")
         self["pic_mo1"].instance.show()
 
-        self["pic_af2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af2) + ".png")
+        self["pic_af2"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af2) + ".png")
         self["pic_af2"].instance.show()
-        self["pic_ev2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev2) + ".png")
+        self["pic_ev2"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev2) + ".png")
         self["pic_ev2"].instance.show()
-        self["pic_ov2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov2) + ".png")
+        self["pic_ov2"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov2) + ".png")
         self["pic_ov2"].instance.show()
-        self["pic_mo2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo2) + ".png")
+        self["pic_mo2"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo2) + ".png")
         self["pic_mo2"].instance.show()
 
-        self["pic_lot"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
+        self["pic_lot"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
         self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
+        self["pic_lat"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
         self['mo1_text'].text = str(self.myt_mo1)
@@ -2055,9 +2172,11 @@ class ExtInfo_2_Foreca4_FHD(Screen):
             self["pic"].instance.setPixmapFromFile("/tmp/385.png")
             self["pic"].instance.show()
 
-        self["pic_lot"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
+        self["pic_lot"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
         self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
+        self["pic_lat"].instance.setPixmapFromFile(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
         self['lat_val'].text = str(lat)
@@ -2141,7 +2260,10 @@ class TransparencyBox(Screen):
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-        self['text1'].text = (_('Window transparency') + ' - ' + conv_alpha(alpha))
+        self['text1'].text = (
+            _('Window transparency') +
+            ' - ' +
+            conv_alpha(alpha))
 
         list = []
 
@@ -2207,13 +2329,16 @@ class Meteogram_Foreca4_FHD(Screen):
         # global myloc
         if myloc == 0:
             if os.path.exists("/tmp/foreca_com_2_w.png"):
-                self["pic"].instance.setPixmapFromFile("/tmp/foreca_com_2_w.png")
+                self["pic"].instance.setPixmapFromFile(
+                    "/tmp/foreca_com_2_w.png")
                 self["pic"].instance.show()
             else:
-                self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
+                self["pic"].instance.setPixmapFromFile(
+                    "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
                 self["pic"].instance.show()
         else:
-            self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
+            self["pic"].instance.setPixmapFromFile(
+                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
             self["pic"].instance.show()
 
     def Exit(self):
@@ -2223,7 +2348,13 @@ class Meteogram_Foreca4_FHD(Screen):
 class CityPanel4List(MenuList):
     """Custom list for city selection with unified styling"""
 
-    def __init__(self, list, font0=22, font1=16, itemHeight=30, enableWrapAround=True):
+    def __init__(
+            self,
+            list,
+            font0=22,
+            font1=16,
+            itemHeight=30,
+            enableWrapAround=True):
         MenuList.__init__(self, [], False, eListboxPythonMultiContent)
         GUIComponent.__init__(self)
 

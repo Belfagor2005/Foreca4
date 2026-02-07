@@ -36,8 +36,9 @@ def getPageF(MAIN_PAGE, page=None):
     try:
         req = Request(url, headers=HEADERS)
         resp = urlopen(req, timeout=10)
-        return getForecaPageF(resp.read().decode('utf-8') if PY3 else resp.read())
-    except:
+        return getForecaPageF(resp.read().decode('utf-8')
+                              if PY3 else resp.read())
+    except BaseException:
         return ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a', ' n/a'
 
 
@@ -45,124 +46,183 @@ def getForecaPageF(html):
     try:
         fulltext = compile(r'Weather today - (.+?)</title>', DOTALL)
         town = str(fulltext.findall(html)[0]).split(', ')[0]
-    except:
+    except BaseException:
         town = er
 
     try:
-        fulltext = compile(r'<p class="large"><span class="value temp temp_c warm">(.+?)&deg;.+?', DOTALL)
+        fulltext = compile(
+            r'<p class="large"><span class="value temp temp_c warm">(.+?)&deg;.+?',
+            DOTALL)
         cur_temp = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         try:
-            fulltext = compile(r'<p class="large"><span class="value temp temp_c cold">(.+?)&deg;.+?', DOTALL)
+            fulltext = compile(
+                r'<p class="large"><span class="value temp temp_c cold">(.+?)&deg;.+?', DOTALL)
             cur_temp = str(fulltext.findall(html)[0])
-        except:
+        except BaseException:
             cur_temp = er
 
     try:
-        fulltext = compile(r'<p>Feels like <span class="value temp temp_c warm"><em>(.+?)&deg;.+?', DOTALL)
+        fulltext = compile(
+            r'<p>Feels like <span class="value temp temp_c warm"><em>(.+?)&deg;.+?',
+            DOTALL)
         fl_temp = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         try:
-            fulltext = compile(r'<p>Feels like <span class="value temp temp_c cold"><em>(.+?)&deg;.+?', DOTALL)
+            fulltext = compile(
+                r'<p>Feels like <span class="value temp temp_c cold"><em>(.+?)&deg;.+?',
+                DOTALL)
             fl_temp = str(fulltext.findall(html)[0])
-        except:
+        except BaseException:
             fl_temp = er
 
     try:
-        fulltext = compile(r'>Dewpoint <span class="value temp temp_c warm"><em>(.+?)&deg;.+?', DOTALL)
+        fulltext = compile(
+            r'>Dewpoint <span class="value temp temp_c warm"><em>(.+?)&deg;.+?',
+            DOTALL)
         dewpoint = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         try:
-            fulltext = compile(r'Dewpoint <span class="value temp temp_c cold"><em>(.+?)&deg;.+?', DOTALL)
+            fulltext = compile(
+                r'Dewpoint <span class="value temp temp_c cold"><em>(.+?)&deg;.+?', DOTALL)
             dewpoint = str(fulltext.findall(html)[0])
-        except:
+        except BaseException:
             dewpoint = er
 
     try:
-        fulltext = compile(r'<img src="/public/images/symbols/(.+?).svg" alt=".+?', DOTALL)
+        fulltext = compile(
+            r'<img src="/public/images/symbols/(.+?).svg" alt=".+?', DOTALL)
         pic = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         pic = er
 
     try:
-        fulltext = compile(r'<img src="/public/images/wind/blue/(.+?).svg" .+?', DOTALL)
+        fulltext = compile(
+            r'<img src="/public/images/wind/blue/(.+?).svg" .+?', DOTALL)
         wind = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         wind = er
 
     try:
-        fulltext = compile(r'<span class="value wind wind_kmh">(.+?) kmh.+?', DOTALL)
+        fulltext = compile(
+            r'<span class="value wind wind_kmh">(.+?) kmh.+?', DOTALL)
         wind_speed = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         wind_speed = er
 
     try:
-        fulltext = compile(r'<span class="value wind wind_kmh"><em>(.+?)</em> kmh.+?', DOTALL)
+        fulltext = compile(
+            r'<span class="value wind wind_kmh"><em>(.+?)</em> kmh.+?',
+            DOTALL)
         wind_gust = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         wind_gust = er
 
     try:
-        fulltext = compile(r'<span class="value rain rain_mm"><em>(.+?)</em> mm</span> .+?', DOTALL)
+        fulltext = compile(
+            r'<span class="value rain rain_mm"><em>(.+?)</em> mm</span> .+?',
+            DOTALL)
         rain_mm = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         rain_mm = er
 
     try:
-        fulltext = compile(r'<div class="rhum center"><p><em>(.+?)</em>.+?', DOTALL)
+        fulltext = compile(
+            r'<div class="rhum center"><p><em>(.+?)</em>.+?', DOTALL)
         hum = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         hum = er
 
     try:
-        fulltext = compile(r'<span class="value pres pres_mmhg"><em>(.+?)</em> .+?', DOTALL)
+        fulltext = compile(
+            r'<span class="value pres pres_mmhg"><em>(.+?)</em> .+?',
+            DOTALL)
         pressure = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         pressure = er
 
     try:
         fulltext = compile(r',"defaultCountryName":"(.+?)",', DOTALL)
         country = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         country = er
 
     try:
         fulltext = compile(r'lon: (.+?),.+?', DOTALL)
         lon = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         lon = er
 
     try:
         fulltext = compile(r'lat: (.+?),.+?', DOTALL)
         lat = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         lat = er
 
     try:
-        fulltext = compile(r'class="row sun details">.+?<span class="value time time_24h">(.+?)</span></em>.+?', DOTALL)
+        fulltext = compile(
+            r'class="row sun details">.+?<span class="value time time_24h">(.+?)</span></em>.+?',
+            DOTALL)
         sunrise = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         sunrise = er
 
     try:
-        fulltext = compile(r'<div class="daylen center"><em>(.+?)</em><br>.+?', DOTALL)
+        fulltext = compile(
+            r'<div class="daylen center"><em>(.+?)</em><br>.+?', DOTALL)
         daylen = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         daylen = er
 
     try:
-        fulltext = compile(r'<div class="sunset right"><em>.+?<span class="value time time_24h">(.+?)</span></em><br>Sunset</div>.+?', DOTALL)
+        fulltext = compile(
+            r'<div class="sunset right"><em>.+?<span class="value time time_24h">(.+?)</span></em><br>Sunset</div>.+?',
+            DOTALL)
         sunset = str(fulltext.findall(html)[0])
-    except:
+    except BaseException:
         sunset = er
 
-    mylogwrite(town + ' ' + cur_temp + ' ' + fl_temp + ' ' + dewpoint + ' ' + pic + ' ' + wind + ' ' + wind_speed + ' ' + wind_gust + ' ' + rain_mm + ' ' + hum + ' ' + pressure + ' ' + country + ' ' + lon + ' ' + lat + ' ' + sunrise + ' ' + daylen + ' ' + sunset)
+    mylogwrite(
+        town +
+        ' ' +
+        cur_temp +
+        ' ' +
+        fl_temp +
+        ' ' +
+        dewpoint +
+        ' ' +
+        pic +
+        ' ' +
+        wind +
+        ' ' +
+        wind_speed +
+        ' ' +
+        wind_gust +
+        ' ' +
+        rain_mm +
+        ' ' +
+        hum +
+        ' ' +
+        pressure +
+        ' ' +
+        country +
+        ' ' +
+        lon +
+        ' ' +
+        lat +
+        ' ' +
+        sunrise +
+        ' ' +
+        daylen +
+        ' ' +
+        sunset)
     return town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset
 
 
 def first_start():
     MAIN_PAGE_F = 'https://www.foreca.com/100457954/Liep%c4%81ja-Latvia'
-    mytown, mycur_temp, myfl_temp, mydewpoint, mypic, mywind, mywind_speed, mywind_gust, myrain_mm, myhum, mypressure, mycountry, mylon, mylat, mysunrise, mydaylen, mysunset = getPageF(MAIN_PAGE_F)
+    mytown, mycur_temp, myfl_temp, mydewpoint, mypic, mywind, mywind_speed, mywind_gust, myrain_mm, myhum, mypressure, mycountry, mylon, mylat, mysunrise, mydaylen, mysunset = getPageF(
+        MAIN_PAGE_F)
 
     print(mytown)
     print(mycur_temp)
