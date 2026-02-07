@@ -1,11 +1,151 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
+
 #
+#  $Id$
+#
+# -------------------------------------------------------
+#
+#              Foreca Weather Forecast E2
+#
+#   This Plugin retrieves the actual weather forecast
+#   for the next 10 days from the Foreca website.
+#
+#        We wish all users wonderful weather!
+#
+#
+#                 11/03/2025
+#
+#     Source of information: https://www.foreca.ba
+#
+#             Design and idea by
+#                  @Bauernbub
+#            enigma2 mod by mogli123
+#
+# -------------------------------------------------------
+#
+#  Provided with no warranties of any sort.
+#
+# -------------------------------------------------------
+#
+# History:
+# 2.6 Various minor changes
+# 2.7 Wrap around mode enabled in screen-lists
+# 2.8 Calculate next date based on displayed date when left/right key is pushed
+#     after prior date jump using 0 - 9 keys was performed
+# 2.9 Fix: Show correct date and time in weather videos
+#     Main screen navigation modified to comply with standard usage:
+#     scroll page up/down by left/right key
+#     select previous/next day by left/right arrow key of numeric key group
+# 2.9.1 Latvian cities and localization added. Thanks to muca
+# 2.9.2 Iranian cities updated and localization added. Thanks to Persian Prince
+#   Hungarian and Slovakian cities added. Thanks to torpe
+# 2.9.3 Detail line in main screen condensed to show more text in SD screen
+#   Grading of temperature colors reworked
+#   Some code cosmetics
+#   Translation code simplified: Setting the os LANGUAGE variable isn't needed anymore
+#   Typos in German localization fixed
+# 2.9.4 Many world-wide cities added. Thanks to AnodA
+#   Hungarian and Slovakian localization added. Thanks to torpe
+# 2.9.5 Fixed: Cities containing "_" didn't work as favorites. Thanks to kashmir
+# 2.9.6 Size of temperature item slightly extended to match with skins using italic font
+#   Grading of temperature colors reworked
+# 2.9.7 Use specified "Frame size in full view" value when showing "5 day forecast" chart
+#   Info screen reworked
+#   False temperature colors fixed
+#   Up/down keys now scroll by page in main screen (without highlighting selection)
+# 3.0.0 Option added to select measurement units. Thanks to muca
+#   Option added to select time format.
+#   Setup menu reworked.
+#   Main screen navigation modified: Select previous/next day by left/right key
+#   Many Italian cities added and Italian localization updated. Thanks to mat8861
+#   Czech, Greek, French, Latvian, Dutch, Polish, Russian localization updated. Thanks to muca
+# 3.0.1 Fix broken transliteration
+#   Disable selection in main screen.
+# 3.0.2 Weather maps of Czech Republic, Greece, Hungary, Latvia, Poland, Russia, Slovakia added
+#   Temperature Satellite video added
+#   Control key assignment in slide show reworked to comply with Media Player standard
+#   Some Italian cities added
+#   Thumbnail folders compacted
+#   Unused code removed, redundant code purged
+#   Localization updated
+# 3.0.3 List of German states and list of European countries sorted
+#   Code cosmetics
+#   Localization updated
+# 3.0.4 Language determination improved
+# 3.0.5 Setup of collating sequence reworked
+# 3.0.6 Weather data in Russian version obtained from foreca.com instead of foreca.ru due
+#     to structural discrepancy of Russian web site
+#   Code cosmetics
+# 3.0.7 Turkish cities updated. Thanks to atsiz77
+#   Debug state noted in log file
+# 3.0.8 Fixed for Foreca's pages changes
+# 3.0.9 Path for weather map regions updated after change of Wetterkontor's pages. Thanks to Bag58.
+#   Add missing spinner icon
+# 3.1.0 Plugin splitted into a loader and UI part, as Foreca needs quite a while to load. Hence
+#     actual load postponed until the user requests for it.
+#   Finnish localization added. Thanks to kjuntara
+#   Ukrainian localization added. Thanks to Irkoff
+# 3.1.1 ForecaPreview skineable
+# 3.1.2 Next screens skineable
+# 3.1.3 Added font size for slideshow into setting
+# 3.1.4 rem /www.metoffice.gov.uk due non existing infrared on this pages more
+# 3.1.7 fix url foreca com
+# 3.1.8 fix problem with national chars in favorite names
+# 3.1.9 renamed parsed variables, added humidity into list - for display in default screen must be:
+#   changed line:       self.itemHeight = 90   ... change to new height, if is needed
+#   and rearanged lines:    self.valText1 = 365,5,600,28
+#               self.valText2 = 365,33,600,28
+#               self.valText3 = 365,59,600,28
+#               self.valText4 = 365,87,600,28
+#   similar in user skin - there text4Pos="x,y,w,h" must be added
+# 3.2.0 fixed satellite maps, removed infrared - page not exist more, sanity check if nothing is downloaded
+# 3.2.3-r3 change URL to .net and .ru
+# 3.2.7 change URL to .hr, Py3-bugfix for videos and several code cleanups
+# 3.2.8 'startservice.cfg', 'fav1.cfg' and 'fav2.cfg' are obsolete and now part of etc/enigma2/settings and therefore can be deleted
+# 3.2.9 change URL to .biz (THX to jup @OpenA.TV) and some code improvements
+#
+# To do:
+#   Add 10 day forecast on green key press
+#   City search at Foreca website on yellow key press. This will eliminate complete city DB.
+#   Option to add unlimited cities to a favorite list and to manage this favorite list (add & delete city, sort list).
+#   Show home city (first entry of favorite list) on OK key press.
+#   Skip to next/previous favorite city on left/right arrow key.
+#   Show weather videos and maps on blue key
+#   Show setup menu on Menu key
+# 3.2.11 Umstellung auf Foreca Seite .biz und Nutzung WebClientContextFactory für https
+# Unresolved: Crash when scrolling in help screen of city panel
+# To do:
+#   Show weather videos and maps on blue key
+#   Show setup menu on Menu key
+#
+# 3.3.4 change URL to and many code improvements
+#  RECODE FROM LULULLA TO 20241222
+# To do:
+#   Add choice list for pressur and other menu
+#   check all url and fetch..
+#   CACHE_PATH moved
+#   FAlog moved
+#   secure remove image from folde CACHE_PATH
+#   Remove profile ICC from bad image
+# 3.3.5 change URL to and many code improvements
+#  RECODE FROM LULULLA
+# To do:
+#   Add server url online
+# 3.3.6 fix translations and many code improvements
+#  RECODE FROM LULULLA
+# 3.3.7 removed .cfg files - add TV button for Menu Config
+#  RECODE FROM LULULLA
+# 3.3.8 Mahor fix on clean all code unnecessay / append new PY3
+#  Translate 90% complete
+#  # thank's Orlandoxx  restore Eumsat screen picxview
+#  RECODE FROM LULULLA
 #  Foreca 4 Weather and Forecast
 #
-#  (C) Evg77734, 2025
+#  RECODE FROM (C) Evg77734, 2025
+#  v.1.3.4
 #
-# mod @lululla 2026.01.25
+# mod @lululla 2026.01.25 v.1.3.4_r2
 # Core API:
 # Authentication system, token/tile cache (foreca_map_api.py).
 # Interface:
@@ -23,41 +163,47 @@
 
 from __future__ import absolute_import
 
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS
-from Components.MultiContent import MultiContentEntryText
-from Components.Sources.StaticText import StaticText
-from Components.ActionMap import HelpableActionMap
-from .google_translate_api import translate_text
-from Components.GUIComponent import GUIComponent
-from Tools.BoundFunction import boundFunction
-from Screens.HelpMenu import HelpableScreen
-from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import ActionMap
-from Screens.MessageBox import MessageBox
-from Components.Sources.List import List
-from Components.MenuList import MenuList
-from Tools.LoadPixmap import LoadPixmap
-from Components.config import config
-from skin import parseColor
-from Components.Pixmap import Pixmap
-from enigma import (
-    eListboxPythonMultiContent,
-    getDesktop,
-    gFont,
-    RT_VALIGN_CENTER,
-)
-from Components.Label import Label
-from Screens.Screen import Screen
+# Standard library imports
+import os
 from sys import version_info
 from threading import Thread
-from enigma import gRGB
-import six
-import os
 
-from .slideshow import ForecaMapsMenu
-from .forecast_weather import getPageF_F
+# Enigma2 imports
+from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.config import config
+from Components.GUIComponent import GUIComponent
+from Components.Label import Label
+from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryText
+from Components.Pixmap import Pixmap
+from Components.Sources.List import List
+from Components.Sources.StaticText import StaticText
+from enigma import (
+    eListboxPythonMultiContent,
+    gFont,
+    getDesktop,
+    RT_VALIGN_CENTER,
+)
+from enigma import gRGB
+from Plugins.Plugin import PluginDescriptor
+from Screens.HelpMenu import HelpableScreen
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from skin import parseColor
+from Tools.BoundFunction import boundFunction
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.LoadPixmap import LoadPixmap
+
+# Third-party imports
+import six
+
+# Local application imports
+from . import _
 from .cur_weather import getPageF
-from .tt_weather import getPageTT
+from .forecast_weather import getPageF_F
+from .foreca_map_api import ForecaMapAPI
+from .foreca_map_menu import ForecaMapMenu
+from .google_translate import translate_text, safe_translate, _get_system_language, translate_batch
 from .skin import (
     About_Foreca4_FHD,
     About_Foreca4_HD,
@@ -74,30 +220,14 @@ from .skin import (
     Transparency_Foreca4_FHD,
     Transparency_Foreca4_HD,
 )
-from .foreca_map_api import ForecaMapAPI
-from .foreca_map_menu import ForecaMapMenu
-from . import _
+from .slideshow import ForecaMapsMenu
+from .tt_weather import getPageTT
 
-# moved on __init__.py
-"""
-import gettext
-language config
-lang = language.getLanguage()
-environ["LANGUAGE"] = lang[:2]
-gettext.bindtextdomain("enigma2", resolveFilename(SCOPE_LANGUAGE))
-gettext.textdomain("enigma2")
-gettext.bindtextdomain("Foreca4", "%s%s" % (resolveFilename(SCOPE_PLUGINS), "Extensions/Foreca4/locale/"))
-def _(txt):
-    t = gettext.dgettext("Foreca4", txt)
-    if t == txt:
-        t = gettext.gettext(txt)
-    return t
-"""
 
 VERSION = "1.3.4_r2"
 try:
     TARGET_LANG = config.misc.language.value.split('_')[0]
-except BaseException:
+except:
     TARGET_LANG = "en"
 
 
@@ -116,7 +246,7 @@ if os.path.exists(home_file):
     try:
         with open(home_file, "r") as f:
             path_loc0 = f.read().strip()
-    except BaseException:
+    except:
         pass
 
 # Favorite 1
@@ -125,7 +255,7 @@ if os.path.exists(fav1_file):
     try:
         with open(fav1_file, "r") as f:
             path_loc1 = f.read().strip()
-    except BaseException:
+    except:
         pass
 
 # Favorite 2
@@ -134,7 +264,7 @@ if os.path.exists(fav2_file):
     try:
         with open(fav2_file, "r") as f:
             path_loc2 = f.read().strip()
-    except BaseException:
+    except:
         pass
 
 
@@ -205,27 +335,24 @@ def conv_alpha(insel):
 def readsetalpha():
     global alpha
     alpha = '#40000000'
-    if os.path.exists(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf") is True:
+    if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf") is True:
         try:
             with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf", "r") as file:
                 contents = file.readlines()
                 a = str(contents[0])
                 alpha = a.rstrip()
                 file.close()
-        except BaseException:
+        except:
             alpha = '#40000000'
-    else:
-        alpha = '#40000000'
+    # else:
+        # alpha = '#40000000'
 
 
 readsetalpha()
 
 
 def savesetalpha(indata):
-    f = open(
-        '/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf',
-        'w')
+    f = open('/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf', 'w')
     f.write(indata)
     f.close()
 
@@ -237,7 +364,7 @@ def conv_day_len(indata):
         in2 = _(str(inall[1]))
         in3 = _(str(inall[3]))
         rez = inall[0] + ' ' + str(in2) + ' ' + inall[2] + ' ' + str(in3)
-    except BaseException:
+    except:
         rez = indata
     return rez
 
@@ -251,7 +378,7 @@ def mywindSpeed(indata, metka):
         else:
             rez = '%.01f' % float(int(indata))
             return float(rez)
-    except BaseException:
+    except:
         return 0.00
 
 
@@ -278,8 +405,7 @@ def load_translation_cache():
                     if '=' in line:
                         original, translated = line.strip().split('=', 1)
                         _translation_cache[original] = translated
-            print(
-                f"[Foreca4] Loaded {len(_translation_cache)} translations from cache")
+            print(f"[Foreca4] Loaded {len(_translation_cache)} translations from cache")
         except Exception as e:
             print(f"[Foreca4] Cache loading error: {e}")
 
@@ -289,6 +415,7 @@ def load_translation_cache():
 
 def save_translation_cache(original, translated):
     """Save a translation to the cache file"""
+    # global _translation_cache
     try:
         with open(_translation_cache_file, "a", encoding='utf-8') as f:
             f.write(f"{original}={translated}\n")
@@ -296,6 +423,96 @@ def save_translation_cache(original, translated):
         print(f"[Foreca4] Cache save error: {e}")
 
 
+def trans(text, use_batch=True):
+    """
+    Enhanced translation function using improved translation module.
+
+    Args:
+        text: Text to translate
+        use_batch: Whether to use batch translation optimization
+
+    Returns:
+        Translated text or original if translation fails
+    """
+    if not text or not isinstance(text, str):
+        return text or ""
+
+    # Clean the text
+    text = text.strip()
+    if not text:
+        return ""
+
+    # Check cache first
+    if text in _translation_cache:
+        return _translation_cache[text]
+
+    # For single translations or when batch is disabled
+    if not use_batch:
+        translated = translate_text(text)
+        if translated and translated != text:
+            _translation_cache[text] = translated
+            return translated
+        return text
+
+    # For batch mode, we'll queue translations
+    # (This would need integration with a batch system)
+    return safe_translate(text, fallback=text)
+
+
+def translate_batch_strings(texts):
+    """Translate multiple strings efficiently using batch mode."""
+    if not texts:
+        return []
+
+    # Filter out None or empty strings
+    valid_texts = [str(t).strip() for t in texts if t and str(t).strip()]
+    if not valid_texts:
+        return []
+
+    # Check cache first
+    results = []
+    to_translate = []
+    indices = []
+
+    for i, text in enumerate(valid_texts):
+        if text in _translation_cache:
+            results.append(_translation_cache[text])
+        else:
+            to_translate.append(text)
+            indices.append(i)
+            results.append(None)  # Placeholder
+
+    # Translate remaining texts in batch
+    if to_translate:
+        try:
+            translated_batch = translate_batch(to_translate)
+
+            # Update cache and results
+            for idx, (original, translated) in enumerate(zip(to_translate, translated_batch)):
+                if translated and translated != original:
+                    _translation_cache[original] = translated
+                    # Update result at correct index
+                    results[indices[idx]] = translated
+                else:
+                    results[indices[idx]] = original
+
+        except Exception as e:
+            print(f"[Foreca4] Batch translation error: {e}")
+            # Fallback: translate individually
+            for idx, text in enumerate(to_translate):
+                translated = safe_translate(text, fallback=text)
+                _translation_cache[text] = translated
+                results[indices[idx]] = translated
+
+    # Replace any None values with original text
+    for i in range(len(results)):
+        if results[i] is None:
+            results[i] = valid_texts[i] if i < len(valid_texts) else ""
+
+    return results
+
+
+"""
 def trans(t):
     rez = t
     try:
@@ -313,7 +530,7 @@ def trans(t):
         try:
             from Components.config import config
             target_lang = config.misc.language.value.split('_')[0]
-        except BaseException:
+        except:
             target_lang = "en"  # Fallback
 
         print(f"[Foreca4] Translating '{s[:30]}...' to {target_lang}")
@@ -333,26 +550,71 @@ def trans(t):
         rez = t
 
     return rez
+"""
 
 
 class ForecaPreview_4(Screen, HelpableScreen):
-
     def __init__(self, session):
-        global myloc, MAIN_PAGE_F, MAIN_PAGE_FF, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, share_town0, f_day
-        self.session = session
+        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset
+        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day
 
-        myloc = 0
+        self.session = session
         self.tag = 0
 
         MAIN_PAGE_F = str(BASEURL) + path_loc0
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
-
-        share_town0 = '  ' + _(str(town)) + ', ' + _(str(country))
-
         MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+
+        print(f"[Foreca4] Fetching from: {MAIN_PAGE_F}")
+
+        try:
+            # DEVI usare le variabili GLOBALI già dichiarate sopra
+            result_current = getPageF(MAIN_PAGE_F)
+            print(f"[Foreca4] Current weather result: {result_current[:5]}...")  # Prima 5 elementi
+
+            # Assegna alle variabili GLOBALI
+            town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+        except Exception as e:
+            print(f"[Foreca4] Error getting current weather: {e}")
+            # Inizializza le variabili GLOBALI
+            town = ' n/a'
+            cur_temp = ' n/a'
+            fl_temp = ' n/a'
+            dewpoint = ' n/a'
+            pic = ' n/a'
+            wind = ' n/a'
+            wind_speed = ' n/a'
+            wind_gust = ' n/a'
+            rain_mm = ' n/a'
+            hum = ' n/a'
+            pressure = ' n/a'
+            country = ' n/a'
+            lon = ' n/a'
+            lat = ' n/a'
+            sunrise = ' n/a'
+            daylen = ' n/a'
+            sunset = ' n/a'
+
+        print(f"[Foreca4] Fetching forecast from: {MAIN_PAGE_FF}")
+        try:
+            result_forecast = getPageF_F(MAIN_PAGE_FF)
+            print(f"[Foreca4] Forecast result length: {len(result_forecast[1]) if result_forecast and len(result_forecast) > 1 else 'N/A'}")
+
+            # Assegna alle variabili GLOBALI
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
+        except Exception as e:
+            print(f"[Foreca4] Error getting forecast: {e}")
+            # Inizializza le variabili GLOBALI
+            f_town = ' n/a'
+            f_date = []
+            f_time = []
+            f_symb = []
+            f_cur_temp = []
+            f_flike_temp = []
+            f_wind = []
+            f_wind_speed = []
+            f_precipitation = []
+            f_rel_hum = []
+            f_day = ' n/a'
 
         if size_w == 1920:
             self.skin = ForecaPreview_4_FHD
@@ -369,32 +631,32 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["Titel3"] = StaticText()
         self["Titel5"] = StaticText()
         self["mytitel1"] = StaticText()
-        self["town"] = Label(_("N/A"))
-        self["cur_temp"] = Label(_("N/A"))
-        self["fl_temp"] = Label(_("N/A"))
-        self["dewpoint"] = Label(_("N/A"))
+        self["town"] = Label("N/A")
+        self["cur_temp"] = Label("N/A")
+        self["fl_temp"] = Label("N/A")
+        self["dewpoint"] = Label("N/A")
         self["pic"] = Pixmap()
         self["wind"] = Pixmap()
-        self["wind_speed"] = Label(_("N/A"))
-        self["wind_gust"] = Label(_("N/A"))
-        self["rain_mm"] = Label(_("N/A"))
-        self["hum"] = Label(_("N/A"))
-        self["pressure"] = Label(_("N/A"))
+        self["wind_speed"] = Label("N/A")
+        self["wind_gust"] = Label("N/A")
+        self["rain_mm"] = Label("N/A")
+        self["hum"] = Label("N/A")
+        self["pressure"] = Label("N/A")
         self["description_w"] = Label('')
         self["pressure_pic"] = Pixmap()
         self["rain_mm_pic"] = Pixmap()
         self["hum_pic"] = Pixmap()
-        self["plate1"] = Label(_("N/A"))
-        self["plate2"] = Label(_("N/A"))
-        self["plate3"] = Label(_("N/A"))
-        self["plate4"] = Label(_("N/A"))
-        self["plate5"] = Label(_("N/A"))
+        self["plate1"] = Label("N/A")
+        self["plate2"] = Label("N/A")
+        self["plate3"] = Label("N/A")
+        self["plate4"] = Label("N/A")
+        self["plate5"] = Label("N/A")
 
-        self["plate11"] = Label(_("N/A"))
-        self["plate22"] = Label(_("N/A"))
-        self["plate33"] = Label(_("N/A"))
-        self["plate44"] = Label(_("N/A"))
-        self["plate55"] = Label(_("N/A"))
+        self["plate11"] = Label("N/A")
+        self["plate22"] = Label("N/A")
+        self["plate33"] = Label("N/A")
+        self["plate44"] = Label("N/A")
+        self["plate55"] = Label("N/A")
         self["day_len"] = Label('0 h 0 min')
         self["sunrise_text"] = Label(_('Sunrise'))
         self["sunrise_val"] = Label('00:00')
@@ -524,7 +786,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt.example"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10)
+                    timeout=10
+                )
                 return
             self.session.open(ForecaMapMenu, api)
         except Exception as e:
@@ -543,9 +806,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             self.session.open(ExtInfo_2_Foreca4_FHD)
 
     def savesetcolor(self, indata):
-        f = open(
-            '/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf',
-            'w')
+        f = open('/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf', 'w')
         f.write(indata)
         f.close()
 
@@ -554,8 +815,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         rgbmyr = 0
         rgbmyg = 80
         rgbmyb = 239
-        if os.path.exists(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf") is True:
+        if os.path.exists("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf") is True:
             try:
                 with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf", "r") as file:
                     contents = file.readlines()
@@ -565,17 +825,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     rgbmyg = rez.split(' ')[1]
                     rgbmyb = rez.split(' ')[2]
                     file.close()
-            except BaseException:
+            except:
                 rgbmyr = 0
                 rgbmyg = 80
                 rgbmyb = 239
-        else:
-            rgbmyr = 0
-            rgbmyg = 80
-            rgbmyb = 239
+        # else:
+            # rgbmyr = 0
+            # rgbmyg = 80
+            # rgbmyb = 239
 
     def update_button(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate1"].instance.setBackgroundColor(self.color)
         self["plate2"].instance.setBackgroundColor(self.color)
@@ -590,53 +849,132 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         self.my_cur_weather()
         self.my_forecast_weather()
+        self.update_widget_translations()
+
+    def debug_data(self):
+        """Debug function to check data"""
+        print(f"[Foreca4 DEBUG] town: {town}")
+        print(f"[Foreca4 DEBUG] country: {country}")
+        print(f"[Foreca4 DEBUG] f_date type: {type(f_date)}, length: {len(f_date)}")
+        print(f"[Foreca4 DEBUG] f_date content: {f_date}")
+        print(f"[Foreca4 DEBUG] f_day: {f_day}")
+
+        if f_date and len(f_date) > 0:
+            print(f"[Foreca4 DEBUG] f_date[0]: {f_date[0]}")
+        else:
+            print("[Foreca4 DEBUG] f_date is empty or None")
 
     def StartPageFirst(self):
-        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_date, lon, lat, sunrise, daylen, sunset, f_day
+        # global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_date, lon, lat, sunrise, daylen, sunset, f_day
+
+        self.debug_data()
+
         self.readsetcolor()
-        self["pic"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
+        self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
         self["pic"].instance.show()
-        self["wind"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
+        self["wind"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
         self["wind"].instance.show()
-        self["pressure_pic"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
+        self["pressure_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
         self["pressure_pic"].instance.show()
-        self["rain_mm_pic"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
+        self["rain_mm_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
         self["rain_mm_pic"].instance.show()
-        self["hum_pic"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
+        self["hum_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
         self["hum_pic"].instance.show()
-        self["sun"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
+        self["sun"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
         self["sun"].instance.show()
+
+        # TRANSLATE widget titles
         self["mytitel1"].text = _("Current weather and forecast")
-        self["mytitel2"].text = _("<< ver. ") + str(VERSION) + ' >>'
-        self["Titel"].text = _(str(town)) + ', ' + _(str(country)) + \
-            ' - ' + str(f_date[0]) + ' - ' + _(f_day)
-        self["day_len"].setText(str(conv_day_len(daylen)))
-        self["sunrise_val"].setText(str(sunrise))
-        self["sunset_val"].setText(str(sunset))
+        self["mytitel2"].text = "<< ver. " + str(VERSION) + ' >>'
+
+        date_str = ""
+        if f_date and len(f_date) > 0:
+            date_str = str(f_date[0])
+        else:
+            date_str = trans("No date available")
+
+        day_str = trans(f_day) if f_day and f_day != ' n/a' else ""
+
+        # TRANSLATE the title widget
+        self["Titel"].text = trans(str(town)) + ', ' + trans(str(country)) + ' - ' + date_str
+        if day_str:
+            self["Titel"].text += ' - ' + day_str
+
+        if daylen and daylen != ' n/a':
+            self["day_len"].setText(str(conv_day_len(daylen)))
+        else:
+            self["day_len"].setText("N/A")
+
+        if sunrise and sunrise != ' n/a':
+            self["sunrise_val"].setText(str(sunrise))
+        else:
+            self["sunrise_val"].setText("N/A")
+
+        if sunset and sunset != ' n/a':
+            self["sunset_val"].setText(str(sunset))
+        else:
+            self["sunset_val"].setText("N/A")
+
+        # TRANSLATE sunrise/sunset labels
+        self["sunrise_text"].setText(trans("Sunrise"))
+        self["sunset_text"].setText(trans("Sunset"))
+
+        self.update_button()
 
         Thread0 = Thread(target=self.mypicload)
         Thread0.start()
 
+    # def StartPageFirst(self):
+        # # global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_date, lon, lat, sunrise, daylen, sunset, f_day
+        # self.readsetcolor()
+        # self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
+        # self["pic"].instance.show()
+        # self["wind"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
+        # self["wind"].instance.show()
+        # self["pressure_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
+        # self["pressure_pic"].instance.show()
+        # self["rain_mm_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
+        # self["rain_mm_pic"].instance.show()
+        # self["hum_pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
+        # self["hum_pic"].instance.show()
+        # self["sun"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
+        # self["sun"].instance.show()
+        # self["mytitel1"].text = _("Current weather and forecast")
+        # self["mytitel2"].text = _("<< ver. ") + str(VERSION) + ' >>'
+        # self["Titel"].text = _(str(town)) + ', ' + _(str(country)) + ' - ' + str(f_date[0]) + ' - ' + _(f_day)
+        # self["day_len"].setText(str(conv_day_len(daylen)))
+        # self["sunrise_val"].setText(str(sunrise))
+        # self["sunset_val"].setText(str(sunset))
+
+        # Thread0 = Thread(target=self.mypicload)
+        # Thread0.start()
+
     def mypicload(self):
-        global lon, lat
-        download_pic = '/tmp/385.png ' + 'https://map-cf.foreca.net/teaser/map/light/rain/6/' + \
-            str(lon) + '/' + str(lat) + '/317/385.png?names'
+        # global lon, lat
+        download_pic = '/tmp/385.png ' + 'https://map-cf.foreca.net/teaser/map/light/rain/6/' + str(lon) + '/' + str(lat) + '/317/385.png?names'
         try:
             os.system('wget -O ' + str(download_pic))
-        except BaseException:
+        except:
             pass
 
     def my_forecast_weather(self):
-        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
+        # global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
+
         self.list = []
         i = len(f_time)
         n = 0
+
+        # Prepare descriptions for batch translation
+        descriptions_to_translate = []
+        for symb in f_symb:
+            if symb != ' n/a':
+                descriptions_to_translate.append(self.symbolToCondition(str(symb)))
+            else:
+                descriptions_to_translate.append("Unknown")
+
+        # Translate all descriptions at once
+        translated_descriptions = translate_batch_strings(descriptions_to_translate)
+
         while n <= i - 1:
             if int(f_cur_temp[n]) >= 0:
                 myf_cur_temp = '+' + str(f_cur_temp[n])
@@ -644,135 +982,187 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 myf_cur_temp = str(f_cur_temp[n])
 
             try:
-                minipng = LoadPixmap(cached=True, path=resolveFilename(
-                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_symb[n]) + ".png"))
-            except BaseException:
-                minipng = LoadPixmap(cached=True, path=resolveFilename(
-                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/n600.png"))
+                minipng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_symb[n]) + ".png"))
+            except:
+                minipng = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/n600.png"))
 
             try:
                 f_myw = int(f_wind[n])
                 f_myw1 = self.degreesToWindDirection(f_myw)
-                minipng1 = LoadPixmap(
-                    cached=True,
-                    path=resolveFilename(
-                        SCOPE_PLUGINS,
-                        "Extensions/Foreca4/thumb/" +
-                        str(f_myw1) +
-                        ".png"))
-            except BaseException:
-                minipng1 = LoadPixmap(cached=True, path=resolveFilename(
-                    SCOPE_PLUGINS, "Extensions/Foreca4/thumb/w360.png"))
+                minipng1 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/" + str(f_myw1) + ".png"))
+            except:
+                minipng1 = LoadPixmap(cached=True, path=resolveFilename(SCOPE_PLUGINS, "Extensions/Foreca4/thumb/w360.png"))
 
             try:
-                f_w_s = str(
-                    mywindSpeed(
-                        f_wind_speed[n],
-                        for_wind_speed_recalc)) + ' ' + _('km/h')
-            except BaseException:
-                f_w_s = '0.00' + _('km/h')
+                f_w_s = str(mywindSpeed(f_wind_speed[n], for_wind_speed_recalc)) + ' ' + trans('km/h')
+            except:
+                f_w_s = '0.00' + ' ' + trans('km/h')
 
-            f_description = _(str(self.symbolToCondition(str(f_symb[n]))))
+            # Use translated description
+            f_description = translated_descriptions[n] if n < len(translated_descriptions) else descriptions_to_translate[n]
 
             if int(f_flike_temp[n]) >= 0:
                 myf_flike_temp = '+' + str(f_flike_temp[n])
             else:
                 myf_flike_temp = str(f_flike_temp[n])
 
-            pos8 = _('Feels like: ') + str(myf_flike_temp) + \
-                six.ensure_str(six.unichr(176)) + 'C'
+            pos8 = trans('Feels like: ') + str(myf_flike_temp) + six.ensure_str(six.unichr(176)) + 'C'
 
-            pos9 = _('Precipitations:') + ' ' + str(f_precipitation[n]) + '%'
+            pos9 = trans('Precipitations:') + ' ' + str(f_precipitation[n]) + '%'
 
-            pos10 = _('Humidity:') + ' ' + str(f_rel_hum[n]) + '%'
+            pos10 = trans('Humidity:') + ' ' + str(f_rel_hum[n]) + '%'
 
-            self.list.append(
-                (str(
-                    f_time[n]),
-                    _('Temp'),
-                    minipng,
-                    str(myf_cur_temp) +
-                    six.ensure_str(
-                    six.unichr(176)) +
-                    'C',
-                    minipng1,
-                    _('Wind'),
-                    str(f_w_s),
-                    str(f_description),
-                    str(pos8),
-                    str(pos9),
-                    str(pos10)))
+            self.list.append((
+                str(f_time[n]),
+                trans('Temp'),
+                minipng,
+                str(myf_cur_temp) + six.ensure_str(six.unichr(176)) + 'C',
+                minipng1,
+                trans('Wind'),
+                str(f_w_s),
+                str(f_description),
+                str(pos8),
+                str(pos9),
+                str(pos10)
+            ))
             n = n + 1
 
         self["menu"].setList(self.list)
 
     def my_cur_weather(self):
-        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset
-        self["town"].setText(_(str(town)))
-        self["cur_temp"].setText(
-            str(cur_temp) +
-            six.ensure_str(
-                six.unichr(176)) +
-            'C')
-        self["fl_temp"].setText(
-            _('Feels like ') +
-            str(fl_temp) +
-            six.ensure_str(
-                six.unichr(176)) +
-            'C')
-        self["dewpoint"].setText(
-            _('Dewpoint ') +
-            '       ' +
-            str(dewpoint) +
-            six.ensure_str(
-                six.unichr(176)) +
-            'C')
+        """Update current weather display with proper translations"""
+        # global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
+        # Translate city and country
+        translated_town = _(str(town)) if town != ' n/a' else _("N/A")
+        # translated_country = _(str(country)) if country != ' n/a' else ""  # RIMUOVI O COMMENTA
 
+        self["town"].setText(translated_town)
+
+        # Temperature values
+        if cur_temp != ' n/a':
+            self["cur_temp"].setText(f"{cur_temp}°C")
+        else:
+            self["cur_temp"].setText("N/A")
+
+        # Feels like temperature
+        if fl_temp != ' n/a':
+            self["fl_temp"].setText(_('Feels like ') + f"{fl_temp}°C")
+        else:
+            self["fl_temp"].setText(_('Feels like ') + _("N/A"))
+
+        # Dewpoint
+        if dewpoint != ' n/a':
+            self["dewpoint"].setText(_('Dewpoint ') + f"{dewpoint}°C")
+        else:
+            self["dewpoint"].setText(_('Dewpoint ') + _("N/A"))
+
+        # Weather icon
         try:
-            self["pic"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(pic) + ".png")
-            self["pic"].instance.show()
-        except BaseException:
-            self["pic"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/n600.png")
-            self["pic"].instance.show()
+            icon_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{pic}.png"
+            if os.path.exists(icon_path):
+                self["pic"].instance.setPixmapFromFile(icon_path)
+            else:
+                self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/n600.png")
+        except:
+            pass
 
+        # Weather description
+        if pic != ' n/a':
+            description = self.symbolToCondition(str(pic))
+            self["description_w"].setText(_(description))
+        else:
+            self["description_w"].setText("N/A")
+
+        # Wind direction icon
         try:
-            myw = int(wind.split('w')[1])
-            myw1 = self.degreesToWindDirection(myw)
-            self["wind"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(myw1) + ".png")
-            self["wind"].instance.show()
-        except BaseException:
-            self["wind"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/w360.png")
-            self["wind"].instance.show()
+            if wind != ' n/a' and 'w' in str(wind):
+                myw = int(wind.split('w')[1])
+                myw1 = self.degreesToWindDirection(myw)
+                wind_icon = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{myw1}.png"
+                if os.path.exists(wind_icon):
+                    self["wind"].instance.setPixmapFromFile(wind_icon)
+        except:
+            pass
 
-        try:
-            self["wind_speed"].setText(
-                _('Wind speed ') + str(mywindSpeed(wind_speed, cur_wind_speed_recalc)) + ' ' + _('km/h'))
-        except BaseException:
-            self["wind_speed"].setText(
-                _('Wind speed ') + ' n/a' + ' ' + _('km/h'))
+        # Wind speed
+        if wind_speed != ' n/a':
+            speed = mywindSpeed(wind_speed, cur_wind_speed_recalc)
+            self["wind_speed"].setText(_('Wind speed ') + f"{speed} " + _('km/h'))
+        else:
+            self["wind_speed"].setText(_('Wind speed ') + _('N/A'))
 
-        try:
-            self["wind_gust"].setText(
-                _('Gust ') + '  ' + str(mywindSpeed(wind_gust, cur_wind_speed_recalc)) + ' ' + _('km/h'))
-        except BaseException:
-            self["wind_gust"].setText(
-                _('Gust ') + '  ' + ' n/a' + ' ' + _('km/h'))
+        # Wind gust
+        if wind_gust != ' n/a':
+            gust = mywindSpeed(wind_gust, cur_wind_speed_recalc)
+            self["wind_gust"].setText(_('Gust ') + f"{gust} " + _('km/h'))
+        else:
+            self["wind_gust"].setText(_('Gust ') + _('N/A'))
 
-        self["rain_mm"].setText(str(rain_mm) + ' ' + _('mm'))
-        self["hum"].setText(str(hum) + '%')
-        self["pressure"].setText(str(pressure) + ' ' + _('hPa') + '.')
-        self["description_w"].setText(_(str(self.symbolToCondition(str(pic)))))
+        # Precipitation
+        self["rain_mm"].setText(f"{rain_mm} " + _('mm') if rain_mm != ' n/a' else _("N/A"))
+
+        # Humidity
+        self["hum"].setText(f"{hum}%" if hum != ' n/a' else _("N/A"))
+
+        # Pressure
+        self["pressure"].setText(f"{pressure} " + _('hPa') if pressure != ' n/a' else _("N/A"))
+
+    """
+    # def my_cur_weather(self):
+        # # global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset
+        # self["town"].setText(_(str(town)))
+        # self["cur_temp"].setText(str(cur_temp) + six.ensure_str(six.unichr(176)) + 'C')
+        # self["fl_temp"].setText(_('Feels like ') + str(fl_temp) + six.ensure_str(six.unichr(176)) + 'C')
+        # self["dewpoint"].setText(_('Dewpoint ') + '       ' + str(dewpoint) + six.ensure_str(six.unichr(176)) + 'C')
+
+        # try:
+            # self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(pic) + ".png")
+            # self["pic"].instance.show()
+        # except:
+            # self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/n600.png")
+            # self["pic"].instance.show()
+
+        # try:
+            # myw = int(wind.split('w')[1])
+            # myw1 = self.degreesToWindDirection(myw)
+            # self["wind"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(myw1) + ".png")
+            # self["wind"].instance.show()
+        # except:
+            # self["wind"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/w360.png")
+            # self["wind"].instance.show()
+
+        # try:
+            # self["wind_speed"].setText(_('Wind speed ') + str(mywindSpeed(wind_speed, cur_wind_speed_recalc)) + ' ' + _('km/h'))
+        # except:
+            # self["wind_speed"].setText(_('Wind speed ') + ' n/a' + ' ' + _('km/h'))
+
+        # try:
+            # self["wind_gust"].setText(_('Gust ') + '  ' + str(mywindSpeed(wind_gust, cur_wind_speed_recalc)) + ' ' + _('km/h'))
+        # except:
+            # self["wind_gust"].setText(_('Gust ') + '  ' + ' n/a' + ' ' + _('km/h'))
+
+        # self["rain_mm"].setText(str(rain_mm) + ' ' + _('mm'))
+        # self["hum"].setText(str(hum) + '%')
+        # self["pressure"].setText(str(pressure) + ' ' + _('hPa') + '.')
+        # self["description_w"].setText(_(str(self.symbolToCondition(str(pic)))))
+    """
 
     def StartPage(self):
-        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_date, lon, lat, sunrise, daylen, sunset, f_day
-        self["Titel"].text = _(str(town)) + ', ' + _(str(country)) + \
-            ' - ' + str(f_date[0]) + ' - ' + _(f_day)
+        date_str = ""
+        if f_date and len(f_date) > 0:
+            date_str = str(f_date[0])
+        else:
+            date_str = trans("No date available")
+
+        day_str = trans(f_day) if f_day and f_day != ' n/a' else ""
+
+        # TRANSLATE the title widget
+        self["Titel"].text = trans(str(town)) + ', ' + trans(str(country)) + ' - ' + date_str
+        if day_str:
+            self["Titel"].text += ' - ' + day_str
+
         self["mytitel1"].text = _("Current weather and forecast")
-        self["mytitel2"].text = _("<< ver. ") + str(VERSION) + ' >>'
+        self["mytitel2"].text = "<< ver. " + str(VERSION) + ' >>'
         self["Titel3"].text = ""
         self["Titel5"].text = ""
         self["Titel2"].text = _("Please wait ...")
@@ -785,17 +1175,18 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
 
     def Fav0(self):
-        global start, myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
+        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 0
         MAIN_PAGE_F = str(BASEURL) + path_loc0
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
         self.my_forecast_weather()
+
+        self.update_widget_translations()
 
         self["day_len"].setText(str(conv_day_len(daylen)))
         self["sunrise_val"].setText(str(sunrise))
@@ -808,17 +1199,18 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.Zukunft(0)
 
     def Fav1(self):
-        global fav1, fav2, myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
+        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 1
         MAIN_PAGE_F = str(BASEURL) + path_loc1
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc1 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
         self.my_forecast_weather()
+
+        self.update_widget_translations()
 
         self["day_len"].setText(str(conv_day_len(daylen)))
         self["sunrise_val"].setText(str(sunrise))
@@ -834,14 +1226,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
         global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
         myloc = 2
         MAIN_PAGE_F = str(BASEURL) + path_loc2
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
+        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(MAIN_PAGE_F)
+
         self.my_cur_weather()
 
         MAIN_PAGE_FF = str(BASEURL) + path_loc2 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+
         self.my_forecast_weather()
+
+        self.update_widget_translations()
 
         self["day_len"].setText(str(conv_day_len(daylen)))
         self["sunrise_val"].setText(str(sunrise))
@@ -854,26 +1248,20 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.Zukunft(0)
 
     def Zukunft(self, ztag=0):
-        global myloc, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day
+        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day
         self.tag = ztag
 
         if myloc == 0:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc0 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
             self.my_forecast_weather()
         elif myloc == 1:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc1 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc1 + '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
             self.my_forecast_weather()
         elif myloc == 2:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc2 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
+            MAIN_PAGE_FF = str(BASEURL) + path_loc2 + '/hourly?day=' + str(ztag)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
             self.my_forecast_weather()
 
         self.StartPage()
@@ -905,68 +1293,38 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def symbolToCondition(self, symbol):
         symbol_map = {
-            'd000': _('Clear'),
-            'n000': _('Clear'),
-            'd100': _('Mostly clear'),
-            'n100': _('Mostly clear'),
-            'd200': _('Partly cloudy'),
-            'n200': _('Partly cloudy'),
-            'd210': _('Partly cloudy and light rain'),
-            'n210': _('Partly cloudy and light rain'),
-            'd211': _('Partly cloudy and light wet snow'),
-            'n211': _('Partly cloudy and light wet snow'),
-            'd212': _('Partly cloudy and light snow'),
-            'n212': _('Partly cloudy and light snow'),
-            'd220': _('Partly cloudy and showers'),
-            'n220': _('Partly cloudy and showers'),
-            'd221': _('Partly cloudy and wet snow showers'),
-            'n221': _('Partly cloudy and wet snow showers'),
-            'd222': _('Partly cloudy and snow showers'),
-            'n222': _('Partly cloudy and snow showers'),
-            'd240': _('Partly cloudy, possible thunderstorms with rain'),
-            'n240': _('Partly cloudy, possible thunderstorms with rain'),
-            'd300': _('Cloudy'),
-            'n300': _('Cloudy'),
-            'd310': _('Cloudy and light rain'),
-            'n310': _('Cloudy and light rain'),
-            'd311': _('Cloudy and light wet snow'),
-            'n311': _('Cloudy and light wet snow'),
-            'd312': _('Cloudy and light snow'),
-            'n312': _('Cloudy and light snow'),
-            'd320': _('Cloudy and showers'),
-            'n320': _('Cloudy and showers'),
-            'd321': _('Cloudy and wet snow showers'),
-            'n321': _('Cloudy and wet snow showers'),
-            'd322': _('Cloudy and snow showers'),
-            'n322': _('Cloudy and snow showers'),
-            'd340': _('Cloudy, thunderstorms with rain'),
-            'n340': _('Cloudy, thunderstorms with rain'),
-            'd400': _('Overcast'),
-            'n400': _('Overcast'),
-            'd410': _('Overcast and light rain'),
-            'n410': _('Overcast and light rain'),
-            'd411': _('Overcast and light wet snow'),
-            'n411': _('Overcast and light wet snow'),
-            'd412': _('Overcast and light snow'),
-            'n412': _('Overcast and light snow'),
-            'd430': _('Overcast and showers'),
-            'n430': _('Overcast and showers'),
-            'd421': _('Overcast and wet snow showers'),
-            'n421': _('Overcast and wet snow showers'),
-            'd432': _('Overcast and snow showers'),
-            'n432': _('Overcast and snow showers'),
-            'd420': _('Overcast and rain'),
-            'n420': _('Overcast and rain'),
-            'd431': _('Overcast and wet snow'),
-            'n431': _('Overcast and wet snow'),
-            'd422': _('Overcast and snow'),
-            'n422': _('Overcast and snow'),
-            'd440': _('Overcast, thunderstorms with rain'),
-            'n440': _('Overcast, thunderstorms with rain'),
-            'd500': _('Thin upper cloud'),
-            'n500': _('Thin upper cloud'),
-            'd600': _('Fog'),
-            'n600': _('Fog')}
+            'd000': _('Clear'), 'n000': _('Clear'),
+            'd100': _('Mostly clear'), 'n100': _('Mostly clear'),
+            'd200': _('Partly cloudy'), 'n200': _('Partly cloudy'),
+            'd210': _('Partly cloudy and light rain'), 'n210': _('Partly cloudy and light rain'),
+            'd211': _('Partly cloudy and light wet snow'), 'n211': _('Partly cloudy and light wet snow'),
+            'd212': _('Partly cloudy and light snow'), 'n212': _('Partly cloudy and light snow'),
+            'd220': _('Partly cloudy and showers'), 'n220': _('Partly cloudy and showers'),
+            'd221': _('Partly cloudy and wet snow showers'), 'n221': _('Partly cloudy and wet snow showers'),
+            'd222': _('Partly cloudy and snow showers'), 'n222': _('Partly cloudy and snow showers'),
+            'd240': _('Partly cloudy, possible thunderstorms with rain'), 'n240': _('Partly cloudy, possible thunderstorms with rain'),
+            'd300': _('Cloudy'), 'n300': _('Cloudy'),
+            'd310': _('Cloudy and light rain'), 'n310': _('Cloudy and light rain'),
+            'd311': _('Cloudy and light wet snow'), 'n311': _('Cloudy and light wet snow'),
+            'd312': _('Cloudy and light snow'), 'n312': _('Cloudy and light snow'),
+            'd320': _('Cloudy and showers'), 'n320': _('Cloudy and showers'),
+            'd321': _('Cloudy and wet snow showers'), 'n321': _('Cloudy and wet snow showers'),
+            'd322': _('Cloudy and snow showers'), 'n322': _('Cloudy and snow showers'),
+            'd340': _('Cloudy, thunderstorms with rain'), 'n340': _('Cloudy, thunderstorms with rain'),
+            'd400': _('Overcast'), 'n400': _('Overcast'),
+            'd410': _('Overcast and light rain'), 'n410': _('Overcast and light rain'),
+            'd411': _('Overcast and light wet snow'), 'n411': _('Overcast and light wet snow'),
+            'd412': _('Overcast and light snow'), 'n412': _('Overcast and light snow'),
+            'd430': _('Overcast and showers'), 'n430': _('Overcast and showers'),
+            'd421': _('Overcast and wet snow showers'), 'n421': _('Overcast and wet snow showers'),
+            'd432': _('Overcast and snow showers'), 'n432': _('Overcast and snow showers'),
+            'd420': _('Overcast and rain'), 'n420': _('Overcast and rain'),
+            'd431': _('Overcast and wet snow'), 'n431': _('Overcast and wet snow'),
+            'd422': _('Overcast and snow'), 'n422': _('Overcast and snow'),
+            'd440': _('Overcast, thunderstorms with rain'), 'n440': _('Overcast, thunderstorms with rain'),
+            'd500': _('Thin upper cloud'), 'n500': _('Thin upper cloud'),
+            'd600': _('Fog'), 'n600': _('Fog')
+        }
         return symbol_map.get(symbol, _('Unknown'))
 
     def degreesToWindDirection(self, degrees):
@@ -974,7 +1332,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
             index = round(degrees / 45) % 8
             return "w" + directions[int(index)]
-        except BaseException:
+        except:
             return "w360"
 
     def red(self):
@@ -982,8 +1340,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def exit(self):
         """Exit plugin and optionally clean cache"""
-        global rgbmyr, rgbmyg, rgbmyb, myloc, alpha
-
         rez = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
         self.savesetcolor(rez)
         savesetalpha(alpha)
@@ -992,6 +1348,153 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.clean_foreca_cache()
 
         self.close()
+
+    def update_widget_translations(self):
+        """Update all translatable widgets in the GUI with proper translation handling"""
+        # global town, cur_temp, fl_temp, dewpoint, wind_speed, wind_gust, rain_mm, hum, pressure, country
+        # global f_date, f_day, daylen, sunrise, sunset, pic
+
+        try:
+            # Update title widgets with proper translation
+            self["mytitel1"].text = _("Current weather and forecast")
+            self["mytitel2"].text = "<< ver. " + str(VERSION) + ' >>'
+
+            # Update main title with proper formatting
+            date_str = ""
+            if f_date and len(f_date) > 0:
+                date_str = str(f_date[0])
+            else:
+                date_str = trans("No date available")
+
+            day_str = trans(f_day) if f_day and f_day != ' n/a' else ""
+
+            # Format title properly
+            town_str = trans(str(town)) if town != ' n/a' else "N/A"
+            country_str = trans(str(country)) if country != ' n/a' else ""
+
+            title_parts = []
+            if town_str:
+                title_parts.append(town_str)
+            if country_str:
+                title_parts.append(country_str)
+            if date_str:
+                title_parts.append(date_str)
+            if day_str:
+                title_parts.append(day_str)
+
+            self["Titel"].text = ' - '.join(title_parts)
+
+            # Update sunrise/sunset labels
+            if hasattr(self, 'sunrise_text'):
+                self["sunrise_text"].setText(trans('Sunrise'))
+            if hasattr(self, 'sunset_text'):
+                self["sunset_text"].setText(trans('Sunset'))
+
+            # Update day length
+            if hasattr(self, 'day_len'):
+                if daylen and daylen != ' n/a':
+                    self["day_len"].setText(str(conv_day_len(daylen)))
+                else:
+                    self["day_len"].setText("N/A")
+
+            # Update sunrise/sunset times
+            if hasattr(self, 'sunrise_val'):
+                self["sunrise_val"].setText(str(sunrise) if sunrise != ' n/a' else "N/A")
+            if hasattr(self, 'sunset_val'):
+                self["sunset_val"].setText(str(sunset) if sunset != ' n/a' else "N/A")
+
+            # Update current weather widgets
+            if hasattr(self, 'town'):
+                self["town"].setText(trans(str(town)) if town != ' n/a' else "N/A")
+
+            if hasattr(self, 'description_w'):
+                if pic != ' n/a':
+                    description = self.symbolToCondition(str(pic))
+                    self["description_w"].setText(trans(description))
+                else:
+                    self["description_w"].setText("N/A")
+
+            # Update temperature widgets with proper formatting
+            if hasattr(self, 'cur_temp'):
+                if cur_temp != ' n/a':
+                    self["cur_temp"].setText(f"{cur_temp}°C")
+                else:
+                    self["cur_temp"].setText("N/A")
+
+            # CORREZIONE CRITICA: Usa le variabili globali corrette
+            if hasattr(self, 'fl_temp'):
+                if fl_temp != ' n/a':
+                    self["fl_temp"].setText(trans('Feels like ') + f"{fl_temp}°C")
+                else:
+                    self["fl_temp"].setText(trans('Feels like ') + "N/A")
+
+            if hasattr(self, 'dewpoint'):
+                if dewpoint != ' n/a':
+                    self["dewpoint"].setText(trans('Dewpoint ') + f"{dewpoint}°C")
+                else:
+                    self["dewpoint"].setText(trans('Dewpoint ') + "N/A")
+
+            # Update wind widgets
+            if hasattr(self, 'wind_speed'):
+                if wind_speed != ' n/a':
+                    speed = mywindSpeed(wind_speed, cur_wind_speed_recalc)
+                    self["wind_speed"].setText(trans('Wind speed ') + f"{speed} " + trans('km/h'))
+                else:
+                    self["wind_speed"].setText(trans('Wind speed ') + trans('N/A'))
+
+            if hasattr(self, 'wind_gust'):
+                if wind_gust != ' n/a':
+                    gust = mywindSpeed(wind_gust, cur_wind_speed_recalc)
+                    self["wind_gust"].setText(trans('Gust ') + f"{gust} " + trans('km/h'))
+                else:
+                    self["wind_gust"].setText(trans('Gust ') + trans('N/A'))
+
+            # Update other weather widgets
+            if hasattr(self, 'rain_mm'):
+                if rain_mm != ' n/a':
+                    self["rain_mm"].setText(f"{rain_mm} " + trans('mm'))
+                else:
+                    self["rain_mm"].setText("N/A")
+
+            if hasattr(self, 'hum'):
+                if hum != ' n/a':
+                    self["hum"].setText(f"{hum}%")
+                else:
+                    self["hum"].setText("N/A")
+
+            if hasattr(self, 'pressure'):
+                if pressure != ' n/a':
+                    self["pressure"].setText(f"{pressure} " + trans('hPa'))
+                else:
+                    self["pressure"].setText("N/A")
+
+            # Force GUI update for all widgets
+            self.invalidate_widgets()
+
+        except Exception as e:
+            print(f"[Foreca4] Error in update_widget_translations: {e}")
+            import traceback
+            traceback.print_exc()
+
+    def invalidate_widgets(self):
+        """Invalidate all widgets to force GUI refresh"""
+        widgets_to_invalidate = [
+            "Titel", "mytitel1", "mytitel2", "town", "description_w",
+            "cur_temp", "fl_temp", "dewpoint", "wind_speed", "wind_gust",
+            "rain_mm", "hum", "pressure", "day_len", "sunrise_text",
+            "sunset_text", "sunrise_val", "sunset_val"
+        ]
+
+        for widget_name in widgets_to_invalidate:
+            try:
+                if hasattr(self, widget_name):
+                    widget = self[widget_name]
+                    if hasattr(widget, 'instance'):
+                        widget.instance.invalidate()
+                    elif hasattr(widget, 'invalidate'):
+                        widget.invalidate()
+            except:
+                pass
 
     def clean_foreca_cache(self):
         """Clean Foreca cache files"""
@@ -1014,30 +1517,26 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     continue
 
                 if os.path.isfile(filepath):
-                    # Delete temporary display files (they start with
-                    # 'display_' or 'merged_')
-                    if filename.startswith(
-                            ('display_', 'merged_', 'foreca4_merged_', 'foreca4_display_')):
+                    # Delete temporary display files (they start with 'display_' or 'merged_')
+                    if filename.startswith(('display_', 'merged_', 'foreca4_merged_', 'foreca4_display_')):
                         try:
                             os.remove(filepath)
                             deleted += 1
-                        except BaseException:
+                        except:
                             pass
                     else:
-                        # For tile cache files, keep if recent (less than 1
-                        # day)
+                        # For tile cache files, keep if recent (less than 1 day)
                         file_age = current_time - os.path.getmtime(filepath)
                         if file_age > 86400:  # 1 day
                             try:
                                 os.remove(filepath)
                                 deleted += 1
-                            except BaseException:
+                            except:
                                 pass
                         else:
                             kept += 1
 
-            print(
-                f"[Foreca4] Cache cleanup: {deleted} files deleted, {kept} files kept")
+            print(f"[Foreca4] Cache cleanup: {deleted} files deleted, {kept} files kept")
 
         except Exception as e:
             print(f"[Foreca4] Error cleaning cache: {e}")
@@ -1073,20 +1572,26 @@ class Color_Select(Screen):
         self["plate0"] = Label(_("N/A"))
         self["plate1"] = Label(_("N/A"))
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-                                    {
-            "cancel": self.Exit,
-            "left": self.left,
-            "right": self.right,
-            "up": self.up,
-            "down": self.down,
-            "ok": self.OK,
-        }, -1)
-
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions"
+            ],
+            {
+                "cancel": self.Exit,
+                "left": self.left,
+                "right": self.right,
+                "up": self.up,
+                "down": self.down,
+                "ok": self.OK,
+            }, -1
+        )
         self.onShown.append(self.prepare)
 
     def prepare(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
@@ -1149,8 +1654,7 @@ class Color_Select(Screen):
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print(
-                f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
+            print(f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
             translated_any = False
             for i in range(start_idx, end_idx_actual):
                 if self.display_names[i] == self.original_names[i]:
@@ -1163,53 +1667,19 @@ class Color_Select(Screen):
 
             if translated_any:
                 self.update_gui()
-                print(
-                    f"[Color_Select] Range {start_idx}-{end_idx_actual} translated")
+                print(f"[Color_Select] Range {start_idx}-{end_idx_actual} translated")
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
 
-    def start_background_translation(self):
-        import threading
+    def translate_color(self, color_name):
+        if not color_name:
+            return color_name
 
-        def translate():
-            print("[Color_Select] Background translation STARTED")
-
-            batch_size = 100
-            items_to_translate = min(batch_size, len(self.original_names))
-
-            translated_count = 0
-
-            for i in range(items_to_translate):
-                if self.display_names[i] == self.original_names[i]:
-                    translated = self.translate_color(self.original_names[i])
-
-                    if translated != self.original_names[i]:
-                        self.display_names[i] = translated
-                        self.Clist[i] = f"{i}. {translated}"
-                        translated_count += 1
-
-                        if translated_count % 10 == 0:
-                            self.update_gui()
-
-            if translated_count > 0:
-                print(
-                    f"[Color_Select] Background: tradotti {translated_count} elementi")
-                self.update_gui()
-
-            print("[Color_Select] Background translation FINISHED")
-
-        thread = threading.Thread(target=translate, daemon=True)
-        thread.start()
-
-    def translate_color(self, russian_name):
-        if not russian_name:
-            return russian_name
-
-        print(f"[Color_Select] Translate: '{russian_name}'")
+        print(f"[Color_Select] Translate: '{color_name}'")
         try:
-            if '-' in russian_name:
-                parts = russian_name.split('-')
+            if '-' in color_name:
+                parts = color_name.split('-')
                 translated_parts = []
 
                 for part in parts:
@@ -1221,44 +1691,16 @@ class Color_Select(Screen):
                         translated_parts.append("")
 
                 result = '-'.join(translated_parts)
-                print(
-                    f"[Color_Select] Result with iphen: '{russian_name}' -> '{result}'")
+                print(f"[Color_Select] Result with iphen: '{color_name}' -> '{result}'")
                 return result
 
-            result = trans(russian_name)
-            print(f"[Color_Select] Result: '{russian_name}' -> '{result}'")
+            result = trans(color_name)
+            print(f"[Color_Select] Result: '{color_name}' -> '{result}'")
             return result
 
         except Exception as e:
-            print(f"[Color_Select] ERROR translating '{russian_name}': {e}")
-            return russian_name
-
-    def translate_current_page(self):
-        import threading
-
-        def translate_page():
-            current_idx = self["Clist"].getCurrentIndex()
-            page_size = 20
-            page_start = (current_idx // page_size) * page_size
-            page_end = min(page_start + page_size, len(self.original_names))
-            print(
-                f"[Color_Select] Translating page: indices {page_start} to {page_end}")
-            translated_any = False
-            for i in range(page_start, page_end):
-                if self.display_names[i] == self.original_names[i]:
-                    translated = self.translate_color(self.original_names[i])
-
-                    if translated != self.original_names[i]:
-                        self.display_names[i] = translated
-                        self.Clist[i] = f"{i}. {translated}"
-                        translated_any = True
-
-            if translated_any:
-                self.update_gui()
-                print("[Color_Select] Page translated")
-
-        thread = threading.Thread(target=translate_page, daemon=True)
-        thread.start()
+            print(f"[Color_Select] ERROR translating '{color_name}': {e}")
+            return color_name
 
     def update_display(self, index):
         print(f"[Color_Select] update_display({index})")
@@ -1365,24 +1807,28 @@ class InfoBox1(Screen):
 
         Screen.__init__(self, session)
 
-        self['ver'] = StaticText(
-            _('Foreca 4 Weather and Forecast') +
-            ' ver. ' +
-            str(VERSION))
+        self['ver'] = StaticText(_('Foreca 4 Weather and Forecast') + ' ver. ' + str(VERSION))
 
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-                                    {
-            "cancel": self.Exit,
-            'ok': self.Exit,
-        }, -1)
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions"
+            ],
+            {
+                "cancel": self.Exit,
+                'ok': self.Exit,
+            }, -1
+        )
 
         self.onShow.append(self.Start2)
 
     def Start2(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
@@ -1402,7 +1848,7 @@ class ExtInfo_Foreca4_FHD(Screen):
 
         Screen.__init__(self, session)
 
-        global myloc
+        # global myloc
 
         if myloc == 0:
             MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc0)
@@ -1411,8 +1857,7 @@ class ExtInfo_Foreca4_FHD(Screen):
         elif myloc == 2:
             MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc2)
 
-        self.mytown, self.mytext1, self.myh_temp, self.myl_temp, self.mytext2, self.mytext3, self.myh2_temp, self.myl2_temp, self.mytext4, self.mysymb_mo1, self.mysymb_mo2, self.myt_mo1, self.myt_mo2, self.mysymb_af1, self.mysymb_af2, self.myt_af1, self.myt_af2, self.mysymb_ev1, self.mysymb_ev2, self.myt_ev1, self.myt_ev2, self.mysymb_ov1, self.mysymb_ov2, self.myt_ov1, self.myt_ov2 = getPageTT(
-            MAIN_PAGE_TT)
+        self.mytown, self.mytext1, self.myh_temp, self.myl_temp, self.mytext2, self.mytext3, self.myh2_temp, self.myl2_temp, self.mytext4, self.mysymb_mo1, self.mysymb_mo2, self.myt_mo1, self.myt_mo2, self.mysymb_af1, self.mysymb_af2, self.myt_af1, self.myt_af2, self.mysymb_ev1, self.mysymb_ev2, self.myt_ev1, self.myt_ev2, self.mysymb_ov1, self.mysymb_ov2, self.myt_ov1, self.myt_ov2 = getPageTT(MAIN_PAGE_TT)
 
         self['title1'] = StaticText(_('Weather Radar'))
         self['title2'] = StaticText()
@@ -1449,18 +1894,25 @@ class ExtInfo_Foreca4_FHD(Screen):
         self['af2_text'] = StaticText()
         self['ev2_text'] = StaticText()
         self['ov2_text'] = StaticText()
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
         self["pic_lot"] = Pixmap()
         self["pic_lat"] = Pixmap()
         self['lat_val'] = StaticText()
         self['lon_val'] = StaticText()
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-                                    {
-            "cancel": self.Exit,
-            'ok': self.OK,
-        }, -1)
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions"
+            ],
+            {
+                "cancel": self.Exit,
+                'ok': self.OK,
+            }, -1
+        )
 
         self.onLayoutFinish.append(self.Start1)
         self.onShow.append(self.Start2)
@@ -1474,12 +1926,10 @@ class ExtInfo_Foreca4_FHD(Screen):
 
         self['title2'].text = str(self.mytown)
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
+        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
         self["text1"].text = str(t1)
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
+        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
         self["text2"].text = str(t2)
 
         self['mo1'].text = _('Morning')
@@ -1491,7 +1941,7 @@ class ExtInfo_Foreca4_FHD(Screen):
         self['ov1'].text = _('Overnight')
         self['ov2'].text = _('Overnight')
 
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
@@ -1505,51 +1955,39 @@ class ExtInfo_Foreca4_FHD(Screen):
 
         self['title2'].text = str(trans(self.mytown))
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
+        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
         self["text1"].text = str(trans(t1))
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
+        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
         self["text2"].text = str(trans(t2))
 
     def Start1(self):
-        global lon, lat
+        # global lon, lat
         if os.path.exists("/tmp/385.png"):
             self["pic"].instance.setPixmapFromFile("/tmp/385.png")
             self["pic"].instance.show()
 
-        self["pic_af1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af1) + ".png")
+        self["pic_af1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af1) + ".png")
         self["pic_af1"].instance.show()
-        self["pic_ev1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev1) + ".png")
+        self["pic_ev1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev1) + ".png")
         self["pic_ev1"].instance.show()
-        self["pic_ov1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov1) + ".png")
+        self["pic_ov1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov1) + ".png")
         self["pic_ov1"].instance.show()
-        self["pic_mo1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo1) + ".png")
+        self["pic_mo1"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo1) + ".png")
         self["pic_mo1"].instance.show()
 
-        self["pic_af2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af2) + ".png")
+        self["pic_af2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af2) + ".png")
         self["pic_af2"].instance.show()
-        self["pic_ev2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev2) + ".png")
+        self["pic_ev2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev2) + ".png")
         self["pic_ev2"].instance.show()
-        self["pic_ov2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov2) + ".png")
+        self["pic_ov2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov2) + ".png")
         self["pic_ov2"].instance.show()
-        self["pic_mo2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo2) + ".png")
+        self["pic_mo2"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo2) + ".png")
         self["pic_mo2"].instance.show()
 
-        self["pic_lot"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
+        self["pic_lot"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
         self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
+        self["pic_lat"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
         self['mo1_text'].text = str(self.myt_mo1)
@@ -1582,39 +2020,44 @@ class ExtInfo_2_Foreca4_FHD(Screen):
 
         self['title1'] = StaticText(_('Weather Radar'))
         self["pic"] = Pixmap()
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
         self["pic_lot"] = Pixmap()
         self["pic_lat"] = Pixmap()
         self['lat_val'] = StaticText()
         self['lon_val'] = StaticText()
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-                                    {
-            "cancel": self.Exit,
-            'ok': self.OK,
-        }, -1)
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions"
+            ],
+            {
+                "cancel": self.Exit,
+                'ok': self.OK,
+            }, -1
+        )
 
         self.onLayoutFinish.append(self.Start1)
         self.onShow.append(self.Start2)
 
     def Start2(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
 
     def Start1(self):
-        global lon, lat
+        # global lon, lat
         if os.path.exists("/tmp/385.png"):
             self["pic"].instance.setPixmapFromFile("/tmp/385.png")
             self["pic"].instance.show()
 
-        self["pic_lot"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
+        self["pic_lot"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
         self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
+        self["pic_lat"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
         self['lat_val'].text = str(lat)
@@ -1641,19 +2084,23 @@ class TransparencyBox(Screen):
         self["list"] = MenuList([])
         self['text1'] = StaticText(_('Window transparency'))
 
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
 
-        self["actions"] = ActionMap(["OkCancelActions",
-                                     "DirectionActions",
-                                     "HelpActions",
-                                     "EPGSelectActions",
-                                     "ShortcutActions",
-                                     "WizardActions"],
-                                    {"cancel": self.Exit,
-                                     "ok": self.Ok,
-                                     },
-                                    -1)
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions",
+                "ShortcutActions",
+                "WizardActions"
+            ],
+            {
+                "cancel": self.Exit,
+                "ok": self.Ok,
+            }, -1
+        )
 
         self.onShow.append(self.Start2)
 
@@ -1690,14 +2137,11 @@ class TransparencyBox(Screen):
             self.close()
 
     def Start2(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-        self['text1'].text = (
-            _('Window transparency') +
-            ' - ' +
-            conv_alpha(alpha))
+        self['text1'].text = (_('Window transparency') + ' - ' + conv_alpha(alpha))
 
         list = []
 
@@ -1725,7 +2169,7 @@ class Meteogram_Foreca4_FHD(Screen):
 
     def __init__(self, session):
 
-        global share_town0, myloc
+        # global share_town0, myloc
 
         Screen.__init__(self, session)
 
@@ -1735,38 +2179,41 @@ class Meteogram_Foreca4_FHD(Screen):
             self['title1'] = StaticText(_('Meteogram'))
 
         self["pic"] = Pixmap()
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-                                    {
-            "cancel": self.Exit,
-            'ok': self.Exit,
-        }, -1)
-
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "DirectionActions",
+                "HelpActions",
+                "EPGSelectActions"
+            ],
+            {
+                "cancel": self.Exit,
+                'ok': self.Exit,
+            }, -1
+        )
         self.onLayoutFinish.append(self.Start1)
         self.onShow.append(self.Start2)
 
     def Start2(self):
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
 
     def Start1(self):
-        global myloc
+        # global myloc
         if myloc == 0:
             if os.path.exists("/tmp/foreca_com_2_w.png"):
-                self["pic"].instance.setPixmapFromFile(
-                    "/tmp/foreca_com_2_w.png")
+                self["pic"].instance.setPixmapFromFile("/tmp/foreca_com_2_w.png")
                 self["pic"].instance.show()
             else:
-                self["pic"].instance.setPixmapFromFile(
-                    "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
+                self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
                 self["pic"].instance.show()
         else:
-            self["pic"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
+            self["pic"].instance.setPixmapFromFile("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
             self["pic"].instance.show()
 
     def Exit(self):
@@ -1776,13 +2223,7 @@ class Meteogram_Foreca4_FHD(Screen):
 class CityPanel4List(MenuList):
     """Custom list for city selection with unified styling"""
 
-    def __init__(
-            self,
-            list,
-            font0=22,
-            font1=16,
-            itemHeight=30,
-            enableWrapAround=True):
+    def __init__(self, list, font0=22, font1=16, itemHeight=30, enableWrapAround=True):
         MenuList.__init__(self, [], False, eListboxPythonMultiContent)
         GUIComponent.__init__(self)
 
@@ -1902,37 +2343,27 @@ class CityPanel4(Screen):
         """FHD skin with unified colors"""
         return """
         <screen name="CityPanel4" position="center,center" size="1200,900" title="Select a city">
-            <!-- Unified color definitions -->
-            <eLabel backgroundColor="$color_red" position="10,65" size="295,6" zPosition="11" />
-            <eLabel backgroundColor="$color_green" position="305,65" size="295,6" zPosition="11" />
-            <eLabel backgroundColor="$color_yellow" position="600,65" size="295,6" zPosition="11" />
-            <eLabel backgroundColor="$color_blue" position="895,65" size="295,6" zPosition="11" />
-
             <!-- Button widgets with unified colors -->
-            <widget backgroundColor="$color_red" font="Regular;30" halign="center" position="10,5" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="295,70" source="key_red" transparent="1"
-                    valign="center" zPosition="1" />
-            <widget backgroundColor="$color_green" font="Regular;30" halign="center" position="305,5" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="295,70" source="key_green" transparent="1"
-                    valign="center" zPosition="1" />
-            <widget backgroundColor="$color_yellow" font="Regular;30" halign="center" position="600,5" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="295,70" source="key_yellow" transparent="1"
-                    valign="center" zPosition="1" />
-            <widget backgroundColor="$color_blue" font="Regular;30" halign="center" position="895,5" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="295,70" source="key_blue" transparent="1"
-                    valign="center" zPosition="1" />
-
+            <widget source="key_red" render="Label" position="10,5" size="295,70" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_green" render="Label" position="305,5" size="295,70" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_yellow" render="Label" position="600,5" size="295,70" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_blue" render="Label" position="895,5" size="295,70" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
             <!-- Separator -->
-            <eLabel backgroundColor="$separator_color" position="10,80" size="1180,2" />
+            <eLabel backgroundColor="#fe00" position="10,80" size="1180,2" />
 
             <!-- City list -->
-            <widget name="Mlist" itemHeight="35" position="10,90" size="1180,665" enableWrapAround="1"
-                    scrollbarMode="showOnDemand" foregroundColor="$text_color"
-                    foregroundColorSelected="$selected_text_color"
-                    backgroundColorSelected="$selected_bg_color" />
+            <widget name="Mlist" itemHeight="35" position="10,90" size="1180,665" enableWrapAround="1" scrollbarMode="showOnDemand" foregroundColor="$text_color" foregroundColorSelected="$selected_text_color" backgroundColorSelected="$selected_bg_color" />
 
             <!-- Bottom separator -->
-            <eLabel backgroundColor="$separator_color" position="10,770" size="1180,2" />
+            <eLabel backgroundColor="#fe00" position="10,770" size="1180,2" />
 
             <!-- Button icons -->
             <ePixmap position="1025,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" />
@@ -1947,32 +2378,27 @@ class CityPanel4(Screen):
         """UHD skin"""
         return """
         <screen name="CityPanel4" position="center,center" size="1600,1200" title="Select a city">
-            <eLabel backgroundColor="$color_red" position="14,87" size="394,8" zPosition="11"/>
-            <eLabel backgroundColor="$color_green" position="407,87" size="394,8" zPosition="11"/>
-            <eLabel backgroundColor="$color_yellow" position="800,87" size="394,8" zPosition="11"/>
-            <eLabel backgroundColor="$color_blue" position="1194,87" size="394,8" zPosition="11"/>
-
-            <widget backgroundColor="$color_red" font="Regular;40" halign="center" position="14,7" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="394,94" source="key_red" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_green" font="Regular;40" halign="center" position="407,7" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="394,94" source="key_green" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_yellow" font="Regular;40" halign="center" position="800,7" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="394,94" source="key_yellow" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_blue" font="Regular;40" halign="center" position="1194,7" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="394,94" source="key_blue" transparent="1"
-                    valign="center" zPosition="1"/>
-
-            <eLabel backgroundColor="$separator_color" position="14,107" size="1574,3"/>
+            <!-- Button widgets with unified colors -->
+            <widget source="key_red" render="Label" position="14,7" size="394,94" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_green" render="Label" position="407,7" size="394,94" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_yellow" render="Label" position="800,7" size="394,94" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_blue" render="Label" position="1194,7" size="394,94" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <eLabel backgroundColor="#fe00" position="14,107" size="1574,3"/>
 
             <widget name="Mlist" itemHeight="47" position="14,120" size="1574,887" enableWrapAround="1"
                     scrollbarMode="showOnDemand" foregroundColor="$text_color"
                     foregroundColorSelected="$selected_text_color"
                     backgroundColorSelected="$selected_bg_color"/>
 
-            <eLabel backgroundColor="$separator_color" position="14,1027" size="1574,3"/>
+            <eLabel backgroundColor="#fe00" position="14,1027" size="1574,3"/>
 
             <ePixmap position="1367,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png"/>
             <ePixmap position="506,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png"/>
@@ -1986,33 +2412,26 @@ class CityPanel4(Screen):
         """HD skin"""
         return """
         <screen name="CityPanel4" position="center,center" size="800,600" title="Select a city">
-            <eLabel backgroundColor="$color_red" position="6,43" size="196,4" zPosition="11"/>
-            <eLabel backgroundColor="$color_green" position="203,43" size="196,4" zPosition="11"/>
-            <eLabel backgroundColor="$color_yellow" position="400,43" size="196,4" zPosition="11"/>
-            <eLabel backgroundColor="$color_blue" position="596,43" size="196,4" zPosition="11"/>
-
-            <widget backgroundColor="$color_red" font="Regular;20" halign="center" position="6,3" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="196,46" source="key_red" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_green" font="Regular;20" halign="center" position="203,3" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="196,46" source="key_green" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_yellow" font="Regular;20" halign="center" position="400,3" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="196,46" source="key_yellow" transparent="1"
-                    valign="center" zPosition="1"/>
-            <widget backgroundColor="$color_blue" font="Regular;20" halign="center" position="596,3" render="Label"
-                    shadowColor="black" shadowOffset="-2,-2" size="196,46" source="key_blue" transparent="1"
-                    valign="center" zPosition="1"/>
-
-            <eLabel backgroundColor="$separator_color" position="6,53" size="786,1"/>
+            <!-- Button widgets with unified colors -->
+            <widget source="key_red" render="Label" position="6,3" size="196,46" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_green" render="Label" position="203,3" size="196,46" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_yellow" render="Label" position="400,3" size="196,46" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_blue" render="Label" position="596,3" size="196,46" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <eLabel backgroundColor="#fe00" position="6,53" size="786,1"/>
 
             <widget name="Mlist" itemHeight="23" position="6,60" size="786,443" enableWrapAround="1"
                     scrollbarMode="showOnDemand" foregroundColor="$text_color"
                     foregroundColorSelected="$selected_text_color"
                     backgroundColorSelected="$selected_bg_color"/>
-
-            <eLabel backgroundColor="$separator_color" position="6,513" size="786,1"/>
-
+            <eLabel backgroundColor="#fe00" position="6,513" size="786,1"/>
             <ePixmap position="683,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png"/>
             <ePixmap position="252,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png"/>
             <ePixmap position="28,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png"/>

@@ -7,8 +7,8 @@ import gettext
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
-PluginLanguageDomain = "moviebrowser"
-PluginLanguagePath = "Extensions/MovieBrowser/locale"
+PluginLanguageDomain = "Foreca4"
+PluginLanguagePath = "Extensions/Foreca4/locale"
 isDreambox = os.path.exists("/usr/bin/apt-get")
 
 
@@ -17,11 +17,7 @@ def localeInit():
         lang = language.getLanguage()[:2]
         os.environ["LANGUAGE"] = lang
     if PluginLanguageDomain and PluginLanguagePath:
-        gettext.bindtextdomain(
-            PluginLanguageDomain,
-            resolveFilename(
-                SCOPE_PLUGINS,
-                PluginLanguagePath))
+        gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 
 
 if isDreambox:
@@ -33,9 +29,7 @@ else:
         if translated:
             return translated
         else:
-            print(
-                "[%s] fallback to default translation for %s" %
-                (PluginLanguageDomain, txt))
+            print("[%s] fallback to default translation for %s" % (PluginLanguageDomain, txt))
             return gettext.gettext(txt)
 
 
