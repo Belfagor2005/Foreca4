@@ -371,9 +371,6 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-msgid "No date available"
-msgstr ""
-
 msgid "North Africa"
 msgstr ""
 
@@ -600,14 +597,17 @@ msgstr "Window transparency"
 msgid "Yellow - Favorite 2"
 msgstr "Yellow - Favorite 2"
 
+msgid "hPa"
+msgstr ""
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "mm"
+msgstr "mm"
+
 msgid "v."
 msgstr "v."
-
-#~ msgid "km/h"
-#~ msgstr "km/h"
-
-#~ msgid "mm"
-#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."

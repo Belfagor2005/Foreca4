@@ -358,10 +358,6 @@ msgstr "Город не найден в поиске!!!"
 msgid "No data available"
 msgstr "Данные недоступны"
 
-#, fuzzy
-msgid "No date available"
-msgstr "Данные недоступны"
-
 msgid "North Africa"
 msgstr "Северная Африка"
 
@@ -584,17 +580,21 @@ msgstr "Прозрачность окон"
 msgid "Yellow - Favorite 2"
 msgstr "Желтая кнопка - Избранное 2"
 
+msgid "hPa"
+msgstr "гПа"
+
+msgid "km/h"
+msgstr "км/ч"
+
+msgid "mm"
+msgstr "мм"
+
 msgid "v."
 msgstr "в."
 
-#~ msgid "hPa"
-#~ msgstr "гПа"
-
-#~ msgid "km/h"
-#~ msgstr "км/ч"
-
-#~ msgid "mm"
-#~ msgstr "мм"
+#, fuzzy
+#~ msgid "No date available"
+#~ msgstr "Данные недоступны"
 
 #~ msgid "<< ver."
 #~ msgstr "<< вер."

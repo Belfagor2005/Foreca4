@@ -360,9 +360,6 @@ msgstr "Nessuna città trovata nella ricerca!!!"
 msgid "No data available"
 msgstr "Nessun dato disponibile"
 
-msgid "No date available"
-msgstr "Nessun dato disponibile"
-
 msgid "North Africa"
 msgstr "Africa del Nord"
 
@@ -585,17 +582,20 @@ msgstr "Trasparenza Finestra"
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
 
+msgid "hPa"
+msgstr "hPa"
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "mm"
+msgstr "mm"
+
 msgid "v."
 msgstr "v."
 
-#~ msgid "hPa"
-#~ msgstr "hPa"
-
-#~ msgid "km/h"
-#~ msgstr "km/h"
-
-#~ msgid "mm"
-#~ msgstr "mm"
+#~ msgid "No date available"
+#~ msgstr "Nessun dato disponibile"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."

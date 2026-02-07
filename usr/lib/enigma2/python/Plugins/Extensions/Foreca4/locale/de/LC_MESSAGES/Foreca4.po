@@ -358,10 +358,6 @@ msgstr "Keine Stadt in der Suche gefunden!!!"
 msgid "No data available"
 msgstr "Keine Daten verfügbar"
 
-#, fuzzy
-msgid "No date available"
-msgstr "Keine Daten verfügbar"
-
 msgid "North Africa"
 msgstr "Nordafrika"
 
@@ -584,17 +580,21 @@ msgstr "Bildschirmransparenz"
 msgid "Yellow - Favorite 2"
 msgstr "Gelb Button - Favoriten 2"
 
+msgid "hPa"
+msgstr "hPa"
+
+msgid "km/h"
+msgstr "km/h"
+
+msgid "mm"
+msgstr "mm"
+
 msgid "v."
 msgstr "V."
 
-#~ msgid "hPa"
-#~ msgstr "hPa"
-
-#~ msgid "km/h"
-#~ msgstr "km/h"
-
-#~ msgid "mm"
-#~ msgstr "mm"
+#, fuzzy
+#~ msgid "No date available"
+#~ msgstr "Keine Daten verfügbar"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."
