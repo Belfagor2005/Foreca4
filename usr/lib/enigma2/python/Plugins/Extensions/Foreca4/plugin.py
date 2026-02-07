@@ -2006,6 +2006,7 @@ class CityPanel4(Screen):
         self["key_blue"] = StaticText(_("Home"))
         self["key_ok"] = StaticText(_("Forecast"))
         self["key_red"] = StaticText(_("Keyboard"))
+        self["description"] = Label()
 
         self.setTitle(_("Select a city"))
 
@@ -2040,84 +2041,114 @@ class CityPanel4(Screen):
     def get_unified_skin(self, size_w):
         """Get unified skin based on resolution"""
         if size_w == 1920:
+            print('SKIN FHD')
             return self.get_fhd_skin()
         elif size_w == 2560:
+            print('SKIN UHD')
             return self.get_uhd_skin()
         else:
+            print('SKIN HD')
             return self.get_hd_skin()
 
     def get_fhd_skin(self):
         """FHD skin with unified colors"""
         return """
         <screen name="CityPanel4" position="center,center" size="1200,900" title="Select a city">
-            <!-- Button widgets with unified colors -->
-            <widget source="key_red" render="Label" position="10,5" size="295,70" backgroundColor="key_red" font="Regular;24" foregroundColor="#ffffff" halign="center" valign="center">
-                <convert type="ConditionalShowHide" />
-            </widget>
-            <widget source="key_green" render="Label" position="305,5" size="295,70" backgroundColor="key_green" font="Regular;24" foregroundColor="#ffffff" halign="center" valign="center">
-                <convert type="ConditionalShowHide" />
-            </widget>
-            <widget source="key_yellow" render="Label" position="600,5" size="295,70" backgroundColor="key_yellow" font="Regular;24" foregroundColor="#ffffff" halign="center" valign="center">
-                <convert type="ConditionalShowHide" />
-            </widget>
-            <widget source="key_blue" render="Label" position="895,5" size="295,70" backgroundColor="key_blue" font="Regular;24" foregroundColor="#ffffff" halign="center" valign="center">
-                <convert type="ConditionalShowHide" />
-            </widget>
             <!-- Separator -->
-            <eLabel backgroundColor="#fe00" position="0,80" size="1180,2" />
+            <eLabel backgroundColor="#fe00" position="10,80" size="1180,2" />
+            <eLabel backgroundColor="#fe00" position="10,770" size="1180,2" />
 
             <!-- City list -->
-            <widget name="Mlist" itemHeight="40" itemCornerRadius="12" position="10,90" size="1180,665" enableWrapAround="1"
-                    scrollbarMode="showOnDemand" foregroundColor="#FFFFFFFF" foregroundColorSelected="yellow" backgroundColorSelected="#00283752" backgroundColor="#10101010" />
+            <widget name="Mlist" position="21,98" size="1156,660" font="Regular; 30" itemHeight="40" />
 
-            <!-- Bottom separator -->
-            <eLabel backgroundColor="#fe00" position="0,770" size="1180,2" />
+            <!--
+            <widget name="description" position="9,794" size="1178,56" zPosition="3" font="Regular;24" backgroundColor="black" valign="center" halign="center" transparent="1" />
+            -->
+
+            <widget name="description" position="9,794" size="1178,56" zPosition="3" font="Regular;24"
+                    foregroundColor="yellow" backgroundColor="red" transparent="0"
+                    valign="center" halign="center" />
 
             <!-- Button icons -->
-            <ePixmap position="1025,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" />
-            <ePixmap position="379,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" />
-            <ePixmap position="42,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" />
-            <ePixmap position="705,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" />
-            <ePixmap position="1135,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" />
-            <ePixmap position="1085,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" />
+            <ePixmap position="1025,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" />
+            <ePixmap position="379,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" />
+            <ePixmap position="42,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" />
+            <ePixmap position="705,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" />
+            <ePixmap position="1135,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
+            <ePixmap position="1085,864" size="60,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
+
+            <!-- Button widgets with unified colors -->
+            <widget source="key_red" render="Label" position="10,5" size="295,70" backgroundColor="key_red" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_green" render="Label" position="305,5" size="295,70" backgroundColor="key_green" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_yellow" render="Label" position="600,5" size="295,70" backgroundColor="key_yellow" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
+            <widget source="key_blue" render="Label" position="895,5" size="295,70" backgroundColor="key_blue" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
+                <convert type="ConditionalShowHide" />
+            </widget>
         </screen>"""
 
     def get_uhd_skin(self):
         """UHD skin"""
         return """
         <screen name="CityPanel4" position="center,center" size="1600,1200" title="Select a city">
+            <!-- Separator -->
+            <eLabel backgroundColor="#fe00" position="0,107" size="1600,3" />
+            <eLabel backgroundColor="#fe00" position="0,1027" size="1600,3" />
+
+            <!-- City list -->
+            <widget name="Mlist" position="14,120" size="1574,887" font="Regular;32" itemHeight="47" enableWrapAround="1" scrollbarMode="showOnDemand" />
+
+            <widget name="description" position="14,1060" size="1573,56" zPosition="3" font="Regular; 32" backgroundColor="black" transparent="1" valign="center" halign="center" />
+
+            <!-- Button icons -->
+            <ePixmap position="1367,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" />
+            <ePixmap position="506,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" />
+            <ePixmap position="56,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" />
+            <ePixmap position="940,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" />
+            <ePixmap position="1514,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
+            <ePixmap position="1447,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
+
             <!-- Button widgets with unified colors -->
-            <widget source="key_red" render="Label" position="14,7" size="394,94" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+            <widget source="key_red" render="Label" position="14,7" size="394,94" backgroundColor="key_red" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
             </widget>
-            <widget source="key_green" render="Label" position="407,7" size="394,94" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+            <widget source="key_green" render="Label" position="407,7" size="394,94" backgroundColor="key_green" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
             </widget>
             <widget source="key_yellow" render="Label" position="800,7" size="394,94" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
             </widget>
-            <widget source="key_blue" render="Label" position="1194,7" size="394,94" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+            <widget source="key_blue" render="Label" position="1194,7" size="394,94" backgroundColor="key_blue" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
             </widget>
-            <eLabel backgroundColor="#fe00" position="0,107" size="1600,3"/>
-
-            <widget name="Mlist" itemHeight="47" position="14,120" size="1574,887" itemCornerRadius="12" enableWrapAround="1"
-                    scrollbarMode="showOnDemand" foregroundColor="#FFFFFFFF" foregroundColorSelected="yellow" backgroundColorSelected="#00283752" backgroundColor="#10101010" />
-
-            <eLabel backgroundColor="#fe00" position="0,1027" size="1600,3"/>
-
-            <ePixmap position="1367,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png"/>
-            <ePixmap position="506,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png"/>
-            <ePixmap position="56,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png"/>
-            <ePixmap position="940,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png"/>
-            <ePixmap position="1514,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png"/>
-            <ePixmap position="1447,1152" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png"/>
         </screen>"""
 
     def get_hd_skin(self):
         """HD skin"""
         return """
         <screen name="CityPanel4" position="center,center" size="800,600" title="Select a city">
+            <!-- Separator -->
+            <eLabel backgroundColor="#fe00" position="5,53" size="785,1" />
+            <eLabel backgroundColor="#fe00" position="5,513" size="785,1" />
+
+            <!-- City list -->
+            <widget name="Mlist" position="6,60" size="786,443" font="Regular;24" itemHeight="30" enableWrapAround="1" scrollbarMode="showOnDemand" />
+
+            <widget name="description" position="5,517" size="787,35" zPosition="3" font="Regular; 22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+
+            <!-- Button icons -->
+            <ePixmap position="683,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" />
+            <ePixmap position="252,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" />
+            <ePixmap position="28,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" />
+            <ePixmap position="470,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" />
+            <ePixmap position="756,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
+            <ePixmap position="723,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
+
             <!-- Button widgets with unified colors -->
             <widget source="key_red" render="Label" position="6,3" size="196,46" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
@@ -2131,51 +2162,83 @@ class CityPanel4(Screen):
             <widget source="key_blue" render="Label" position="596,3" size="196,46" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
                 <convert type="ConditionalShowHide" />
             </widget>
-            <eLabel backgroundColor="#fe00" position="0,53" size="800,1"/>
-            <widget name="Mlist" itemHeight="23" position="6,60" size="786,443" itemCornerRadius="12" enableWrapAround="1"
-                    scrollbarMode="showOnDemand" foregroundColor="#FFFFFFFF" foregroundColorSelected="yellow" backgroundColorSelected="#00283752" backgroundColor="#10101010" />
-
-            <eLabel backgroundColor="#fe00" position="0,513" size="800,1"/>
-            <ePixmap position="683,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png"/>
-            <ePixmap position="252,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png"/>
-            <ePixmap position="28,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png"/>
-            <ePixmap position="470,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png"/>
-            <ePixmap position="756,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png"/>
-            <ePixmap position="723,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png"/>
         </screen>"""
 
+    # def prepare_city_list(self):
+        # """Load cities from new_city.cfg file"""
+        # self.maxidx = 0
+        # self.Mlist = []
+
+        # city_cfg_path = os.path.join(self.config_path, "new_city.cfg")
+        # if os.path.exists(city_cfg_path):
+            # try:
+                # with open(city_cfg_path, "r", encoding='utf-8') as f:
+                    # for line in f:
+                        # text = line.strip()
+                        # if text:  # Skip empty lines
+                            # self.maxidx += 1
+                            # entry = (text.replace("_", " "), text)
+                            # self.Mlist.append(self.create_city_entry(entry))
+                # print(f"[CityPanel4] Loaded {self.maxidx} cities")
+            # except Exception as e:
+                # print(f"[CityPanel4] Error loading new_city.cfg: {e}")
+                # self.session.open(MessageBox,
+                                  # _("Error loading city list!"),
+                                  # MessageBox.TYPE_ERROR,
+                                  # timeout=5)
+        # else:
+            # print(f"[CityPanel4] new_city.cfg not found at {city_cfg_path}")
+            # self.session.open(MessageBox,
+                              # _("City list file not found!"),
+                              # MessageBox.TYPE_WARNING,
+                              # timeout=5)
+
+        # self.filtered_list = self.Mlist
+        # self["Mlist"].l.setList(self.filtered_list)
+        # self["Mlist"].selectionEnabled(1)
+
     def prepare_city_list(self):
-        """Load cities from new_city.cfg file"""
         self.maxidx = 0
         self.Mlist = []
 
         city_cfg_path = os.path.join(self.config_path, "new_city.cfg")
-        if os.path.exists(city_cfg_path):
-            try:
-                with open(city_cfg_path, "r", encoding='utf-8') as f:
-                    for line in f:
-                        text = line.strip()
-                        if text:  # Skip empty lines
-                            self.maxidx += 1
-                            entry = (text.replace("_", " "), text)
-                            self.Mlist.append(self.create_city_entry(entry))
-                print(f"[CityPanel4] Loaded {self.maxidx} cities")
-            except Exception as e:
-                print(f"[CityPanel4] Error loading new_city.cfg: {e}")
-                self.session.open(MessageBox,
-                                  _("Error loading city list!"),
-                                  MessageBox.TYPE_ERROR,
-                                  timeout=5)
-        else:
-            print(f"[CityPanel4] new_city.cfg not found at {city_cfg_path}")
-            self.session.open(MessageBox,
-                              _("City list file not found!"),
-                              MessageBox.TYPE_WARNING,
-                              timeout=5)
+        if not os.path.exists(city_cfg_path):
+            self.session.open(
+                MessageBox,
+                _("City list file not found!"),
+                MessageBox.TYPE_WARNING,
+                timeout=5
+            )
+            return
 
-        self.filtered_list = self.Mlist
-        self["Mlist"].l.setList(self.filtered_list)
-        self["Mlist"].selectionEnabled(1)
+        try:
+            with open(city_cfg_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+
+                    # skip comments and blank lines
+                    # if not line or line.startswith("#"):
+                        # continue
+
+                    # format: ID/NAME
+                    if "/" not in line:
+                        continue
+
+                    city_id, city_name = line.split("/", 1)
+                    city_name = city_name.replace("_", " ")
+
+                    self.maxidx += 1
+                    entry = (city_name, city_id)
+                    self.Mlist.append(self.create_city_entry(entry))
+
+            self.filtered_list = self.Mlist
+            self["Mlist"].l.setList(self.filtered_list)
+            self["Mlist"].selectionEnabled(1)
+
+            self.update_description()
+
+        except Exception as e:
+            print("[CityPanel4] Error loading cities:", e)
 
     def create_city_entry(self, entry):
         """Create MultiContent entry for city"""
@@ -2207,6 +2270,36 @@ class CityPanel4(Screen):
             flags=RT_VALIGN_CENTER
         ))
         return res
+
+    # def create_city_entry(self, entry):
+        # """Create MultiContent entry for city"""
+        # mblau = self["Mlist"].foregroundColorSelected
+        # weiss = self["Mlist"].foregroundColor
+        # grau = self["Mlist"].backgroundColorSelected
+        # itemHeight = self["Mlist"].itemHeight
+        # col = self["Mlist"].column
+        # res = [entry]
+        # res.append(MultiContentEntryText(
+            # pos=(0, 0),
+            # size=(col, itemHeight),
+            # font=0,
+            # text="",
+            # color=weiss,
+            # color_sel=mblau,
+            # backcolor_sel=grau,
+            # flags=RT_VALIGN_CENTER
+        # ))
+        # res.append(MultiContentEntryText(
+            # pos=(col, 0),
+            # size=(1000, itemHeight),
+            # font=0,
+            # text=entry[0],
+            # color=weiss,
+            # color_sel=mblau,
+            # backcolor_sel=grau,
+            # flags=RT_VALIGN_CENTER
+        # ))
+        # return res
 
     def open_keyboard(self):
         """Open virtual keyboard for city search"""
@@ -2248,6 +2341,20 @@ class CityPanel4(Screen):
                                   MessageBox.TYPE_ERROR,
                                   timeout=5)
 
+    def update_description(self):
+        try:
+            sel = self["Mlist"].l.getCurrentSelection()
+            if sel and len(sel[0]) >= 2:
+                city_name, city_id = sel[0][0], sel[0][1]
+                city_name_disp = city_name.replace("_", " ")
+                self["description"].setText(f"{city_name_disp}  id: {city_id}")
+                print(f"[CityPanel4] update city_name_disp {city_name_disp} id: {city_id}")
+            else:
+                self["description"].setText(_("No city selected"))
+        except Exception as e:
+            print(f"[CityPanel4] update_description error: {e}")
+            self["description"].setText(_("No city selected"))
+
     def save_favorite1(self):
         """Save selected city as Favorite 1"""
         selected = self.get_selected_city()
@@ -2267,14 +2374,24 @@ class CityPanel4(Screen):
             self.save_favorite("home", selected)
 
     def get_selected_city(self):
-        """Get currently selected city"""
         try:
-            selection = self['Mlist'].l.getCurrentSelection()
+            selection = self["Mlist"].l.getCurrentSelection()
             if selection:
-                return selection[0][1].replace(" ", "_")
+                city_name, _, city_id = selection[0]
+                return f"{city_id}/{city_name.replace(' ', '_')}"
         except Exception as e:
             print(f"[CityPanel4] Error getting selection: {e}")
         return None
+
+    # def get_selected_city(self):
+        # """Get currently selected city"""
+        # try:
+            # selection = self['Mlist'].l.getCurrentSelection()
+            # if selection:
+                # return selection[0][1].replace(" ", "_")
+        # except Exception as e:
+            # print(f"[CityPanel4] Error getting selection: {e}")
+        # return None
 
     def save_favorite(self, fav_type, city):
         """Save city to favorite file AND update global variable"""
@@ -2323,32 +2440,36 @@ class CityPanel4(Screen):
 
     def show_info(self):
         """Show information/help"""
-        info_text = _(
-            "City Selection Help:\n\n"
-            "• Use arrow keys to navigate\n"
-            "• OK to select city\n"
-            "• GREEN to save as Favorite 1\n"
-            "• YELLOW to save as Favorite 2\n"
-            "• BLUE to save as Home\n"
-            "• RED to open search keyboard\n"
-            "• CH+/CH- to jump 500 cities\n"
-            "• VOL+/VOL- to jump 100 cities"
+        info_text = (
+            _("City Selection Help:\n\n")
+            + _("• Use arrow keys to navigate\n")
+            + _("• OK to select city\n")
+            + _("• GREEN to save as Favorite 1\n")
+            + _("• YELLOW to save as Favorite 2\n")
+            + _("• BLUE to save as Home\n")
+            + _("• RED to open search keyboard\n")
+            + _("• CH+/CH- to jump 500 cities\n")
+            + _("• VOL+/VOL- to jump 100 cities")
         )
         self.session.open(MessageBox, info_text, MessageBox.TYPE_INFO)
 
     def up(self):
         self["Mlist"].up()
         self["Mlist"].selectionEnabled(1)
+        self.update_description()
 
     def down(self):
         self["Mlist"].down()
         self["Mlist"].selectionEnabled(1)
+        self.update_description()
 
     def left(self):
         self["Mlist"].pageUp()
+        self.update_description()
 
     def right(self):
         self["Mlist"].pageDown()
+        self.update_description()
 
     def jump_up(self):
         cur = self["Mlist"].l.getCurrentSelectionIndex()
@@ -2356,6 +2477,7 @@ class CityPanel4(Screen):
             self["Mlist"].instance.moveSelectionTo(cur + 500)
         else:
             self["Mlist"].instance.moveSelectionTo(self.maxidx - 1)
+        self.update_description()
 
     def jump_down(self):
         cur = self["Mlist"].l.getCurrentSelectionIndex()
@@ -2363,6 +2485,7 @@ class CityPanel4(Screen):
             self["Mlist"].instance.moveSelectionTo(cur - 500)
         else:
             self["Mlist"].instance.moveSelectionTo(0)
+        self.update_description()
 
     def jump_100_up(self):
         cur = self["Mlist"].l.getCurrentSelectionIndex()
@@ -2370,6 +2493,7 @@ class CityPanel4(Screen):
             self["Mlist"].instance.moveSelectionTo(cur + 100)
         else:
             self["Mlist"].instance.moveSelectionTo(self.maxidx - 1)
+        self.update_description()
 
     def jump_100_down(self):
         cur = self["Mlist"].l.getCurrentSelectionIndex()
@@ -2377,6 +2501,7 @@ class CityPanel4(Screen):
             self["Mlist"].instance.moveSelectionTo(cur - 100)
         else:
             self["Mlist"].instance.moveSelectionTo(0)
+        self.update_description()
 
     def exit(self):
         if self.search_ok:
