@@ -84,11 +84,14 @@ ColorSelect_FHD = """
 
 About_Foreca4_FHD = """
 <screen name="About_Foreca4_FHD" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="960,400">
-    <widget position="center,100" size="750,42" zPosition="3" font="Regular;32" source="ver" render="Label" transparent="1" valign="center" halign="center"/>
-    <eLabel position="center,180" size="400,42" zPosition="3" font="Regular;32" text="(C) Evg77734, 2025" transparent="1" halign="center" valign="center"/>
-    <eLabel name="" position="center,260" size="400,42" zPosition="3" font="Regular;32" text="https://gisclub.tv" transparent="1" halign="center" valign="center"/>
-    <widget name="plate1" size="930,370" zPosition="2" position="15,15" backgroundColor="#40000000" cornerRadius="50"/>
-    <widget name="plate0" size="960,400" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget position="center,100" size="750,42" zPosition="3" font="Regular;32" source="ver" render="Label" transparent="1" valign="center" halign="center" />
+    <eLabel position="280,155" size="400,42" zPosition="3" font="Regular;32" text="Create by @Bauernbub" transparent="1" halign="center" valign="center" />
+    <eLabel position="280,200" size="400,42" zPosition="3" font="Regular;32" text="mod Evg77734, 2025" transparent="1" halign="center" valign="center" />
+    <eLabel position="280,245" size="400,42" zPosition="3" font="Regular;32" text="mod Lululla, 2026" transparent="1" halign="center" valign="center" />    
+    <eLabel name="" position="280,290" size="400,42" zPosition="3" font="Regular;32" text="https://gisclub.tv" transparent="1" halign="center" valign="center" />
+    <eLabel name="" position="280,330" size="400,42" zPosition="3" font="Regular;32" text="https://linuxsat-support.com" transparent="1" halign="center" valign="center" />
+    <widget name="plate1" size="930,370" zPosition="2" position="15,15" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="plate0" size="960,400" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
 </screen>"""
 
 ExtInfo_Foreca4_FHD = """
@@ -305,11 +308,14 @@ ColorSelect_HD = """
 
 About_Foreca4_HD = """
 <screen name="About_Foreca4_HD" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="640,267">
-    <widget position="center,67" size="500,28" zPosition="3" font="Regular;21" source="ver" render="Label" transparent="1" valign="center" halign="center"/>
-    <eLabel position="center,120" size="267,28" zPosition="3" font="Regular;21" text="(C) Evg77734,2025" transparent="1" halign="center" valign="center"/>
-    <eLabel name="" position="center,173" size="267,28" zPosition="3" font="Regular;21" text="https://gisclub.tv" transparent="1" halign="center" valign="center"/>
-    <widget name="plate1" size="620,247" zPosition="2" position="10,10" backgroundColor="#40000000" cornerRadius="50"/>
-    <widget name="plate0" size="640,267" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget position="70,22" size="500,28" zPosition="3" font="Regular;21" source="ver" render="Label" transparent="1" valign="center" halign="center" />
+    <eLabel position="120,50" size="400,42" zPosition="3" font="Regular;21" text="Create by @Bauernbub" transparent="1" halign="center" valign="center" />
+    <eLabel position="120,90" size="400,42" zPosition="3" font="Regular;21" text="mod Evg77734, 2025" transparent="1" halign="center" valign="center" />
+    <eLabel position="120,130" size="400,42" zPosition="3" font="Regular;21" text="mod Lululla, 2026" transparent="1" halign="center" valign="center" />    
+    <eLabel name="" position="120,170" size="400,42" zPosition="3" font="Regular;21" text="https://gisclub.tv" transparent="1" halign="center" valign="center" />
+    <eLabel name="" position="120,210" size="400,42" zPosition="3" font="Regular;21" text="https://linuxsat-support.com" transparent="1" halign="center" valign="center" />
+    <widget name="plate1" size="620,247" zPosition="2" position="10,10" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="plate0" size="640,267" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
 </screen>"""
 
 ExtInfo_Foreca4_HD = """
@@ -525,11 +531,14 @@ ColorSelect_UHD = """
 
 About_Foreca4_UHD = """
 <screen name="About_Foreca4_UHD" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1280,534">
-    <widget position="center,134" size="1000,56" zPosition="3" font="Regular;43" source="ver" render="Label" transparent="1" valign="center" halign="center"/>
-    <eLabel position="center,240" size="534,56" zPosition="3" font="Regular;43" text="(C) Evg77734, 2025" transparent="1" halign="center" valign="center"/>
-    <eLabel name="" position="center,347" size="534,56" zPosition="3" font="Regular;43" text="https://gisclub.tv" transparent="1" halign="center" valign="center"/>
-    <widget name="plate1" size="1240,494" zPosition="2" position="20,20" backgroundColor="#40000000" cornerRadius="50"/>
-    <widget name="plate0" size="1280,534" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget position="140,54" size="1000,56" zPosition="3" font="Regular;43" source="ver" render="Label" transparent="1" valign="center" halign="center" />
+    <eLabel position="330,120" size="600,42" zPosition="3" font="Regular;43" text="Create by @Bauernbub" transparent="1" halign="center" valign="center" />
+    <eLabel position="330,175" size="600,42" zPosition="3" font="Regular;43" text="mod Evg77734, 2025" transparent="1" halign="center" valign="center" />
+    <eLabel position="330,220" size="600,42" zPosition="3" font="Regular;43" text="mod Lululla, 2026" transparent="1" halign="center" valign="center" />    
+    <eLabel name="" position="330,281" size="600,42" zPosition="3" font="Regular;43" text="https://gisclub.tv" transparent="1" halign="center" valign="center" />
+    <eLabel name="" position="330,330" size="600,50" zPosition="3" font="Regular;43" text="https://linuxsat-support.com" transparent="1" halign="center" valign="center" />
+    <widget name="plate1" size="1240,494" zPosition="2" position="20,20" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="plate0" size="1280,534" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
 </screen>"""
 
 ExtInfo_Foreca4_UHD = """
