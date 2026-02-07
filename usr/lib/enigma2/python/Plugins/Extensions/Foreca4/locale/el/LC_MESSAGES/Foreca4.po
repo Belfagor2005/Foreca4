@@ -360,6 +360,10 @@ msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
 msgid "No data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
+#, fuzzy
+msgid "No date available"
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
 msgid "North Africa"
 msgstr "Βόρεια Αφρική"
 
@@ -582,17 +586,17 @@ msgstr "Διαφάνεια παραθύρου"
 msgid "Yellow - Favorite 2"
 msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
 
-msgid "hPa"
-msgstr "hPa"
-
-msgid "km/h"
-msgstr "χλμ/ώρα"
-
-msgid "mm"
-msgstr "mm"
-
 msgid "v."
 msgstr "έκδ."
+
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#~ msgid "km/h"
+#~ msgstr "χλμ/ώρα"
+
+#~ msgid "mm"
+#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< έκδ."

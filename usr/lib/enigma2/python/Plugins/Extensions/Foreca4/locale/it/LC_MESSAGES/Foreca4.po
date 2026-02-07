@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Foreca4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-06 21:29+0100\n"
+"PO-Revision-Date: 2026-02-07 16:07+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -175,10 +175,10 @@ msgid "Error loading colors"
 msgstr "Errore nel caricamento dei colori"
 
 msgid "Error loading maps. Check connection."
-msgstr ""
+msgstr "Errore durante il caricamento delle mappe. Controllare la connessione."
 
 msgid "Error saving favorite!"
-msgstr ""
+msgstr "Errore durante il salvataggio dei preferiti!"
 
 msgid "Europe"
 msgstr "Europa"
@@ -360,6 +360,9 @@ msgstr "Nessuna città trovata nella ricerca!!!"
 msgid "No data available"
 msgstr "Nessun dato disponibile"
 
+msgid "No date available"
+msgstr "Nessun dato disponibile"
+
 msgid "North Africa"
 msgstr "Africa del Nord"
 
@@ -412,7 +415,7 @@ msgid "Overcast, thunderstorms with rain"
 msgstr "Coperto, temporali con pioggia"
 
 msgid "Overnight"
-msgstr "Di notte"
+msgstr "Notte"
 
 msgid "Partly cloudy"
 msgstr "Parzialmente nuvoloso"
@@ -582,17 +585,17 @@ msgstr "Trasparenza Finestra"
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
 
-msgid "hPa"
-msgstr "hPa"
-
-msgid "km/h"
-msgstr "km/h"
-
-msgid "mm"
-msgstr "mm"
-
 msgid "v."
 msgstr "v."
+
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "mm"
+#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."

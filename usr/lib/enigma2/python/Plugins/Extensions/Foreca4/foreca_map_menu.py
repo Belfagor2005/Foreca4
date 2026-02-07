@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # foreca_map_menu.py - Foreca map selection menu
-# @Lululla 20260122
-# @Lululla 20260122
+# Copyright (c) @Lululla 20260122
 # Core API:
 # Authentication system, token/tile cache (foreca_map_api.py).
 # Interface:
@@ -27,7 +26,7 @@ from . import _
 
 class ForecaMapMenu(Screen):
     """Menu to select Foreca map layers"""
-
+    
     def __init__(self, session, api):
         self.session = session
         self.api = api
@@ -37,12 +36,12 @@ class ForecaMapMenu(Screen):
             <widget name="list" position="46,7" size="700,650" itemHeight="35" font="Regular;32" scrollbarMode="showNever" />
             <widget name="info" position="50,665" size="700,30" font="Regular;24" halign="center" />
         </screen>"""
-
+        
         Screen.__init__(self, session)
-
+        
         self["list"] = MenuList([])
         self["info"] = Label(_("Loading available maps..."))
-
+        
         self["actions"] = ActionMap(
             ["OkCancelActions", "DirectionActions"],
             {
@@ -53,37 +52,37 @@ class ForecaMapMenu(Screen):
             },
             -1
         )
-
+        
         self.onLayoutFinish.append(self.load_layers)
-
+    
     def load_layers(self):
         """Load available layers"""
         self.layers = self.api.get_capabilities()
-
+        
         if not self.layers:
             self["info"].setText(_("Error loading maps. Check connection."))
             return
-
+        
         items = []
         for layer in self.layers:
             title = layer.get('title', f"Layer {layer['id']}")
             items.append((title, layer))
-
+        
         self["list"].setList(items)
         self["info"].setText(_("Select a map with OK"))
-
+    
     def up(self):
         self["list"].up()
-
+    
     def down(self):
         self["list"].down()
-
+    
     def select_layer(self):
         """Select layer and open viewer"""
         selection = self["list"].getCurrent()
         if selection:
             from .foreca_map_viewer import ForecaMapViewer
             self.session.open(ForecaMapViewer, self.api, selection[1])
-
+    
     def exit(self):
         self.close()

@@ -8,7 +8,6 @@
 
 
 
-
 msgid "0 - Today"
 msgstr ""
 
@@ -351,6 +350,9 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
+msgid "No date available"
+msgstr ""
+
 msgid "North Africa"
 msgstr ""
 
@@ -571,15 +573,6 @@ msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
-msgstr ""
-
-msgid "hPa"
-msgstr ""
-
-msgid "km/h"
-msgstr ""
-
-msgid "mm"
 msgstr ""
 
 msgid "v."
