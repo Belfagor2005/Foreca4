@@ -156,9 +156,6 @@ msgstr "Repubblica Ceca"
 msgid "Denmark"
 msgstr "Danimarca"
 
-msgid "Dewpoint"
-msgstr "Punto di rugiada"
-
 msgid "Down - Next page"
 msgstr "Giù - Pagina successiva"
 
@@ -204,9 +201,6 @@ msgstr "Preferito 1"
 msgid "Favorite 2"
 msgstr "Preferito 2"
 
-msgid "Feels like"
-msgstr "Percepita"
-
 msgid "Finland"
 msgstr "Finlandia"
 
@@ -251,9 +245,6 @@ msgstr "Verde"
 
 msgid "Green - Favorite 1"
 msgstr "Verde - Favorito 1"
-
-msgid "Gust"
-msgstr "Raffica"
 
 msgid "HTML"
 msgstr "HTML"
@@ -358,6 +349,9 @@ msgid "No City found in search!!!"
 msgstr "Nessuna città trovata nella ricerca!!!"
 
 msgid "No data available"
+msgstr "Nessun dato disponibile"
+
+msgid "No date available"
 msgstr "Nessun dato disponibile"
 
 msgid "North Africa"
@@ -573,29 +567,35 @@ msgstr "Meteo oggi"
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
 
-msgid "Wind speed"
-msgstr "Velocità del vento"
-
 msgid "Window transparency"
 msgstr "Trasparenza Finestra"
 
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
 
-msgid "hPa"
-msgstr "hPa"
-
-msgid "km/h"
-msgstr "km/h"
-
-msgid "mm"
-msgstr "mm"
-
 msgid "v."
 msgstr "v."
 
-#~ msgid "No date available"
-#~ msgstr "Nessun dato disponibile"
+#~ msgid "Dewpoint"
+#~ msgstr "Punto di rugiada"
+
+#~ msgid "Feels like"
+#~ msgstr "Percepita"
+
+#~ msgid "Gust"
+#~ msgstr "Raffica"
+
+#~ msgid "Wind speed"
+#~ msgstr "Velocità del vento"
+
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "mm"
+#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."

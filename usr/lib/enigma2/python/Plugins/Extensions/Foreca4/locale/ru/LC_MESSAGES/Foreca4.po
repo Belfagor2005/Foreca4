@@ -154,9 +154,6 @@ msgstr "Чешская Республика"
 msgid "Denmark"
 msgstr "Дания"
 
-msgid "Dewpoint"
-msgstr "Точка росы"
-
 msgid "Down - Next page"
 msgstr "Вниз - Следующая страница"
 
@@ -202,9 +199,6 @@ msgstr "Избранное 1"
 msgid "Favorite 2"
 msgstr "Избранное 2"
 
-msgid "Feels like"
-msgstr "Ощущается как"
-
 msgid "Finland"
 msgstr "Финляндия"
 
@@ -249,9 +243,6 @@ msgstr "Зеленый"
 
 msgid "Green - Favorite 1"
 msgstr "Зелёная кнопка - Избранное 1"
-
-msgid "Gust"
-msgstr "Порыв ветра"
 
 msgid "HTML"
 msgstr "HTML"
@@ -356,6 +347,10 @@ msgid "No City found in search!!!"
 msgstr "Город не найден в поиске!!!"
 
 msgid "No data available"
+msgstr "Данные недоступны"
+
+#, fuzzy
+msgid "No date available"
 msgstr "Данные недоступны"
 
 msgid "North Africa"
@@ -571,30 +566,35 @@ msgstr "Погода сегодня"
 msgid "Weather tomorrow"
 msgstr "Погода завтра"
 
-msgid "Wind speed"
-msgstr "Скорость ветра"
-
 msgid "Window transparency"
 msgstr "Прозрачность окон"
 
 msgid "Yellow - Favorite 2"
 msgstr "Желтая кнопка - Избранное 2"
 
-msgid "hPa"
-msgstr "гПа"
-
-msgid "km/h"
-msgstr "км/ч"
-
-msgid "mm"
-msgstr "мм"
-
 msgid "v."
 msgstr "в."
 
-#, fuzzy
-#~ msgid "No date available"
-#~ msgstr "Данные недоступны"
+#~ msgid "Dewpoint"
+#~ msgstr "Точка росы"
+
+#~ msgid "Feels like"
+#~ msgstr "Ощущается как"
+
+#~ msgid "Gust"
+#~ msgstr "Порыв ветра"
+
+#~ msgid "Wind speed"
+#~ msgstr "Скорость ветра"
+
+#~ msgid "hPa"
+#~ msgstr "гПа"
+
+#~ msgid "km/h"
+#~ msgstr "км/ч"
+
+#~ msgid "mm"
+#~ msgstr "мм"
 
 #~ msgid "<< ver."
 #~ msgstr "<< вер."

@@ -154,9 +154,6 @@ msgstr ""
 msgid "Denmark"
 msgstr ""
 
-msgid "Dewpoint"
-msgstr ""
-
 msgid "Down - Next page"
 msgstr ""
 
@@ -202,9 +199,6 @@ msgstr ""
 msgid "Favorite 2"
 msgstr ""
 
-msgid "Feels like"
-msgstr ""
-
 msgid "Finland"
 msgstr ""
 
@@ -248,9 +242,6 @@ msgid "Green"
 msgstr ""
 
 msgid "Green - Favorite 1"
-msgstr ""
-
-msgid "Gust"
 msgstr ""
 
 msgid "HTML"
@@ -356,6 +347,9 @@ msgid "No City found in search!!!"
 msgstr ""
 
 msgid "No data available"
+msgstr ""
+
+msgid "No date available"
 msgstr ""
 
 msgid "North Africa"
@@ -571,22 +565,10 @@ msgstr ""
 msgid "Weather tomorrow"
 msgstr ""
 
-msgid "Wind speed"
-msgstr ""
-
 msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
-msgstr ""
-
-msgid "hPa"
-msgstr ""
-
-msgid "km/h"
-msgstr ""
-
-msgid "mm"
 msgstr ""
 
 msgid "v."
