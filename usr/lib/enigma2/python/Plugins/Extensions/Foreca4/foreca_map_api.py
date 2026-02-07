@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # foreca_map_api.py - Gestione API mappe Foreca
-# @Lululla 20260122
+# Copyright (c) @Lululla 20260122
 # Core API:
 # Authentication system, token/tile cache (foreca_map_api.py).
 # Interface:
@@ -76,8 +76,7 @@ class ForecaMapAPI:
                             value = value.strip()
                             config_data[key] = value
 
-                print(
-                    f"[ForecaMapAPI] Configuration loaded from {CONFIG_FILE}")
+                print(f"[ForecaMapAPI] Configuration loaded from {CONFIG_FILE}")
             except Exception as e:
                 print(f"[ForecaMapAPI] Error loading config: {e}")
                 # Create example config file
@@ -91,9 +90,7 @@ class ForecaMapAPI:
         # Assign values
         self.user = config_data.get("API_USER", "ekekaz")
         self.password = config_data.get("API_PASSWORD", "im5issEYcMUG")
-        self.token_expire_hours = int(
-            config_data.get(
-                "TOKEN_EXPIRE_HOURS", 720))
+        self.token_expire_hours = int(config_data.get("TOKEN_EXPIRE_HOURS", 720))
         self.map_server = config_data.get("MAP_SERVER", "map-eu.foreca.com")
         self.auth_server = config_data.get("AUTH_SERVER", "pfa.foreca.com")
 
@@ -126,8 +123,7 @@ AUTH_SERVER=pfa.foreca.com
 """
             with open(CONFIG_FILE + ".example", 'w') as f:
                 f.write(example_content)
-            print(
-                f"[ForecaMapAPI] Created example file: {CONFIG_FILE}.example")
+            print(f"[ForecaMapAPI] Created example file: {CONFIG_FILE}.example")
         except Exception as e:
             print(f"[ForecaMapAPI] Error creating example: {e}")
 
@@ -221,8 +217,7 @@ AUTH_SERVER=pfa.foreca.com
                 try:
                     with open(cache_file, 'r') as f:
                         data = json.load(f)
-                        print(
-                            f"[ForecaMapAPI] Capabilities from cache: {len(data.get('images', []))} layers")
+                        print(f"[ForecaMapAPI] Capabilities from cache: {len(data.get('images', []))} layers")
                         return data.get('images', [])
                 except Exception as e:
                     print(f"[ForecaMapAPI] Error cache capabilities: {e}")
@@ -240,12 +235,10 @@ AUTH_SERVER=pfa.foreca.com
                 # Save to cache
                 with open(cache_file, 'w') as f:
                     json.dump(data, f)
-                print(
-                    f"[ForecaMapAPI] Capabilities downloaded: {len(data.get('images', []))} layers")
+                print(f"[ForecaMapAPI] Capabilities downloaded: {len(data.get('images', []))} layers")
                 return data.get('images', [])
             else:
-                print(
-                    f"[ForecaMapAPI] Error capabilities HTTP {response.status_code}")
+                print(f"[ForecaMapAPI] Error capabilities HTTP {response.status_code}")
                 return []
 
         except Exception as e:
@@ -332,8 +325,7 @@ AUTH_SERVER=pfa.foreca.com
                         deleted_files += 1
 
             if deleted_files > 0:
-                print(
-                    f"[ForecaMapAPI] Cleared {deleted_files} old cache files")
+                print(f"[ForecaMapAPI] Cleared {deleted_files} old cache files")
 
         except Exception as e:
             print(f"[ForecaMapAPI] Error clearing cache: {e}")

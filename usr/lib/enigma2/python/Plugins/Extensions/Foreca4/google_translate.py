@@ -1,0 +1,535 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+#
+# Google Translate API for Foreca4 Weather Plugin
+
+
+import sys
+import json
+import socket
+from Components.config import config
+from time import time
+
+
+PY3 = sys.version_info[0] >= 3
+
+try:
+    unicode
+except NameError:
+    unicode = str
+
+
+if PY3:
+    from urllib.parse import urlencode
+    from urllib.request import Request, urlopen
+    from urllib.error import URLError, HTTPError
+    text_type = str
+else:
+    from urllib import urlencode
+    from urllib2 import Request, urlopen, URLError, HTTPError
+    text_type = unicode
+
+
+# ============================================================
+# CUSTOM CONFIGURATION
+# ============================================================
+
+# Translation API URL (can be changed if needed)
+TRANSLATE_API_URL = "https://translate.googleapis.com/translate_a/single"
+
+# Timeout for HTTP requests (in seconds)
+REQUEST_TIMEOUT = 8
+
+# Character limit for batch translation (to avoid errors)
+MAX_CHARS_PER_REQUEST = 2000
+
+# Local cache to avoid repetitive requests
+_translation_cache = {}
+_cache_hits = 0
+_cache_misses = 0
+
+# Enable logging
+ENABLE_LOGGING = True
+
+# ============================================================
+# UTILITY FUNCTIONS
+# ============================================================
+
+
+def _log(message):
+    """Custom logging"""
+    if ENABLE_LOGGING:
+        timestamp = time()
+        print(f"[Foreca4-Translate][{timestamp:.2f}] {message}")
+
+
+def _get_system_language():
+    """Get system language in short format"""
+    try:
+        lang = config.misc.language.value
+        return lang.split('_')[0].lower()
+    except Exception:
+        return "en"
+
+
+print("System Language:", _get_system_language())
+
+
+def _to_unicode(text):
+    """
+    Converts any input into a Unicode string.
+    Automatically handles encoding/decoding.
+    """
+    if text is None:
+        return u""
+
+    # If already Unicode (Python 2) or str (Python 3)
+    if PY3:
+        if isinstance(text, str):
+            return text
+        elif isinstance(text, bytes):
+            try:
+                return text.decode('utf-8', errors='ignore')
+            except:
+                return str(text, errors='ignore')
+    else:
+        # Python 2
+        if isinstance(text, text_type):
+            return text
+        elif isinstance(text, str):
+            try:
+                return text.decode('utf-8', errors='ignore')
+            except:
+                return text_type(text, errors='ignore')
+
+    # Fallback for other types (int, float, etc.)
+    try:
+        return str(text) if PY3 else text_type(text)
+    except:
+        return u""
+
+
+# ============================================================
+# ARABIC LANGUAGE DETECTION (for special handling)
+# ============================================================
+
+
+def _is_arabic_char(char):
+    """Check if a character is Arabic"""
+    try:
+        code = ord(char)
+        # Unicode ranges for Arabic characters
+        return (
+            0x0600 <= code <= 0x06FF or
+            0x0750 <= code <= 0x077F or
+            0x08A0 <= code <= 0x08FF or
+            0xFB50 <= code <= 0xFDFF or
+            0xFE70 <= code <= 0xFEFF
+        )
+    except Exception:
+        return False
+
+
+def _is_text_arabic(text):
+    """
+    Determines whether a text is predominantly Arabic.
+    Returns True if more than 60% of alphabetic characters are Arabic.
+    """
+    text_unicode = _to_unicode(text)
+    if not text_unicode:
+        return False
+
+    total_letters = 0
+    arabic_letters = 0
+
+    for char in text_unicode:
+        # Consider only alphabetic characters (exclude spaces, numbers, punctuation)
+        if char.isalpha():
+            total_letters += 1
+            if _is_arabic_char(char):
+                arabic_letters += 1
+
+    # If there are no letters, it's not Arabic
+    if total_letters == 0:
+        return False
+
+    # Calculate percentage
+    arabic_ratio = float(arabic_letters) / float(total_letters)
+
+    # Threshold to consider the text Arabic (60%)
+    return arabic_ratio >= 0.6
+
+
+def _clean_whitespace(text):
+    """Clean multiple spaces and extra whitespace"""
+    text_unicode = _to_unicode(text)
+    # Remove multiple spaces
+    while u"  " in text_unicode:
+        text_unicode = text_unicode.replace(u"  ", u" ")
+    # Remove leading and trailing spaces
+    return text_unicode.strip()
+
+
+# ============================================================
+# CACHE AND PERFORMANCE
+# ============================================================
+
+
+def _get_cache_key(text, target_lang):
+    """Generate a unique cache key"""
+    return f"{target_lang}:{hash(text)}"
+
+
+def _cache_translation(text, target_lang, translated):
+    """Store a translation in the cache"""
+    cache_key = _get_cache_key(text, target_lang)
+    _translation_cache[cache_key] = translated
+    return translated
+
+
+def _get_cached_translation(text, target_lang):
+    """Retrieve a translation from the cache"""
+    global _cache_hits, _cache_misses
+    cache_key = _get_cache_key(text, target_lang)
+
+    if cache_key in _translation_cache:
+        _cache_hits += 1
+        if _cache_hits % 50 == 0:  # Log every 50 hits
+            _log(f"Cache hit rate: {_cache_hits}/{_cache_hits + _cache_misses}")
+        return _translation_cache[cache_key]
+
+    _cache_misses += 1
+    return None
+
+
+def get_cache_stats():
+    """Return cache statistics"""
+    return {
+        'hits': _cache_hits,
+        'misses': _cache_misses,
+        'size': len(_translation_cache),
+        'hit_rate': _cache_hits / max(1, _cache_hits + _cache_misses)
+    }
+
+
+def clear_cache():
+    """Clear the translation cache"""
+    global _cache_hits, _cache_misses  # _translation_cache,
+    _translation_cache.clear()
+    _cache_hits = 0
+    _cache_misses = 0
+    _log("Cache cleared")
+
+
+# ============================================================
+# MAIN TRANSLATION FUNCTION
+# ============================================================
+
+def translate_text(text, target_lang=None, use_cache=True):
+    """
+    Translates text using the Google Translate API.
+
+    Args:
+        text (str): Text to translate
+        target_lang (str): Target language (e.g. 'it', 'en', 'de')
+                           If None, uses the system language
+        use_cache (bool): Whether to use the local cache
+
+    Returns:
+        str: Translated text or original text in case of error
+    """
+    start_time = time()
+
+    # Input validation
+    if not text:
+        return u""
+
+    # Convert to Unicode
+    text_unicode = _to_unicode(text)
+
+    # Use system language if not specified
+    if target_lang is None:
+        target_lang = _get_system_language()
+
+    # Normalize language (ensure lowercase)
+    target_lang = target_lang.lower()
+
+    # If the text is already Arabic, do not translate it
+    if _is_text_arabic(text_unicode):
+        _log(f"Arabic text detected, not translated: '{text_unicode[:50]}...'")
+        return text_unicode
+
+    # Check cache if enabled
+    if use_cache:
+        cached = _get_cached_translation(text_unicode, target_lang)
+        if cached is not None:
+            _log(f"Cache HIT: '{text_unicode[:30]}...' -> '{cached[:30]}...'")
+            return cached
+
+    # Error handling for overly long texts
+    if len(text_unicode) > MAX_CHARS_PER_REQUEST:
+        _log(f"Text too long ({len(text_unicode)} chars), truncated to {MAX_CHARS_PER_REQUEST}")
+        text_unicode = text_unicode[:MAX_CHARS_PER_REQUEST]
+
+    # Prepare the request
+    params = {
+        "client": "gtx",           # Fake client to bypass restrictions
+        "sl": "auto",              # Automatic source language
+        "tl": target_lang,         # Target language
+        "dt": "t",                 # Response type: translation only
+        "q": text_unicode,         # Text to translate
+    }
+
+    try:
+        # Build the URL
+        query_string = urlencode(params)
+        url = f"{TRANSLATE_API_URL}?{query_string}"
+
+        _log(f"Translating: '{text_unicode[:40]}...' -> {target_lang}")
+
+        # Set timeout to avoid blocking
+        socket.setdefaulttimeout(REQUEST_TIMEOUT)
+
+        # Perform the request
+        req = Request(url)
+        # Add headers to look like a browser (avoid blocking)
+        req.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36')
+        req.add_header('Accept', 'application/json')
+
+        response = urlopen(req, timeout=REQUEST_TIMEOUT)
+        raw_data = response.read()
+
+        # Decode the response
+        if PY3 and isinstance(raw_data, bytes):
+            raw_data = raw_data.decode('utf-8')
+
+        # Parse JSON response
+        data = json.loads(raw_data)
+
+        # Extract the translation from the JSON structure
+        translated_text = u""
+        if isinstance(data, list) and data:
+            # Typical structure: [[[translation, original], ...], ...]
+            for item in data[0]:
+                if item and isinstance(item, list) and item[0]:
+                    translated_text += item[0]
+
+        # Clean the result
+        if translated_text:
+            translated_text = _clean_whitespace(translated_text)
+
+            # Save to cache
+            if use_cache:
+                _cache_translation(text_unicode, target_lang, translated_text)
+
+            elapsed = time() - start_time
+            _log(f"Translation completed in {elapsed:.2f}s: '{text_unicode[:30]}...' -> '{translated_text[:30]}...'")
+
+            return translated_text
+        else:
+            _log(f"Empty API response for: '{text_unicode[:30]}...'")
+            return text_unicode
+
+    except socket.timeout:
+        _log(f"TIMEOUT during translation: '{text_unicode[:30]}...'")
+        return text_unicode
+
+    except (URLError, HTTPError) as e:
+        _log(f"HTTP error {getattr(e, 'code', 'N/A')}: {str(e)}")
+        return text_unicode
+
+    except json.JSONDecodeError as e:
+        _log(f"JSON error: {str(e)}")
+        return text_unicode
+
+    except Exception as e:
+        error_type = type(e).__name__
+        _log(f"Error {error_type}: {str(e)}")
+        return text_unicode
+
+    finally:
+        # Restore default timeout
+        socket.setdefaulttimeout(None)
+
+
+# ============================================================
+# AUXILIARY FUNCTIONS FOR SPECIAL CASES
+# ============================================================
+
+
+def translate_batch(texts, target_lang=None, use_cache=True):
+    """
+    Translates a list of texts in batch.
+    Optimized to reduce the number of HTTP requests.
+
+    Args:
+        texts (list): List of texts to translate
+        target_lang (str): Target language
+        use_cache (bool): Use cache
+
+    Returns:
+        list: List of translated texts
+    """
+    if not texts:
+        return []
+
+    # Use system language if not specified
+    if target_lang is None:
+        target_lang = _get_system_language()
+
+    results = []
+    batch_text = []
+    batch_indices = []
+
+    for i, text in enumerate(texts):
+        text_unicode = _to_unicode(text)
+
+        # Check cache
+        if use_cache:
+            cached = _get_cached_translation(text_unicode, target_lang)
+            if cached is not None:
+                results.append(cached)
+                continue
+
+        # If the text is Arabic, do not translate it
+        if _is_text_arabic(text_unicode):
+            results.append(text_unicode)
+            continue
+
+        # Add to batch
+        batch_text.append(text_unicode)
+        batch_indices.append(i)
+        results.append(None)  # Placeholder
+
+    # If there are texts to translate in batch
+    if batch_text:
+        try:
+            # Join texts with a special separator
+            separator = u" ||| "
+            combined_text = separator.join(batch_text)
+
+            # Translate the batch
+            combined_translated = translate_text(
+                combined_text,
+                target_lang,
+                use_cache=False  # Do not use cache for batch
+            )
+
+            # Split results
+            if separator in combined_translated:
+                translated_parts = combined_translated.split(separator)
+            else:
+                # Fallback: split by approximate number
+                translated_parts = [combined_translated] * len(batch_text)
+
+            # Update results
+            for idx, translated in zip(batch_indices, translated_parts):
+                results[idx] = translated
+
+                # Save to cache
+                if use_cache and idx < len(texts):
+                    text_unicode = _to_unicode(texts[idx])
+                    _cache_translation(text_unicode, target_lang, translated)
+
+        except Exception as e:
+            _log(f"Batch translation error: {str(e)}")
+            # Fallback: translate individually
+            for idx in batch_indices:
+                if results[idx] is None and idx < len(texts):
+                    results[idx] = translate_text(texts[idx], target_lang, use_cache)
+
+    # Replace None with original text
+    for i in range(len(results)):
+        if results[i] is None:
+            results[i] = _to_unicode(texts[i])
+
+    return results
+
+
+def safe_translate(text, fallback=None, **kwargs):
+    """
+    Safe version of translate_text that always returns a valid string.
+
+    Args:
+        text (str): Text to translate
+        fallback (str): Fallback text if translation fails
+        **kwargs: Additional arguments for translate_text
+
+    Returns:
+        str: Translated text, fallback or original
+    """
+    try:
+        translated = translate_text(text, **kwargs)
+        if translated and translated.strip():
+            return translated
+
+        # If translation is empty, use fallback
+        if fallback is not None:
+            return _to_unicode(fallback)
+
+        return _to_unicode(text)
+
+    except Exception as e:
+        _log(f"Error in safe_translate: {str(e)}")
+        if fallback is not None:
+            return _to_unicode(fallback)
+        return _to_unicode(text)
+
+
+# ============================================================
+# TEST FUNCTION (for debugging)
+# ============================================================
+
+
+def test_translation():
+    """Test function to verify functionality"""
+    test_cases = [
+        ("Hello world", "it", "Ciao mondo"),
+        ("Weather forecast", "es", "Pronóstico del tiempo"),
+        ("Temperature", "fr", "Température"),
+    ]
+
+    print("=" * 60)
+    print("FORECA4 TRANSLATION TEST")
+    print("=" * 60)
+
+    all_passed = True
+
+    for original, lang, expected in test_cases:
+        result = translate_text(original, lang)
+
+        if result and result.lower() == expected.lower():
+            status = "✓ PASS"
+        else:
+            status = "✗ FAIL"
+            all_passed = False
+
+        print(f"{status}: '{original}' -> '{result}' (expected: '{expected}')")
+
+    print("=" * 60)
+    stats = get_cache_stats()
+    print(f"Cache statistics: {stats['hits']} hits, {stats['misses']} misses, "
+          f"rate: {stats['hit_rate']:.1%}")
+    print("=" * 60)
+
+    return all_passed
+
+
+# ============================================================
+# INITIALIZATION
+# ============================================================
+
+
+if __name__ == "__main__":
+    # Test mode when run directly
+    print("Google Translate API for Foreca4")
+    print("Enhanced custom version")
+
+    if test_translation():
+        print("✓ All tests passed!")
+    else:
+        print("✗ Some tests failed")
+else:
+    # Imported as a module
+    _log("Foreca4 translation module loaded")
+    _log(f"System language: {_get_system_language()}")
