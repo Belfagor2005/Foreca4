@@ -156,9 +156,6 @@ msgstr "Τσεχική Δημοκρατία"
 msgid "Denmark"
 msgstr "Δανία"
 
-msgid "Dewpoint"
-msgstr "Σημείο δρόσου"
-
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
 
@@ -204,9 +201,6 @@ msgstr "Αγαπημένο 1"
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
 
-msgid "Feels like"
-msgstr "Αίσθηση"
-
 msgid "Finland"
 msgstr "Φινλανδία"
 
@@ -251,9 +245,6 @@ msgstr "Πράσινο"
 
 msgid "Green - Favorite 1"
 msgstr "Πράσινο κουμπί - Αγαπημένο 1"
-
-msgid "Gust"
-msgstr "Ρίπες"
 
 msgid "HTML"
 msgstr "HTML"
@@ -358,6 +349,10 @@ msgid "No City found in search!!!"
 msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
 
 msgid "No data available"
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
+#, fuzzy
+msgid "No date available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 msgid "North Africa"
@@ -573,30 +568,35 @@ msgstr "Καιρός σήμερα"
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
 
-msgid "Wind speed"
-msgstr "Ταχύτητα ανέμου"
-
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
 msgid "Yellow - Favorite 2"
 msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
 
-msgid "hPa"
-msgstr "hPa"
-
-msgid "km/h"
-msgstr "χλμ/ώρα"
-
-msgid "mm"
-msgstr "mm"
-
 msgid "v."
 msgstr "έκδ."
 
-#, fuzzy
-#~ msgid "No date available"
-#~ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+#~ msgid "Dewpoint"
+#~ msgstr "Σημείο δρόσου"
+
+#~ msgid "Feels like"
+#~ msgstr "Αίσθηση"
+
+#~ msgid "Gust"
+#~ msgstr "Ρίπες"
+
+#~ msgid "Wind speed"
+#~ msgstr "Ταχύτητα ανέμου"
+
+#~ msgid "hPa"
+#~ msgstr "hPa"
+
+#~ msgid "km/h"
+#~ msgstr "χλμ/ώρα"
+
+#~ msgid "mm"
+#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< έκδ."

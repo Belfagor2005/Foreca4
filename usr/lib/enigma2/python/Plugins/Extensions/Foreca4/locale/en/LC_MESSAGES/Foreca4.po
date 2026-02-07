@@ -160,9 +160,6 @@ msgstr ""
 msgid "Denmark"
 msgstr ""
 
-msgid "Dewpoint"
-msgstr "Dewpoint"
-
 msgid "Down - Next page"
 msgstr "Down - Next page"
 
@@ -211,9 +208,6 @@ msgstr "Green - Favorite 1"
 msgid "Favorite 2"
 msgstr "Yellow - Favorite 2"
 
-msgid "Feels like"
-msgstr "Feels like"
-
 msgid "Finland"
 msgstr ""
 
@@ -260,9 +254,6 @@ msgstr ""
 
 msgid "Green - Favorite 1"
 msgstr "Green - Favorite 1"
-
-msgid "Gust"
-msgstr "Gust"
 
 msgid "HTML"
 msgstr ""
@@ -369,6 +360,9 @@ msgid "No City found in search!!!"
 msgstr ""
 
 msgid "No data available"
+msgstr ""
+
+msgid "No date available"
 msgstr ""
 
 msgid "North Africa"
@@ -588,26 +582,32 @@ msgstr "Weather today"
 msgid "Weather tomorrow"
 msgstr "Weather tomorrow"
 
-msgid "Wind speed"
-msgstr "Wind speed"
-
 msgid "Window transparency"
 msgstr "Window transparency"
 
 msgid "Yellow - Favorite 2"
 msgstr "Yellow - Favorite 2"
 
-msgid "hPa"
-msgstr ""
-
-msgid "km/h"
-msgstr "km/h"
-
-msgid "mm"
-msgstr "mm"
-
 msgid "v."
 msgstr "v."
+
+#~ msgid "Dewpoint"
+#~ msgstr "Dewpoint"
+
+#~ msgid "Feels like"
+#~ msgstr "Feels like"
+
+#~ msgid "Gust"
+#~ msgstr "Gust"
+
+#~ msgid "Wind speed"
+#~ msgstr "Wind speed"
+
+#~ msgid "km/h"
+#~ msgstr "km/h"
+
+#~ msgid "mm"
+#~ msgstr "mm"
 
 #~ msgid "<< ver."
 #~ msgstr "<< ver."
