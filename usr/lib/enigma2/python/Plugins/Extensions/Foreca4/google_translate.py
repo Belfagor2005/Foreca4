@@ -90,7 +90,7 @@ def _to_unicode(text):
         elif isinstance(text, bytes):
             try:
                 return text.decode('utf-8', errors='ignore')
-            except:
+            except BaseException:
                 return str(text, errors='ignore')
     else:
         # Python 2
@@ -99,13 +99,13 @@ def _to_unicode(text):
         elif isinstance(text, str):
             try:
                 return text.decode('utf-8', errors='ignore')
-            except:
+            except BaseException:
                 return text_type(text, errors='ignore')
 
     # Fallback for other types (int, float, etc.)
     try:
         return str(text) if PY3 else text_type(text)
-    except:
+    except BaseException:
         return u""
 
 
@@ -143,7 +143,8 @@ def _is_text_arabic(text):
     arabic_letters = 0
 
     for char in text_unicode:
-        # Consider only alphabetic characters (exclude spaces, numbers, punctuation)
+        # Consider only alphabetic characters (exclude spaces, numbers,
+        # punctuation)
         if char.isalpha():
             total_letters += 1
             if _is_arabic_char(char):
@@ -195,7 +196,8 @@ def _get_cached_translation(text, target_lang):
     if cache_key in _translation_cache:
         _cache_hits += 1
         if _cache_hits % 50 == 0:  # Log every 50 hits
-            _log(f"Cache hit rate: {_cache_hits}/{_cache_hits + _cache_misses}")
+            _log(
+                f"Cache hit rate: {_cache_hits}/{_cache_hits + _cache_misses}")
         return _translation_cache[cache_key]
 
     _cache_misses += 1
@@ -268,7 +270,8 @@ def translate_text(text, target_lang=None, use_cache=True):
 
     # Error handling for overly long texts
     if len(text_unicode) > MAX_CHARS_PER_REQUEST:
-        _log(f"Text too long ({len(text_unicode)} chars), truncated to {MAX_CHARS_PER_REQUEST}")
+        _log(
+            f"Text too long ({len(text_unicode)} chars), truncated to {MAX_CHARS_PER_REQUEST}")
         text_unicode = text_unicode[:MAX_CHARS_PER_REQUEST]
 
     # Prepare the request
@@ -293,7 +296,9 @@ def translate_text(text, target_lang=None, use_cache=True):
         # Perform the request
         req = Request(url)
         # Add headers to look like a browser (avoid blocking)
-        req.add_header('User-Agent', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36')
+        req.add_header(
+            'User-Agent',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36')
         req.add_header('Accept', 'application/json')
 
         response = urlopen(req, timeout=REQUEST_TIMEOUT)
@@ -323,7 +328,8 @@ def translate_text(text, target_lang=None, use_cache=True):
                 _cache_translation(text_unicode, target_lang, translated_text)
 
             elapsed = time() - start_time
-            _log(f"Translation completed in {elapsed:.2f}s: '{text_unicode[:30]}...' -> '{translated_text[:30]}...'")
+            _log(
+                f"Translation completed in {elapsed:.2f}s: '{text_unicode[:30]}...' -> '{translated_text[:30]}...'")
 
             return translated_text
         else:
@@ -436,7 +442,8 @@ def translate_batch(texts, target_lang=None, use_cache=True):
             # Fallback: translate individually
             for idx in batch_indices:
                 if results[idx] is None and idx < len(texts):
-                    results[idx] = translate_text(texts[idx], target_lang, use_cache)
+                    results[idx] = translate_text(
+                        texts[idx], target_lang, use_cache)
 
     # Replace None with original text
     for i in range(len(results)):

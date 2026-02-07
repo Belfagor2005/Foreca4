@@ -149,7 +149,7 @@ class ForecaSlideshow(Screen):
         self.slide_interval = 5000  # 5 seconds
 
         self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
-        {
+                                    {
             "cancel": self.exit,
             "ok": self.play_pause,
             "left": self.previous_image,
@@ -185,7 +185,9 @@ class ForecaSlideshow(Screen):
 
         for i in range(self.total_images):
             url = f"http://img.wetterkontor.de/karten/{self.region_code}{i}.jpg"
-            cache_file = os.path.join(WETTERKONTOR_CACHE, f"{self.region_code}_{i}.jpg")
+            cache_file = os.path.join(
+                WETTERKONTOR_CACHE,
+                f"{self.region_code}_{i}.jpg")
             if not os.path.exists(cache_file):
                 try:
                     response = requests.get(url, timeout=10)
@@ -204,7 +206,9 @@ class ForecaSlideshow(Screen):
         """Show specific image"""
         if 0 <= index < self.total_images:
             self.current_image = index
-            cache_file = os.path.join(WETTERKONTOR_CACHE, f"{self.region_code}_{index}.jpg")
+            cache_file = os.path.join(
+                WETTERKONTOR_CACHE,
+                f"{self.region_code}_{index}.jpg")
 
             if os.path.exists(cache_file):
                 self["info"].setText(f"{index + 1}/{self.total_images}")
@@ -237,11 +241,13 @@ class ForecaSlideshow(Screen):
         """Pause or resume slideshow"""
         if self.is_playing:
             self.slide_timer.stop()
-            self["info"].setText(f"⏸ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(
+                f"⏸ {self.current_image + 1}/{self.total_images}")
             self.is_playing = False
         else:
             self.slide_timer.start(self.slide_interval)
-            self["info"].setText(f"▶ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(
+                f"▶ {self.current_image + 1}/{self.total_images}")
             self.is_playing = True
 
     def increase_speed(self):
@@ -250,7 +256,9 @@ class ForecaSlideshow(Screen):
             self.slide_interval -= 1000
             if self.is_playing:
                 self.slide_timer.start(self.slide_interval)
-            self["info"].setText(_("Faster: {}s").format(self.slide_interval // 1000))
+            self["info"].setText(
+                _("Faster: {}s").format(
+                    self.slide_interval // 1000))
 
     def decrease_speed(self):
         """Decrease slideshow speed"""
@@ -258,7 +266,9 @@ class ForecaSlideshow(Screen):
             self.slide_interval += 1000
             if self.is_playing:
                 self.slide_timer.start(self.slide_interval)
-            self["info"].setText(_("Slower: {}s").format(self.slide_interval // 1000))
+            self["info"].setText(
+                _("Slower: {}s").format(
+                    self.slide_interval // 1000))
 
     def exit(self):
         """Exit slideshow"""
@@ -305,7 +315,7 @@ class ForecaMapsMenu(Screen):
 
         self.populate_list()
         self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
-        {
+                                    {
             "cancel": self.exit,
             "ok": self.select_region,
             "up": self.up,
