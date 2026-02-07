@@ -203,7 +203,7 @@ class ForecaMapViewer(Screen):
         try:
             dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
             display_time = dt.strftime("%d/%m %H:%M UTC")
-        except:
+        except BaseException:
             display_time = timestamp
 
         self["time"].setText(f"{display_time} | Zoom: {self.zoom}")
@@ -217,7 +217,8 @@ class ForecaMapViewer(Screen):
 
         def download_grid_thread():
             # Calculate center tile
-            center_x, center_y = self.latlon_to_tile(self.center_lat, self.center_lon, self.zoom)
+            center_x, center_y = self.latlon_to_tile(
+                self.center_lat, self.center_lon, self.zoom)
 
             # Grid size (e.g., 3x3 tiles = 768x768 pixels)
             # grid_size = 3
@@ -239,7 +240,8 @@ class ForecaMapViewer(Screen):
                     )
 
                     if tile_path:
-                        tile_paths.append((dx + offset, dy + offset, tile_path))
+                        tile_paths.append(
+                            (dx + offset, dy + offset, tile_path))
 
             if len(tile_paths) == grid_size * grid_size:
                 # All tiles downloaded, merge them
@@ -247,7 +249,8 @@ class ForecaMapViewer(Screen):
                 if merged_image and callback:
                     callback(merged_image)
             else:
-                print(f"[ForecaMapViewer] Missing tiles: {len(tile_paths)}/{grid_size * grid_size}")
+                print(
+                    f"[ForecaMapViewer] Missing tiles: {len(tile_paths)}/{grid_size * grid_size}")
                 if callback:
                     callback(None)
 
@@ -257,7 +260,8 @@ class ForecaMapViewer(Screen):
     def merge_tile_grid(self, tile_paths, grid_size):
         """Unisce una griglia di tiles in un'unica immagine"""
         try:
-            print(f"[DEBUG] Starting merge. Grid size: {grid_size}, Tiles received: {len(tile_paths)}")
+            print(
+                f"[DEBUG] Starting merge. Grid size: {grid_size}, Tiles received: {len(tile_paths)}")
             """
             for i, (col, row, tile_path) in enumerate(tile_paths):
                 print(f"[DEBUG] Tile {i}: pos({col},{row}), path: {tile_path}")
@@ -273,7 +277,8 @@ class ForecaMapViewer(Screen):
             print(f"[DEBUG] Creating image {total_size}x{total_size}")
 
             # Create transparent image (RGBA)
-            merged_image = Image.new('RGBA', (total_size, total_size), (0, 0, 0, 0))
+            merged_image = Image.new(
+                'RGBA', (total_size, total_size), (0, 0, 0, 0))
 
             # Place each tile in correct position
             tiles_placed = 0
@@ -291,7 +296,8 @@ class ForecaMapViewer(Screen):
             print(f"[DEBUG] Tiles placed: {tiles_placed}/{len(tile_paths)}")
 
             # Save merged image
-            merged_path = os.path.join(CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}.png")
+            merged_path = os.path.join(
+                CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}.png")
             merged_image.save(merged_path, 'PNG')
             print(f"[DEBUG] Merged image saved: {merged_path}")
 
@@ -340,10 +346,12 @@ class ForecaMapViewer(Screen):
                     new_width = int(screen_height * img_ratio)
 
                 # Resize with high quality
-                resized_img = composite.resize((new_width, new_height), Image.Resampling.LANCZOS)
+                resized_img = composite.resize(
+                    (new_width, new_height), Image.Resampling.LANCZOS)
 
                 # 5. Create background at screen size
-                display_img = Image.new('RGB', (screen_width, screen_height), (0, 0, 0))
+                display_img = Image.new(
+                    'RGB', (screen_width, screen_height), (0, 0, 0))
 
                 # 6. Center the resized image on the background
                 x_offset = (screen_width - new_width) // 2
@@ -351,10 +359,12 @@ class ForecaMapViewer(Screen):
                 display_img.paste(resized_img, (x_offset, y_offset))
 
                 # 7. Save for display
-                display_path = os.path.join(CACHE_BASE, f"display_{self.layer_id}_{self.zoom}.png")
+                display_path = os.path.join(
+                    CACHE_BASE, f"display_{self.layer_id}_{self.zoom}.png")
                 display_img.save(display_path, 'PNG')
 
-                print(f"[ForecaMapViewer] Display image: {display_path} ({screen_width}x{screen_height})")
+                print(
+                    f"[ForecaMapViewer] Display image: {display_path} ({screen_width}x{screen_height})")
 
                 # 8. Show on screen
                 self["map"].instance.setPixmapFromFile(display_path)
@@ -364,7 +374,8 @@ class ForecaMapViewer(Screen):
                 current_time = self.timestamps[self.current_time_index]
                 dt = datetime.strptime(current_time, "%Y-%m-%dT%H:%M:%SZ")
                 display_time = dt.strftime("%d/%m %H:%M UTC")
-                self["time"].setText(f"{display_time} | Zoom: {self.zoom} | Grid: 3x3")
+                self["time"].setText(
+                    f"{display_time} | Zoom: {self.zoom} | Grid: 3x3")
                 self["info"].setText("Use ← → to change time | OK to exit")
 
             except Exception as e:
@@ -393,9 +404,11 @@ class ForecaMapViewer(Screen):
 
             # Draw grid
             for i in range(0, width, 100):
-                draw.line([(i, 0), (i, height)], fill=(50, 50, 80, 100), width=1)
+                draw.line([(i, 0), (i, height)], fill=(
+                    50, 50, 80, 100), width=1)
             for i in range(0, height, 100):
-                draw.line([(0, i), (width, i)], fill=(50, 50, 80, 100), width=1)
+                draw.line([(0, i), (width, i)], fill=(
+                    50, 50, 80, 100), width=1)
 
             return bg
 
@@ -406,13 +419,15 @@ class ForecaMapViewer(Screen):
     def prev_time(self):
         """Previous time step"""
         if self.timestamps and len(self.timestamps) > 1:
-            self.current_time_index = (self.current_time_index - 1) % len(self.timestamps)
+            self.current_time_index = (
+                self.current_time_index - 1) % len(self.timestamps)
             self.load_current_tile()
 
     def next_time(self):
         """Next time step"""
         if self.timestamps and len(self.timestamps) > 1:
-            self.current_time_index = (self.current_time_index + 1) % len(self.timestamps)
+            self.current_time_index = (
+                self.current_time_index + 1) % len(self.timestamps)
             self.load_current_tile()
 
     def exit(self):
