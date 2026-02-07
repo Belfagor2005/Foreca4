@@ -46,9 +46,6 @@ msgstr "8 - Сегодня + 8 дней"
 msgid "9 - Today + 9 days"
 msgstr "9 - Сегодня + 9 дней"
 
-msgid "<< ver."
-msgstr "<< вер."
-
 msgid "Afternoon"
 msgstr "Полдень"
 
@@ -208,9 +205,6 @@ msgstr "Избранное 2"
 msgid "Feels like"
 msgstr "Ощущается как"
 
-msgid "Feels like:"
-msgstr "По ощущениям:"
-
 msgid "Finland"
 msgstr "Финляндия"
 
@@ -270,9 +264,6 @@ msgstr "Гессен"
 
 msgid "Home"
 msgstr "Домашнее"
-
-msgid "Humidity:"
-msgstr "Влажность:"
 
 msgid "Hungary"
 msgstr "Венгрия"
@@ -454,9 +445,6 @@ msgstr "Польша"
 msgid "Portugal"
 msgstr "Португалия"
 
-msgid "Precipitations:"
-msgstr "Вероятность осадков:"
-
 msgid "Previous"
 msgstr "Предыдущий"
 
@@ -544,9 +532,6 @@ msgstr "Швеция"
 msgid "Switzerland"
 msgstr "Швейцария"
 
-msgid "Temp"
-msgstr "Темп"
-
 msgid "Thin upper cloud"
 msgstr "Дымка"
 
@@ -586,9 +571,6 @@ msgstr "Погода сегодня"
 msgid "Weather tomorrow"
 msgstr "Погода завтра"
 
-msgid "Wind"
-msgstr "Ветер"
-
 msgid "Wind speed"
 msgstr "Скорость ветра"
 
@@ -609,3 +591,21 @@ msgstr "мм"
 
 msgid "v."
 msgstr "в."
+
+#~ msgid "<< ver."
+#~ msgstr "<< вер."
+
+#~ msgid "Feels like:"
+#~ msgstr "По ощущениям:"
+
+#~ msgid "Humidity:"
+#~ msgstr "Влажность:"
+
+#~ msgid "Precipitations:"
+#~ msgstr "Вероятность осадков:"
+
+#~ msgid "Temp"
+#~ msgstr "Темп"
+
+#~ msgid "Wind"
+#~ msgstr "Ветер"

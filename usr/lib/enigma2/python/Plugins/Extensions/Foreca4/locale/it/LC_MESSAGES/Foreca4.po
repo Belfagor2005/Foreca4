@@ -48,9 +48,6 @@ msgstr "8 - Oggi + 8 giorni"
 msgid "9 - Today + 9 days"
 msgstr "9 - Oggi + 9 giorni"
 
-msgid "<< ver."
-msgstr "<< ver."
-
 msgid "Afternoon"
 msgstr "Pomeriggio"
 
@@ -210,9 +207,6 @@ msgstr "Preferito 2"
 msgid "Feels like"
 msgstr "Percepita"
 
-msgid "Feels like:"
-msgstr "Percepita:"
-
 msgid "Finland"
 msgstr "Finlandia"
 
@@ -272,9 +266,6 @@ msgstr "Assia"
 
 msgid "Home"
 msgstr ""
-
-msgid "Humidity:"
-msgstr "Umidità:"
 
 msgid "Hungary"
 msgstr "Ungheria"
@@ -456,9 +447,6 @@ msgstr "Polonia"
 msgid "Portugal"
 msgstr "Portogallo"
 
-msgid "Precipitations:"
-msgstr "Precipitazioni:"
-
 msgid "Previous"
 msgstr "Precedente"
 
@@ -546,9 +534,6 @@ msgstr "Svezia"
 msgid "Switzerland"
 msgstr "Svizzera"
 
-msgid "Temp"
-msgstr "Temperatura"
-
 msgid "Thin upper cloud"
 msgstr "Nubi alte sottili"
 
@@ -588,9 +573,6 @@ msgstr "Meteo oggi"
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
 
-msgid "Wind"
-msgstr "Vento"
-
 msgid "Wind speed"
 msgstr "Velocità del vento"
 
@@ -611,3 +593,21 @@ msgstr "mm"
 
 msgid "v."
 msgstr "v."
+
+#~ msgid "<< ver."
+#~ msgstr "<< ver."
+
+#~ msgid "Feels like:"
+#~ msgstr "Percepita:"
+
+#~ msgid "Humidity:"
+#~ msgstr "Umidità:"
+
+#~ msgid "Precipitations:"
+#~ msgstr "Precipitazioni:"
+
+#~ msgid "Temp"
+#~ msgstr "Temperatura"
+
+#~ msgid "Wind"
+#~ msgstr "Vento"
