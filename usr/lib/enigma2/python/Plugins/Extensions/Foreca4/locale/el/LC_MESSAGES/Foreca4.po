@@ -48,9 +48,6 @@ msgstr "8 - Σήμερα + 8 ημέρες"
 msgid "9 - Today + 9 days"
 msgstr "9 - Σήμερα + 9 ημέρες"
 
-msgid "<< ver."
-msgstr "<< έκδ."
-
 msgid "Afternoon"
 msgstr "Απόγευμα"
 
@@ -210,9 +207,6 @@ msgstr "Αγαπημένο 2"
 msgid "Feels like"
 msgstr "Αίσθηση"
 
-msgid "Feels like:"
-msgstr "Αίσθηση όπως:"
-
 msgid "Finland"
 msgstr "Φινλανδία"
 
@@ -272,9 +266,6 @@ msgstr "Έσση"
 
 msgid "Home"
 msgstr "Αρχική"
-
-msgid "Humidity:"
-msgstr "Υγρασία:"
 
 msgid "Hungary"
 msgstr "Ουγγαρία"
@@ -456,9 +447,6 @@ msgstr "Πολωνία"
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
-msgid "Precipitations:"
-msgstr "Υετός:"
-
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -546,9 +534,6 @@ msgstr "Σουηδία"
 msgid "Switzerland"
 msgstr "Ελβετία"
 
-msgid "Temp"
-msgstr "Θερμοκρασία"
-
 msgid "Thin upper cloud"
 msgstr "Λεπτό ανώτερο σύννεφο"
 
@@ -588,9 +573,6 @@ msgstr "Καιρός σήμερα"
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
 
-msgid "Wind"
-msgstr "Άνεμος"
-
 msgid "Wind speed"
 msgstr "Ταχύτητα ανέμου"
 
@@ -611,3 +593,21 @@ msgstr "mm"
 
 msgid "v."
 msgstr "έκδ."
+
+#~ msgid "<< ver."
+#~ msgstr "<< έκδ."
+
+#~ msgid "Feels like:"
+#~ msgstr "Αίσθηση όπως:"
+
+#~ msgid "Humidity:"
+#~ msgstr "Υγρασία:"
+
+#~ msgid "Precipitations:"
+#~ msgstr "Υετός:"
+
+#~ msgid "Temp"
+#~ msgstr "Θερμοκρασία"
+
+#~ msgid "Wind"
+#~ msgstr "Άνεμος"

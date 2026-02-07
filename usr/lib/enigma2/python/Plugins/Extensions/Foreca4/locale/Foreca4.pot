@@ -8,6 +8,7 @@
 
 
 
+
 msgid "0 - Today"
 msgstr ""
 
@@ -36,9 +37,6 @@ msgid "8 - Today + 8 days"
 msgstr ""
 
 msgid "9 - Today + 9 days"
-msgstr ""
-
-msgid "<< ver."
 msgstr ""
 
 msgid "Afternoon"
@@ -200,9 +198,6 @@ msgstr ""
 msgid "Feels like"
 msgstr ""
 
-msgid "Feels like:"
-msgstr ""
-
 msgid "Finland"
 msgstr ""
 
@@ -261,9 +256,6 @@ msgid "Hesse"
 msgstr ""
 
 msgid "Home"
-msgstr ""
-
-msgid "Humidity:"
 msgstr ""
 
 msgid "Hungary"
@@ -446,9 +438,6 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Precipitations:"
-msgstr ""
-
 msgid "Previous"
 msgstr ""
 
@@ -536,9 +525,6 @@ msgstr ""
 msgid "Switzerland"
 msgstr ""
 
-msgid "Temp"
-msgstr ""
-
 msgid "Thin upper cloud"
 msgstr ""
 
@@ -576,9 +562,6 @@ msgid "Weather today"
 msgstr ""
 
 msgid "Weather tomorrow"
-msgstr ""
-
-msgid "Wind"
 msgstr ""
 
 msgid "Wind speed"

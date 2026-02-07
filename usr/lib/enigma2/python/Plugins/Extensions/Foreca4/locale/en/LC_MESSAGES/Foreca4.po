@@ -47,9 +47,6 @@ msgstr "8 - Today + 8 days"
 msgid "9 - Today + 9 days"
 msgstr "9 - Today + 9 days"
 
-msgid "<< ver."
-msgstr "<< ver."
-
 msgid "Afternoon"
 msgstr "Afternoon"
 
@@ -217,9 +214,6 @@ msgstr "Yellow - Favorite 2"
 msgid "Feels like"
 msgstr "Feels like"
 
-msgid "Feels like:"
-msgstr "Feels like:"
-
 msgid "Finland"
 msgstr ""
 
@@ -281,9 +275,6 @@ msgstr ""
 
 msgid "Home"
 msgstr ""
-
-msgid "Humidity:"
-msgstr "Humidity:"
 
 msgid "Hungary"
 msgstr ""
@@ -467,9 +458,6 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Precipitations:"
-msgstr "Precipitations:"
-
 #, fuzzy
 msgid "Previous"
 msgstr "Up - Previous page"
@@ -559,9 +547,6 @@ msgstr ""
 msgid "Switzerland"
 msgstr ""
 
-msgid "Temp"
-msgstr "Temp"
-
 msgid "Thin upper cloud"
 msgstr ""
 
@@ -603,9 +588,6 @@ msgstr "Weather today"
 msgid "Weather tomorrow"
 msgstr "Weather tomorrow"
 
-msgid "Wind"
-msgstr "Wind"
-
 msgid "Wind speed"
 msgstr "Wind speed"
 
@@ -626,6 +608,24 @@ msgstr "mm"
 
 msgid "v."
 msgstr "v."
+
+#~ msgid "<< ver."
+#~ msgstr "<< ver."
+
+#~ msgid "Feels like:"
+#~ msgstr "Feels like:"
+
+#~ msgid "Humidity:"
+#~ msgstr "Humidity:"
+
+#~ msgid "Precipitations:"
+#~ msgstr "Precipitations:"
+
+#~ msgid "Temp"
+#~ msgstr "Temp"
+
+#~ msgid "Wind"
+#~ msgstr "Wind"
 
 #~ msgid "mmHg"
 #~ msgstr "mmHg"
