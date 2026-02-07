@@ -203,7 +203,7 @@ CityPanel4_FHD = """
     <ePixmap position="518,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" />
     <ePixmap position="601,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
     <ePixmap position="683,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
-    <ePixmap position="763,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />    
+    <ePixmap position="763,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
     <ePixmap position="851,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
     <ePixmap position="936,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch.png" scale="1" />
     <!-- Button widgets with unified colors -->
@@ -424,7 +424,7 @@ CityPanel4_HD = """
     <ePixmap position="363,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" />
     <ePixmap position="406,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
     <ePixmap position="448,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
-    <ePixmap position="493,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />    
+    <ePixmap position="493,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
     <ePixmap position="536,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
     <ePixmap position="581,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch.png" scale="1" />
     <!-- Button widgets with unified colors -->
@@ -650,7 +650,7 @@ CityPanel4_UHD = """
     <ePixmap position="693,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" />
     <ePixmap position="811,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
     <ePixmap position="923,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
-    <ePixmap position="1033,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />    
+    <ePixmap position="1033,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
     <ePixmap position="1261,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
     <ePixmap position="1146,1132" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch.png" scale="1" />
     <!-- Button widgets with unified colors -->
