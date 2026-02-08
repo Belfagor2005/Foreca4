@@ -1,21 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 # slideshow.py - Manage overlay map Foreca
-# Copyright (c) @Lululla 20260122
-# Core API:
-# Authentication system, token/tile cache (foreca_map_api.py).
-# Interface:
-# Layer selection menu and basic viewer with timeline (foreca_map_menu.py, foreca_map_viewer.py).
-# Integration:
-# Menu item in the main plugin, configuration reading from file.
-# Features:
-# Download and merge 3x3 tile grids, overlay on existing background maps (temp_map.png, europa.png, etc.).
-# Trial Limitations:
-# The code is compatible with the trial plan limit: 1,000 tiles/day for maps.
-# The cache I implemented helps avoid exceeding this limit by reusing already downloaded tiles.
-# Language Translation:
-# Implementation of GetText translation and Google AI API
-# major fix
+# Copyright (c) @Lululla 2026
 from __future__ import absolute_import
 
 from Components.ActionMap import ActionMap

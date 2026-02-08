@@ -97,6 +97,15 @@ msgstr ""
 msgid "Bremen"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 #, fuzzy
 msgid "City Selection"
 msgstr "Color selection"
@@ -142,6 +151,10 @@ msgstr "Color selection"
 msgid "Color name"
 msgstr ""
 
+#, fuzzy
+msgid "Color select"
+msgstr "Color selection"
+
 msgid "Color selection"
 msgstr "Color selection"
 
@@ -158,6 +171,9 @@ msgid "Czech Republic"
 msgstr ""
 
 msgid "Denmark"
+msgstr ""
+
+msgid "Distance"
 msgstr ""
 
 msgid "Down - Next page"
@@ -178,6 +194,9 @@ msgstr ""
 msgid "Error saving favorite!"
 msgstr ""
 
+msgid "Error saving settings!"
+msgstr ""
+
 msgid "Europe"
 msgstr ""
 
@@ -194,6 +213,9 @@ msgstr ""
 msgid "Exit - End"
 msgstr "Exit - End"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr ""
 
@@ -204,6 +226,9 @@ msgstr "Green - Favorite 1"
 #, fuzzy
 msgid "Favorite 2"
 msgstr "Yellow - Favorite 2"
+
+msgid "Feels like"
+msgstr "Feels like"
 
 msgid "Finland"
 msgstr ""
@@ -268,10 +293,23 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#, fuzzy
+msgid "Humidity"
+msgstr "Humidity:"
+
 msgid "Hungary"
 msgstr ""
 
 msgid "Image not available"
+msgstr ""
+
+msgid "Imperial System"
+msgstr ""
+
+msgid "Imperial System (Fahrenheit, mph, inHg)"
+msgstr ""
+
+msgid "Info"
 msgstr ""
 
 msgid "Info - About"
@@ -298,6 +336,9 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
+msgid "Last update"
+msgstr ""
+
 msgid "Latvia"
 msgstr ""
 
@@ -308,6 +349,9 @@ msgid "Left arrow - Previous day"
 msgstr "Left arrow - Previous day"
 
 msgid "Loading available maps..."
+msgstr ""
+
+msgid "Loading nearby stations..."
 msgstr ""
 
 msgid "Loading..."
@@ -328,6 +372,12 @@ msgstr "Menu - Select transparency"
 
 msgid "Meteogram"
 msgstr "Meteogram"
+
+msgid "Metric System"
+msgstr ""
+
+msgid "Metric System (Celsius, km/h, hPa)"
+msgstr ""
 
 msgid "Middle America"
 msgstr ""
@@ -368,6 +418,16 @@ msgid "No data available"
 msgstr ""
 
 msgid "No date available"
+msgstr ""
+
+#, fuzzy
+msgid "No location selected"
+msgstr "Color selection"
+
+msgid "No station data available"
+msgstr ""
+
+msgid "No stations found"
 msgstr ""
 
 msgid "North Africa"
@@ -457,6 +517,9 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
+msgid "Pressure"
+msgstr ""
+
 #, fuzzy
 msgid "Previous"
 msgstr "Up - Previous page"
@@ -492,6 +555,9 @@ msgstr ""
 msgid "Satellite photos coming soon!"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr ""
 
@@ -511,6 +577,9 @@ msgid "Select a city"
 msgstr ""
 
 msgid "Select a map with OK"
+msgstr ""
+
+msgid "Select unit system"
 msgstr ""
 
 msgid "Show info"
@@ -534,6 +603,9 @@ msgstr ""
 msgid "Spain"
 msgstr ""
 
+msgid "Station Observations"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Sunrise"
 
@@ -544,6 +616,9 @@ msgid "Sweden"
 msgstr ""
 
 msgid "Switzerland"
+msgstr ""
+
+msgid "Temperature"
 msgstr ""
 
 msgid "Thin upper cloud"
@@ -558,6 +633,13 @@ msgstr "Transparency level"
 
 msgid "Transparency level"
 msgstr "Transparency level"
+
+#, fuzzy
+msgid "Unit Settings"
+msgstr "Menu - Select transparency"
+
+msgid "Unit settings saved. Restart plugin to apply changes."
+msgstr ""
 
 msgid "Unknown"
 msgstr ""
@@ -587,11 +669,17 @@ msgstr "Weather today"
 msgid "Weather tomorrow"
 msgstr "Weather tomorrow"
 
+msgid "Wind"
+msgstr "Wind"
+
 msgid "Window transparency"
 msgstr "Window transparency"
 
 msgid "Yellow - Favorite 2"
 msgstr "Yellow - Favorite 2"
+
+msgid "stations nearby"
+msgstr ""
 
 msgid "v."
 msgstr "v."
@@ -623,9 +711,6 @@ msgstr ""
 #~ msgid "Dewpoint"
 #~ msgstr "Dewpoint"
 
-#~ msgid "Feels like"
-#~ msgstr "Feels like"
-
 #~ msgid "Gust"
 #~ msgstr "Gust"
 
@@ -644,17 +729,11 @@ msgstr ""
 #~ msgid "Feels like:"
 #~ msgstr "Feels like:"
 
-#~ msgid "Humidity:"
-#~ msgstr "Humidity:"
-
 #~ msgid "Precipitations:"
 #~ msgstr "Precipitations:"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"
-
-#~ msgid "Wind"
-#~ msgstr "Wind"
 
 #~ msgid "mmHg"
 #~ msgstr "mmHg"

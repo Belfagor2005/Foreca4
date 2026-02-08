@@ -2,20 +2,6 @@
 # -*- coding: UTF-8 -*-
 # foreca_map_menu.py - Foreca map selection menu
 # Copyright (c) @Lululla 20260122
-# Core API:
-# Authentication system, token/tile cache (foreca_map_api.py).
-# Interface:
-# Layer selection menu and basic viewer with timeline (foreca_map_menu.py, foreca_map_viewer.py).
-# Integration:
-# Menu item in the main plugin, configuration reading from file.
-# Features:
-# Download and merge 3x3 tile grids, overlay on existing background maps (temp_map.png, europa.png, etc.).
-# Trial Limitations:
-# The code is compatible with the trial plan limit: 1,000 tiles/day for maps.
-# The cache I implemented helps avoid exceeding this limit by reusing already downloaded tiles.
-# Language Translation:
-# Implementation of GetText translation and Google AI API
-# major fix
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
@@ -40,9 +26,10 @@ class ForecaMapMenu(Screen):
     else:
         skin = ForecaMapMenu_HD
 
-    def __init__(self, session, api):
+    def __init__(self, session, api, unit_system='metric'):
         self.session = session
         self.api = api
+        self.unit_system = unit_system
         self.layers = []
         Screen.__init__(self, session)
         self["list"] = MenuList([])
@@ -86,7 +73,7 @@ class ForecaMapMenu(Screen):
         selection = self["list"].getCurrent()
         if selection:
             from .foreca_map_viewer import ForecaMapViewer
-            self.session.open(ForecaMapViewer, self.api, selection[1])
+            self.session.open(ForecaMapViewer, self.api, selection[1], self.unit_system)
 
     def exit(self):
         self.close()

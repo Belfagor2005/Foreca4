@@ -94,6 +94,16 @@ msgstr "Brandenburg"
 msgid "Bremen"
 msgstr "Bremen"
 
+#, fuzzy
+msgid "Cancel"
+msgstr "Frankreich"
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 msgid "City Selection"
 msgstr "Stadtauswahl"
 
@@ -136,6 +146,10 @@ msgstr "Farbdatei nicht gefunden"
 msgid "Color name"
 msgstr "Farbname"
 
+#, fuzzy
+msgid "Color select"
+msgstr "Farbauswahl"
+
 msgid "Color selection"
 msgstr "Farbauswahl"
 
@@ -153,6 +167,9 @@ msgstr "Tschechische Republik"
 
 msgid "Denmark"
 msgstr "Dänemark"
+
+msgid "Distance"
+msgstr ""
 
 msgid "Down - Next page"
 msgstr "Nach unten – Nächste Seite"
@@ -172,6 +189,10 @@ msgstr "Fehler beim Laden der Karten. Verbindung prüfen."
 msgid "Error saving favorite!"
 msgstr "Fehler beim Speichern des Favoriten!"
 
+#, fuzzy
+msgid "Error saving settings!"
+msgstr "Fehler beim Speichern des Favoriten!"
+
 msgid "Europe"
 msgstr "Europa"
 
@@ -187,6 +208,9 @@ msgstr ""
 msgid "Exit - End"
 msgstr "Verlassen - Beenden"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr "Schneller: {}s"
 
@@ -195,6 +219,9 @@ msgstr "Favorit 1"
 
 msgid "Favorite 2"
 msgstr "Favorit 2"
+
+msgid "Feels like"
+msgstr "Gefühlt wie"
 
 msgid "Finland"
 msgstr "Finnland"
@@ -257,11 +284,24 @@ msgstr "Hessen"
 msgid "Home"
 msgstr "Startseite"
 
+#, fuzzy
+msgid "Humidity"
+msgstr "Luftfeuchtigkeit:"
+
 msgid "Hungary"
 msgstr "Ungarn"
 
 msgid "Image not available"
 msgstr "Bild nicht verfügbar"
+
+msgid "Imperial System"
+msgstr ""
+
+msgid "Imperial System (Fahrenheit, mph, inHg)"
+msgstr ""
+
+msgid "Info"
+msgstr ""
 
 msgid "Info - About"
 msgstr "Info - Über"
@@ -287,6 +327,9 @@ msgstr "500 nach oben springen"
 msgid "Keyboard"
 msgstr "Tastatur"
 
+msgid "Last update"
+msgstr ""
+
 msgid "Latvia"
 msgstr "Lettland"
 
@@ -297,6 +340,10 @@ msgid "Left arrow - Previous day"
 msgstr "Pfeil nach links – Vorheriger Tag"
 
 msgid "Loading available maps..."
+msgstr "Verfügbare Karten werden geladen..."
+
+#, fuzzy
+msgid "Loading nearby stations..."
 msgstr "Verfügbare Karten werden geladen..."
 
 msgid "Loading..."
@@ -316,6 +363,12 @@ msgstr "Menü - Einstellungen"
 
 msgid "Meteogram"
 msgstr "Meteogramm"
+
+msgid "Metric System"
+msgstr ""
+
+msgid "Metric System (Celsius, km/h, hPa)"
+msgstr ""
 
 msgid "Middle America"
 msgstr "Mittelamerika"
@@ -357,6 +410,17 @@ msgstr "Keine Daten verfügbar"
 #, fuzzy
 msgid "No date available"
 msgstr "Keine Daten verfügbar"
+
+#, fuzzy
+msgid "No location selected"
+msgstr "Stadtauswahl"
+
+#, fuzzy
+msgid "No station data available"
+msgstr "Keine Daten verfügbar"
+
+msgid "No stations found"
+msgstr ""
 
 msgid "North Africa"
 msgstr "Nordafrika"
@@ -445,6 +509,9 @@ msgstr "Polen"
 msgid "Portugal"
 msgstr "Portugal"
 
+msgid "Pressure"
+msgstr ""
+
 msgid "Previous"
 msgstr "Zurück"
 
@@ -478,6 +545,9 @@ msgstr "Satellitenfotos"
 msgid "Satellite photos coming soon!"
 msgstr "Satellitenfotos kommen bald!"
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr "Sachsen"
 
@@ -498,6 +568,10 @@ msgstr "Eine Stadt auswählen"
 
 msgid "Select a map with OK"
 msgstr "Eine Karte mit OK auswählen"
+
+#, fuzzy
+msgid "Select unit system"
+msgstr "Eine Stadt auswählen"
 
 msgid "Show info"
 msgstr "Info anzeigen"
@@ -520,6 +594,9 @@ msgstr "Südostasien"
 msgid "Spain"
 msgstr "Spanien"
 
+msgid "Station Observations"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
@@ -532,6 +609,9 @@ msgstr "Schweden"
 msgid "Switzerland"
 msgstr "Schweiz"
 
+msgid "Temperature"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Dünne obere Wolke"
 
@@ -543,6 +623,13 @@ msgstr "Transparenzeinstellungen"
 
 msgid "Transparency level"
 msgstr "Transparenzgrad"
+
+#, fuzzy
+msgid "Unit Settings"
+msgstr "Menü - Einstellungen"
+
+msgid "Unit settings saved. Restart plugin to apply changes."
+msgstr ""
 
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -571,11 +658,17 @@ msgstr "Wetter heute"
 msgid "Weather tomorrow"
 msgstr "Wetter morgen"
 
+msgid "Wind"
+msgstr "Wind"
+
 msgid "Window transparency"
 msgstr "Bildschirmransparenz"
 
 msgid "Yellow - Favorite 2"
 msgstr "Gelb Button - Favoriten 2"
+
+msgid "stations nearby"
+msgstr ""
 
 msgid "v."
 msgstr "V."
@@ -607,9 +700,6 @@ msgstr ""
 #~ msgid "Dewpoint"
 #~ msgstr "Taupunkt"
 
-#~ msgid "Feels like"
-#~ msgstr "Gefühlt wie"
-
 #~ msgid "Gust"
 #~ msgstr "Böe"
 
@@ -631,14 +721,8 @@ msgstr ""
 #~ msgid "Feels like:"
 #~ msgstr "Fühlt sich an wie:"
 
-#~ msgid "Humidity:"
-#~ msgstr "Luftfeuchtigkeit:"
-
 #~ msgid "Precipitations:"
 #~ msgstr "Niederschläge:"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"
-
-#~ msgid "Wind"
-#~ msgstr "Wind"

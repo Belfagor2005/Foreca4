@@ -96,6 +96,16 @@ msgstr "Βρανδεμβούργο"
 msgid "Bremen"
 msgstr "Βρέμη"
 
+#, fuzzy
+msgid "Cancel"
+msgstr "Γαλλία"
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 msgid "City Selection"
 msgstr "Επιλογή Πόλης"
 
@@ -138,6 +148,10 @@ msgstr "Το αρχείο χρώματος δεν βρέθηκε"
 msgid "Color name"
 msgstr "Όνομα χρώματος"
 
+#, fuzzy
+msgid "Color select"
+msgstr "Επιλογή χρώματος"
+
 msgid "Color selection"
 msgstr "Επιλογή χρώματος"
 
@@ -155,6 +169,9 @@ msgstr "Τσεχική Δημοκρατία"
 
 msgid "Denmark"
 msgstr "Δανία"
+
+msgid "Distance"
+msgstr ""
 
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
@@ -174,6 +191,10 @@ msgstr "Σφάλμα φόρτωσης χαρτών. Ελέγξτε τη σύνδ
 msgid "Error saving favorite!"
 msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
 
+#, fuzzy
+msgid "Error saving settings!"
+msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
+
 msgid "Europe"
 msgstr "Ευρώπη"
 
@@ -189,6 +210,9 @@ msgstr "Έξοδος"
 msgid "Exit - End"
 msgstr "Έξοδος - Τέλος"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr "Πιο γρήγορα: {}s"
 
@@ -197,6 +221,9 @@ msgstr "Αγαπημένο 1"
 
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
+
+msgid "Feels like"
+msgstr "Αίσθηση"
 
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -259,11 +286,24 @@ msgstr "Έσση"
 msgid "Home"
 msgstr "Αρχική"
 
+#, fuzzy
+msgid "Humidity"
+msgstr "Υγρασία:"
+
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
 msgid "Image not available"
 msgstr "Η εικόνα δεν είναι διαθέσιμη"
+
+msgid "Imperial System"
+msgstr ""
+
+msgid "Imperial System (Fahrenheit, mph, inHg)"
+msgstr ""
+
+msgid "Info"
+msgstr ""
 
 msgid "Info - About"
 msgstr "Πληροφορίες - Σχετικά"
@@ -289,6 +329,9 @@ msgstr "Μετάβαση 500 πάνω"
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
+msgid "Last update"
+msgstr ""
+
 msgid "Latvia"
 msgstr "Λετονία"
 
@@ -299,6 +342,10 @@ msgid "Left arrow - Previous day"
 msgstr "Βέλος αριστερά - Προηγούμενη ημέρα"
 
 msgid "Loading available maps..."
+msgstr "Φόρτωση διαθέσιμων χαρτών..."
+
+#, fuzzy
+msgid "Loading nearby stations..."
 msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
 msgid "Loading..."
@@ -318,6 +365,12 @@ msgstr "Μενού - Ρυθμίσεις"
 
 msgid "Meteogram"
 msgstr "Μετεωγράμμα"
+
+msgid "Metric System"
+msgstr ""
+
+msgid "Metric System (Celsius, km/h, hPa)"
+msgstr ""
 
 msgid "Middle America"
 msgstr "Κεντρική Αμερική"
@@ -359,6 +412,17 @@ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 #, fuzzy
 msgid "No date available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
+#, fuzzy
+msgid "No location selected"
+msgstr "Επιλογή Πόλης"
+
+#, fuzzy
+msgid "No station data available"
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
+msgid "No stations found"
+msgstr ""
 
 msgid "North Africa"
 msgstr "Βόρεια Αφρική"
@@ -447,6 +511,9 @@ msgstr "Πολωνία"
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
+msgid "Pressure"
+msgstr ""
+
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -480,6 +547,9 @@ msgstr "Δορυφορικές Φωτογραφίες"
 msgid "Satellite photos coming soon!"
 msgstr "Δορυφορικές φωτογραφίες σύντομα!"
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr "Σαξονία"
 
@@ -500,6 +570,10 @@ msgstr "Επιλέξτε μια πόλη"
 
 msgid "Select a map with OK"
 msgstr "Επιλέξτε έναν χάρτη με OK"
+
+#, fuzzy
+msgid "Select unit system"
+msgstr "Επιλέξτε μια πόλη"
 
 msgid "Show info"
 msgstr "Εμφάνιση πληροφοριών"
@@ -522,6 +596,9 @@ msgstr "Νοτιοανατολική Ασία"
 msgid "Spain"
 msgstr "Ισπανία"
 
+msgid "Station Observations"
+msgstr ""
+
 msgid "Sunrise"
 msgstr "Ανατολή"
 
@@ -534,6 +611,9 @@ msgstr "Σουηδία"
 msgid "Switzerland"
 msgstr "Ελβετία"
 
+msgid "Temperature"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Λεπτό ανώτερο σύννεφο"
 
@@ -545,6 +625,13 @@ msgstr "Ρυθμίσεις Διαφάνειας"
 
 msgid "Transparency level"
 msgstr "Επίπεδο διαφάνειας"
+
+#, fuzzy
+msgid "Unit Settings"
+msgstr "Μενού - Ρυθμίσεις"
+
+msgid "Unit settings saved. Restart plugin to apply changes."
+msgstr ""
 
 msgid "Unknown"
 msgstr "Άγνωστο"
@@ -573,11 +660,17 @@ msgstr "Καιρός σήμερα"
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
 
+msgid "Wind"
+msgstr "Άνεμος"
+
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
 msgid "Yellow - Favorite 2"
 msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
+
+msgid "stations nearby"
+msgstr ""
 
 msgid "v."
 msgstr "έκδ."
@@ -612,9 +705,6 @@ msgstr ""
 #~ msgid "Error loading city list!"
 #~ msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
 
-#~ msgid "Feels like"
-#~ msgstr "Αίσθηση"
-
 #~ msgid "Gust"
 #~ msgstr "Ρίπες"
 
@@ -636,14 +726,8 @@ msgstr ""
 #~ msgid "Feels like:"
 #~ msgstr "Αίσθηση όπως:"
 
-#~ msgid "Humidity:"
-#~ msgstr "Υγρασία:"
-
 #~ msgid "Precipitations:"
 #~ msgstr "Υετός:"
 
 #~ msgid "Temp"
 #~ msgstr "Θερμοκρασία"
-
-#~ msgid "Wind"
-#~ msgstr "Άνεμος"

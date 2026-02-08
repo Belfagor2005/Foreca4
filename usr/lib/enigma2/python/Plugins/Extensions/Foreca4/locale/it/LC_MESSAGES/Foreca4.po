@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Foreca4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-08 00:35+0100\n"
+"PO-Revision-Date: 2026-02-08 22:52+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -96,6 +96,15 @@ msgstr "Brandeburgo"
 msgid "Bremen"
 msgstr "Brema"
 
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Celsius, km/h, hPa"
+msgstr "Celsius, km/h, hPa"
+
+msgid "Changes apply immediately"
+msgstr "Applica modifiche immediatamente"
+
 msgid "City Selection"
 msgstr "Selezione Città"
 
@@ -138,6 +147,9 @@ msgstr "File colore non trovato"
 msgid "Color name"
 msgstr "Nome colore"
 
+msgid "Color select"
+msgstr "Seleziona Colore"
+
 msgid "Color selection"
 msgstr "Selezione del colore"
 
@@ -155,6 +167,9 @@ msgstr "Repubblica Ceca"
 
 msgid "Denmark"
 msgstr "Danimarca"
+
+msgid "Distance"
+msgstr "Distanza"
 
 msgid "Down - Next page"
 msgstr "Giù - Pagina successiva"
@@ -174,6 +189,9 @@ msgstr "Errore durante il caricamento delle mappe. Controllare la connessione."
 msgid "Error saving favorite!"
 msgstr "Errore durante il salvataggio dei preferiti!"
 
+msgid "Error saving settings!"
+msgstr "Errore durante il salvataggio delle impostazioni!"
+
 msgid "Europe"
 msgstr "Europa"
 
@@ -189,6 +207,9 @@ msgstr "Esci"
 msgid "Exit - End"
 msgstr "Uscita - Fine"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr "Fahrenheit, mph, inHg"
+
 msgid "Faster: {}s"
 msgstr "Più veloce: {}s"
 
@@ -197,6 +218,9 @@ msgstr "Preferito 1"
 
 msgid "Favorite 2"
 msgstr "Preferito 2"
+
+msgid "Feels like"
+msgstr "Percepita"
 
 msgid "Finland"
 msgstr "Finlandia"
@@ -258,11 +282,23 @@ msgstr "Assia"
 msgid "Home"
 msgstr ""
 
+msgid "Humidity"
+msgstr "Umidità"
+
 msgid "Hungary"
 msgstr "Ungheria"
 
 msgid "Image not available"
 msgstr "Immagine non disponibile"
+
+msgid "Imperial System"
+msgstr "Sistema Imperiale"
+
+msgid "Imperial System (Fahrenheit, mph, inHg)"
+msgstr "Sistema Imperiale (Fahrenheit, mph, inHg)"
+
+msgid "Info"
+msgstr "Informazioni"
 
 msgid "Info - About"
 msgstr "Info - Informazioni"
@@ -288,6 +324,9 @@ msgstr "Salta 500 in su"
 msgid "Keyboard"
 msgstr "Tastiera"
 
+msgid "Last update"
+msgstr "Ultimo aggiornamento"
+
 msgid "Latvia"
 msgstr "Lettonia"
 
@@ -299,6 +338,9 @@ msgstr "Freccia sinistra - Giorno precedente"
 
 msgid "Loading available maps..."
 msgstr "Caricamento mappe disponibili..."
+
+msgid "Loading nearby stations..."
+msgstr "Caricamento delle stazioni vicine..."
 
 msgid "Loading..."
 msgstr "Caricamento..."
@@ -317,6 +359,12 @@ msgstr "Menu - Impostazioni"
 
 msgid "Meteogram"
 msgstr "Meteogramma"
+
+msgid "Metric System"
+msgstr "Sistema Metrico"
+
+msgid "Metric System (Celsius, km/h, hPa)"
+msgstr "Sistema metrico (Celsius, km/h, hPa)"
 
 msgid "Middle America"
 msgstr "America Centrale"
@@ -356,6 +404,15 @@ msgstr "Nessun dato disponibile"
 
 msgid "No date available"
 msgstr "Nessun dato disponibile"
+
+msgid "No location selected"
+msgstr "Nessuna posizione selezionata"
+
+msgid "No station data available"
+msgstr "Nessun dato sulla stazione disponibile"
+
+msgid "No stations found"
+msgstr "Nessuna stazione trovata"
 
 msgid "North Africa"
 msgstr "Africa del Nord"
@@ -444,6 +501,9 @@ msgstr "Polonia"
 msgid "Portugal"
 msgstr "Portogallo"
 
+msgid "Pressure"
+msgstr "Pressione"
+
 msgid "Previous"
 msgstr "Precedente"
 
@@ -477,6 +537,9 @@ msgstr "Foto Satellitari"
 msgid "Satellite photos coming soon!"
 msgstr "Foto satellitari in arrivo!"
 
+msgid "Save"
+msgstr "Salva"
+
 msgid "Saxony"
 msgstr "Sassonia"
 
@@ -497,6 +560,9 @@ msgstr "Seleziona una città"
 
 msgid "Select a map with OK"
 msgstr "Seleziona una mappa con OK"
+
+msgid "Select unit system"
+msgstr "Seleziona Sistema Unità"
 
 msgid "Show info"
 msgstr "Mostra info"
@@ -519,6 +585,9 @@ msgstr "Sud-est Asiatico"
 msgid "Spain"
 msgstr "Spagna"
 
+msgid "Station Observations"
+msgstr "Stazione di Osservazione"
+
 msgid "Sunrise"
 msgstr "Alba"
 
@@ -531,6 +600,9 @@ msgstr "Svezia"
 msgid "Switzerland"
 msgstr "Svizzera"
 
+msgid "Temperature"
+msgstr "Temperatura"
+
 msgid "Thin upper cloud"
 msgstr "Nubi alte sottili"
 
@@ -542,6 +614,12 @@ msgstr "Impostazioni Trasparenza"
 
 msgid "Transparency level"
 msgstr "Livello trasparenza"
+
+msgid "Unit Settings"
+msgstr "Impostazioni Unità"
+
+msgid "Unit settings saved. Restart plugin to apply changes."
+msgstr "Impostazioni unità salvate. Riavvia il plugin per applicare le modifiche."
 
 msgid "Unknown"
 msgstr "Sconosciuto"
@@ -570,11 +648,17 @@ msgstr "Meteo oggi"
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
 
+msgid "Wind"
+msgstr "Vento"
+
 msgid "Window transparency"
 msgstr "Trasparenza Finestra"
 
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
+
+msgid "stations nearby"
+msgstr "stazioni vicine"
 
 msgid "v."
 msgstr "v."
@@ -609,9 +693,6 @@ msgstr "• GIALLO per salvare come Preferito 2\n"
 #~ msgid "Error loading city list!"
 #~ msgstr "Errore nel caricamento della lista città!"
 
-#~ msgid "Feels like"
-#~ msgstr "Percepita"
-
 #~ msgid "Gust"
 #~ msgstr "Raffica"
 
@@ -633,14 +714,8 @@ msgstr "• GIALLO per salvare come Preferito 2\n"
 #~ msgid "Feels like:"
 #~ msgstr "Percepita:"
 
-#~ msgid "Humidity:"
-#~ msgstr "Umidità:"
-
 #~ msgid "Precipitations:"
 #~ msgstr "Precipitazioni:"
 
 #~ msgid "Temp"
 #~ msgstr "Temperatura"
-
-#~ msgid "Wind"
-#~ msgstr "Vento"

@@ -2,20 +2,6 @@
 # -*- coding: UTF-8 -*-
 # foreca_map_viewer.py - Base Foreca map viewer
 # Copyright (c) @Lululla 20260122
-# Core API:
-# Authentication system, token/tile cache (foreca_map_api.py).
-# Interface:
-# Layer selection menu and basic viewer with timeline (foreca_map_menu.py, foreca_map_viewer.py).
-# Integration:
-# Menu item in the main plugin, configuration reading from file.
-# Features:
-# Download and merge 3x3 tile grids, overlay on existing background maps (temp_map.png, europa.png, etc.).
-# Trial Limitations:
-# The code is compatible with the trial plan limit: 1,000 tiles/day for maps.
-# The cache I implemented helps avoid exceeding this limit by reusing already downloaded tiles.
-# Language Translation:
-# Implementation of GetText translation and Google AI API
-# major fix
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Pixmap import Pixmap
@@ -126,11 +112,12 @@ class ForecaMapViewer(Screen):
     else:
         skin = ForecaMapViewer_HD
 
-    def __init__(self, session, api, layer):
+    def __init__(self, session, api, layer, unit_system='metric'):  # Aggiungi unit_system
         self.api = api
         self.layer = layer
         self.layer_id = layer['id']
         self.layer_title = layer.get('title', 'Map')
+        self.unit_system = unit_system  # Memorizza le unità
 
         self.zoom = 4
         self.center_lat = 50.0  # Central Germany
@@ -211,11 +198,13 @@ class ForecaMapViewer(Screen):
                     tile_x = center_x + dx
                     tile_y = center_y + dy
 
+                    # passa unit_system
                     tile_path = self.api.get_tile(
                         self.layer_id,
                         timestamp,
                         self.zoom,
-                        tile_x, tile_y
+                        tile_x, tile_y,
+                        self.unit_system
                     )
 
                     if tile_path:

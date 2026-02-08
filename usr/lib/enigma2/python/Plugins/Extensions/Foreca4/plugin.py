@@ -230,27 +230,23 @@ from .skin import (
 )
 from .slideshow import ForecaMapsMenu
 from .tt_weather import getPageTT
+from .unit_manager import UnitManager, UnitSettingsSimple
+from .foreca_weather_api import ForecaWeatherAPI
 
-
-VERSION = "1.3.4_r3"
+VERSION = "1.3.4_r4"
 
 TARGET_LANG = _get_system_language()
 
-"""
-# try:
-    # TARGET_LANG = config.misc.language.value.split('_')[0]
-# except:
-    # TARGET_LANG = "en"
-"""
 
 # base constant
 BASEURL = "https://www.foreca.com/"
 
 config_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/"
-
-path_loc0 = '100787718/Negotin-Bor-District-Serbia'  # Blue - Favorite 0
-path_loc1 = '1100725905/Vidin-Bulgaria'              # Green - Favorite 1
-path_loc2 = '100792456/Bor-Bor-District-Serbia'      # Yellow - Favorite 2
+unit_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/unit_config.conf"
+default_unit = 'metric'  # Default a metrico
+path_loc0 = '103169070/Rome-Italy'                        # Blue - Favorite 0
+path_loc1 = '100524901/Moscow-Russia'                     # Green - Favorite 1
+path_loc2 = '102961214/Thurles-County-Tipperary-Ireland'  # Yellow - Favorite 2
 
 
 # Home @lululla
@@ -524,66 +520,77 @@ def translate_batch_strings(texts):
 
 class ForecaPreview_4(Screen, HelpableScreen):
     def __init__(self, session):
-        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset
-        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day
+        # GLOBAL VARIABLES – KEPT FOR COMPATIBILITY
+        global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
+        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
+        global lon, lat, sunrise, daylen, sunset, f_day
 
         self.session = session
         self.tag = 0
 
-        MAIN_PAGE_F = str(BASEURL) + path_loc0
-        MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
+        self.unit_manager = UnitManager(config_path)
+        self.weather_api = ForecaWeatherAPI(self.unit_manager)
 
-        # print(f"[Foreca4] Fetching from: {MAIN_PAGE_F}")
+        # DETERMINE LOCATION ID FROM PATH
+        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
 
-        try:
-            # use the GLOBAL variables already declared above
-            result_current = getPageF(MAIN_PAGE_F)
-            # print(f"[Foreca4] Current weather result: {result_current[:5]}...")
+        # STRATEGY: TRY API FIRST, THEN FALL BACK TO SCRAPING
+        api_current_ok = False
+        api_forecast_ok = False
 
-            # Assign to GLOBAL variables
-            town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-        except Exception as e:
-            print(f"[Foreca4] Error getting current weather: {e}")
-            # Initialize GLOBAL variables
-            town = ' n/a'
-            cur_temp = ' n/a'
-            fl_temp = ' n/a'
-            dewpoint = ' n/a'
-            pic = ' n/a'
-            wind = ' n/a'
-            wind_speed = ' n/a'
-            wind_gust = ' n/a'
-            rain_mm = ' n/a'
-            hum = ' n/a'
-            pressure = ' n/a'
-            country = ' n/a'
-            lon = ' n/a'
-            lat = ' n/a'
-            sunrise = ' n/a'
-            daylen = ' n/a'
-            sunset = ' n/a'
+        # 1. TRY CURRENT WEATHER VIA API
+        if self.weather_api.check_credentials():
+            print(f"[Foreca4] Trying API for current weather, ID: {location_id}")
+            result_current = self.weather_api.get_current_weather(location_id)
+            if result_current and result_current[0] != 'N/A':
+                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+                api_current_ok = True
+                print("[Foreca4] Current weather obtained via API")
+            else:
+                print("[Foreca4] Current weather API failed, falling back to scraping")
+        else:
+            print("[Foreca4] API credentials not configured, using scraping")
 
-        # print(f"[Foreca4] Fetching forecast from: {MAIN_PAGE_FF}")
-        try:
-            result_forecast = getPageF_F(MAIN_PAGE_FF)
-            # print(f"[Foreca4] Forecast result length: {len(result_forecast[1]) if result_forecast and len(result_forecast) > 1 else 'N/A'}")
+        # FALLBACK TO SCRAPING FOR CURRENT WEATHER
+        if not api_current_ok:
+            try:
+                MAIN_PAGE_F = str(BASEURL) + path_loc0
+                print(f"[Foreca4] Scraping from: {MAIN_PAGE_F}")
+                result_current = getPageF(MAIN_PAGE_F)
+                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+            except Exception as e:
+                print(f"[Foreca4] Error scraping current weather: {e}")
+                # DEFAULT VALUES
+                town = cur_temp = fl_temp = dewpoint = pic = wind = 'N/A'
+                wind_speed = wind_gust = rain_mm = hum = pressure = 'N/A'
+                country = lon = lat = sunrise = daylen = sunset = 'N/A'
 
-            # Assign to GLOBAL variables
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
-        except Exception as e:
-            print(f"[Foreca4] Error getting forecast: {e}")
-            # Initialize GLOBAL variables
-            f_town = ' n/a'
-            f_date = []
-            f_time = []
-            f_symb = []
-            f_cur_temp = []
-            f_flike_temp = []
-            f_wind = []
-            f_wind_speed = []
-            f_precipitation = []
-            f_rel_hum = []
-            f_day = ' n/a'
+        # 2. TRY HOURLY FORECASTS VIA API
+        if self.weather_api.check_credentials():
+            print(f"[Foreca4] Trying API for forecasts, ID: {location_id}")
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
+            if result_forecast and result_forecast[0] != 'N/A':
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
+                api_forecast_ok = True
+                print(f"[Foreca4] Forecasts obtained via API: {len(f_time)} periods")
+            else:
+                print("[Foreca4] Forecast API failed, falling back to scraping")
+        else:
+            print("[Foreca4] API credentials not configured for forecasts")
+
+        # 3. FALLBACK TO FORECAST SCRAPING
+        if not api_forecast_ok:
+            try:
+                MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
+                result_forecast = getPageF_F(MAIN_PAGE_FF)
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
+            except Exception as e:
+                print(f"[Foreca4] Error scraping forecasts: {e}")
+                # DEFAULT VALUES
+                f_town = 'N/A'
+                f_date = f_time = f_symb = f_cur_temp = f_flike_temp = []
+                f_wind = f_wind_speed = f_precipitation = f_rel_hum = []
+                f_day = 'N/A'
 
         if size_w == 1920:
             self.skin = ForecaPreview_4_FHD
@@ -593,6 +600,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             self.skin = ForecaPreview_4_HD
 
         Screen.__init__(self, session)
+        HelpableScreen.__init__(self)
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
         self.list = []
         self["menu"] = List(self.list)
@@ -602,6 +610,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["Titel3"] = StaticText()
         self["Titel5"] = StaticText()
         self["mytitel1"] = StaticText()
+        self["station"] = Label("N/A")
         self["town"] = Label("N/A")
         self["cur_temp"] = Label("N/A")
         self["fl_temp"] = Label("N/A")
@@ -622,7 +631,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["plate3"] = Label("N/A")
         self["plate4"] = Label("N/A")
         self["plate5"] = Label("N/A")
-
         self["plate11"] = Label("N/A")
         self["plate22"] = Label("N/A")
         self["plate33"] = Label("N/A")
@@ -634,8 +642,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["sunset_text"] = Label(_('Sunset'))
         self["sunset_val"] = Label('00:00')
         self["sun"] = Pixmap()
+
         self.color = gRGB(255, 255, 255)
-        HelpableScreen.__init__(self)
         self["actions"] = HelpableActionMap(
             self, "ForecaActions",
             {
@@ -666,21 +674,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
             },
             -2
         )
-
         self.onLayoutFinish.append(self.StartPageFirst)
         self.onShow.append(self.update_button)
-
-    def menu_callback(self, choice):
-        """Manages the selection"""
-        if choice is None:
-            return
-
-        if choice[1] == "city":
-            self.session.open(CityPanel4)
-        elif choice[1] == "maps":
-            self.open_maps_menu()
-        elif choice[1] == "transparency":
-            self.session.open(TransparencyBox)
 
     def Menu(self):
         """Simple menu with ChoiceBox"""
@@ -689,7 +684,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
         menu_items = [
             (_("City Selection"), "city"),
             (_("Weather Maps"), "maps"),
+            (_("Station Observations"), "stations"),
+            (_("Unit Settings"), "units"),
+            (_("Color select"), "color_select"),
             (_("Transparency Settings"), "transparency"),
+            (_("Info"), "info"),
             (_("Exit"), "exit")
         ]
 
@@ -699,6 +698,27 @@ class ForecaPreview_4(Screen, HelpableScreen):
             title=_("Foreca Menu"),
             list=menu_items
         )
+
+    def menu_callback(self, choice):
+        """Manages the selection"""
+        if choice is None:
+            return
+        if choice[1] == "city":
+            self.session.open(CityPanel4)
+        elif choice[1] == "maps":
+            self.open_maps_menu()
+        elif choice[1] == "stations":
+            self.open_station_observations()
+        elif choice[1] == "units":
+            self.session.open(UnitSettingsSimple, self.unit_manager)
+        elif choice[1] == "color_select":
+            self.session.open(Color_Select)
+        elif choice[1] == "transparency":
+            self.session.open(TransparencyBox)
+        elif choice[1] == "info":
+            self.session.open(InfoBox1)
+        elif choice[1] == "exit":
+            self.exit()
 
     def open_maps_menu(self):
         """Open the weather maps menu"""
@@ -744,9 +764,152 @@ class ForecaPreview_4(Screen, HelpableScreen):
         elif choice[1] == "back":
             self.Menu()
 
+    def test_station_observations(self):
+        """Test station observations"""
+        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+
+        # Ensure weather_api is initialized
+        if not hasattr(self, 'weather_api'):
+            from .foreca_weather_api import ForecaWeatherAPI
+            from .unit_manager import UnitManager
+            unit_manager = UnitManager(config_path)
+            self.weather_api = ForecaWeatherAPI(unit_manager)
+
+        observations = self.weather_api.get_station_observations(location_id, station_limit=3)
+
+        if observations:
+            print(f"[TEST] Found {len(observations)} stations:")
+            for obs in observations:
+                station = obs.get('station', 'N/A')
+                temp = obs.get('temperature', 'N/A')
+                distance = obs.get('distance', 'N/A')
+                print(f"  - {station} ({distance}): {temp}°C")
+            return True
+        else:
+            print("[TEST] No station observations available")
+            return False
+
+    def open_station_observations(self):
+        """Open station observations for the current location"""
+        print(f"[DEBUG] open_station_observations called, myloc={myloc}")  # DEBUG
+
+        location_id = ""
+        location_name = str(town) if is_valid(town) else "Unknown"
+
+        if myloc == 0:
+            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+        elif myloc == 1:
+            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+        elif myloc == 2:
+            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+
+        print(f"[DEBUG] Location ID: {location_id}, Name: {location_name}")  # DEBUG
+
+        if not location_id:
+            self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
+            return
+
+        from .foreca_stations import ForecaStations
+        print("[DEBUG] Opening ForecaStations...")
+        self.session.open(ForecaStations, self.weather_api, location_id, location_name)
+
+    def _update_station_label(self):
+        """Thread to update the nearest station name safely"""
+        try:
+            # Determine the current location ID
+            location_id = ""
+            if myloc == 0:
+                location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            elif myloc == 1:
+                location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            elif myloc == 2:
+                location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+
+            if location_id and hasattr(self, 'weather_api'):
+                # Request only the nearest station
+                observations = self.weather_api.get_station_observations(location_id, station_limit=1)
+
+                if observations and len(observations) > 0:
+                    station_name = observations[0].get('station', 'N/A')
+                    station_dist = observations[0].get('distance', '')
+                    text = f"Station: {station_name} ({station_dist})"
+                    print(f"[DEBUG] Station text: {text}")
+
+                    from enigma import eTimer
+
+                    def update_ui():
+                        try:
+                            if "station" in self:
+                                self["station"].setText(text)
+                                print(f"[DEBUG] UI updated: {text}")
+                        except Exception as e:
+                            print(f"[DEBUG] UI update error: {e}")
+
+                    # Stop previous timer if it exists
+                    if hasattr(self, "station_update_timer") and self.station_update_timer:
+                        self.station_update_timer.stop()
+
+                    # Create and start a single-shot timer
+                    self.station_update_timer = eTimer()
+                    self.station_update_timer.callback.append(update_ui)
+                    self.station_update_timer.start(0, True)
+
+        except Exception as e:
+            print(f"[Foreca4] Error updating station: {e}")
+            import traceback
+            traceback.print_exc()
+
+    # def _set_station_text(self, text):
+        # """Method called from the main thread to update the widget."""
+        # self["station"].setText(text)
+
     def region_selected_callback(self, result=None):
         """Callback when selecting a region (no need to do anything)"""
         pass
+
+    def create_default_unit_config(self):
+        """Create the default configuration file if it does not exist"""
+        if not os.path.exists(unit_file):
+            try:
+                with open(unit_file, 'w') as f:
+                    f.write("# configuration file for units: metric or imperial\n")
+                    f.write("metric\n")
+                print(f"[Foreca4] Created default unit config: {unit_file}")
+            except Exception as e:
+                print(f"[Foreca4] Error creating unit config: {e}")
+
+    def read_unit_preference(self):
+        """Read the unit preference from file"""
+        if not os.path.exists(unit_file):
+            self.create_default_unit_config()
+        try:
+            with open(unit_file, 'r') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#'):
+                        if line.lower() in ['metric', 'imperial']:
+                            return line.lower()
+                        else:
+                            print(f"[Foreca4] Invalid unit in config: '{line}'")
+                            break
+        except Exception as e:
+            print(f"[Foreca4] Error reading unit config: {e}")
+        return default_unit
+
+    def get_unit_system_preference(self):
+        """Read drive preferences from a configuration file"""
+        default_system = 'metric'  # Default to metric
+
+        if os.path.exists(unit_file):
+            try:
+                with open(unit_file, 'r') as f:
+                    content = f.read().strip()
+                    if content in ['metric', 'imperial']:
+                        return content
+            except Exception as e:
+                print(f"[Foreca4] Error reading unit config: {e}")
+
+        return default_system
 
     def open_foreca_api_maps(self):
         """Open Foreca API maps"""
@@ -755,11 +918,15 @@ class ForecaPreview_4(Screen, HelpableScreen):
             if not api.check_credentials():
                 self.session.open(
                     MessageBox,
-                    _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt.example"),
+                    _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt"),
                     MessageBox.TYPE_ERROR,
                     timeout=10)
                 return
-            self.session.open(ForecaMapMenu, api)
+
+            # Get unit preferences
+            unit_system = self.get_unit_system_preference()
+
+            self.session.open(ForecaMapMenu, api, unit_system)
         except Exception as e:
             print(f"[Foreca4] Error opening API maps: {e}")
             self.session.open(
@@ -856,7 +1023,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # Day
         day_str = trans(f_day) if is_valid(f_day) else ""
 
-        self["Titel"].text = f"{str(town)}, {trans(str(country))} - {date_str}"
+        self["Titel"].text = f"{trans(str(town))}, {trans(str(country))} - {date_str}"
         if day_str:
             self["Titel"].text += " - " + day_str
 
@@ -970,6 +1137,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
             ))
             n = n + 1
 
+        from threading import Thread
+        Thread(target=self._update_station_label).start()
         self["menu"].setList(self.list)
 
     def my_cur_weather(self):
@@ -997,25 +1166,28 @@ class ForecaPreview_4(Screen, HelpableScreen):
         else:
             self["fl_temp"].setText(trans("Feels like") + " N/A")
 
-        # Wind speed
+        # WIND: use the value directly from scraping
         if is_valid(wind_speed):
-            speed = mywindSpeed(wind_speed, cur_wind_speed_recalc)
+            # wind_speed is already in km/h from the site
             self["wind_speed"].setText(
-                trans("Wind speed") + f" {speed} " + trans("km/h"))
-            print(
-                f"[WIDGET-FIX] wind_speed settato a: {trans('Wind speed ')}{speed} {trans('km/h')}")
-        else:
-            self["wind_speed"].setText(trans("Wind speed") + " N/A")
+                trans("Wind speed") + f" {wind_speed} km/h"
+            )
 
-        # Wind gust
+        # GUST
         if is_valid(wind_gust):
-            gust = mywindSpeed(wind_gust, cur_wind_speed_recalc)
             self["wind_gust"].setText(
-                trans("Gust") + f" {gust} " + trans("km/h"))
-            print(
-                f"[WIDGET-FIX] wind_gust settato a: {trans('Gust ')}{gust} {trans('km/h')}")
-        else:
-            self["wind_gust"].setText(trans("Gust") + " N/A")
+                trans("Gust") + f" {wind_gust} km/h"
+            )
+
+        # PRESSURE
+        if is_valid(pressure):
+            # pressure is in mmHg from scraping (e.g., "757.3")
+            # Convert to hPa for proper display
+            try:
+                pressure_hpa = float(pressure) / 0.750062  # mmHg → hPa
+                self["pressure"].setText(f"{pressure_hpa:.0f} hPa")  # Rounded
+            except:
+                self["pressure"].setText(f"{pressure} hPa")  # Fallback
 
         # Dewpoint
         if is_valid(dewpoint):
@@ -1059,11 +1231,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # Humidity
         self["hum"].setText(f"{hum}%" if is_valid(hum) else "N/A")
 
-        # Pressure
-        self["pressure"].setText(
-            f"{pressure} " +
-            trans("hPa") if is_valid(pressure) else "N/A")
-
         # Force immediate GUI update
         self.invalidate_current_weather_widgets()
 
@@ -1094,102 +1261,114 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def titel(self):
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
 
-    def Fav0(self):
-        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
-        myloc = 0
-        MAIN_PAGE_F = str(BASEURL) + path_loc0
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
+    def _load_favorite(self, fav_index, path_loc):
+        """
+        Load a favorite (single function for all favorites)
+
+        Args:
+            fav_index: 0=Home, 1=Fav1, 2=Fav2
+            path_loc: location path (e.g. "103169070/Rome-Italy")
+        """
+        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
+        global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
+        global lon, lat, sunrise, daylen, sunset, f_day
+
+        myloc = fav_index  # <-- THIS is the only real difference!
+        location_id = path_loc.split('/')[0] if '/' in path_loc else path_loc
+
+        # 1. CURRENT WEATHER VIA API (or scraping fallback)
+        if self.weather_api.check_credentials():
+            result_current = self.weather_api.get_current_weather(location_id)
+            if result_current and result_current[0] != 'N/A':
+                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+                print(f"[Foreca4] Fav{fav_index}: Current weather via API")
+            else:
+                # Fallback to scraping
+                MAIN_PAGE_F = str(BASEURL) + path_loc
+                result_current = getPageF(MAIN_PAGE_F)
+                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+                print(f"[Foreca4] Fav{fav_index}: Current weather via scraping")
+        else:
+            # Scraping only
+            MAIN_PAGE_F = str(BASEURL) + path_loc
+            result_current = getPageF(MAIN_PAGE_F)
+            town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
 
         self.my_cur_weather()
 
-        MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+        # 2. FORECAST VIA API (or scraping fallback)
+        if self.weather_api.check_credentials():
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
+            if result_forecast and result_forecast[0] != 'N/A':
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
+            else:
+                # Fallback
+                MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+        else:
+            # Scraping only
+            MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+
         self.my_forecast_weather()
 
-        self["day_len"].setText(str(conv_day_len(daylen)))
-        self["sunrise_val"].setText(str(sunrise))
-        self["sunset_val"].setText(str(sunset))
+        # 3. UPDATE INTERFACE
+        self["day_len"].setText(str(conv_day_len(daylen)) if is_valid(daylen) else "N/A")
+        self["sunrise_val"].setText(str(sunrise) if is_valid(sunrise) else "N/A")
+        self["sunset_val"].setText(str(sunset) if is_valid(sunset) else "N/A")
 
-        Thread1 = Thread(target=self.mypicload)
-        Thread1.start()
+        # 4. LOAD MAP IN BACKGROUND
+        Thread(target=self.mypicload).start()
 
+        # 5. UPDATE TITLE AND DAILY FORECASTS
         self.titel()
         self.Zukunft(0)
+
+    def Fav0(self):
+        """Home (Blue button)"""
+        self._load_favorite(0, path_loc0)
 
     def Fav1(self):
-        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
-        myloc = 1
-        MAIN_PAGE_F = str(BASEURL) + path_loc1
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
-
-        self.my_cur_weather()
-
-        MAIN_PAGE_FF = str(BASEURL) + path_loc1 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
-        self.my_forecast_weather()
-
-        self["day_len"].setText(str(conv_day_len(daylen)))
-        self["sunrise_val"].setText(str(sunrise))
-        self["sunset_val"].setText(str(sunset))
-
-        Thread2 = Thread(target=self.mypicload)
-        Thread2.start()
-
-        self.titel()
-        self.Zukunft(0)
+        """Favorite 1 (Green button)"""
+        self._load_favorite(1, path_loc1)
 
     def Fav2(self):
-        global myloc, town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, lon, lat, sunrise, daylen, sunset, f_day
-        myloc = 2
-        MAIN_PAGE_F = str(BASEURL) + path_loc2
-        town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = getPageF(
-            MAIN_PAGE_F)
-
-        self.my_cur_weather()
-
-        MAIN_PAGE_FF = str(BASEURL) + path_loc2 + '/hourly?day=0'
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
-
-        self.my_forecast_weather()
-
-        self["day_len"].setText(str(conv_day_len(daylen)))
-        self["sunrise_val"].setText(str(sunrise))
-        self["sunset_val"].setText(str(sunset))
-
-        Thread3 = Thread(target=self.mypicload)
-        Thread3.start()
-
-        self.titel()
-        self.Zukunft(0)
+        """Favorite 2 (Yellow button)"""
+        self._load_favorite(2, path_loc2)
 
     def Zukunft(self, ztag=0):
+        """Load forecast for a specific day"""
         global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day
+
         self.tag = ztag
 
+        # Determine which favorite is active
+        path_loc = ""
         if myloc == 0:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc0 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
-            self.my_forecast_weather()
+            path_loc = path_loc0
         elif myloc == 1:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc1 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
-            self.my_forecast_weather()
+            path_loc = path_loc1
         elif myloc == 2:
-            MAIN_PAGE_FF = str(BASEURL) + path_loc2 + \
-                '/hourly?day=' + str(ztag)
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
-            self.my_forecast_weather()
+            path_loc = path_loc2
+        else:
+            path_loc = path_loc0  # Default
 
+        location_id = path_loc.split('/')[0] if '/' in path_loc else path_loc
+
+        # FIRST TRY API
+        if self.weather_api.check_credentials() and location_id:
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=ztag + 1)
+            if result_forecast and result_forecast[0] != 'N/A':
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
+                self.my_forecast_weather()
+                self.StartPage()
+                return
+
+        # FALLBACK TO SCRAPING
+        MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=' + str(ztag)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+
+        self.my_forecast_weather()
         self.StartPage()
 
     def info(self):
@@ -1296,6 +1475,13 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def exit(self):
         """Exit plugin and optionally clean cache"""
+        # Stop timers and clean
+        if hasattr(self, 'station_timer'):
+            self.station_timer.stop()
+        if hasattr(self, 'station_update_timer'):
+            self.station_update_timer.stop()
+
+        # Config Save
         rez = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
         self.savesetcolor(rez)
         savesetalpha(alpha)
@@ -1389,15 +1575,11 @@ class Color_Select(Screen):
         self["Clist"] = MenuList([])
         self["colorname"] = Label()
         self["colorname"].setText(_('Color name'))
-
         self["colordatas"] = Label()
         self["colordatas"].setText(_('Color data'))
-
         self["pic1"] = Pixmap()
-
         self["plate0"] = Label(_("N/A"))
         self["plate1"] = Label(_("N/A"))
-
         self["actions"] = ActionMap(
             [
                 "OkCancelActions",
@@ -2073,8 +2255,8 @@ class Meteogram_Foreca4_FHD(Screen):
 class CityPanel4List(GUIComponent):
     def __init__(self, entries):
         GUIComponent.__init__(self)
-        self.l = eListboxPythonMultiContent()
-        self.l.setFont(0, gFont("Regular", 30))
+        self.lst = eListboxPythonMultiContent()
+        self.lst.setFont(0, gFont("Regular", 30))
         self.foregroundColor = 0xffffff  # bianco
         self.foregroundColorSelected = 0x00a0ff  # blu
         self.backgroundColor = 0x000000  # nero
@@ -2086,14 +2268,14 @@ class CityPanel4List(GUIComponent):
     GUI_WIDGET = eListbox
 
     def postWidgetCreate(self, instance):
-        instance.setContent(self.l)
+        instance.setContent(self.lst)
         instance.setItemHeight(self.itemHeight)
 
     def preWidgetRemove(self, instance):
         instance.setContent(None)
 
     def setList(self, entries):
-        self.l.setList(entries)
+        self.lst.setList(entries)
 
     def getCurrentIndex(self):
         if self.instance:
@@ -2106,7 +2288,7 @@ class CityPanel4List(GUIComponent):
 
     def getCurrentSelection(self):
         if self.instance:
-            return self.l.getCurrentSelection()
+            return self.lst.getCurrentSelection()
         return None
 
     def getItemsPerPage(self):
@@ -2569,7 +2751,45 @@ class CityPanel4(Screen):
         """Exit the city selection panel"""
         if self.search_ok:
             self.search_ok = False
+        if hasattr(self, 'init_timer'):
+            self.init_timer.stop()
+        if hasattr(self, 'timer'):
+            self.timer.stop()
         self.close(None)
+
+
+class UnitSettings(Screen):
+    """Unit settings screen"""
+
+    def __init__(self, session):
+        Screen.__init__(self, session)
+        self.setTitle(_("Unit Settings"))
+
+        self["list"] = MenuList([
+            _("Metric System (Celsius, km/h, hPa)"),
+            _("Imperial System (Fahrenheit, mph, inHg)")
+        ])
+
+        self["actions"] = ActionMap(["OkCancelActions"], {
+            "ok": self.select_unit,
+            "cancel": self.exit
+        }, -1)
+
+    def select_unit(self):
+        selection = self["list"].getCurrentIndex()
+        unit_system = "metric" if selection == 0 else "imperial"
+
+        # Save to configuration file
+        with open(unit_file, "w") as f:
+            f.write(f"# configuration file for the units : metric or imperial\n{unit_system}")
+
+        self.session.open(MessageBox,
+                          _("Unit settings saved. Restart plugin to apply changes."),
+                          MessageBox.TYPE_INFO)
+        self.close()
+
+    def exit(self):
+        self.close()
 
 
 def main(session, **kwargs):

@@ -2,27 +2,12 @@
 # -*- coding: UTF-8 -*-
 # foreca_map_api.py - Gestione API mappe Foreca
 # Copyright (c) @Lululla 20260122
-# Core API:
-# Authentication system, token/tile cache (foreca_map_api.py).
-# Interface:
-# Layer selection menu and basic viewer with timeline (foreca_map_menu.py, foreca_map_viewer.py).
-# Integration:
-# Menu item in the main plugin, configuration reading from file.
-# Features:
-# Download and merge 3x3 tile grids, overlay on existing background maps (temp_map.png, europa.png, etc.).
-# Trial Limitations:
-# The code is compatible with the trial plan limit: 1,000 tiles/day for maps.
-# The cache I implemented helps avoid exceeding this limit by reusing already downloaded tiles.
-# Language Translation:
-# Implementation of GetText translation and Google AI API
-# major fix
 import os
 import json
 import hashlib
 import requests
 from time import time
 from threading import Thread
-
 
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
 CACHE_EXPIRE = 3600  # 1 ora per tile
@@ -101,29 +86,48 @@ class ForecaMapAPI:
         if not self.user or not self.password:
             print("[ForecaMapAPI] WARNING: API credentials missing in config file!")
 
+    def _get_colorscheme_for_layer(self, layer_id, unit_system='metric'):
+        """
+        Returns the appropriate color scheme for a layer and a unit system.
+        unit_system: 'metric' or 'imperial'
+        """
+        # Mapping based on the foreca_capabilities.json file
+        # ID 2: Temperature
+        # ID 8: Wind
+        colorschemes = {
+            2: {'metric': 'default', 'imperial': 'temp-fahrenheit-noalpha'},  # Temperature
+            8: {'metric': 'winds-noalpha', 'imperial': 'winds-mph-noalpha'},  # Wind
+            # Add other layer IDs here if needed (e.g. 3, 4, etc.)
+        }
+
+        # Get the mapping for the layer, if it exists
+        layer_map = colorschemes.get(layer_id, {})
+        # Return the scheme for the unit system, defaulting to 'default' if not found
+        return layer_map.get(unit_system, 'default')
+
     def create_example_config(self):
         """Create example configuration file"""
         try:
             example_content = """# Foreca API Configuration
-# Rename this file to api_config.txt and fill with your credentials
+                # Rename this file to api_config.txt and fill with your credentials
 
-# Your Foreca API username
-API_USER=ekekaz
+                # Your Foreca API username
+                API_USER=ekekaz
 
-# Your Foreca API password
-API_PASSWORD=im5issEYcMUG
+                # Your Foreca API password
+                API_PASSWORD=im5issEYcMUG
 
-# Token expiration in hours (max 720 = 30 days)
-TOKEN_EXPIRE_HOURS=720
+                # Token expiration in hours (max 720 = 30 days)
+                TOKEN_EXPIRE_HOURS=720
 
-# Map server (EU, US, etc.)
-MAP_SERVER=map-eu.foreca.com
+                # Map server (EU, US, etc.)
+                MAP_SERVER=map-eu.foreca.com
 
-# Authentication server
-AUTH_SERVER=pfa.foreca.com
+                # Authentication server
+                AUTH_SERVER=pfa.foreca.com
 
-# Save this file as api_config.txt (remove .example)
-"""
+                # Save this file as api_config.txt (remove .example)
+            """
             with open(CONFIG_FILE + ".example", 'w') as f:
                 f.write(example_content)
             print(
@@ -252,7 +256,7 @@ AUTH_SERVER=pfa.foreca.com
             print(f"[ForecaMapAPI] Error capabilities: {e}")
             return []
 
-    def get_tile(self, layer_id, timestamp, zoom, x, y):
+    def get_tile(self, layer_id, timestamp, zoom, x, y, unit_system='metric'):
         """Download a single tile with cache support"""
         print("[DEBUG] === get_tile START ===")
 
@@ -262,8 +266,11 @@ AUTH_SERVER=pfa.foreca.com
             print("[DEBUG] ERROR: No token obtained!")
             return None
 
-        # Create hash for cache filename
-        cache_key = f"{layer_id}_{timestamp}_{zoom}_{x}_{y}"
+        # Determine color scheme based on unit system
+        colorscheme = self._get_colorscheme_for_layer(layer_id, unit_system)
+
+        # Create a cache key that also includes the color scheme
+        cache_key = f"{layer_id}_{timestamp}_{zoom}_{x}_{y}_{colorscheme}"
         cache_hash = hashlib.md5(cache_key.encode()).hexdigest()
         cache_file = os.path.join(CACHE_BASE, f"{cache_hash}.png")
 
@@ -275,7 +282,8 @@ AUTH_SERVER=pfa.foreca.com
                 return cache_file
 
         try:
-            url = f"https://{self.map_server}/api/v1/image/tile/{zoom}/{x}/{y}/{timestamp}/{layer_id}"
+            # BUILD THE URL WITH THE COLORSCHEME PARAMETER
+            url = f"https://{self.map_server}/api/v1/image/tile/{zoom}/{x}/{y}/{timestamp}/{layer_id}?colorscheme={colorscheme}"
             headers = {"Authorization": f"Bearer {token}"}
             print(f"[DEBUG] Tile URL: {url}")
 
@@ -298,10 +306,10 @@ AUTH_SERVER=pfa.foreca.com
             print(f"[DEBUG] Tile download exception: {e}")
             return None
 
-    def download_tile_async(self, layer_id, timestamp, zoom, x, y, callback):
+    def download_tile_async(self, layer_id, timestamp, zoom, x, y, callback, unit_system='metric'):
         """Download tile in separate thread"""
         def download_thread():
-            result = self.get_tile(layer_id, timestamp, zoom, x, y)
+            result = self.get_tile(layer_id, timestamp, zoom, x, y, unit_system)
             if callback:
                 callback(result)
 
