@@ -13,7 +13,7 @@
     <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License">
   </a>
   <a href="https://python.org">
-    <img src="https://img.shields.io/badge/Python-2F3.x-yellow.svg" alt="Python">
+    <img src="https://img.shields.io/badge/Python-3.x-yellow.svg" alt="Python">
   </a>
 </p>
 
