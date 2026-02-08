@@ -248,9 +248,9 @@ BASEURL = "https://www.foreca.com/"
 
 config_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/"
 
-path_loc0 = '103169070/Rome-Italy'                        # Blue - Favorite 0
-path_loc1 = '100524901/Moscow-Russia'                     # Green - Favorite 1
-path_loc2 = '102961214/Thurles-County-Tipperary-Ireland'  # Yellow - Favorite 2
+path_loc0 = '100787718/Negotin-Bor-District-Serbia'  # Blue - Favorite 0
+path_loc1 = '1100725905/Vidin-Bulgaria'              # Green - Favorite 1
+path_loc2 = '100792456/Bor-Bor-District-Serbia'      # Yellow - Favorite 2
 
 
 # Home @lululla
@@ -856,7 +856,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # Day
         day_str = trans(f_day) if is_valid(f_day) else ""
 
-        self["Titel"].text = f"{trans(str(town))}, {trans(str(country))} - {date_str}"
+        self["Titel"].text = f"{str(town)}, {trans(str(country))} - {date_str}"
         if day_str:
             self["Titel"].text += " - " + day_str
 
@@ -975,14 +975,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def my_cur_weather(self):
         """Update current weather display with proper translations and formatting"""
         # City name
-        self["town"].setText(trans(str(town)) if is_valid(town) else "N/A")
+        self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Debug per cur_temp
         print(
             f"[DEBUG cur_temp] Valore: '{cur_temp}', is_valid: {is_valid(cur_temp)}")
 
         # City name
-        self["town"].setText(trans(str(town)) if is_valid(town) else "N/A")
+        self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Current temperature
         cur_temp_text = f"{cur_temp}°C" if is_valid(cur_temp) else "N/A"
@@ -1076,7 +1076,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         day_str = trans(f_day) if is_valid(f_day) else ""
 
-        self["Titel"].text = trans(str(town)) + ', ' + \
+        self["Titel"].text = str(town) + ', ' + \
             trans(str(country)) + ' - ' + date_str
         if day_str:
             self["Titel"].text += ' - ' + day_str
