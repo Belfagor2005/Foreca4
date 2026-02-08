@@ -36,7 +36,7 @@ ForecaPreview_4_FHD = """
     <ePixmap position="150,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" zPosition="3" />
     <ePixmap position="555,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" zPosition="3" />
     <ePixmap position="640,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_help.png" scale="1" zPosition="3" />
-	<!--
+    <!--
     <eLabel name="new eLabel" position="555,1005" size="110,43" transparent="1" backgroundColor="black" text=" Help " foregroundColor="white" font="Regular;32" zPosition="3" borderColor="black" valign="center" />
     <eLabel name="new eLabel" position="665,1005" size="120,43" transparent="1" backgroundColor="#000080" text="Help+" foregroundColor="#0053a9ff" font="Regular;32" zPosition="3" valign="center" />
     <eLabel name="new eLabel2" position="30,1005" size="70,43" transparent="1" backgroundColor="black" text="Ok" foregroundColor="white" font="Regular;32" zPosition="3" borderColor="black" valign="center" />
@@ -217,7 +217,7 @@ CityPanel4_FHD = """
     <ePixmap position="660,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
     <ePixmap position="740,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
     <ePixmap position="820,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
-    <ePixmap position="900,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1" /> 
+    <ePixmap position="900,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1" />
     <ePixmap position="980,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch-.png" scale="1" />
     <!-- Button widgets with unified colors -->
     <widget source="key_red" render="Label" position="10,5" size="295,70" backgroundColor="key_red" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
@@ -270,7 +270,7 @@ ForecaPreview_4_HD = """
     <eLabel position="399,314" size="19,19" transparent="1" backgroundColor="#000080" text="S" foregroundColor="#0053a9ff" font="Regular;12" zPosition="3" halign="center" valign="center" />
     <eLabel position="449,261" size="19,19" transparent="1" backgroundColor="#000080" text="E" foregroundColor="#0053a9ff" font="Regular;12" zPosition="3" halign="center" valign="center" />
     <eLabel position="349,261" size="19,19" transparent="1" backgroundColor="#000080" text="W" foregroundColor="#0053a9ff" font="Regular;12" zPosition="3" halign="center" valign="center" />
-    
+
     <ePixmap position="75,676" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" zPosition="3" />
     <ePixmap position="115,676" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" zPosition="3" />
     <ePixmap position="370,676" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" zPosition="3" />
@@ -527,7 +527,7 @@ ForecaPreview_4_UHD = """
     <widget name="plate5" size="1054,120" zPosition="1" position="14,14" backgroundColor="#000050ef" cornerRadius="50" />
     <widget name="plate44" size="1440,94" zPosition="2" position="1094,27" backgroundColor="#40000000" cornerRadius="50" />
     <widget name="plate55" size="1027,94" zPosition="2" position="27,27" backgroundColor="#40000000" cornerRadius="50" />
-    
+
     <widget source="menu" render="Listbox" position="1111,191" size="1407,1180" scrollbarMode="showOnDemand" zPosition="3" transparent="1" backgroundColor="black">
         <convert type="TemplatedMultiContent">
       {"template": [
