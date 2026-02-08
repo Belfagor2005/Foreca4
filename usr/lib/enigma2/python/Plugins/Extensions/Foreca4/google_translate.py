@@ -456,12 +456,10 @@ def translate_batch(texts, target_lang=None, use_cache=True):
 def safe_translate(text, fallback=None, **kwargs):
     """
     Safe version of translate_text that always returns a valid string.
-
     Args:
         text (str): Text to translate
         fallback (str): Fallback text if translation fails
         **kwargs: Additional arguments for translate_text
-
     Returns:
         str: Translated text, fallback or original
     """
