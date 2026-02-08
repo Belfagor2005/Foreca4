@@ -94,16 +94,6 @@ msgstr "Бранденбург"
 msgid "Bremen"
 msgstr "Бремен"
 
-#, fuzzy
-msgid "Cancel"
-msgstr "Франция"
-
-msgid "Celsius, km/h, hPa"
-msgstr ""
-
-msgid "Changes apply immediately"
-msgstr ""
-
 msgid "City Selection"
 msgstr "Выбор города"
 
@@ -168,9 +158,6 @@ msgstr "Чешская Республика"
 msgid "Denmark"
 msgstr "Дания"
 
-msgid "Distance"
-msgstr ""
-
 msgid "Down - Next page"
 msgstr "Вниз - Следующая страница"
 
@@ -189,10 +176,6 @@ msgstr "Ошибка загрузки карт. Проверьте соедин�
 msgid "Error saving favorite!"
 msgstr "Ошибка сохранения избранного!"
 
-#, fuzzy
-msgid "Error saving settings!"
-msgstr "Ошибка сохранения избранного!"
-
 msgid "Europe"
 msgstr "Европа"
 
@@ -208,9 +191,6 @@ msgstr "Выход"
 msgid "Exit - End"
 msgstr "Выход - Закрыть"
 
-msgid "Fahrenheit, mph, inHg"
-msgstr ""
-
 msgid "Faster: {}s"
 msgstr "Быстрее: {}с"
 
@@ -219,9 +199,6 @@ msgstr "Избранное 1"
 
 msgid "Favorite 2"
 msgstr "Избранное 2"
-
-msgid "Feels like"
-msgstr "Ощущается как"
 
 msgid "Finland"
 msgstr "Финляндия"
@@ -284,18 +261,11 @@ msgstr "Гессен"
 msgid "Home"
 msgstr "Домашнее"
 
-#, fuzzy
-msgid "Humidity"
-msgstr "Влажность:"
-
 msgid "Hungary"
 msgstr "Венгрия"
 
 msgid "Image not available"
 msgstr "Изображение недоступно"
-
-msgid "Imperial System"
-msgstr ""
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr ""
@@ -327,9 +297,6 @@ msgstr "Перейти на 500 вверх"
 msgid "Keyboard"
 msgstr "Клавиатура"
 
-msgid "Last update"
-msgstr ""
-
 msgid "Latvia"
 msgstr "Латвия"
 
@@ -340,10 +307,6 @@ msgid "Left arrow - Previous day"
 msgstr "Стрелка влево - Предыдущий день"
 
 msgid "Loading available maps..."
-msgstr "Загрузка доступных карт..."
-
-#, fuzzy
-msgid "Loading nearby stations..."
 msgstr "Загрузка доступных карт..."
 
 msgid "Loading..."
@@ -363,9 +326,6 @@ msgstr "Меню - Настройки"
 
 msgid "Meteogram"
 msgstr "Метеограмма"
-
-msgid "Metric System"
-msgstr ""
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr ""
@@ -414,13 +374,6 @@ msgstr "Данные недоступны"
 #, fuzzy
 msgid "No location selected"
 msgstr "Выбор города"
-
-#, fuzzy
-msgid "No station data available"
-msgstr "Данные недоступны"
-
-msgid "No stations found"
-msgstr ""
 
 msgid "North Africa"
 msgstr "Северная Африка"
@@ -509,9 +462,6 @@ msgstr "Польша"
 msgid "Portugal"
 msgstr "Португалия"
 
-msgid "Pressure"
-msgstr ""
-
 msgid "Previous"
 msgstr "Предыдущий"
 
@@ -545,9 +495,6 @@ msgstr "Спутниковые снимки"
 msgid "Satellite photos coming soon!"
 msgstr "Спутниковые снимки скоро!"
 
-msgid "Save"
-msgstr ""
-
 msgid "Saxony"
 msgstr "Саксония"
 
@@ -568,10 +515,6 @@ msgstr "Выберите город"
 
 msgid "Select a map with OK"
 msgstr "Выберите карту с OK"
-
-#, fuzzy
-msgid "Select unit system"
-msgstr "Выберите город"
 
 msgid "Show info"
 msgstr "Показать информацию"
@@ -608,9 +551,6 @@ msgstr "Швеция"
 
 msgid "Switzerland"
 msgstr "Швейцария"
-
-msgid "Temperature"
-msgstr ""
 
 msgid "Thin upper cloud"
 msgstr "Дымка"
@@ -658,17 +598,11 @@ msgstr "Погода сегодня"
 msgid "Weather tomorrow"
 msgstr "Погода завтра"
 
-msgid "Wind"
-msgstr "Ветер"
-
 msgid "Window transparency"
 msgstr "Прозрачность окон"
 
 msgid "Yellow - Favorite 2"
 msgstr "Желтая кнопка - Избранное 2"
-
-msgid "stations nearby"
-msgstr ""
 
 msgid "v."
 msgstr "в."
@@ -696,6 +630,36 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "Франция"
+
+#, fuzzy
+#~ msgid "Error saving settings!"
+#~ msgstr "Ошибка сохранения избранного!"
+
+#~ msgid "Feels like"
+#~ msgstr "Ощущается как"
+
+#, fuzzy
+#~ msgid "Humidity"
+#~ msgstr "Влажность:"
+
+#, fuzzy
+#~ msgid "Loading nearby stations..."
+#~ msgstr "Загрузка доступных карт..."
+
+#, fuzzy
+#~ msgid "No station data available"
+#~ msgstr "Данные недоступны"
+
+#, fuzzy
+#~ msgid "Select unit system"
+#~ msgstr "Выберите город"
+
+#~ msgid "Wind"
+#~ msgstr "Ветер"
 
 #~ msgid "Dewpoint"
 #~ msgstr "Точка росы"

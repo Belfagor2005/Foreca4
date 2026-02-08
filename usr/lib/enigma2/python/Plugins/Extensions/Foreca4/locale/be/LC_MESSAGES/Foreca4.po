@@ -95,15 +95,6 @@ msgstr ""
 msgid "Bremen"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Celsius, km/h, hPa"
-msgstr ""
-
-msgid "Changes apply immediately"
-msgstr ""
-
 msgid "City Selection"
 msgstr ""
 
@@ -167,9 +158,6 @@ msgstr ""
 msgid "Denmark"
 msgstr ""
 
-msgid "Distance"
-msgstr ""
-
 msgid "Down - Next page"
 msgstr ""
 
@@ -188,9 +176,6 @@ msgstr ""
 msgid "Error saving favorite!"
 msgstr ""
 
-msgid "Error saving settings!"
-msgstr ""
-
 msgid "Europe"
 msgstr ""
 
@@ -206,9 +191,6 @@ msgstr ""
 msgid "Exit - End"
 msgstr ""
 
-msgid "Fahrenheit, mph, inHg"
-msgstr ""
-
 msgid "Faster: {}s"
 msgstr ""
 
@@ -216,9 +198,6 @@ msgid "Favorite 1"
 msgstr ""
 
 msgid "Favorite 2"
-msgstr ""
-
-msgid "Feels like"
 msgstr ""
 
 msgid "Finland"
@@ -281,16 +260,10 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-msgid "Humidity"
-msgstr ""
-
 msgid "Hungary"
 msgstr ""
 
 msgid "Image not available"
-msgstr ""
-
-msgid "Imperial System"
 msgstr ""
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
@@ -323,9 +296,6 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-msgid "Last update"
-msgstr ""
-
 msgid "Latvia"
 msgstr ""
 
@@ -336,9 +306,6 @@ msgid "Left arrow - Previous day"
 msgstr ""
 
 msgid "Loading available maps..."
-msgstr ""
-
-msgid "Loading nearby stations..."
 msgstr ""
 
 msgid "Loading..."
@@ -357,9 +324,6 @@ msgid "Menu - Settings"
 msgstr ""
 
 msgid "Meteogram"
-msgstr ""
-
-msgid "Metric System"
 msgstr ""
 
 msgid "Metric System (Celsius, km/h, hPa)"
@@ -405,12 +369,6 @@ msgid "No date available"
 msgstr ""
 
 msgid "No location selected"
-msgstr ""
-
-msgid "No station data available"
-msgstr ""
-
-msgid "No stations found"
 msgstr ""
 
 msgid "North Africa"
@@ -500,9 +458,6 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Pressure"
-msgstr ""
-
 msgid "Previous"
 msgstr ""
 
@@ -536,9 +491,6 @@ msgstr ""
 msgid "Satellite photos coming soon!"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Saxony"
 msgstr ""
 
@@ -558,9 +510,6 @@ msgid "Select a city"
 msgstr ""
 
 msgid "Select a map with OK"
-msgstr ""
-
-msgid "Select unit system"
 msgstr ""
 
 msgid "Show info"
@@ -597,9 +546,6 @@ msgid "Sweden"
 msgstr ""
 
 msgid "Switzerland"
-msgstr ""
-
-msgid "Temperature"
 msgstr ""
 
 msgid "Thin upper cloud"
@@ -647,16 +593,10 @@ msgstr ""
 msgid "Weather tomorrow"
 msgstr ""
 
-msgid "Wind"
-msgstr ""
-
 msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
-msgstr ""
-
-msgid "stations nearby"
 msgstr ""
 
 msgid "v."

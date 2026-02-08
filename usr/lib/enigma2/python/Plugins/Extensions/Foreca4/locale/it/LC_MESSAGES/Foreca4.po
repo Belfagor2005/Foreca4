@@ -96,15 +96,6 @@ msgstr "Brandeburgo"
 msgid "Bremen"
 msgstr "Brema"
 
-msgid "Cancel"
-msgstr "Annulla"
-
-msgid "Celsius, km/h, hPa"
-msgstr "Celsius, km/h, hPa"
-
-msgid "Changes apply immediately"
-msgstr "Applica modifiche immediatamente"
-
 msgid "City Selection"
 msgstr "Selezione Città"
 
@@ -168,9 +159,6 @@ msgstr "Repubblica Ceca"
 msgid "Denmark"
 msgstr "Danimarca"
 
-msgid "Distance"
-msgstr "Distanza"
-
 msgid "Down - Next page"
 msgstr "Giù - Pagina successiva"
 
@@ -189,9 +177,6 @@ msgstr "Errore durante il caricamento delle mappe. Controllare la connessione."
 msgid "Error saving favorite!"
 msgstr "Errore durante il salvataggio dei preferiti!"
 
-msgid "Error saving settings!"
-msgstr "Errore durante il salvataggio delle impostazioni!"
-
 msgid "Europe"
 msgstr "Europa"
 
@@ -207,9 +192,6 @@ msgstr "Esci"
 msgid "Exit - End"
 msgstr "Uscita - Fine"
 
-msgid "Fahrenheit, mph, inHg"
-msgstr "Fahrenheit, mph, inHg"
-
 msgid "Faster: {}s"
 msgstr "Più veloce: {}s"
 
@@ -218,9 +200,6 @@ msgstr "Preferito 1"
 
 msgid "Favorite 2"
 msgstr "Preferito 2"
-
-msgid "Feels like"
-msgstr "Percepita"
 
 msgid "Finland"
 msgstr "Finlandia"
@@ -282,17 +261,11 @@ msgstr "Assia"
 msgid "Home"
 msgstr ""
 
-msgid "Humidity"
-msgstr "Umidità"
-
 msgid "Hungary"
 msgstr "Ungheria"
 
 msgid "Image not available"
 msgstr "Immagine non disponibile"
-
-msgid "Imperial System"
-msgstr "Sistema Imperiale"
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr "Sistema Imperiale (Fahrenheit, mph, inHg)"
@@ -324,9 +297,6 @@ msgstr "Salta 500 in su"
 msgid "Keyboard"
 msgstr "Tastiera"
 
-msgid "Last update"
-msgstr "Ultimo aggiornamento"
-
 msgid "Latvia"
 msgstr "Lettonia"
 
@@ -338,9 +308,6 @@ msgstr "Freccia sinistra - Giorno precedente"
 
 msgid "Loading available maps..."
 msgstr "Caricamento mappe disponibili..."
-
-msgid "Loading nearby stations..."
-msgstr "Caricamento delle stazioni vicine..."
 
 msgid "Loading..."
 msgstr "Caricamento..."
@@ -359,9 +326,6 @@ msgstr "Menu - Impostazioni"
 
 msgid "Meteogram"
 msgstr "Meteogramma"
-
-msgid "Metric System"
-msgstr "Sistema Metrico"
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr "Sistema metrico (Celsius, km/h, hPa)"
@@ -407,12 +371,6 @@ msgstr "Nessun dato disponibile"
 
 msgid "No location selected"
 msgstr "Nessuna posizione selezionata"
-
-msgid "No station data available"
-msgstr "Nessun dato sulla stazione disponibile"
-
-msgid "No stations found"
-msgstr "Nessuna stazione trovata"
 
 msgid "North Africa"
 msgstr "Africa del Nord"
@@ -501,9 +459,6 @@ msgstr "Polonia"
 msgid "Portugal"
 msgstr "Portogallo"
 
-msgid "Pressure"
-msgstr "Pressione"
-
 msgid "Previous"
 msgstr "Precedente"
 
@@ -537,9 +492,6 @@ msgstr "Foto Satellitari"
 msgid "Satellite photos coming soon!"
 msgstr "Foto satellitari in arrivo!"
 
-msgid "Save"
-msgstr "Salva"
-
 msgid "Saxony"
 msgstr "Sassonia"
 
@@ -560,9 +512,6 @@ msgstr "Seleziona una città"
 
 msgid "Select a map with OK"
 msgstr "Seleziona una mappa con OK"
-
-msgid "Select unit system"
-msgstr "Seleziona Sistema Unità"
 
 msgid "Show info"
 msgstr "Mostra info"
@@ -599,9 +548,6 @@ msgstr "Svezia"
 
 msgid "Switzerland"
 msgstr "Svizzera"
-
-msgid "Temperature"
-msgstr "Temperatura"
 
 msgid "Thin upper cloud"
 msgstr "Nubi alte sottili"
@@ -648,17 +594,11 @@ msgstr "Meteo oggi"
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
 
-msgid "Wind"
-msgstr "Vento"
-
 msgid "Window transparency"
 msgstr "Trasparenza Finestra"
 
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
-
-msgid "stations nearby"
-msgstr "stazioni vicine"
 
 msgid "v."
 msgstr "v."
@@ -686,6 +626,66 @@ msgstr "• VOL+/VOL- per saltare 100 città"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GIALLO per salvare come Preferito 2\n"
+
+#~ msgid "Cancel"
+#~ msgstr "Annulla"
+
+#~ msgid "Celsius, km/h, hPa"
+#~ msgstr "Celsius, km/h, hPa"
+
+#~ msgid "Changes apply immediately"
+#~ msgstr "Applica modifiche immediatamente"
+
+#~ msgid "Distance"
+#~ msgstr "Distanza"
+
+#~ msgid "Error saving settings!"
+#~ msgstr "Errore durante il salvataggio delle impostazioni!"
+
+#~ msgid "Fahrenheit, mph, inHg"
+#~ msgstr "Fahrenheit, mph, inHg"
+
+#~ msgid "Feels like"
+#~ msgstr "Percepita"
+
+#~ msgid "Humidity"
+#~ msgstr "Umidità"
+
+#~ msgid "Imperial System"
+#~ msgstr "Sistema Imperiale"
+
+#~ msgid "Last update"
+#~ msgstr "Ultimo aggiornamento"
+
+#~ msgid "Loading nearby stations..."
+#~ msgstr "Caricamento delle stazioni vicine..."
+
+#~ msgid "Metric System"
+#~ msgstr "Sistema Metrico"
+
+#~ msgid "No station data available"
+#~ msgstr "Nessun dato sulla stazione disponibile"
+
+#~ msgid "No stations found"
+#~ msgstr "Nessuna stazione trovata"
+
+#~ msgid "Pressure"
+#~ msgstr "Pressione"
+
+#~ msgid "Save"
+#~ msgstr "Salva"
+
+#~ msgid "Select unit system"
+#~ msgstr "Seleziona Sistema Unità"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#~ msgid "Wind"
+#~ msgstr "Vento"
+
+#~ msgid "stations nearby"
+#~ msgstr "stazioni vicine"
 
 #~ msgid "Dewpoint"
 #~ msgstr "Punto di rugiada"
