@@ -257,7 +257,7 @@ UnitSettingsSimple_FHD = """
 
     <ePixmap name="red" position="25,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="579,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-    
+
     <widget name="key_red" position="27,431" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="579,435" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
 
@@ -524,7 +524,7 @@ UnitSettingsSimple_HD = """
     -->
     <ePixmap name="red" position="35,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="439,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-    
+
     <widget name="key_red" position="33,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="439,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
 
@@ -796,10 +796,10 @@ UnitSettingsSimple_UHD = """
     -->
     <ePixmap name="red" position="45,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="804,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-    
+
     <widget name="key_red" position="48,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="804,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
-    
+
     <widget name="option_metric" position="150,230" size="700,70" font="Regular;38" halign="left" />
     <widget name="metric_details" position="190,300" size="660,50" font="Regular;26" halign="left" />
     <widget name="option_imperial" position="150,380" size="700,70" font="Regular;38" halign="left" />
