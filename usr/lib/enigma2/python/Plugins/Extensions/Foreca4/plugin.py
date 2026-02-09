@@ -533,7 +533,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.weather_api = ForecaWeatherAPI(self.unit_manager)
 
         # DETERMINE LOCATION ID FROM PATH
-        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+        location_id = path_loc0.split(
+            '/')[0] if '/' in path_loc0 else path_loc0
 
         # STRATEGY: TRY API FIRST, THEN FALL BACK TO SCRAPING
         api_current_ok = False
@@ -541,14 +542,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 1. TRY CURRENT WEATHER VIA API
         if self.weather_api.check_credentials():
-            print("[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
+            print(
+                "[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
             result_current = self.weather_api.get_current_weather(location_id)
             if result_current and result_current[0] != 'N/A':
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
                 api_current_ok = True
                 print("[Foreca4] Current weather obtained via API")
             else:
-                print("[Foreca4] Current weather API failed, falling back to scraping")
+                print(
+                    "[Foreca4] Current weather API failed, falling back to scraping")
         else:
             print("[Foreca4] API credentials not configured, using scraping")
 
@@ -560,7 +563,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 result_current = getPageF(MAIN_PAGE_F)
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
             except Exception as e:
-                print("[Foreca4] Error scraping current weather: {0}".format(e))
+                print(
+                    "[Foreca4] Error scraping current weather: {0}".format(e))
                 # DEFAULT VALUES
                 town = cur_temp = fl_temp = dewpoint = pic = wind = 'N/A'
                 wind_speed = wind_gust = rain_mm = hum = pressure = 'N/A'
@@ -568,12 +572,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 2. TRY HOURLY FORECASTS VIA API
         if self.weather_api.check_credentials():
-            print("[Foreca4] Trying API for forecasts, ID: {0}".format(location_id))
-            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
+            print(
+                "[Foreca4] Trying API for forecasts, ID: {0}".format(location_id))
+            result_forecast = self.weather_api.get_hourly_forecast(
+                location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
                 api_forecast_ok = True
-                print("[Foreca4] Forecasts obtained via API: {0} periods".format(len(f_time)))
+                print(
+                    "[Foreca4] Forecasts obtained via API: {0} periods".format(
+                        len(f_time)))
             else:
                 print("[Foreca4] Forecast API failed, falling back to scraping")
         else:
@@ -767,7 +775,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def test_station_observations(self):
         """Test station observations"""
-        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+        location_id = path_loc0.split(
+            '/')[0] if '/' in path_loc0 else path_loc0
 
         # Ensure weather_api is initialized
         if not hasattr(self, 'weather_api'):
@@ -776,7 +785,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
             unit_manager = UnitManager(config_path)
             self.weather_api = ForecaWeatherAPI(unit_manager)
 
-        observations = self.weather_api.get_station_observations(location_id, station_limit=3)
+        observations = self.weather_api.get_station_observations(
+            location_id, station_limit=3)
 
         if observations:
             print("[TEST] Found {0} stations:".format(len(observations)))
@@ -792,26 +802,40 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def open_station_observations(self):
         """Open station observations for the current location"""
-        print("[DEBUG] open_station_observations called, myloc={0}".format(myloc))
+        print(
+            "[DEBUG] open_station_observations called, myloc={0}".format(myloc))
 
         location_id = ""
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split(
+                '/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split(
+                '/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split(
+                '/')[0] if '/' in path_loc2 else path_loc2
 
-        print("[DEBUG] Location ID: {0}, Name: {1}".format(location_id, location_name))
+        print(
+            "[DEBUG] Location ID: {0}, Name: {1}".format(
+                location_id,
+                location_name))
         if not location_id:
-            self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
+            self.session.open(
+                MessageBox,
+                _("No location selected"),
+                MessageBox.TYPE_INFO)
             return
 
         from .foreca_stations import ForecaStations
         print("[DEBUG] Opening ForecaStations...")
-        self.session.open(ForecaStations, self.weather_api, location_id, location_name)
+        self.session.open(
+            ForecaStations,
+            self.weather_api,
+            location_id,
+            location_name)
 
     def _update_station_label(self):
         """Thread to update the nearest station name safely"""
@@ -819,20 +843,25 @@ class ForecaPreview_4(Screen, HelpableScreen):
             # Determine the current location ID
             location_id = ""
             if myloc == 0:
-                location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+                location_id = path_loc0.split(
+                    '/')[0] if '/' in path_loc0 else path_loc0
             elif myloc == 1:
-                location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+                location_id = path_loc1.split(
+                    '/')[0] if '/' in path_loc1 else path_loc1
             elif myloc == 2:
-                location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+                location_id = path_loc2.split(
+                    '/')[0] if '/' in path_loc2 else path_loc2
 
             if location_id and hasattr(self, 'weather_api'):
                 # Request only the nearest station
-                observations = self.weather_api.get_station_observations(location_id, station_limit=1)
+                observations = self.weather_api.get_station_observations(
+                    location_id, station_limit=1)
 
                 if observations and len(observations) > 0:
                     station_name = observations[0].get('station', 'N/A')
                     station_dist = observations[0].get('distance', '')
-                    text = "Station: {0} ({1})".format(station_name, station_dist)
+                    text = "Station: {0} ({1})".format(
+                        station_name, station_dist)
                     print("[DEBUG] Station text: {0}".format(text))
 
                     from enigma import eTimer
@@ -846,7 +875,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
                             print("[DEBUG] UI update error: {0}".format(e))
 
                     # Stop previous timer if it exists
-                    if hasattr(self, "station_update_timer") and self.station_update_timer:
+                    if hasattr(
+                            self,
+                            "station_update_timer") and self.station_update_timer:
                         self.station_update_timer.stop()
 
                     # Create and start a single-shot timer
@@ -870,7 +901,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 with open(unit_file, 'w') as f:
                     f.write("# configuration file for units: metric or imperial\n")
                     f.write("metric\n")
-                print("[Foreca4] Created default unit config: {0}".format(unit_file))
+                print(
+                    "[Foreca4] Created default unit config: {0}".format(unit_file))
             except Exception as e:
                 print("[Foreca4] Error creating unit config: {0}".format(e))
 
@@ -886,7 +918,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         if line.lower() in ['metric', 'imperial']:
                             return line.lower()
                         else:
-                            print("[Foreca4] Invalid unit in config: '{0}'".format(line))
+                            print(
+                                "[Foreca4] Invalid unit in config: '{0}'".format(line))
                             break
         except Exception as e:
             print("[Foreca4] Error reading unit config: {0}".format(e))
@@ -1143,31 +1176,42 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Debug per cur_temp
-        print("[DEBUG cur_temp] Valore: '{0}', is_valid: {1}".format(cur_temp, is_valid(cur_temp)))
+        print(
+            "[DEBUG cur_temp] Valore: '{0}', is_valid: {1}".format(
+                cur_temp,
+                is_valid(cur_temp)))
 
         # City name
         self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Current temperature
-        cur_temp_text = "{0}°C".format(cur_temp) if is_valid(cur_temp) else "N/A"
-        print("[DEBUG cur_temp] Testo da impostare: '{0}'".format(cur_temp_text))
+        cur_temp_text = "{0}°C".format(
+            cur_temp) if is_valid(cur_temp) else "N/A"
+        print(
+            "[DEBUG cur_temp] Testo da impostare: '{0}'".format(cur_temp_text))
         self["cur_temp"].setText(cur_temp_text)
 
         # Feels like temperature
         if is_valid(fl_temp):
-            self["fl_temp"].setText(trans("Feels like") + " {0}°C".format(fl_temp))
-            print("[WIDGET-FIX] fl_temp settato a: {0}{1}°C".format(trans("Feels like "), fl_temp))
+            self["fl_temp"].setText(
+                trans("Feels like") +
+                " {0}°C".format(fl_temp))
+            print(
+                "[WIDGET-FIX] fl_temp settato a: {0}{1}°C".format(trans("Feels like "), fl_temp))
         else:
             self["fl_temp"].setText(trans("Feels like") + " N/A")
 
         # WIND: use the value directly from scraping
         if is_valid(wind_speed):
             # wind_speed is already in km/h from the site
-            self["wind_speed"].setText(trans("Wind speed") + " {0} km/h".format(wind_speed))
+            self["wind_speed"].setText(
+                trans("Wind speed") +
+                " {0} km/h".format(wind_speed))
 
         # GUST
         if is_valid(wind_gust):
-            self["wind_gust"].setText(trans("Gust") + " {0} km/h".format(wind_gust))
+            self["wind_gust"].setText(
+                trans("Gust") + " {0} km/h".format(wind_gust))
 
         # PRESSURE
         if is_valid(pressure):
@@ -1175,21 +1219,27 @@ class ForecaPreview_4(Screen, HelpableScreen):
             # Convert to hPa for proper display
             try:
                 pressure_hpa = float(pressure) / 0.750062  # mmHg → hPa
-                self["pressure"].setText("{0:.0f} hPa".format(pressure_hpa))  # Rounded
-            except:
-                self["pressure"].setText("{0} hPa".format(pressure))  # Fallback
+                self["pressure"].setText(
+                    "{0:.0f} hPa".format(pressure_hpa))  # Rounded
+            except BaseException:
+                self["pressure"].setText(
+                    "{0} hPa".format(pressure))  # Fallback
 
         # Dewpoint
         if is_valid(dewpoint):
-            self["dewpoint"].setText(trans("Dewpoint") + " {0}°C".format(dewpoint))
-            print("[WIDGET-FIX] dewpoint settato a: {0}{1}°C".format(trans("Dewpoint "), dewpoint))
+            self["dewpoint"].setText(
+                trans("Dewpoint") +
+                " {0}°C".format(dewpoint))
+            print(
+                "[WIDGET-FIX] dewpoint settato a: {0}{1}°C".format(trans("Dewpoint "), dewpoint))
         else:
             self["dewpoint"].setText(trans("Dewpoint") + " N/A")
 
         # Weather icon
         try:
             icon = "{0}.png".format(pic) if is_valid(pic) else "n600.png"
-            icon_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}".format(icon)
+            icon_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}".format(
+                icon)
             if os.path.exists(icon_path):
                 self["pic"].instance.setPixmapFromFile(icon_path)
         except Exception:
@@ -1207,14 +1257,17 @@ class ForecaPreview_4(Screen, HelpableScreen):
             if is_valid(wind) and 'w' in str(wind):
                 myw = int(str(wind).split('w')[1])
                 myw1 = self.degreesToWindDirection(myw)
-                wind_icon = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}.png".format(myw1)
+                wind_icon = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}.png".format(
+                    myw1)
                 if os.path.exists(wind_icon):
                     self["wind"].instance.setPixmapFromFile(wind_icon)
         except Exception:
             pass
 
         # Precipitation
-        self["rain_mm"].setText("{0} ".format(rain_mm) + trans("mm") if is_valid(rain_mm) else "N/A")
+        self["rain_mm"].setText(
+            "{0} ".format(rain_mm) +
+            trans("mm") if is_valid(rain_mm) else "N/A")
 
         # Humidity
         self["hum"].setText("{0}%".format(hum) if is_valid(hum) else "N/A")
@@ -1269,13 +1322,15 @@ class ForecaPreview_4(Screen, HelpableScreen):
             result_current = self.weather_api.get_current_weather(location_id)
             if result_current and result_current[0] != 'N/A':
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print("[Foreca4] Fav{0}: Current weather via API".format(fav_index))
+                print(
+                    "[Foreca4] Fav{0}: Current weather via API".format(fav_index))
             else:
                 # Fallback to scraping
                 MAIN_PAGE_F = str(BASEURL) + path_loc
                 result_current = getPageF(MAIN_PAGE_F)
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print("[Foreca4] Fav{0}: Current weather via scraping".format(fav_index))
+                print(
+                    "[Foreca4] Fav{0}: Current weather via scraping".format(fav_index))
         else:
             # Scraping only
             MAIN_PAGE_F = str(BASEURL) + path_loc
@@ -1286,23 +1341,28 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 2. FORECAST VIA API (or scraping fallback)
         if self.weather_api.check_credentials():
-            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
+            result_forecast = self.weather_api.get_hourly_forecast(
+                location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
             else:
                 # Fallback
                 MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+                    MAIN_PAGE_FF)
         else:
             # Scraping only
             MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+                MAIN_PAGE_FF)
 
         self.my_forecast_weather()
 
         # 3. UPDATE INTERFACE
-        self["day_len"].setText(str(conv_day_len(daylen)) if is_valid(daylen) else "N/A")
-        self["sunrise_val"].setText(str(sunrise) if is_valid(sunrise) else "N/A")
+        self["day_len"].setText(str(conv_day_len(daylen))
+                                if is_valid(daylen) else "N/A")
+        self["sunrise_val"].setText(
+            str(sunrise) if is_valid(sunrise) else "N/A")
         self["sunset_val"].setText(str(sunset) if is_valid(sunset) else "N/A")
 
         # 4. LOAD MAP IN BACKGROUND
@@ -1345,7 +1405,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # FIRST TRY API
         if self.weather_api.check_credentials() and location_id:
-            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=ztag + 1)
+            result_forecast = self.weather_api.get_hourly_forecast(
+                location_id, days=ztag + 1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
                 self.my_forecast_weather()
@@ -1354,7 +1415,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # FALLBACK TO SCRAPING
         MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=' + str(ztag)
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
+            MAIN_PAGE_FF)
 
         self.my_forecast_weather()
         self.StartPage()
@@ -1637,7 +1699,8 @@ class Color_Select(Screen):
         self["Clist"].selectionEnabled(1)
 
         print("[Color_Select] === START ===")
-        print("[Color_Select] Loaded items: {0}".format(len(self.original_names)))
+        print("[Color_Select] Loaded items: {0}".format(
+            len(self.original_names)))
         if self.Clist:
             self.update_display(0)
 
@@ -1649,7 +1712,9 @@ class Color_Select(Screen):
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print("[Color_Select] Translating range {0} to {1}".format(start_idx, end_idx_actual))
+            print(
+                "[Color_Select] Translating range {0} to {1}".format(
+                    start_idx, end_idx_actual))
             translated_any = False
             for i in range(start_idx, end_idx_actual):
                 if self.display_names[i] == self.original_names[i]:
@@ -1662,7 +1727,8 @@ class Color_Select(Screen):
 
             if translated_any:
                 self.update_gui()
-                print("[Color_Select] Range {0}-{1} translated".format(start_idx, end_idx_actual))
+                print(
+                    "[Color_Select] Range {0}-{1} translated".format(start_idx, end_idx_actual))
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
@@ -1686,15 +1752,19 @@ class Color_Select(Screen):
                         translated_parts.append("")
 
                 result = '-'.join(translated_parts)
-                print("[Color_Select] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
+                print(
+                    "[Color_Select] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
                 return result
 
             result = trans(color_name)
-            print("[Color_Select] Result: '{0}' -> '{1}'".format(color_name, result))
+            print(
+                "[Color_Select] Result: '{0}' -> '{1}'".format(color_name, result))
             return result
 
         except Exception as e:
-            print("[Color_Select] ERROR translating '{0}': {1}".format(color_name, e))
+            print(
+                "[Color_Select] ERROR translating '{0}': {1}".format(
+                    color_name, e))
             return color_name
 
     def update_display(self, index):
@@ -1727,7 +1797,8 @@ class Color_Select(Screen):
                     self["colordatas"].setText(color_text)
                     print("[Color_Select] Set colordatas")
 
-                    img_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{0}.png".format(myhtml)
+                    img_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{0}.png".format(
+                        myhtml)
                     if os.path.exists(img_path):
                         self["pic1"].instance.setPixmapFromFile(img_path)
                         self["pic1"].instance.show()
@@ -2770,7 +2841,8 @@ class UnitSettings(Screen):
 
         # Save to configuration file
         with open(unit_file, "w") as f:
-            f.write("# configuration file for the units : metric or imperial\n{0}".format(unit_system))
+            f.write("# configuration file for the units : metric or imperial\n{0}".format(
+                unit_system))
 
         self.session.open(
             MessageBox,
