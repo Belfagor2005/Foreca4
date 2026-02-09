@@ -419,10 +419,11 @@ def load_translation_cache():
                     if '=' in line:
                         original, translated = line.strip().split('=', 1)
                         _translation_cache[original] = translated
-            print(
-                f"[Foreca4] Loaded {len(_translation_cache)} translations from cache")
+            print("[Foreca4] Loaded {0} translations from cache"
+                  .format(len(_translation_cache)))
         except Exception as e:
-            print(f"[Foreca4] Cache loading error: {e}")
+            print("[Foreca4] Cache loading error: {0}"
+                  .format(e))
 
     _translation_cache_loaded = True
     return _translation_cache
@@ -432,9 +433,9 @@ def save_translation_cache(original, translated):
     """Save a translation to the cache file"""
     try:
         with open(_translation_cache_file, "a", encoding='utf-8') as f:
-            f.write(f"{original}={translated}\n")
+            f.write("{0}={1}\n".format(original, translated))
     except Exception as e:
-        print(f"[Foreca4] Cache save error: {e}")
+        print("[Foreca4] Cache save error: {0}".format(e))
 
 
 def trans(text, use_batch=True):
@@ -503,7 +504,7 @@ def translate_batch_strings(texts):
                     results[indices[idx]] = original
 
         except Exception as e:
-            print(f"[Foreca4] Batch translation error: {e}")
+            print("[Foreca4] Batch translation error: {0}".format(e))
             # Fallback: translate individually
             for idx, text in enumerate(to_translate):
                 translated = safe_translate(text, fallback=text)
@@ -540,7 +541,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 1. TRY CURRENT WEATHER VIA API
         if self.weather_api.check_credentials():
-            print(f"[Foreca4] Trying API for current weather, ID: {location_id}")
+            print("[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
             result_current = self.weather_api.get_current_weather(location_id)
             if result_current and result_current[0] != 'N/A':
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
@@ -555,11 +556,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
         if not api_current_ok:
             try:
                 MAIN_PAGE_F = str(BASEURL) + path_loc0
-                print(f"[Foreca4] Scraping from: {MAIN_PAGE_F}")
+                print("[Foreca4] Scraping from: {0}".format(MAIN_PAGE_F))
                 result_current = getPageF(MAIN_PAGE_F)
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
             except Exception as e:
-                print(f"[Foreca4] Error scraping current weather: {e}")
+                print("[Foreca4] Error scraping current weather: {0}".format(e))
                 # DEFAULT VALUES
                 town = cur_temp = fl_temp = dewpoint = pic = wind = 'N/A'
                 wind_speed = wind_gust = rain_mm = hum = pressure = 'N/A'
@@ -567,12 +568,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 2. TRY HOURLY FORECASTS VIA API
         if self.weather_api.check_credentials():
-            print(f"[Foreca4] Trying API for forecasts, ID: {location_id}")
+            print("[Foreca4] Trying API for forecasts, ID: {0}".format(location_id))
             result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
                 api_forecast_ok = True
-                print(f"[Foreca4] Forecasts obtained via API: {len(f_time)} periods")
+                print("[Foreca4] Forecasts obtained via API: {0} periods".format(len(f_time)))
             else:
                 print("[Foreca4] Forecast API failed, falling back to scraping")
         else:
@@ -585,7 +586,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 result_forecast = getPageF_F(MAIN_PAGE_FF)
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
             except Exception as e:
-                print(f"[Foreca4] Error scraping forecasts: {e}")
+                print("[Foreca4] Error scraping forecasts: {0}".format(e))
                 # DEFAULT VALUES
                 f_town = 'N/A'
                 f_date = f_time = f_symb = f_cur_temp = f_flike_temp = []
@@ -778,12 +779,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
         observations = self.weather_api.get_station_observations(location_id, station_limit=3)
 
         if observations:
-            print(f"[TEST] Found {len(observations)} stations:")
+            print("[TEST] Found {0} stations:".format(len(observations)))
             for obs in observations:
                 station = obs.get('station', 'N/A')
                 temp = obs.get('temperature', 'N/A')
                 distance = obs.get('distance', 'N/A')
-                print(f"  - {station} ({distance}): {temp}°C")
+                print("  - {0} ({1}): {2}°C".format(station, distance, temp))
             return True
         else:
             print("[TEST] No station observations available")
@@ -791,7 +792,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def open_station_observations(self):
         """Open station observations for the current location"""
-        print(f"[DEBUG] open_station_observations called, myloc={myloc}")  # DEBUG
+        print("[DEBUG] open_station_observations called, myloc={0}".format(myloc))
 
         location_id = ""
         location_name = str(town) if is_valid(town) else "Unknown"
@@ -803,8 +804,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         elif myloc == 2:
             location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
 
-        print(f"[DEBUG] Location ID: {location_id}, Name: {location_name}")  # DEBUG
-
+        print("[DEBUG] Location ID: {0}, Name: {1}".format(location_id, location_name))
         if not location_id:
             self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
             return
@@ -832,8 +832,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 if observations and len(observations) > 0:
                     station_name = observations[0].get('station', 'N/A')
                     station_dist = observations[0].get('distance', '')
-                    text = f"Station: {station_name} ({station_dist})"
-                    print(f"[DEBUG] Station text: {text}")
+                    text = "Station: {0} ({1})".format(station_name, station_dist)
+                    print("[DEBUG] Station text: {0}".format(text))
 
                     from enigma import eTimer
 
@@ -841,9 +841,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         try:
                             if "station" in self:
                                 self["station"].setText(text)
-                                print(f"[DEBUG] UI updated: {text}")
+                                print("[DEBUG] UI updated: {0}".format(text))
                         except Exception as e:
-                            print(f"[DEBUG] UI update error: {e}")
+                            print("[DEBUG] UI update error: {0}".format(e))
 
                     # Stop previous timer if it exists
                     if hasattr(self, "station_update_timer") and self.station_update_timer:
@@ -855,13 +855,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     self.station_update_timer.start(0, True)
 
         except Exception as e:
-            print(f"[Foreca4] Error updating station: {e}")
+            print("[Foreca4] Error updating station: {0}".format(e))
             import traceback
             traceback.print_exc()
-
-    # def _set_station_text(self, text):
-        # """Method called from the main thread to update the widget."""
-        # self["station"].setText(text)
 
     def region_selected_callback(self, result=None):
         """Callback when selecting a region (no need to do anything)"""
@@ -874,9 +870,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 with open(unit_file, 'w') as f:
                     f.write("# configuration file for units: metric or imperial\n")
                     f.write("metric\n")
-                print(f"[Foreca4] Created default unit config: {unit_file}")
+                print("[Foreca4] Created default unit config: {0}".format(unit_file))
             except Exception as e:
-                print(f"[Foreca4] Error creating unit config: {e}")
+                print("[Foreca4] Error creating unit config: {0}".format(e))
 
     def read_unit_preference(self):
         """Read the unit preference from file"""
@@ -890,10 +886,10 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         if line.lower() in ['metric', 'imperial']:
                             return line.lower()
                         else:
-                            print(f"[Foreca4] Invalid unit in config: '{line}'")
+                            print("[Foreca4] Invalid unit in config: '{0}'".format(line))
                             break
         except Exception as e:
-            print(f"[Foreca4] Error reading unit config: {e}")
+            print("[Foreca4] Error reading unit config: {0}".format(e))
         return default_unit
 
     def get_unit_system_preference(self):
@@ -907,7 +903,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     if content in ['metric', 'imperial']:
                         return content
             except Exception as e:
-                print(f"[Foreca4] Error reading unit config: {e}")
+                print("[Foreca4] Error reading unit config: {0}".format(e))
 
         return default_system
 
@@ -928,7 +924,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
             self.session.open(ForecaMapMenu, api, unit_system)
         except Exception as e:
-            print(f"[Foreca4] Error opening API maps: {e}")
+            print("[Foreca4] Error opening API maps: {0}".format(e))
             self.session.open(
                 MessageBox,
                 _("Could not initialize map API.\nCheck configuration."),
@@ -1147,37 +1143,31 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Debug per cur_temp
-        print(
-            f"[DEBUG cur_temp] Valore: '{cur_temp}', is_valid: {is_valid(cur_temp)}")
+        print("[DEBUG cur_temp] Valore: '{0}', is_valid: {1}".format(cur_temp, is_valid(cur_temp)))
 
         # City name
         self["town"].setText(str(town) if is_valid(town) else "N/A")
 
         # Current temperature
-        cur_temp_text = f"{cur_temp}°C" if is_valid(cur_temp) else "N/A"
-        print(f"[DEBUG cur_temp] Testo da impostare: '{cur_temp_text}'")
+        cur_temp_text = "{0}°C".format(cur_temp) if is_valid(cur_temp) else "N/A"
+        print("[DEBUG cur_temp] Testo da impostare: '{0}'".format(cur_temp_text))
         self["cur_temp"].setText(cur_temp_text)
 
         # Feels like temperature
         if is_valid(fl_temp):
-            self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
-            print(
-                f"[WIDGET-FIX] fl_temp settato a: {trans('Feels like ')}{fl_temp}°C")
+            self["fl_temp"].setText(trans("Feels like") + " {0}°C".format(fl_temp))
+            print("[WIDGET-FIX] fl_temp settato a: {0}{1}°C".format(trans("Feels like "), fl_temp))
         else:
             self["fl_temp"].setText(trans("Feels like") + " N/A")
 
         # WIND: use the value directly from scraping
         if is_valid(wind_speed):
             # wind_speed is already in km/h from the site
-            self["wind_speed"].setText(
-                trans("Wind speed") + f" {wind_speed} km/h"
-            )
+            self["wind_speed"].setText(trans("Wind speed") + " {0} km/h".format(wind_speed))
 
         # GUST
         if is_valid(wind_gust):
-            self["wind_gust"].setText(
-                trans("Gust") + f" {wind_gust} km/h"
-            )
+            self["wind_gust"].setText(trans("Gust") + " {0} km/h".format(wind_gust))
 
         # PRESSURE
         if is_valid(pressure):
@@ -1185,22 +1175,21 @@ class ForecaPreview_4(Screen, HelpableScreen):
             # Convert to hPa for proper display
             try:
                 pressure_hpa = float(pressure) / 0.750062  # mmHg → hPa
-                self["pressure"].setText(f"{pressure_hpa:.0f} hPa")  # Rounded
+                self["pressure"].setText("{0:.0f} hPa".format(pressure_hpa))  # Rounded
             except:
-                self["pressure"].setText(f"{pressure} hPa")  # Fallback
+                self["pressure"].setText("{0} hPa".format(pressure))  # Fallback
 
         # Dewpoint
         if is_valid(dewpoint):
-            self["dewpoint"].setText(trans("Dewpoint") + f" {dewpoint}°C")
-            print(
-                f"[WIDGET-FIX] dewpoint settato a: {trans('Dewpoint ')}{dewpoint}°C")
+            self["dewpoint"].setText(trans("Dewpoint") + " {0}°C".format(dewpoint))
+            print("[WIDGET-FIX] dewpoint settato a: {0}{1}°C".format(trans("Dewpoint "), dewpoint))
         else:
             self["dewpoint"].setText(trans("Dewpoint") + " N/A")
 
         # Weather icon
         try:
-            icon = f"{pic}.png" if is_valid(pic) else "n600.png"
-            icon_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{icon}"
+            icon = "{0}.png".format(pic) if is_valid(pic) else "n600.png"
+            icon_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}".format(icon)
             if os.path.exists(icon_path):
                 self["pic"].instance.setPixmapFromFile(icon_path)
         except Exception:
@@ -1218,18 +1207,17 @@ class ForecaPreview_4(Screen, HelpableScreen):
             if is_valid(wind) and 'w' in str(wind):
                 myw = int(str(wind).split('w')[1])
                 myw1 = self.degreesToWindDirection(myw)
-                wind_icon = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{myw1}.png"
+                wind_icon = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}.png".format(myw1)
                 if os.path.exists(wind_icon):
                     self["wind"].instance.setPixmapFromFile(wind_icon)
         except Exception:
             pass
 
         # Precipitation
-        self["rain_mm"].setText(f"{rain_mm} " +
-                                trans("mm") if is_valid(rain_mm) else "N/A")
+        self["rain_mm"].setText("{0} ".format(rain_mm) + trans("mm") if is_valid(rain_mm) else "N/A")
 
         # Humidity
-        self["hum"].setText(f"{hum}%" if is_valid(hum) else "N/A")
+        self["hum"].setText("{0}%".format(hum) if is_valid(hum) else "N/A")
 
         # Force immediate GUI update
         self.invalidate_current_weather_widgets()
@@ -1281,13 +1269,13 @@ class ForecaPreview_4(Screen, HelpableScreen):
             result_current = self.weather_api.get_current_weather(location_id)
             if result_current and result_current[0] != 'N/A':
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print(f"[Foreca4] Fav{fav_index}: Current weather via API")
+                print("[Foreca4] Fav{0}: Current weather via API".format(fav_index))
             else:
                 # Fallback to scraping
                 MAIN_PAGE_F = str(BASEURL) + path_loc
                 result_current = getPageF(MAIN_PAGE_F)
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print(f"[Foreca4] Fav{fav_index}: Current weather via scraping")
+                print("[Foreca4] Fav{0}: Current weather via scraping".format(fav_index))
         else:
             # Scraping only
             MAIN_PAGE_F = str(BASEURL) + path_loc
@@ -1550,7 +1538,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 f"[Foreca4] Cache cleanup: {deleted} files deleted, {kept} files kept")
 
         except Exception as e:
-            print(f"[Foreca4] Error cleaning cache: {e}")
+            print("[Foreca4] Error cleaning cache: {0}".format(e))
 
 
 class Color_Select(Screen):
@@ -1631,10 +1619,10 @@ class Color_Select(Screen):
                     self.original_names.append(name_part)
                     self.display_names.append(name_part)
                     self.mydata.append(data_part)
-                    self.Clist.append(f"{i}. {name_part}")
+                    self.Clist.append("{0}. {1}".format(i, name_part))
 
             except Exception as e:
-                print(f"[Foreca4] Error reading color file: {e}")
+                print("[Foreca4] Error reading color file: {0}".format(e))
                 self.Clist.append("0. " + _("Error loading colors"))
                 self.original_names.append("")
                 self.display_names.append("")
@@ -1649,7 +1637,7 @@ class Color_Select(Screen):
         self["Clist"].selectionEnabled(1)
 
         print("[Color_Select] === START ===")
-        print(f"[Color_Select] Loaded items: {len(self.original_names)}")
+        print("[Color_Select] Loaded items: {0}".format(len(self.original_names)))
         if self.Clist:
             self.update_display(0)
 
@@ -1661,8 +1649,7 @@ class Color_Select(Screen):
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print(
-                f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
+            print("[Color_Select] Translating range {0} to {1}".format(start_idx, end_idx_actual))
             translated_any = False
             for i in range(start_idx, end_idx_actual):
                 if self.display_names[i] == self.original_names[i]:
@@ -1670,13 +1657,12 @@ class Color_Select(Screen):
 
                     if translated != self.original_names[i]:
                         self.display_names[i] = translated
-                        self.Clist[i] = f"{i}. {translated}"
+                        self.Clist[i] = "{0}. {1}".format(i, translated)
                         translated_any = True
 
             if translated_any:
                 self.update_gui()
-                print(
-                    f"[Color_Select] Range {start_idx}-{end_idx_actual} translated")
+                print("[Color_Select] Range {0}-{1} translated".format(start_idx, end_idx_actual))
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
@@ -1685,7 +1671,7 @@ class Color_Select(Screen):
         if not color_name:
             return color_name
 
-        print(f"[Color_Select] Translate: '{color_name}'")
+        print("[Color_Select] Translate: '{0}'".format(color_name))
         try:
             if '-' in color_name:
                 parts = color_name.split('-')
@@ -1700,31 +1686,30 @@ class Color_Select(Screen):
                         translated_parts.append("")
 
                 result = '-'.join(translated_parts)
-                print(
-                    f"[Color_Select] Result with iphen: '{color_name}' -> '{result}'")
+                print("[Color_Select] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
                 return result
 
             result = trans(color_name)
-            print(f"[Color_Select] Result: '{color_name}' -> '{result}'")
+            print("[Color_Select] Result: '{0}' -> '{1}'".format(color_name, result))
             return result
 
         except Exception as e:
-            print(f"[Color_Select] ERROR translating '{color_name}': {e}")
+            print("[Color_Select] ERROR translating '{0}': {1}".format(color_name, e))
             return color_name
 
     def update_display(self, index):
-        print(f"[Color_Select] update_display({index})")
+        print("[Color_Select] update_display({0})".format(index))
         if 0 <= index < len(self.display_names):
             if self.display_names[index] == self.original_names[index]:
                 translated = self.translate_color(self.original_names[index])
                 if translated != self.display_names[index]:
                     self.display_names[index] = translated
-                    self.Clist[index] = f"{index}. {translated}"
+                    self.Clist[index] = "{0}. {1}".format(index, translated)
                     self.update_gui()
 
             display_name = self.display_names[index]
             self["colorname"].setText(display_name)
-            print(f"[Color_Select] Set colorname: '{display_name}'")
+            print("[Color_Select] Set colorname: '{0}'".format(display_name))
             if index < len(self.mydata) and self.mydata[index]:
                 color_info = self.mydata[index]
                 parts = color_info.split(' ')
@@ -1742,7 +1727,7 @@ class Color_Select(Screen):
                     self["colordatas"].setText(color_text)
                     print("[Color_Select] Set colordatas")
 
-                    img_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{myhtml}.png"
+                    img_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{0}.png".format(myhtml)
                     if os.path.exists(img_path):
                         self["pic1"].instance.setPixmapFromFile(img_path)
                         self["pic1"].instance.show()
@@ -2418,7 +2403,7 @@ class CityPanel4(Screen):
 
                     line_number += 1
 
-            print(f"[CityPanel4] Upload {len(self.Mlist)} CITY")
+            print("[CityPanel4] Upload {0} CITY".format(len(self.Mlist)))
 
             self.filtered_list = self.Mlist
             self["Mlist"].setList(self.filtered_list)
@@ -2435,7 +2420,7 @@ class CityPanel4(Screen):
             self.timer.start(100, True)  # 100ms
 
         except Exception as e:
-            print("[CityPanel4] Error loading cities:", e)
+            print("[CityPanel4] Error loading cities: {0}".format(e))
             import traceback
             traceback.print_exc()
 
@@ -2528,11 +2513,13 @@ class CityPanel4(Screen):
                     self.select_first_item()
                     self["Mlist"].selectionEnabled(1)
             except Exception as e:
-                print(f"[CityPanel4] Search error: {e}")
-                self.session.open(MessageBox,
-                                  _('An error occurred during search!'),
-                                  MessageBox.TYPE_ERROR,
-                                  timeout=5)
+                print("[CityPanel4] Search error: {0}".format(e))
+                self.session.open(
+                    MessageBox,
+                    _('An error occurred during search!'),
+                    MessageBox.TYPE_ERROR,
+                    timeout=5
+                )
 
     def update_description(self):
         try:
@@ -2560,7 +2547,7 @@ class CityPanel4(Screen):
             else:
                 self["description"].setText(_("No city selected"))
         except Exception as e:
-            print(f"[CityPanel4] update_description error: {e}")
+            print("[CityPanel4] update_description error: {0}".format(e))
             self["description"].setText(_("No city selected"))
 
     def save_favorite1(self):
@@ -2592,7 +2579,7 @@ class CityPanel4(Screen):
                     city_name, city_id = data[0], data[1]
                     return f"{city_id}/{city_name.replace(' ', '_')}"
         except Exception as e:
-            print(f"[CityPanel4] Error getting selection: {e}")
+            print("[CityPanel4] Error getting selection: {0}".format(e))
         return None
 
     def save_favorite(self, fav_type, city):
@@ -2626,18 +2613,20 @@ class CityPanel4(Screen):
                               timeout=8)
             return True
         except Exception as e:
-            print(f"[CityPanel4] Error saving {fav_type}: {e}")
-            self.session.open(MessageBox,
-                              _("Error saving favorite!"),
-                              MessageBox.TYPE_ERROR,
-                              timeout=5)
+            print("[CityPanel4] Error saving {0}: {1}".format(fav_type, e))
+            self.session.open(
+                MessageBox,
+                _("Error saving favorite!"),
+                MessageBox.TYPE_ERROR,
+                timeout=5
+            )
             return False
 
     def ok(self):
         """Select city for forecast"""
         selected = self.get_selected_city()
         if selected:
-            print(f"[CityPanel4] Selected city: {selected}")
+            print("[CityPanel4] Selected city: {0}".format(selected))
             self.close(selected)
 
     def show_info(self):
@@ -2781,11 +2770,13 @@ class UnitSettings(Screen):
 
         # Save to configuration file
         with open(unit_file, "w") as f:
-            f.write(f"# configuration file for the units : metric or imperial\n{unit_system}")
+            f.write("# configuration file for the units : metric or imperial\n{0}".format(unit_system))
 
-        self.session.open(MessageBox,
-                          _("Unit settings saved. Restart plugin to apply changes."),
-                          MessageBox.TYPE_INFO)
+        self.session.open(
+            MessageBox,
+            _("Unit settings saved. Restart plugin to apply changes."),
+            MessageBox.TYPE_INFO
+        )
         self.close()
 
     def exit(self):
