@@ -62,7 +62,8 @@ class DailyForecast(Screen):
         self["info"].setText(_("Loading..."))
 
         # Try API first
-        self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
+        self.forecast_data = self.api.get_daily_forecast(
+            self.location_id, days=7)
 
         if self.forecast_data:
             self.display_forecast()
@@ -77,7 +78,8 @@ class DailyForecast(Screen):
             text_lines = []
 
             # Header
-            text_lines.append(f"[b]{self.forecast_data['town']}, {self.forecast_data['country']}[/b]")
+            text_lines.append(
+                f"[b]{self.forecast_data['town']}, {self.forecast_data['country']}[/b]")
             text_lines.append(_("7-Day Detailed Forecast"))
             text_lines.append("=" * 40)
 
@@ -119,7 +121,8 @@ class DailyForecast(Screen):
             # Display
             self["forecast_text"].setText("\n".join(text_lines))
             self["info"].setText(_("Use arrow keys to scroll"))
-            self["title"].setText(f"{self.location_name} - {_('Weekly Forecast')}")
+            self["title"].setText(
+                f"{self.location_name} - {_('Weekly Forecast')}")
 
         except Exception as e:
             print(f"[DailyForecast] Error displaying forecast: {e}")
@@ -154,13 +157,15 @@ class DailyForecast(Screen):
             url = f"{self.base_url}/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
 
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
                 return self._parse_daily_forecast_response(data)
             else:
-                print(f"[ForecaWeatherAPI] Daily forecast HTTP error: {response.status_code}")
+                print(
+                    f"[ForecaWeatherAPI] Daily forecast HTTP error: {response.status_code}")
                 print(f"Response: {response.text[:200]}")
                 return None
 
@@ -198,7 +203,8 @@ class DailyForecast(Screen):
                     'description': self._symbol_to_description(day.get('symbol', 'd000'))
                 })
 
-            print(f"[ForecaWeatherAPI] Analizzate {len(daily_data['days'])} previsioni giornaliere")
+            print(
+                f"[ForecaWeatherAPI] Analizzate {len(daily_data['days'])} previsioni giornaliere")
             return daily_data
 
         except Exception as e:
