@@ -532,8 +532,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.weather_api = ForecaWeatherAPI(self.unit_manager)
 
         # DETERMINE LOCATION ID FROM PATH
-        location_id = path_loc0.split(
-            '/')[0] if '/' in path_loc0 else path_loc0
+        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
 
         # STRATEGY: TRY API FIRST, THEN FALL BACK TO SCRAPING
         api_current_ok = False
@@ -541,16 +540,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 1. TRY CURRENT WEATHER VIA API
         if self.weather_api.check_credentials():
-            print(
-                f"[Foreca4] Trying API for current weather, ID: {location_id}")
+            print(f"[Foreca4] Trying API for current weather, ID: {location_id}")
             result_current = self.weather_api.get_current_weather(location_id)
             if result_current and result_current[0] != 'N/A':
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
                 api_current_ok = True
                 print("[Foreca4] Current weather obtained via API")
             else:
-                print(
-                    "[Foreca4] Current weather API failed, falling back to scraping")
+                print("[Foreca4] Current weather API failed, falling back to scraping")
         else:
             print("[Foreca4] API credentials not configured, using scraping")
 
@@ -571,13 +568,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # 2. TRY HOURLY FORECASTS VIA API
         if self.weather_api.check_credentials():
             print(f"[Foreca4] Trying API for forecasts, ID: {location_id}")
-            result_forecast = self.weather_api.get_hourly_forecast(
-                location_id, days=1)
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
                 api_forecast_ok = True
-                print(
-                    f"[Foreca4] Forecasts obtained via API: {len(f_time)} periods")
+                print(f"[Foreca4] Forecasts obtained via API: {len(f_time)} periods")
             else:
                 print("[Foreca4] Forecast API failed, falling back to scraping")
         else:
@@ -771,8 +766,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def test_station_observations(self):
         """Test station observations"""
-        location_id = path_loc0.split(
-            '/')[0] if '/' in path_loc0 else path_loc0
+        location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
 
         # Ensure weather_api is initialized
         if not hasattr(self, 'weather_api'):
@@ -781,8 +775,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             unit_manager = UnitManager(config_path)
             self.weather_api = ForecaWeatherAPI(unit_manager)
 
-        observations = self.weather_api.get_station_observations(
-            location_id, station_limit=3)
+        observations = self.weather_api.get_station_observations(location_id, station_limit=3)
 
         if observations:
             print(f"[TEST] Found {len(observations)} stations:")
@@ -798,39 +791,27 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def open_station_observations(self):
         """Open station observations for the current location"""
-        print(
-            f"[DEBUG] open_station_observations called, myloc={myloc}")  # DEBUG
+        print(f"[DEBUG] open_station_observations called, myloc={myloc}")  # DEBUG
 
         location_id = ""
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split(
-                '/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split(
-                '/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split(
-                '/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
 
-        # DEBUG
-        print(f"[DEBUG] Location ID: {location_id}, Name: {location_name}")
+        print(f"[DEBUG] Location ID: {location_id}, Name: {location_name}")  # DEBUG
 
         if not location_id:
-            self.session.open(
-                MessageBox,
-                _("No location selected"),
-                MessageBox.TYPE_INFO)
+            self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
             return
 
         from .foreca_stations import ForecaStations
         print("[DEBUG] Opening ForecaStations...")
-        self.session.open(
-            ForecaStations,
-            self.weather_api,
-            location_id,
-            location_name)
+        self.session.open(ForecaStations, self.weather_api, location_id, location_name)
 
     def _update_station_label(self):
         """Thread to update the nearest station name safely"""
@@ -838,19 +819,15 @@ class ForecaPreview_4(Screen, HelpableScreen):
             # Determine the current location ID
             location_id = ""
             if myloc == 0:
-                location_id = path_loc0.split(
-                    '/')[0] if '/' in path_loc0 else path_loc0
+                location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
             elif myloc == 1:
-                location_id = path_loc1.split(
-                    '/')[0] if '/' in path_loc1 else path_loc1
+                location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
             elif myloc == 2:
-                location_id = path_loc2.split(
-                    '/')[0] if '/' in path_loc2 else path_loc2
+                location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
 
             if location_id and hasattr(self, 'weather_api'):
                 # Request only the nearest station
-                observations = self.weather_api.get_station_observations(
-                    location_id, station_limit=1)
+                observations = self.weather_api.get_station_observations(location_id, station_limit=1)
 
                 if observations and len(observations) > 0:
                     station_name = observations[0].get('station', 'N/A')
@@ -869,9 +846,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                             print(f"[DEBUG] UI update error: {e}")
 
                     # Stop previous timer if it exists
-                    if hasattr(
-                            self,
-                            "station_update_timer") and self.station_update_timer:
+                    if hasattr(self, "station_update_timer") and self.station_update_timer:
                         self.station_update_timer.stop()
 
                     # Create and start a single-shot timer
@@ -915,8 +890,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         if line.lower() in ['metric', 'imperial']:
                             return line.lower()
                         else:
-                            print(
-                                f"[Foreca4] Invalid unit in config: '{line}'")
+                            print(f"[Foreca4] Invalid unit in config: '{line}'")
                             break
         except Exception as e:
             print(f"[Foreca4] Error reading unit config: {e}")
@@ -1212,7 +1186,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
             try:
                 pressure_hpa = float(pressure) / 0.750062  # mmHg → hPa
                 self["pressure"].setText(f"{pressure_hpa:.0f} hPa")  # Rounded
-            except BaseException:
+            except:
                 self["pressure"].setText(f"{pressure} hPa")  # Fallback
 
         # Dewpoint
@@ -1313,8 +1287,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 MAIN_PAGE_F = str(BASEURL) + path_loc
                 result_current = getPageF(MAIN_PAGE_F)
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print(
-                    f"[Foreca4] Fav{fav_index}: Current weather via scraping")
+                print(f"[Foreca4] Fav{fav_index}: Current weather via scraping")
         else:
             # Scraping only
             MAIN_PAGE_F = str(BASEURL) + path_loc
@@ -1325,28 +1298,23 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # 2. FORECAST VIA API (or scraping fallback)
         if self.weather_api.check_credentials():
-            result_forecast = self.weather_api.get_hourly_forecast(
-                location_id, days=1)
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
             else:
                 # Fallback
                 MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                    MAIN_PAGE_FF)
+                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
         else:
             # Scraping only
             MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
+            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
 
         self.my_forecast_weather()
 
         # 3. UPDATE INTERFACE
-        self["day_len"].setText(str(conv_day_len(daylen))
-                                if is_valid(daylen) else "N/A")
-        self["sunrise_val"].setText(
-            str(sunrise) if is_valid(sunrise) else "N/A")
+        self["day_len"].setText(str(conv_day_len(daylen)) if is_valid(daylen) else "N/A")
+        self["sunrise_val"].setText(str(sunrise) if is_valid(sunrise) else "N/A")
         self["sunset_val"].setText(str(sunset) if is_valid(sunset) else "N/A")
 
         # 4. LOAD MAP IN BACKGROUND
@@ -1389,8 +1357,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # FIRST TRY API
         if self.weather_api.check_credentials() and location_id:
-            result_forecast = self.weather_api.get_hourly_forecast(
-                location_id, days=ztag + 1)
+            result_forecast = self.weather_api.get_hourly_forecast(location_id, days=ztag + 1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
                 self.my_forecast_weather()
@@ -1399,8 +1366,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         # FALLBACK TO SCRAPING
         MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=' + str(ztag)
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
+        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(MAIN_PAGE_FF)
 
         self.my_forecast_weather()
         self.StartPage()
@@ -1612,8 +1578,8 @@ class Color_Select(Screen):
         self["colordatas"] = Label()
         self["colordatas"].setText(_('Color data'))
         self["pic1"] = Pixmap()
-        self["plate0"] = Label(_("N/A"))
-        self["plate1"] = Label(_("N/A"))
+        self["plate0"] = Label("N/A")
+        self["plate1"] = Label("N/A")
         self["actions"] = ActionMap(
             [
                 "OkCancelActions",
@@ -2815,20 +2781,38 @@ class UnitSettings(Screen):
 
         # Save to configuration file
         with open(unit_file, "w") as f:
-            f.write(
-                f"# configuration file for the units : metric or imperial\n{unit_system}")
+            f.write(f"# configuration file for the units : metric or imperial\n{unit_system}")
 
-        self.session.open(
-            MessageBox,
-            _("Unit settings saved. Restart plugin to apply changes."),
-            MessageBox.TYPE_INFO)
+        self.session.open(MessageBox,
+                          _("Unit settings saved. Restart plugin to apply changes."),
+                          MessageBox.TYPE_INFO)
         self.close()
 
     def exit(self):
         self.close()
 
 
+def checkInternet():
+    try:
+        import socket
+        socket.setdefaulttimeout(0.5)
+        socket.socket(
+            socket.AF_INET, socket.SOCK_STREAM).connect(
+            ('8.8.8.8', 53))
+        return True
+    except BaseException:
+        return False
+
+
 def main(session, **kwargs):
+    if not checkInternet():
+        session.open(
+            MessageBox,
+            _("No Internet connection detected. Please check your network."),
+            MessageBox.TYPE_INFO
+        )
+        return
+
     session.open(ForecaPreview_4)
 
 
