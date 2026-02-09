@@ -19,7 +19,9 @@
 
 
 
-# Foreca Weather Forecast E2
+---
+
+## 🌍 Foreca 4 Weather and Forecast
 
 Foreca Weather Forecast E2 is an **Enigma2 plugin** that retrieves and displays **actual weather forecasts for up to 10 days** using data provided by **Foreca**.
 
@@ -66,14 +68,6 @@ Foreca Weather Forecast E2 is an **Enigma2 plugin** that retrieves and displays 
 * Major cleanup: removed unnecessary code
 * Added full Python 3 support
 * Translation ~90% complete
-
----
-
-## 🌍 Foreca 4 Weather and Forecast
-
-* **Original code:** (C) Evg77734, 2025
-* **Base version:** v1.3.4
-* **Current mod:** @lululla — 2026-01-25 — v1.3.4_r2
 
 ---
 
@@ -273,9 +267,12 @@ api_config.txt.example
 ## 👥 Credits
 
 * **Design and original idea:** @Bauernbub
-* **Enigma2 modifications:** mogli123
+* Enigma2 modifications:** mogli123
 * **Major recode and maintenance:** Lululla
-* **EUMETSAT screen picxview restore:** thanks to Orlandoxx
+* version:** v3.3.8 mod Lululla
+* Modded from Evg77734, 2025 v1.3.4
+* 
+* **Current mod:** @lululla — 2026-01-25 — v1.3.4_r5
 
 ---
 ## License
@@ -409,12 +406,13 @@ api_config.txt.example
 
 ## 👥 Crediti
 
-* **Progettazione e idea originale:** @Bauernbub
-* **Modifiche a Enigma2:** mogli123
-* **Ricodifica e manutenzione importanti:** Lululla
-* **Ripristino della schermata PicxView di EUMETSAT:** grazie a Orlandoxx
-
----
+* **Design e idea originale:** @Bauernbub
+* Modifiche a Enigma2:** mogli123
+* **Ricodifica e manutenzione principali:** Lululla
+* Versione:** v3.3.8 mod Lululla
+* Modificato da Evg77734, 2025 v1.3.4
+*
+* **Mod attuale:** @lululla — 25/01/2026 — v1.3.4_r5---
 
 © Lululla
 
@@ -539,10 +537,14 @@ api_config.txt.example
   * Пока не реализованы
 
 ---
+## 👥 Благодарности
+
 * **Дизайн и оригинальная идея:** @Bauernbub
-* **Модификации Enigma2:** mogli123
+* Модификации Enigma2:** mogli123
 * **Основная переработка кода и поддержка:** Lululla
-* **Восстановление picxview на экране EUMETSAT:** спасибо Orlandoxx
+* версия:** v3.3.8 mod Lululla
+* Модификация создана на основе Evg77734, 2025 v1.3.4
+* **Текущий мод:** @lululla — 2026-01-25 — v1.3.4_r5
 
 © Lululla
 
