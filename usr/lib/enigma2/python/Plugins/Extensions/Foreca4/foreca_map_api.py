@@ -24,8 +24,9 @@ class ForecaMapAPI:
         self.token_expire_hours = 720
         server_map = {
             'eu': 'map-eu.foreca.com',
+            'europe': 'map-eu.foreca.com',
             'us': 'map-us.foreca.com',
-            # Add others if discovered: 'asia', 'au', etc.
+            'usa': 'map-us.foreca.com',
         }
         self.map_server = server_map.get(region, 'map-eu.foreca.com')
         self.auth_server = 'pfa.foreca.com'

@@ -59,7 +59,7 @@ class ForecaWeatherAPI:
                 print(f"[ForecaWeatherAPI] Error loading token: {e}")
 
     def check_credentials(self):
-        """Verifica se le credenziali sono configurate"""
+        """Check whether credentials are configured"""
         return bool(self.user and self.password)
 
     def _degrees_to_direction(self, degrees):
@@ -338,7 +338,7 @@ class ForecaWeatherAPI:
         if not token:
             print("[ForecaWeatherAPI] No token for daily forecast")
             return None
-        
+
         try:
             headers = {"Authorization": f"Bearer {token}"}
             params = {
@@ -347,16 +347,16 @@ class ForecaWeatherAPI:
                 "tempunit": "C",
                 "windunit": "KMH"
             }
-            
+
             if self.unit_manager:
                 api_params = self.unit_manager.get_api_params()
                 params.update(api_params)
-            
+
             url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
-            
+
             response = requests.get(url, headers=headers, params=params, timeout=15)
-            
+
             if response.status_code == 200:
                 data = response.json()
                 print("[ForecaWeatherAPI] Daily forecast response received")
@@ -365,7 +365,7 @@ class ForecaWeatherAPI:
                 print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
                 print(f"Response: {response.text[:200]}")
                 return None
-                
+
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
             import traceback

@@ -210,10 +210,10 @@ ForecaMapMenu_FHD = """
 
 ForecaMapViewer_FHD = """
 <screen name="ForecaMapViewer_FHD" position="center,center" size="1920,1080" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="1920,1080" zPosition="1" scale="1" />
+    <widget name="map" position="0,0" size="1920,1080" zPosition="1" scale="1" backgroundColor="#40000000" />
     <widget name="title" position="50,5" size="1820,50" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
-    <widget name="time" position="50,1000" size="1820,50" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
-    <widget name="info" position="50,1050" size="1820,30" font="Regular;24" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="time" position="50,995" size="1820,50" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="50,1045" size="1820,35" font="Regular; 28" foregroundColor="#f4f4f4" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
     <widget name="layerinfo" position="60,55" size="1800,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
 </screen>"""
 
@@ -492,7 +492,7 @@ ForecaMapMenu_HD = """
 
 ForecaMapViewer_HD = """
 <screen name="ForecaMapViewer_HD" position="center,center" size="1280,720" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="1280,720" zPosition="1" />
+    <widget name="map" position="0,0" size="1280,720" zPosition="1" scale="1" backgroundColor="#40000000" />
     <widget name="title" position="30,10" size="1220,35" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
     <widget name="time" position="30,665" size="1220,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
     <widget name="info" position="30,695" size="1220,20" font="Regular;20" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
@@ -787,7 +787,7 @@ ForecaMapMenu_UHD = """
 
 ForecaMapViewer_UHD = """
 <screen name="ForecaMapViewer_UHD" position="center,center" size="2560,1440" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="2560,1440" zPosition="1" scale="1" />
+    <widget name="map" position="0,0" size="2560,1440" zPosition="1" scale="1" backgroundColor="#40000000" />
     <widget name="title" position="67,15" size="2427,67" font="Regular;54" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
     <widget name="time" position="67,1334" size="2427,67" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
     <widget name="info" position="67,1400" size="2427,40" font="Regular;32" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />

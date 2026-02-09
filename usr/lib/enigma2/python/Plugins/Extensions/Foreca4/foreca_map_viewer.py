@@ -25,31 +25,14 @@ grid_size = 6
 
 
 def get_background_for_layer(layer_title, region="europe"):
-    """Automatically selects the optimal PNG background from available thumbnails"""
+    """Automatically select the optimal PNG background from available thumbnails"""
 
-    layer_lower = layer_title.lower()
-
-    # Smart mapping based on layer keywords
-    if any(
-        word in layer_lower for word in [
-            'temp',
-            'temperature',
-            'warm',
-            'cold']):
-        return 'temp_map.png'
-    elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
-        return 'rain_map.png'
-    elif any(word in layer_lower for word in ['cloud', 'fog', 'mist']):
-        return 'cloud_map.png'
-    elif any(word in layer_lower for word in ['pressure', 'baro', 'hpa']):
-        return 'pressure_map.png'
-    elif any(word in layer_lower for word in ['wind', 'gust', 'breeze']):
-        # No wind_map.png available, use europa
-        return 'europa.png'
-
-    # Regional backgrounds
     region_lower = region.lower()
-    if any(word in region_lower for word in ['italy', 'italia', 'italien']):
+
+    # FIRST check the region – this has PRIORITY
+    if region_lower in ['eu', 'europe']:
+        return 'europa.png'
+    elif any(word in region_lower for word in ['italy', 'italia', 'italien']):
         return 'italien.png'
     elif any(word in region_lower for word in ['germany', 'deutsch', 'germania']):
         return 'deutschland.png'
@@ -64,83 +47,227 @@ def get_background_for_layer(layer_title, region="europe"):
     elif any(word in region_lower for word in ['switzerland', 'schweiz', 'svizzera']):
         return 'schweiz.png'
 
+    # THEN check the layer type
+    layer_lower = layer_title.lower()
+
+    if any(word in layer_lower for word in ['temp', 'temperature', 'warm', 'cold']):
+        return 'temp_map.png'
+    elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
+        return 'rain_map.png'
+    elif any(word in layer_lower for word in ['cloud', 'fog', 'mist']):
+        return 'cloud_map.png'
+    elif any(word in layer_lower for word in ['pressure', 'baro', 'hpa']):
+        return 'pressure_map.png'
+    elif any(word in layer_lower for word in ['wind', 'gust', 'breeze']):
+        return 'europa.png'  # No wind_map.png exists
+
     # Default background
     return 'europa.png'
 
 
 def create_composite_map(weather_tiles_path, layer_title, region):
-    """Creates a composite map: background + Foreca weather data"""
-    print("[DEBUG] create_composite_map called")
-    print(f"[DEBUG] Weather tiles path: {weather_tiles_path}")
-    print(f"[DEBUG] Layer title: {layer_title}")
-    print(f"[DEBUG] Region: {region}")
+    """Create a composite map with opaque background"""
+    print("[DEBUG] create_composite_map START")
+    from time import time
 
-    # 1. Select background
+    # 1. Screen dimensions
+    screen_width, screen_height = getDesktop(0).size().width(), getDesktop(0).size().height()
+
+    # 2. Create OPAQUE background (dark blue)
+    # Color: (R, G, B, A) where 255 = fully opaque
+    opaque_background = Image.new('RGBA', (screen_width, screen_height), (30, 40, 60, 255))
+
+    # 3. Load base map (transparent)
     bg_file = get_background_for_layer(layer_title, region)
-    print(f"[DEBUG] Selected background file: {bg_file}")
-
     bg_path = os.path.join(THUMB_PATH, bg_file)
-    print(f"[DEBUG] Background path: {bg_path}")
 
-    # 2. Load background
-    background = None
     if os.path.exists(bg_path):
-        print(f"[DEBUG] Loading background from: {bg_path}")
         try:
             background = Image.open(bg_path).convert('RGBA')
-            print(f"[DEBUG] Background loaded successfully: {background.size}")
+            orig_w, orig_h = background.size
+
+            # Resize
+            background = background.resize((screen_width, screen_height), Image.Resampling.LANCZOS)
+
+            # Paste transparent map over opaque background
+            opaque_background.paste(background, (0, 0), background)
+
+            composite = opaque_background  # Now has opaque background + map
         except Exception as e:
-            print(f"[DEBUG] Error loading background: {e}")
-            background = None
+            print(f"[DEBUG] Map error: {e}")
+            composite = opaque_background  # Only opaque background
+    else:
+        composite = opaque_background  # Only opaque background
 
-    if background is None:
-        # Try fallback to europa.png
-        fallback_path = os.path.join(THUMB_PATH, 'europa.png')
-        if os.path.exists(fallback_path):
-            print(f"[DEBUG] Loading fallback: {fallback_path}")
-            background = Image.open(fallback_path).convert('RGBA')
-        else:
-            # Create simple colored background
-            print("[DEBUG] Creating colored background")
-            background = Image.new('RGBA', (768, 768), (40, 60, 80, 255))
-
-    # 3. Load weather data
-    print(f"[DEBUG] Loading weather tiles from: {weather_tiles_path}")
+    # 4. Load and resize weather tile (as before)
     weather_data = Image.open(weather_tiles_path).convert('RGBA')
-    print(f"[DEBUG] Weather data size: {weather_data.size}")
+    tile_w, tile_h = weather_data.size
 
-    # 4. Resize background to match weather data
-    print(
-        f"[DEBUG] Resizing background: {background.size} -> {weather_data.size}")
-    bg_resized = background.resize(weather_data.size, Image.Resampling.LANCZOS)
+    # 5. Calculate scaling
+    scale = min(screen_width * 0.8 / tile_w, screen_height * 0.8 / tile_h)
+    new_tile_w = int(tile_w * scale)
+    new_tile_h = int(tile_h * scale)
 
-    # 5. Combine: background + weather data
-    # First, make weather data slightly transparent to see background
-    # Adjust alpha channel of weather data (0=transparent, 255=opaque)
+    weather_data = weather_data.resize((new_tile_w, new_tile_h), Image.Resampling.LANCZOS)
+
+    # 6. Position tile
+    x_offset = (screen_width - new_tile_w) // 2
+    y_offset = (screen_height - new_tile_h) // 2
+
+    # 7. Combine with transparency (background is already opaque)
     weather_alpha = weather_data.split()[3]
-    # Reduce alpha by 30% to make more transparent
-    weather_alpha = weather_alpha.point(lambda x: int(x * 0.7))
+    weather_alpha = weather_alpha.point(lambda x: int(x * 0.5))
     weather_data.putalpha(weather_alpha)
 
-    composite = Image.alpha_composite(bg_resized, weather_data)
+    composite.paste(weather_data, (x_offset, y_offset), weather_data)
 
-    # 6. Add attribution
+    # 8. Add text (no extra background)
     draw = ImageDraw.Draw(composite)
-    draw.text(
-        (10, composite.height - 20),
-        f"Foreca: {layer_title}",
-        fill=(255, 255, 255, 200)
-    )
+    draw.text((20, 20), f"Foreca: {layer_title}", fill=(255, 255, 255, 230))
+    draw.text((20, screen_height - 60), f"Region: {region}", fill=(200, 200, 200, 200))
+    draw.text((20, screen_height - 30), f"Weather data overlay", fill=(180, 180, 180, 180))
 
-    print(f"[DEBUG] Composite created: {composite.size}")
+    # 9. Save
+    output_path = os.path.join(CACHE_BASE, f"foreca_opaque_{int(time())}.png")
+    composite.save(output_path, 'PNG')
+
+    print(f"[DEBUG] File saved with opaque background")
+    return output_path
+
+
+"""
+def create_composite_map(weather_tiles_path, layer_title, region):
+    print("[DEBUG] create_composite_map START")
+
+    from enigma import getDesktop
     from time import time
-    composite_filename = f"composite_{int(time())}.png"
-    composite_path = os.path.join(CACHE_BASE, composite_filename)
-    try:
-        composite.save(composite_path, 'PNG')
-        return composite_path
-    except BaseException:
-        return weather_tiles_path
+    import os
+
+    # 1. Ottieni dimensioni REALI schermo
+    screen_width, screen_height = getDesktop(0).size().width(), getDesktop(0).size().height()
+    print(f"[DEBUG] Schermo: {screen_width}x{screen_height}")
+
+    # 2. Crea uno sfondo opaco (nero con un po' di blu)
+    background_color = (30, 40, 60, 255)  # R, G, B, A (255 = opaco)
+    composite = Image.new('RGBA', (screen_width, screen_height), background_color)
+
+    # 3. Carica mappa di sfondo (se esiste e non è trasparente?)
+    bg_file = get_background_for_layer(layer_title, region)
+    bg_path = os.path.join(THUMB_PATH, bg_file)
+
+    print(f"[DEBUG] Usando mappa: {bg_file}")
+
+    if os.path.exists(bg_path):
+        try:
+            background_map = Image.open(bg_path).convert('RGBA')
+            orig_w, orig_h = background_map.size
+            print(f"[DEBUG] Mappa originale: {orig_w}x{orig_h}")
+
+            # RIDIMENSIONA mappa a schermo intero
+            background_map = background_map.resize((screen_width, screen_height), Image.Resampling.LANCZOS)
+            print(f"[DEBUG] Mappa ridimensionata: {screen_width}x{screen_height}")
+
+            # Se la mappa è trasparente, la disegniamo sopra lo sfondo opaco
+            # Altrimenti, potremmo sostituire lo sfondo
+            # In questo caso, usiamo la mappa come sovrapposizione (con opacità)
+            # Ma prima assicuriamoci che la mappa abbia un canale alfa
+            # Se la mappa è trasparente, possiamo fare un composite
+            # Per sicurezza, creiamo un'immagine temporanea con sfondo opaco
+            map_bg = Image.new('RGBA', (screen_width, screen_height), background_color)
+            # Poi incolliamo la mappa sopra
+            map_bg.paste(background_map, (0, 0), background_map)
+            # Ora map_bg è opaco con la mappa sopra
+            background_map = map_bg
+
+        except Exception as e:
+            print(f"[DEBUG] Errore caricamento mappa: {e}")
+            background_map = None
+    else:
+        background_map = None
+
+    # 4. Se abbiamo una mappa, la disegniamo sullo sfondo
+    if background_map is not None:
+        # Usiamo la mappa come sfondo (sostituisce lo sfondo uniforme)
+        composite = background_map
+    else:
+        # Altrimenti, resta lo sfondo uniforme
+        pass
+
+    # 5. Carica tile meteo
+    weather_data = Image.open(weather_tiles_path).convert('RGBA')
+    tile_w, tile_h = weather_data.size
+    print(f"[DEBUG] Tile meteo: {tile_w}x{tile_h}")
+
+    # 6. Calcola fattore di scala (basato su mappa ORIGINALE o schermo)
+    if bg_file and os.path.exists(bg_path) and 'orig_w' in locals():
+        scale_x = screen_width / orig_w
+        scale_y = screen_height / orig_h
+        scale = (scale_x + scale_y) / 2
+    else:
+        # Se mappa non caricata, scala per adattare tile allo schermo
+        scale = min(screen_width * 0.8 / tile_w, screen_height * 0.8 / tile_h)
+
+    print(f"[DEBUG] Fattore scala: {scale:.2f}")
+
+    # 7. Ridimensiona le tile
+    new_tile_w = int(tile_w * scale)
+    new_tile_h = int(tile_h * scale)
+    print(f"[DEBUG] Tile ridimensionate: {new_tile_w}x{new_tile_h}")
+
+    weather_data = weather_data.resize((new_tile_w, new_tile_h), Image.Resampling.LANCZOS)
+
+    # 8. Posiziona tile al CENTRO schermo
+    x_offset = (screen_width - new_tile_w) // 2
+    y_offset = (screen_height - new_tile_h) // 2
+    print(f"[DEBUG] Posizione tile: ({x_offset}, {y_offset})")
+
+    # 9. Applica trasparenza alle tile meteo (50% opacità)
+    weather_alpha = weather_data.split()[3]
+    weather_alpha = weather_alpha.point(lambda x: int(x * 0.5))  # 50% trasparenza
+    weather_data.putalpha(weather_alpha)
+
+    # 10. Combina mappa + tile
+    composite.paste(weather_data, (x_offset, y_offset), weather_data)
+
+    # 11. Aggiungi testo informativo (con sfondo semitrasparente)
+    draw = ImageDraw.Draw(composite)
+
+    # Titolo in alto a sinistra con rettangolo di sfondo
+    title_text = f"Foreca: {layer_title}"
+    # Stima dimensione testo (approssimativa)
+    title_font_size = 40
+    title_bg = Image.new('RGBA', (screen_width, title_font_size + 20), (0, 0, 0, 0))
+    title_draw = ImageDraw.Draw(title_bg)
+    # Disegna rettangolo di sfondo
+    title_draw.rectangle([0, 0, screen_width, title_font_size + 20], fill=(0, 0, 0, 180))
+    # Posiziona sull'immagine principale
+    composite.paste(title_bg, (0, 0), title_bg)
+    draw.text((20, 10), title_text, fill=(255, 255, 255, 230))
+
+    # Info in basso a sinistra con rettangolo di sfondo
+    info_text1 = f"Regione: {region}"
+    info_text2 = f"Tile: {tile_w}x{tile_h} → {new_tile_w}x{new_tile_h}"
+    info_font_size = 24
+    info_bg_height = info_font_size * 2 + 30
+    info_bg = Image.new('RGBA', (screen_width, info_bg_height), (0, 0, 0, 0))
+    info_draw = ImageDraw.Draw(info_bg)
+    info_draw.rectangle([0, 0, screen_width, info_bg_height], fill=(0, 0, 0, 180))
+    composite.paste(info_bg, (0, screen_height - info_bg_height), info_bg)
+    draw.text((20, screen_height - info_bg_height + 10), info_text1, fill=(200, 200, 200, 200))
+    draw.text((20, screen_height - info_bg_height + 10 + info_font_size + 5), info_text2,
+              fill=(180, 180, 180, 180))
+
+    # 12. Salva file (assicurati che sia in modalità RGB, non RGBA, per evitare trasparenza)
+    output_path = os.path.join(CACHE_BASE, f"foreca_display_{int(time())}.png")
+    # Converti in RGB per rimuovere il canale alfa
+    composite_rgb = composite.convert('RGB')
+    composite_rgb.save(output_path, 'PNG')
+
+    print(f"[DEBUG] File salvato (RGB opaco): {output_path}")
+    print(f"[DEBUG] create_composite_map END")
+
+    return output_path
+"""
 
 
 def debug_background_search():
@@ -214,38 +341,47 @@ class ForecaMapViewer(Screen):
         self.unit_system = unit_system
         self.region = region
 
-        # Configurazioni ottimizzate per ogni regione
+        # Optimized configurations for each region
         region_configs = {
-            'eu': {'zoom': 3, 'lat': 52.0, 'lon': 10.0, 'grid': 5},
-            'europe': {'zoom': 3, 'lat': 52.0, 'lon': 10.0, 'grid': 5},
+            'eu': {'zoom': 4, 'lat': 50.0, 'lon': 10.0, 'grid': 5},
+            'europe': {'zoom': 4, 'lat': 50.0, 'lon': 10.0, 'grid': 5},
             'us': {'zoom': 3, 'lat': 40.0, 'lon': -100.0, 'grid': 5},
             'usa': {'zoom': 3, 'lat': 40.0, 'lon': -100.0, 'grid': 5},
-            'asia': {'zoom': 2, 'lat': 30.0, 'lon': 100.0, 'grid': 6},
-            'africa': {'zoom': 2, 'lat': 0.0, 'lon': 20.0, 'grid': 6},
-            'samerica': {'zoom': 2, 'lat': -20.0, 'lon': -60.0, 'grid': 6},
+            'asia': {'zoom': 2, 'lat': 30.0, 'lon': 100.0, 'grid': 4},
+            'africa': {'zoom': 2, 'lat': 0.0, 'lon': 20.0, 'grid': 4},
+            'samerica': {'zoom': 2, 'lat': -20.0, 'lon': -60.0, 'grid': 4},
             'oceania': {'zoom': 3, 'lat': -25.0, 'lon': 135.0, 'grid': 5},
         }
-        
-        # Usa la configurazione per la regione o il default
-        config = region_configs.get(region.lower(), {'zoom': 3, 'lat': 50.0, 'lon': 10.0, 'grid': 4})
-        
+
+        # Use region-specific configuration or default
+        config = region_configs.get(
+            self.region.lower(),
+            {'zoom': 3, 'lat': 50.0, 'lon': 10.0, 'grid': 4}
+        )
+
         self.zoom = config['zoom']
         self.center_lat = config['lat']
         self.center_lon = config['lon']
         self.grid_size = config['grid']
+
+        print(f"[ForecaMapViewer] Region: {self.region}")
+        print(f"[ForecaMapViewer] Zoom: {self.zoom}, Center: ({self.center_lat}, {self.center_lon})")
+        print(f"[ForecaMapViewer] Grid: {self.grid_size}x{self.grid_size}")
 
         self.timestamps = layer.get('times', {}).get('available', [])
         self.current_time_index = layer.get('times', {}).get('current', 0)
 
         self.size_w = getDesktop(0).size().width()
         self.size_h = getDesktop(0).size().height()
-        
-        print(f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
-              f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}")
-        
+
+        print(
+            f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
+            f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}"
+        )
+
         Screen.__init__(self, session)
         self.setTitle(f"Foreca: {self.layer_title}")
-        # ... resto del codice ...
+        # ... rest of the code ...
 
         self["map"] = Pixmap()
         self["title"] = Label(self.layer_title)
@@ -268,11 +404,15 @@ class ForecaMapViewer(Screen):
 
     def latlon_to_tile(self, lat, lon, zoom):
         """Convert latitude/longitude to tile coordinates"""
-        lat_rad = radians(lat)
+        import math
+        # Formule standard per Web Mercator (usato da Foreca)
+        lat_rad = math.radians(lat)
         n = 2.0 ** zoom
-        x = int((lon + 180.0) / 360.0 * n)
-        y = int((1.0 - log(tan(lat_rad) + 1.0 / cos(lat_rad)) / pi) / 2.0 * n)
-        return x, y
+        x_tile = int((lon + 180.0) / 360.0 * n)
+        # Formula corretta per la coordinata Y
+        y_tile = int((1.0 - math.log(math.tan(lat_rad) + 1.0 / math.cos(lat_rad)) / math.pi) / 2.0 * n)
+
+        return x_tile, y_tile
 
     def get_grid_size_for_region(region):
         """Returns the optimal grid size for the region"""
@@ -318,38 +458,51 @@ class ForecaMapViewer(Screen):
 
     def download_tile_grid_async(self, timestamp, callback):
         """Download a grid of tiles in a separate thread"""
-        
-        grid_size = getattr(self, 'grid_size', 5)
-        
+
+        # Use the class grid_size
+        grid_size = self.grid_size
+
         print(f"[DEBUG] Download grid: {grid_size}x{grid_size} for region: {self.region}")
-        
+        print(f"[DEBUG] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
+
         api = self.api
         layer_id = self.layer_id
         zoom = self.zoom
         center_lat = self.center_lat
         center_lon = self.center_lon
         unit_system = self.unit_system
-        
+
         def download_grid_thread():
             try:
-                # Calcola tile centrale
+                # Calculate center tile
                 center_x, center_y = self.latlon_to_tile(center_lat, center_lon, zoom)
-                
-                offset = grid_size // 2
-                total_tiles_needed = grid_size * grid_size
-                
                 print(f"[DEBUG] Center tile: ({center_x}, {center_y})")
-                print(f"[DEBUG] Grid range: x[{center_x - offset} to {center_x + offset}], "
-                      f"y[{center_y - offset} to {center_y + offset}]")
-                
+
+                # For even grids (4x4, 6x6), a different offset is required
+                if grid_size % 2 == 0:  # Even grid
+                    offset = grid_size // 2
+                    # For even grids, the center tile is not perfectly centered
+                    # We need to shift slightly
+                    start_x = center_x - offset + 1
+                    start_y = center_y - offset + 1
+                    end_x = center_x + offset
+                    end_y = center_y + offset
+                else:  # Odd grid (3x3, 5x5)
+                    offset = grid_size // 2
+                    start_x = center_x - offset
+                    start_y = center_y - offset
+                    end_x = center_x + offset
+                    end_y = center_y + offset
+
+                print(f"[DEBUG] Grid range: x[{start_x} to {end_x}], y[{start_y} to {end_y}]")
+
                 tile_paths = []
-                
-                # Scarica tutti i tile
-                for dx in range(-offset, offset + 1):
-                    for dy in range(-offset, offset + 1):
-                        tile_x = center_x + dx
-                        tile_y = center_y + dy
-                        
+                total_tiles = (end_x - start_x + 1) * (end_y - start_y + 1)
+
+                # Download all tiles
+                for tile_x in range(start_x, end_x + 1):
+                    for tile_y in range(start_y, end_y + 1):
+
                         tile_path = api.get_tile(
                             layer_id,
                             timestamp,
@@ -357,34 +510,34 @@ class ForecaMapViewer(Screen):
                             tile_x, tile_y,
                             unit_system
                         )
-                        
+
                         if tile_path:
-                            # Calcola posizione nella griglia (0-indexed)
-                            grid_x = dx + offset
-                            grid_y = dy + offset
+                            # Calculate position in the grid (0-indexed)
+                            grid_x = tile_x - start_x
+                            grid_y = tile_y - start_y
                             tile_paths.append((grid_x, grid_y, tile_path))
-                            print(f"[DEBUG] Downloaded tile at grid position ({grid_x}, {grid_y})")
+                            print(f"[DEBUG] Downloaded tile ({tile_x}, {tile_y}) -> ({grid_x}, {grid_y})")
                         else:
-                            print(f"[DEBUG] Failed to download tile ({tile_x}, {tile_y})")
-                
-                print(f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles_needed} tiles")
-                
-                if len(tile_paths) >= (total_tiles_needed * 0.8):  # Almeno l'80%
+                            print(f"[DEBUG] FAILED tile ({tile_x}, {tile_y})")
+
+                print(f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles} tiles")
+
+                if len(tile_paths) >= max(1, total_tiles * 0.5):  # At least 50%
                     merged_image = self.merge_tile_grid(tile_paths, grid_size)
                     if merged_image and callback:
                         callback(merged_image)
                 else:
-                    print(f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles_needed}")
+                    print(f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles}")
                     if callback:
                         callback(None)
-                        
+
             except Exception as e:
                 print(f"[ForecaMapViewer] Error in thread: {e}")
                 import traceback
                 traceback.print_exc()
                 if callback:
                     callback(None)
-        
+
         from threading import Thread
         thread = Thread(target=download_grid_thread, daemon=True)
         thread.start()

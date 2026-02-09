@@ -78,8 +78,8 @@ class UnitManager:
 
     def set_simple_unit_system(self, system):
         """
-        Imposta un sistema di unità semplificato (metrico o imperiale)
-        system: 'metric' o 'imperial'
+        Set a simplified unit system (metric or imperial)
+        system: 'metric' or 'imperial'
         """
         if system == self.SYSTEM_METRIC:
             self.system = self.SYSTEM_METRIC
@@ -94,7 +94,7 @@ class UnitManager:
         self.save_config()
 
     def get_simple_system(self):
-        """Restituisce il sistema corrente semplificato"""
+        """Return the current simplified system"""
         return self.system
 
     def convert_wind(self, speed_in_ms):

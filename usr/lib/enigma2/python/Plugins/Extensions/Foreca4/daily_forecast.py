@@ -36,11 +36,9 @@ class DailyForecast(Screen):
         self.forecast_data = None
 
         self.setTitle(_("Weekly Forecast") + " - " + location_name)
-
         self["title"] = Label("")
         self["info"] = Label(_("Loading weekly forecast..."))
         self["forecast_text"] = ScrollLabel()
-
         self["actions"] = ActionMap(
             [
                 "OkCancelActions",
@@ -60,61 +58,53 @@ class DailyForecast(Screen):
     def load_forecast(self):
         """Load and display the weekly forecast"""
         self["info"].setText(_("Loading weekly forecast..."))
-
-        # PRIMA prova API
         try:
             if hasattr(self.api, 'get_daily_forecast'):
+                print(f"[DailyForecast] Calling API for location: {self.location_id}")
                 self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
+
+                if self.forecast_data:
+                    print(f"[DailyForecast] API returned {len(self.forecast_data.get('days', []))} days")
+                else:
+                    print("[DailyForecast] API returned None")
             else:
                 print("[DailyForecast] API method get_daily_forecast not available")
                 self.forecast_data = None
         except Exception as e:
             print(f"[DailyForecast] API error: {e}")
+            import traceback
+            traceback.print_exc()
             self.forecast_data = None
 
-        # Se API fallisce, prova scraping
+        # If API fails, show error message
         if not self.forecast_data:
-            print("[DailyForecast] Trying fallback to scraping...")
-            try:
-                # Usa getPageTT per dati scraping (metodo esistente)
-                from .tt_weather import getPageTT
-                BASEURL = "https://www.forecaweather.com/"
-                url = f"{BASEURL}{self.location_id}"
-                print('load_forecast url is: ', str(url))
-                
-                # getPageTT ritorna molti dati, dobbiamo estrarre quelli per 7 giorni
-                # Per ora mostriamo un messaggio
-                self["info"].setText(_("Using fallback data..."))
-                
-                # Per semplicità, creiamo dati di esempio
-                self.forecast_data = self.create_sample_data()
-                
-            except Exception as e:
-                print(f"[DailyForecast] Fallback also failed: {e}")
-                self.forecast_data = None
+            self["info"].setText(_("Could not load forecast data"))
+            self["forecast_text"].setText(
+                _("Weekly forecast data is not available.\n\n") +
+                _("Possible reasons:\n") +
+                _("1. No API credentials configured\n") +
+                _("2. API service temporarily unavailable\n") +
+                _("3. Location not supported\n\n") +
+                _("Please check your api_config.txt file.")
+            )
+            return
 
-        if self.forecast_data:
-            self.display_forecast()
-        else:
-            self["info"].setText(_("No forecast data available"))
-            self["forecast_text"].setText(_("Could not load weekly forecast. Please check your internet connection."))
+        self.display_forecast()
 
     def create_sample_data(self):
-        """Crea dati di esempio per testing"""
+        """Create sample data for testing"""
         from datetime import datetime, timedelta
-        
         sample_data = {
             'town': self.location_name,
             'country': 'N/A',
             'days': []
         }
-        
         today = datetime.now()
         for i in range(7):
             day_date = today + timedelta(days=i)
             day_name = day_date.strftime("%A")
             date_str = day_date.strftime("%Y-%m-%d")
-            
+
             sample_data['days'].append({
                 'date': date_str,
                 'day_name': day_name,
@@ -129,31 +119,21 @@ class DailyForecast(Screen):
                 'uv_index': f"{i % 5}",
                 'description': ['Sunny', 'Cloudy', 'Rainy', 'Windy', 'Clear', 'Foggy', 'Stormy'][i % 7]
             })
-        
+
         return sample_data
 
     def display_forecast(self):
-        """Format and display the forecast data"""
+        """Format and display the forecast data without BBCode tags"""
         try:
             text_lines = []
-
-            # Header
-            text_lines.append(
-                f"[b]{self.forecast_data['town']}, {self.forecast_data['country']}[/b]")
+            text_lines.append(f"{self.forecast_data['town']}, {self.forecast_data['country']}")
             text_lines.append(_("7-Day Detailed Forecast"))
             text_lines.append("=" * 40)
 
-            # Daily forecasts
             for day in self.forecast_data['days']:
-                # Day header
-                day_header = f"\n[b]{day['day_name']} ({day['date']})[/b]"
-                text_lines.append(day_header)
-
-                # Temperatures
+                text_lines.append(f"\n{day['day_name']} ({day['date']})")
                 temp_line = f"  {_('Temperature')}: {day['min_temp']}° / {day['max_temp']}°C"
                 text_lines.append(temp_line)
-
-                # Weather description
                 text_lines.append(f"  {_('Weather')}: {day['description']}")
 
                 # Precipitation
@@ -190,10 +170,6 @@ class DailyForecast(Screen):
             self["forecast_text"].setText(str(e))
 
     def get_daily_forecast(self, location_id, days=7):
-        """
-        Get daily forecasts for the next 7-10 days via Foreca API.
-        Returns formatted data for meteogram display.
-        """
         token = self.get_token()
         if not token:
             print("[ForecaWeatherAPI] No token for daily forecast")
@@ -202,39 +178,48 @@ class DailyForecast(Screen):
         try:
             headers = {"Authorization": f"Bearer {token}"}
             params = {
-                "days": min(days, 10),  # Max 10 days
-                "lang": "en",  # Or use system language
+                "days": min(days, 10),
+                "lang": "it",  # Cambiato da 'en' a 'it'
                 "tempunit": "C",
                 "windunit": "KMH"
             }
 
-            # Add unit parameters if we have UnitManager
             if self.unit_manager:
                 api_params = self.unit_manager.get_api_params()
                 params.update(api_params)
 
-            # Endpoint for daily forecast
             url = f"{self.base_url}/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
-
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
+            print(f"[ForecaWeatherAPI] Response status: {response.status_code}")
 
             if response.status_code == 200:
                 data = response.json()
+                print(f"[ForecaWeatherAPI] Daily forecast response received: {len(data.get('forecast', []))} days")
                 return self._parse_daily_forecast_response(data)
+            elif response.status_code == 401:
+                print("[ForecaWeatherAPI] Token expired, forcing new token...")
+                token = self.get_token(force_new=True)
+                if token:
+                    headers = {"Authorization": f"Bearer {token}"}
+                    response = requests.get(url, headers=headers, params=params, timeout=15)
+                    if response.status_code == 200:
+                        data = response.json()
+                        return self._parse_daily_forecast_response(data)
+                return None
             else:
-                print(
-                    f"[ForecaWeatherAPI] Daily forecast HTTP error: {response.status_code}")
+                print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
                 print(f"Response: {response.text[:200]}")
                 return None
 
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
     def _parse_daily_forecast_response(self, data):
-        """Analizza la risposta dell'API per le previsioni giornaliere"""
+        """Analyze API response for daily forecasts"""
         try:
             forecast = data.get('forecast', [])
             location = data.get('location', {})
