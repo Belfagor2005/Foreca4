@@ -42,6 +42,10 @@ msgstr "6 - Oggi + 6 giorni"
 msgid "7 - Today + 7 days"
 msgstr "7 - Oggi + 7 giorni"
 
+#, fuzzy
+msgid "7-Day Detailed Forecast"
+msgstr "Previsioni del tempo Foreca"
+
 msgid "8 - Today + 8 days"
 msgstr "8 - Oggi + 8 giorni"
 
@@ -156,6 +160,9 @@ msgstr "Selezione del colore"
 msgid "Continents Weather Maps"
 msgstr "Mappe Meteo dei Continenti"
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr "Meteo attuale e previsioni"
 
@@ -164,6 +171,9 @@ msgstr "Meteo attuale e previsioni per i prossimi 10 giorni"
 
 msgid "Czech Republic"
 msgstr "Repubblica Ceca"
+
+msgid "Data provided by Foreca"
+msgstr ""
 
 msgid "Denmark"
 msgstr "Danimarca"
@@ -179,6 +189,10 @@ msgstr "Download immagini in corso..."
 
 msgid "East Asia"
 msgstr "Asia Orientale"
+
+#, fuzzy
+msgid "Error displaying forecast"
+msgstr "Errore durante il salvataggio dei preferiti!"
 
 msgid "Error loading colors"
 msgstr "Errore nel caricamento dei colori"
@@ -339,6 +353,10 @@ msgstr "Caricamento mappe disponibili..."
 msgid "Loading nearby stations..."
 msgstr "Caricamento delle stazioni vicine..."
 
+#, fuzzy
+msgid "Loading weekly forecast..."
+msgstr "Caricamento delle stazioni vicine..."
+
 msgid "Loading..."
 msgstr "Caricamento..."
 
@@ -400,6 +418,10 @@ msgid "No data available"
 msgstr "Nessun dato disponibile"
 
 msgid "No date available"
+msgstr "Nessun dato disponibile"
+
+#, fuzzy
+msgid "No forecast data available"
 msgstr "Nessun dato disponibile"
 
 msgid "No location selected"
@@ -489,6 +511,9 @@ msgstr "Parzialmente nuvoloso e rovesci di neve bagnata"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Parzialmente nuvoloso, possibili temporali con pioggia"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Attendere prego ..."
 
@@ -497,6 +522,10 @@ msgstr "Polonia"
 
 msgid "Portugal"
 msgstr "Portogallo"
+
+#, fuzzy
+msgid "Precipitation"
+msgstr "Precipitazioni:"
 
 msgid "Pressure"
 msgstr "Pressione"
@@ -585,6 +614,10 @@ msgstr "Spagna"
 msgid "Station Observations"
 msgstr "Stazione di Osservazione"
 
+#, fuzzy
+msgid "Sun"
+msgstr "Tramonto"
+
 msgid "Sunrise"
 msgstr "Alba"
 
@@ -612,6 +645,9 @@ msgstr "Impostazioni Trasparenza"
 msgid "Transparency level"
 msgstr "Livello trasparenza"
 
+msgid "UV Index"
+msgstr ""
+
 msgid "Unit Settings"
 msgstr "Impostazioni Unità"
 
@@ -623,6 +659,14 @@ msgstr "Sconosciuto"
 
 msgid "Up - Previous page"
 msgstr "Su - Pagina precedente"
+
+#, fuzzy
+msgid "Use arrow keys to scroll"
+msgstr "• Utilizzare i tasti freccia per navigare\n"
+
+#, fuzzy
+msgid "Weather"
+msgstr "Mappe Meteo"
 
 msgid "Weather Maps"
 msgstr "Mappe Meteo"
@@ -644,6 +688,10 @@ msgstr "Meteo oggi"
 
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
+
+#, fuzzy
+msgid "Weekly Forecast"
+msgstr "Previsione"
 
 msgid "Wind"
 msgstr "Vento"
@@ -716,9 +764,6 @@ msgstr "• GIALLO per salvare come Preferito 2\n"
 
 #~ msgid "Feels like:"
 #~ msgstr "Percepita:"
-
-#~ msgid "Precipitations:"
-#~ msgstr "Precipitazioni:"
 
 #~ msgid "Temp"
 #~ msgstr "Temperatura"

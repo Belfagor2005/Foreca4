@@ -159,7 +159,7 @@
 # Language Translation:
 # Implementation of GetText translation and Google AI API
 # major fix
-
+# graphic @Oktus
 from __future__ import absolute_import
 
 # Standard library imports
@@ -243,6 +243,7 @@ BASEURL = "https://www.foreca.com/"
 
 config_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/"
 unit_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/unit_config.conf"
+config_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/api_config.txt"
 default_unit = 'metric'  # Default a metrico
 path_loc0 = '103169070/Rome-Italy'                        # Blue - Favorite 0
 path_loc1 = '100524901/Moscow-Russia'                     # Green - Favorite 1
@@ -686,6 +687,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.onLayoutFinish.append(self.StartPageFirst)
         self.onShow.append(self.update_button)
 
+    @property
+    def unit_system(self):
+        """Property for compatibility with existing code"""
+        return self.unit_manager.get_simple_system()
+
     def Menu(self):
         """Simple menu with ChoiceBox"""
         from Screens.ChoiceBox import ChoiceBox
@@ -693,6 +699,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         menu_items = [
             (_("City Selection"), "city"),
             (_("Weather Maps"), "maps"),
+            (_("Weekly Forecast"), "daily_forecast"),
             (_("Station Observations"), "stations"),
             (_("Unit Settings"), "units"),
             (_("Color select"), "color_select"),
@@ -716,6 +723,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
             self.session.open(CityPanel4)
         elif choice[1] == "maps":
             self.open_maps_menu()
+        elif choice[1] == "daily_forecast":
+            self.open_daily_forecast()
         elif choice[1] == "stations":
             self.open_station_observations()
         elif choice[1] == "units":
@@ -776,33 +785,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         elif choice[1] == "back":
             self.Menu()
-
-    def test_station_observations(self):
-        """Test station observations"""
-        location_id = path_loc0.split(
-            '/')[0] if '/' in path_loc0 else path_loc0
-
-        # Ensure weather_api is initialized
-        if not hasattr(self, 'weather_api'):
-            from .foreca_weather_api import ForecaWeatherAPI
-            from .unit_manager import UnitManager
-            unit_manager = UnitManager(config_path)
-            self.weather_api = ForecaWeatherAPI(unit_manager)
-
-        observations = self.weather_api.get_station_observations(
-            location_id, station_limit=3)
-
-        if observations:
-            print("[TEST] Found {0} stations:".format(len(observations)))
-            for obs in observations:
-                station = obs.get('station', 'N/A')
-                temp = obs.get('temperature', 'N/A')
-                distance = obs.get('distance', 'N/A')
-                print("  - {0} ({1}): {2}°C".format(station, distance, temp))
-            return True
-        else:
-            print("[TEST] No station observations available")
-            return False
 
     def open_station_observations(self):
         """Open station observations for the current location"""
@@ -898,7 +880,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         """Callback when selecting a region (no need to do anything)"""
         pass
 
-    def units_settings_closed(self, result):
+    def units_settings_closed(self, result=None):
         """Callback when unit settings are closed"""
         if result:  # If units were changed
             print("[Foreca4] Units changed, reloading display...")
@@ -953,6 +935,18 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def open_foreca_api_maps(self):
         """Open Foreca API maps with region detection"""
+        print("[DEBUG] open_foreca_api_maps called")
+        # Check if api_config.txt exists
+        config_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/api_config.txt"
+        if not os.path.exists(config_file):
+            self.session.open(
+                MessageBox,
+                _("API configuration file not found!\n\nPlease create file:\n{0}\n\nwith your Foreca API credentials.").format(config_file),
+                MessageBox.TYPE_ERROR,
+                timeout=10
+            )
+            return
+
         try:
             # Determine region from current location
             region = self.determine_region_from_location(
@@ -964,26 +958,50 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
             print(f"[Foreca4] Using region: {region} for maps")
 
-            api = ForecaMapAPI()
+            # Pass region to API
+            api = ForecaMapAPI(region=region)
+
             if not api.check_credentials():
                 self.session.open(
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10)
+                    timeout=10
+                )
                 return
 
-            # Get unit preferences
-            unit_system = self.get_unit_system_preference()
+            # Use the unit_system property
+            print(f"[DEBUG] self.unit_system: {self.unit_system}")
+            self.session.open(ForecaMapMenu, api, self.unit_system, region)
 
-            self.session.open(ForecaMapMenu, api, unit_system)
         except Exception as e:
-            print("[Foreca4] Error opening API maps: {0}".format(e))
+            print(f"[Foreca4] Error opening API maps: {e}")
+            import traceback
+            traceback.print_exc()
             self.session.open(
                 MessageBox,
                 _("Could not initialize map API.\nCheck configuration."),
                 MessageBox.TYPE_ERROR
             )
+
+    def open_daily_forecast(self):
+        """Open weekly detailed forecast"""
+        location_id = ""
+        location_name = str(town) if is_valid(town) else "Unknown"
+
+        if myloc == 0:
+            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+        elif myloc == 1:
+            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+        elif myloc == 2:
+            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+
+        if not location_id:
+            self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
+            return
+
+        from .daily_forecast import DailyForecast
+        self.session.open(DailyForecast, self.weather_api, location_id, location_name)
 
     def OK(self):
         PY3 = version_info[0] == 3
@@ -1493,6 +1511,50 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def nextDay(self):
         self.right()
 
+    def determine_region_from_location(self, location_id, country_name="", lon="", lat=""):
+        """
+        Determine the optimal API region based on location.
+        Returns: 'eu' or 'us'
+        """
+        # Default to Europe
+        region = 'eu'
+
+        # 1. Try to get coordinates from current data
+        try:
+            if lon and lat and lon != 'N/A' and lat != 'N/A':
+                lon_float = float(lon)
+                lat_float = float(lat)
+
+                # Check if location is in North America
+                if (-125.0 <= lon_float <= -66.0) and (24.0 <= lat_float <= 49.0):
+                    return 'us'
+                # Could add more regions here in future
+        except (ValueError, TypeError):
+            pass
+
+        # 2. Check by country name (case insensitive)
+        country_lower = str(country_name).lower()
+
+        us_countries = [
+            'united states', 'usa', 'u.s.a', 'u.s.', 'america',
+            'canada', 'mexico'
+        ]
+
+        for us_country in us_countries:
+            if us_country in country_lower:
+                return 'us'
+
+        # 3. Check by location ID patterns (if it contains US cities/IDs)
+        location_str = str(location_id).lower()
+        us_patterns = ['new york', 'los angeles', 'chicago', 'miami',
+                       'texas', 'california', 'florida', '/us/', '/usa/']
+
+        for pattern in us_patterns:
+            if pattern in location_str:
+                return 'us'
+
+        return region
+
     def symbolToCondition(self, symbol):
         symbol_map = {
             'd000': _('Clear'),
@@ -1570,36 +1632,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def red(self):
         self.session.open(Color_Select)
 
-    def exit(self):
-        """Exit plugin and optionally clean cache"""
-        # Stop timers and clean
-        if hasattr(self, 'station_timer'):
-            self.station_timer.stop()
-        if hasattr(self, 'station_update_timer'):
-            self.station_update_timer.stop()
-
-        # Config Save
-        rez = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
-        self.savesetcolor(rez)
-        savesetalpha(alpha)
-
-        # Clean cache on exit (optional)
-        self.clean_foreca_cache()
-        self.close()
-
-    def invalidate_current_weather_widgets(self):
-        """Force GUI update for current weather widgets"""
-        widget_names = ["fl_temp", "wind_speed", "wind_gust", "dewpoint",
-                        "town", "cur_temp", "description_w", "rain_mm",
-                        "hum", "pressure"]
-
-        for name in widget_names:
-            try:
-                if name in self:
-                    self[name].instance.invalidate()
-            except BaseException:
-                pass
-
     def clean_foreca_cache(self):
         """Clean Foreca cache files"""
         cache_dir = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
@@ -1648,6 +1680,46 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
         except Exception as e:
             print("[Foreca4] Error cleaning cache: {0}".format(e))
+
+    def cleanup_background_threads(self):
+        """Clean up any background threads"""
+        # Set a flag to stop threads
+        self.stop_threads = True
+        # You might need more sophisticated thread management
+        print("[Foreca4] Cleaning up background threads")
+
+    def invalidate_current_weather_widgets(self):
+        """Force GUI update for current weather widgets"""
+        widget_names = ["fl_temp", "wind_speed", "wind_gust", "dewpoint",
+                        "town", "cur_temp", "description_w", "rain_mm",
+                        "hum", "pressure"]
+
+        for name in widget_names:
+            try:
+                if name in self:
+                    self[name].instance.invalidate()
+            except BaseException:
+                pass
+
+    def exit(self):
+        """Exit plugin and optionally clean cache"""
+        # Stop timers and clean
+        if hasattr(self, 'station_timer'):
+            self.station_timer.stop()
+        if hasattr(self, 'station_update_timer'):
+            self.station_update_timer.stop()
+
+        # Stop any background threads
+        self.cleanup_background_threads()
+
+        # Config Save
+        rez = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
+        self.savesetcolor(rez)
+        savesetalpha(alpha)
+
+        # Clean cache on exit (optional)
+        self.clean_foreca_cache()
+        self.close()
 
 
 class Color_Select(Screen):
@@ -1705,11 +1777,12 @@ class Color_Select(Screen):
         self.display_names = []
         self.mydata = []
         self.last_translated_idx = 0
+
         file_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/new_rgb_full.txt"
 
         if os.path.exists(file_path):
             try:
-                with open(file_path, "r", encoding='utf-8') as f:
+                with open(file_path, "r", encoding="utf-8") as f:
                     lines = f.readlines()
 
                 for i, line in enumerate(lines):
@@ -1717,8 +1790,8 @@ class Color_Select(Screen):
                     if not line:
                         continue
 
-                    if ' #' in line:
-                        name_part, data_part = line.split(' #', 1)
+                    if " #" in line:
+                        name_part, data_part = line.split(" #", 1)
                         name_part = name_part.strip()
                         data_part = data_part.strip()
                     else:
@@ -1728,10 +1801,10 @@ class Color_Select(Screen):
                     self.original_names.append(name_part)
                     self.display_names.append(name_part)
                     self.mydata.append(data_part)
-                    self.Clist.append("{0}. {1}".format(i, name_part))
+                    self.Clist.append(f"{i}. {name_part}")
 
             except Exception as e:
-                print("[Foreca4] Error reading color file: {0}".format(e))
+                print(f"[Foreca4] Error reading color file: {e}")
                 self.Clist.append("0. " + _("Error loading colors"))
                 self.original_names.append("")
                 self.display_names.append("")
@@ -1745,37 +1818,66 @@ class Color_Select(Screen):
         self["Clist"].l.setList(self.Clist)
         self["Clist"].selectionEnabled(1)
 
-        print("[Color_Select] === START ===")
-        print("[Color_Select] Loaded items: {0}".format(
-            len(self.original_names)))
+        print(f"[Color_Select] Loaded items: {len(self.original_names)}")
+
         if self.Clist:
+            print("[Color_Select] Translating first 30 items synchronously...")
+            for i in range(0, min(30, len(self.original_names))):
+                if self.display_names[i] == self.original_names[i]:
+                    translated = self.translate_color(self.original_names[i])
+                    if translated != self.original_names[i]:
+                        self.display_names[i] = translated
+                        self.Clist[i] = f"{i}. {translated}"
+
+            self.update_gui()
             self.update_display(0)
 
-        self.translate_range(0, 100)
-        self.last_translated_idx = 100
+            if len(self.original_names) > 30:
+                print("[Color_Select] Starting background translation for remaining items...")
+                self.translate_range(30, 150)
+            self.last_translated_idx = 150
 
     def translate_range(self, start_idx, end_idx):
         import threading
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print(
-                "[Color_Select] Translating range {0} to {1}".format(
-                    start_idx, end_idx_actual))
-            translated_any = False
-            for i in range(start_idx, end_idx_actual):
-                if self.display_names[i] == self.original_names[i]:
-                    translated = self.translate_color(self.original_names[i])
+            print(f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
 
-                    if translated != self.original_names[i]:
-                        self.display_names[i] = translated
-                        self.Clist[i] = "{0}. {1}".format(i, translated)
-                        translated_any = True
+            # Translate in blocks of 20 items and update the GUI after each block
+            block_size = 20
+            for block_start in range(start_idx, end_idx_actual, block_size):
+                block_end = min(block_start + block_size, end_idx_actual)
+                translated_in_block = False
 
-            if translated_any:
-                self.update_gui()
-                print(
-                    "[Color_Select] Range {0}-{1} translated".format(start_idx, end_idx_actual))
+                for i in range(block_start, block_end):
+                    if self.display_names[i] == self.original_names[i]:
+                        translated = self.translate_color(self.original_names[i])
+                        if translated != self.original_names[i]:
+                            self.display_names[i] = translated
+                            self.Clist[i] = f"{i}. {translated}"
+                            translated_in_block = True
+
+                # Update the GUI after each block
+                if translated_in_block:
+                    from enigma import eTimer
+
+                    def update_gui_safe():
+                        try:
+                            self.update_gui()
+                        except Exception as e:
+                            print(f"[Color_Select] Error updating GUI: {e}")
+
+                    timer = eTimer()
+                    timer.callback.append(update_gui_safe)
+                    timer.start(0, True)
+
+                print(f"[Color_Select] Translated block {block_start}-{block_end}")
+
+            print(f"[Color_Select] Completed translation of range {start_idx}-{end_idx_actual}")
+
+            # Update the index of the last translated item
+            self.last_translated_idx = max(self.last_translated_idx, end_idx_actual)
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
@@ -1814,19 +1916,52 @@ class Color_Select(Screen):
                     color_name, e))
             return color_name
 
+    def translate_all_async(self):
+        """Translate all items in the background"""
+        import threading
+
+        def translate_all():
+            total = len(self.original_names)
+            block_size = 50
+
+            for start in range(0, total, block_size):
+                end = min(start + block_size, total)
+
+                for i in range(start, end):
+                    if self.display_names[i] == self.original_names[i]:
+                        translated = self.translate_color(self.original_names[i])
+                        if translated != self.original_names[i]:
+                            self.display_names[i] = translated
+                            self.Clist[i] = f"{i}. {translated}"
+
+                # Update the GUI after each block
+                from enigma import eTimer
+                timer = eTimer()
+                timer.callback.append(self.update_gui)
+                timer.start(0, True)
+
+                print(f"[Color_Select] Translated block {start}-{end}")
+
+            print(f"[Color_Select] All {total} items translated")
+
+        thread = threading.Thread(target=translate_all, daemon=True)
+        thread.start()
+
     def update_display(self, index):
-        print("[Color_Select] update_display({0})".format(index))
+        print(f"[Color_Select] update_display({index})")
         if 0 <= index < len(self.display_names):
+            # self.translate_all_async()
             if self.display_names[index] == self.original_names[index]:
                 translated = self.translate_color(self.original_names[index])
                 if translated != self.display_names[index]:
                     self.display_names[index] = translated
-                    self.Clist[index] = "{0}. {1}".format(index, translated)
+                    self.Clist[index] = f"{index}. {translated}"
                     self.update_gui()
+                    print(f"[Color_Select] Translated item {index} on the fly")
 
             display_name = self.display_names[index]
             self["colorname"].setText(display_name)
-            print("[Color_Select] Set colorname: '{0}'".format(display_name))
+            print(f"[Color_Select] Set colorname: '{display_name}'")
             if index < len(self.mydata) and self.mydata[index]:
                 color_info = self.mydata[index]
                 parts = color_info.split(' ')
@@ -1842,14 +1977,10 @@ class Color_Select(Screen):
                                   _('Blue') + ' (' + myb + ')')
 
                     self["colordatas"].setText(color_text)
-                    print("[Color_Select] Set colordatas")
-
-                    img_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{0}.png".format(
-                        myhtml)
+                    img_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{myhtml}.png"
                     if os.path.exists(img_path):
                         self["pic1"].instance.setPixmapFromFile(img_path)
                         self["pic1"].instance.show()
-                        print("[Color_Select] Loaded image")
 
     def update_gui(self):
         print("[Color_Select] update_gui()")
@@ -1877,8 +2008,10 @@ class Color_Select(Screen):
         self["Clist"].pageUp()
         current_idx = self["Clist"].getCurrentIndex()
         self.update_display(current_idx)
-        if current_idx + 50 > self.last_translated_idx:
-            new_end = self.last_translated_idx + 50
+
+        if current_idx + 100 > self.last_translated_idx:
+            new_end = min(self.last_translated_idx + 100, len(self.original_names))
+            print(f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
             self.translate_range(self.last_translated_idx, new_end)
             self.last_translated_idx = new_end
 
@@ -1886,8 +2019,10 @@ class Color_Select(Screen):
         self["Clist"].pageDown()
         current_idx = self["Clist"].getCurrentIndex()
         self.update_display(current_idx)
-        if current_idx + 50 > self.last_translated_idx:
-            new_end = self.last_translated_idx + 50
+
+        if current_idx + 100 > self.last_translated_idx:
+            new_end = min(self.last_translated_idx + 100, len(self.original_names))
+            print(f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
             self.translate_range(self.last_translated_idx, new_end)
             self.last_translated_idx = new_end
 
@@ -2923,6 +3058,12 @@ def main(session, **kwargs):
         )
         return
 
+    session.open(
+        MessageBox,
+        _("Loading Foreca4...\n\nPlease wait while initializing API connections."),
+        MessageBox.TYPE_INFO,
+        timeout=3
+    )
     session.open(ForecaPreview_4)
 
 

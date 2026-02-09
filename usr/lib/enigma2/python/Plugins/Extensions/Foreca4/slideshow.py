@@ -8,6 +8,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
+from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from enigma import eTimer, ePicLoad, getDesktop
 import os
@@ -111,7 +112,14 @@ class ForecaSlideshow(Screen):
         self["image"] = Pixmap()
         self["title"] = Label(region_name)
         self["info"] = Label(_("Loading..."))
-
+        self["key_red"] = StaticText(_("Play/Pause"))
+        self["key_green"] = StaticText(_("Next"))
+        self["key_yellow"] = StaticText(_("Previous"))
+        self["key_blue"] = StaticText(_("Exit"))
+        self["playButton"] = Pixmap()
+        self["pauseButton"] = Pixmap()
+        # self["playButton"].hide()
+        # self["pauseButton"].hide()
         self.region_code = region_code
         self.current_image = 0
         self.total_images = 6
@@ -119,17 +127,27 @@ class ForecaSlideshow(Screen):
 
         self.slide_timer = eTimer()
         self.slide_timer.timeout.get().append(self.next_image)
-        self.slide_interval = 5000  # 5 seconds
+        self.slide_interval = 4000  # 5 seconds
 
-        self["actions"] = ActionMap(["OkCancelActions", "DirectionActions"],
-                                    {
-            "cancel": self.exit,
-            "ok": self.play_pause,
-            "left": self.previous_image,
-            "right": self.next_image,
-            "up": self.increase_speed,
-            "down": self.decrease_speed,
-        }, -1)
+        self["actions"] = ActionMap(
+            [
+                "OkCancelActions",
+                "ColorActions",
+                "DirectionActions"
+            ],
+            {
+                "cancel": self.exit,
+                "ok": self.play_pause,
+                "left": self.previous_image,
+                "right": self.next_image,
+                "up": self.increase_speed,
+                "down": self.decrease_speed,
+                "red": self.play_pause,         # Pulsante ROSSO per play/pause
+                "green": self.next_image,       # Pulsante VERDE per prossima
+                "yellow": self.previous_image,  # Pulsante GIALLO per precedente
+                "blue": self.exit,              # Pulsante BLU per uscire
+            }, -1
+        )
 
         self.picload = ePicLoad()
         self.picload.PictureData.get().append(self.pic_data)
@@ -144,9 +162,9 @@ class ForecaSlideshow(Screen):
             self["image"].instance.size().height(),
             sc[0],
             sc[1],
-            0,      # cache
-            0,      # resize (0=simple)
-            "#00000000"  # background color
+            0,              # cache
+            0,              # resize (0=simple)
+            "#00000000"     # background color
         ])
 
         # Start download in background
@@ -211,16 +229,18 @@ class ForecaSlideshow(Screen):
         self.show_image(prev_idx)
 
     def play_pause(self):
-        """Pause or resume slideshow"""
+        """Pause or resume the slideshow"""
         if self.is_playing:
             self.slide_timer.stop()
-            self["info"].setText(
-                f"⏸ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(f"{self.current_image + 1}/{self.total_images} (Pausa)")
+            self["playButton"].show()
+            self["pauseButton"].hide()
             self.is_playing = False
         else:
             self.slide_timer.start(self.slide_interval)
-            self["info"].setText(
-                f"▶ {self.current_image + 1}/{self.total_images}")
+            self["info"].setText(f"{self.current_image + 1}/{self.total_images}")
+            self["playButton"].hide()
+            self["pauseButton"].show()
             self.is_playing = True
 
     def increase_speed(self):

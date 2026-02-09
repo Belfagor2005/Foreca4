@@ -40,6 +40,9 @@ msgstr ""
 msgid "7 - Today + 7 days"
 msgstr ""
 
+msgid "7-Day Detailed Forecast"
+msgstr ""
+
 msgid "8 - Today + 8 days"
 msgstr ""
 
@@ -154,6 +157,9 @@ msgstr ""
 msgid "Continents Weather Maps"
 msgstr ""
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr ""
 
@@ -161,6 +167,9 @@ msgid "Current weather and forecast for the next 10 days"
 msgstr ""
 
 msgid "Czech Republic"
+msgstr ""
+
+msgid "Data provided by Foreca"
 msgstr ""
 
 msgid "Denmark"
@@ -176,6 +185,9 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
+msgstr ""
+
+msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -337,6 +349,9 @@ msgstr ""
 msgid "Loading nearby stations..."
 msgstr ""
 
+msgid "Loading weekly forecast..."
+msgstr ""
+
 msgid "Loading..."
 msgstr ""
 
@@ -398,6 +413,9 @@ msgid "No data available"
 msgstr ""
 
 msgid "No date available"
+msgstr ""
+
+msgid "No forecast data available"
 msgstr ""
 
 msgid "No location selected"
@@ -487,6 +505,9 @@ msgstr ""
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr ""
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr ""
 
@@ -494,6 +515,9 @@ msgid "Poland"
 msgstr ""
 
 msgid "Portugal"
+msgstr ""
+
+msgid "Precipitation"
 msgstr ""
 
 msgid "Pressure"
@@ -583,6 +607,9 @@ msgstr ""
 msgid "Station Observations"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
 msgid "Sunrise"
 msgstr ""
 
@@ -610,6 +637,9 @@ msgstr ""
 msgid "Transparency level"
 msgstr ""
 
+msgid "UV Index"
+msgstr ""
+
 msgid "Unit Settings"
 msgstr ""
 
@@ -620,6 +650,12 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Up - Previous page"
+msgstr ""
+
+msgid "Use arrow keys to scroll"
+msgstr ""
+
+msgid "Weather"
 msgstr ""
 
 msgid "Weather Maps"
@@ -641,6 +677,9 @@ msgid "Weather today"
 msgstr ""
 
 msgid "Weather tomorrow"
+msgstr ""
+
+msgid "Weekly Forecast"
 msgstr ""
 
 msgid "Wind"

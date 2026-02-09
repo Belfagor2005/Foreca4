@@ -26,10 +26,11 @@ class ForecaMapMenu(Screen):
     else:
         skin = ForecaMapMenu_HD
 
-    def __init__(self, session, api, unit_system='metric'):
+    def __init__(self, session, api, unit_system='metric', region='eu'):
         self.session = session
         self.api = api
         self.unit_system = unit_system
+        self.region = region
         self.layers = []
         Screen.__init__(self, session)
         self["list"] = MenuList([])
@@ -73,7 +74,7 @@ class ForecaMapMenu(Screen):
         selection = self["list"].getCurrent()
         if selection:
             from .foreca_map_viewer import ForecaMapViewer
-            self.session.open(ForecaMapViewer, self.api, selection[1], self.unit_system)
+            self.session.open(ForecaMapViewer, self.api, selection[1], self.unit_system, self.region)
 
     def exit(self):
         self.close()

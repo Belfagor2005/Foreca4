@@ -18,22 +18,27 @@ CONFIG_FILE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/api_config.txt
 class ForecaMapAPI:
     """Manages the Foreca Map API with cache and file-based configuration"""
 
-    def __init__(self):
+    def __init__(self, region='eu'):
         self.user = ""
         self.password = ""
         self.token_expire_hours = 720
-        self.map_server = "map-eu.foreca.com"
-        self.auth_server = "pfa.foreca.com"
+        server_map = {
+            'eu': 'map-eu.foreca.com',
+            'us': 'map-us.foreca.com',
+            # Add others if discovered: 'asia', 'au', etc.
+        }
+        self.map_server = server_map.get(region, 'map-eu.foreca.com')
+        self.auth_server = 'pfa.foreca.com'
 
         self.token = None
         self.token_expire = 0
 
         if not os.path.exists(CACHE_BASE):
             os.makedirs(CACHE_BASE, exist_ok=True)
-            print(f"[ForecaMapAPI] Creata cartella cache: {CACHE_BASE}")
+            print(f"[ForecaMapAPI] Created cache folder: {CACHE_BASE}")
         self.load_config()
         self.load_token()
-        print(f"[ForecaMapAPI] Initialized for user: {self.user}")
+        print(f"[ForecaMapAPI] Initialized for user: {self.user}, region: {region}")
 
     def load_config(self):
         """Load configuration from file"""
@@ -127,11 +132,11 @@ class ForecaMapAPI:
                 AUTH_SERVER=pfa.foreca.com
 
                 # Save this file as api_config.txt (remove .example)
-            """
-            with open(CONFIG_FILE + ".example", 'w') as f:
+                """
+            example_file = CONFIG_FILE + ".example"
+            with open(example_file, 'w') as f:
                 f.write(example_content)
-            print(
-                f"[ForecaMapAPI] Created example file: {CONFIG_FILE}.example")
+            print(f"[ForecaMapAPI] Created example file: {example_file}")
         except Exception as e:
             print(f"[ForecaMapAPI] Error creating example: {e}")
 

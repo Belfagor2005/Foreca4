@@ -40,6 +40,10 @@ msgstr "6 – Heute + 6 Tage"
 msgid "7 - Today + 7 days"
 msgstr "7 - Heute + 7 Tage"
 
+#, fuzzy
+msgid "7-Day Detailed Forecast"
+msgstr "Foreca Weather Forecast"
+
 msgid "8 - Today + 8 days"
 msgstr "8 – Heute + 8 Tage"
 
@@ -156,6 +160,9 @@ msgstr "Farbauswahl"
 msgid "Continents Weather Maps"
 msgstr "Kontinente Wetterkarten"
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr "Aktuelles Wetter und Vorhersage"
 
@@ -164,6 +171,9 @@ msgstr "Aktuelles Wetter und Vorhersage für die nächsten 10 Tage"
 
 msgid "Czech Republic"
 msgstr "Tschechische Republik"
+
+msgid "Data provided by Foreca"
+msgstr ""
 
 msgid "Denmark"
 msgstr "Dänemark"
@@ -179,6 +189,10 @@ msgstr "Bilder werden heruntergeladen..."
 
 msgid "East Asia"
 msgstr "Ostasien"
+
+#, fuzzy
+msgid "Error displaying forecast"
+msgstr "Fehler beim Speichern des Favoriten!"
 
 msgid "Error loading colors"
 msgstr "Fehler beim Laden der Farben"
@@ -342,6 +356,10 @@ msgstr "Verfügbare Karten werden geladen..."
 msgid "Loading nearby stations..."
 msgstr "Verfügbare Karten werden geladen..."
 
+#, fuzzy
+msgid "Loading weekly forecast..."
+msgstr "Verfügbare Karten werden geladen..."
+
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -405,6 +423,10 @@ msgstr "Keine Daten verfügbar"
 
 #, fuzzy
 msgid "No date available"
+msgstr "Keine Daten verfügbar"
+
+#, fuzzy
+msgid "No forecast data available"
 msgstr "Keine Daten verfügbar"
 
 #, fuzzy
@@ -496,6 +518,9 @@ msgstr "Teilweise bewölkt und nasse Schneeschauer"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Teilweise bewölkt, mögliche Gewitter mit Regen"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Bitte warten ..."
 
@@ -504,6 +529,10 @@ msgstr "Polen"
 
 msgid "Portugal"
 msgstr "Portugal"
+
+#, fuzzy
+msgid "Precipitation"
+msgstr "Niederschläge:"
 
 msgid "Pressure"
 msgstr ""
@@ -593,6 +622,10 @@ msgstr "Spanien"
 msgid "Station Observations"
 msgstr ""
 
+#, fuzzy
+msgid "Sun"
+msgstr "Sonnenuntergang"
+
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
@@ -620,6 +653,9 @@ msgstr "Transparenzeinstellungen"
 msgid "Transparency level"
 msgstr "Transparenzgrad"
 
+msgid "UV Index"
+msgstr ""
+
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Menü - Einstellungen"
@@ -632,6 +668,13 @@ msgstr "Unbekannt"
 
 msgid "Up - Previous page"
 msgstr "Nach oben – Vorherige Seite"
+
+msgid "Use arrow keys to scroll"
+msgstr ""
+
+#, fuzzy
+msgid "Weather"
+msgstr "Wetterkarten"
 
 msgid "Weather Maps"
 msgstr "Wetterkarten"
@@ -653,6 +696,10 @@ msgstr "Wetter heute"
 
 msgid "Weather tomorrow"
 msgstr "Wetter morgen"
+
+#, fuzzy
+msgid "Weekly Forecast"
+msgstr "Vorhersage"
 
 msgid "Wind"
 msgstr "Wind"
@@ -723,9 +770,6 @@ msgstr ""
 
 #~ msgid "Feels like:"
 #~ msgstr "Fühlt sich an wie:"
-
-#~ msgid "Precipitations:"
-#~ msgstr "Niederschläge:"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"

@@ -41,6 +41,10 @@ msgstr "6 - Today + 6 days"
 msgid "7 - Today + 7 days"
 msgstr "7 - Today + 7 days"
 
+#, fuzzy
+msgid "7-Day Detailed Forecast"
+msgstr "Foreca Weather Forecast"
+
 msgid "8 - Today + 8 days"
 msgstr "8 - Today + 8 days"
 
@@ -161,6 +165,9 @@ msgstr "Color selection"
 msgid "Continents Weather Maps"
 msgstr ""
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr "Current weather and forecast"
 
@@ -168,6 +175,9 @@ msgid "Current weather and forecast for the next 10 days"
 msgstr "Current weather and forecast for the next 10 days"
 
 msgid "Czech Republic"
+msgstr ""
+
+msgid "Data provided by Foreca"
 msgstr ""
 
 msgid "Denmark"
@@ -183,6 +193,9 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
+msgstr ""
+
+msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -351,6 +364,9 @@ msgstr ""
 msgid "Loading nearby stations..."
 msgstr ""
 
+msgid "Loading weekly forecast..."
+msgstr ""
+
 msgid "Loading..."
 msgstr ""
 
@@ -415,6 +431,9 @@ msgid "No data available"
 msgstr ""
 
 msgid "No date available"
+msgstr ""
+
+msgid "No forecast data available"
 msgstr ""
 
 #, fuzzy
@@ -505,6 +524,9 @@ msgstr ""
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr ""
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Please wait ..."
 
@@ -513,6 +535,10 @@ msgstr ""
 
 msgid "Portugal"
 msgstr ""
+
+#, fuzzy
+msgid "Precipitation"
+msgstr "Precipitations:"
 
 msgid "Pressure"
 msgstr ""
@@ -603,6 +629,10 @@ msgstr ""
 msgid "Station Observations"
 msgstr ""
 
+#, fuzzy
+msgid "Sun"
+msgstr "Sunset"
+
 msgid "Sunrise"
 msgstr "Sunrise"
 
@@ -631,6 +661,9 @@ msgstr "Transparency level"
 msgid "Transparency level"
 msgstr "Transparency level"
 
+msgid "UV Index"
+msgstr ""
+
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Menu - Select transparency"
@@ -643,6 +676,13 @@ msgstr ""
 
 msgid "Up - Previous page"
 msgstr "Up - Previous page"
+
+msgid "Use arrow keys to scroll"
+msgstr ""
+
+#, fuzzy
+msgid "Weather"
+msgstr "Weather Radar"
 
 #, fuzzy
 msgid "Weather Maps"
@@ -665,6 +705,10 @@ msgstr "Weather today"
 
 msgid "Weather tomorrow"
 msgstr "Weather tomorrow"
+
+#, fuzzy
+msgid "Weekly Forecast"
+msgstr "Foreca 4"
 
 msgid "Wind"
 msgstr "Wind"
@@ -725,9 +769,6 @@ msgstr ""
 
 #~ msgid "Feels like:"
 #~ msgstr "Feels like:"
-
-#~ msgid "Precipitations:"
-#~ msgstr "Precipitations:"
 
 #~ msgid "Temp"
 #~ msgstr "Temp"

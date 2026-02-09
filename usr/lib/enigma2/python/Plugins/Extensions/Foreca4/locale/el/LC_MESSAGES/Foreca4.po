@@ -42,6 +42,10 @@ msgstr "6 - Σήμερα + 6 ημέρες"
 msgid "7 - Today + 7 days"
 msgstr "7 - Σήμερα + 7 ημέρες"
 
+#, fuzzy
+msgid "7-Day Detailed Forecast"
+msgstr "Πρόγνωση καιρού Foreca"
+
 msgid "8 - Today + 8 days"
 msgstr "8 - Σήμερα + 8 ημέρες"
 
@@ -158,6 +162,9 @@ msgstr "Επιλογή χρώματος"
 msgid "Continents Weather Maps"
 msgstr "Χάρτες Καιρού Ηπείρων"
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr "Τρέχων καιρός και πρόγνωση"
 
@@ -166,6 +173,9 @@ msgstr "Τρέχων καιρός και πρόγνωση για τις επόμ
 
 msgid "Czech Republic"
 msgstr "Τσεχική Δημοκρατία"
+
+msgid "Data provided by Foreca"
+msgstr ""
 
 msgid "Denmark"
 msgstr "Δανία"
@@ -181,6 +191,10 @@ msgstr "Λήψη εικόνων..."
 
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
+
+#, fuzzy
+msgid "Error displaying forecast"
+msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
 
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
@@ -344,6 +358,10 @@ msgstr "Φόρτωση διαθέσιμων χαρτών..."
 msgid "Loading nearby stations..."
 msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
+#, fuzzy
+msgid "Loading weekly forecast..."
+msgstr "Φόρτωση διαθέσιμων χαρτών..."
+
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
@@ -407,6 +425,10 @@ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #, fuzzy
 msgid "No date available"
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
+#, fuzzy
+msgid "No forecast data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #, fuzzy
@@ -498,6 +520,9 @@ msgstr "Μερικώς συννεφιασμένος και βρεγμένες χ
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Μερικώς συννεφιασμένος, πιθανές καταιγίδες με βροχή"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Παρακαλώ περιμένετε ..."
 
@@ -506,6 +531,10 @@ msgstr "Πολωνία"
 
 msgid "Portugal"
 msgstr "Πορτογαλία"
+
+#, fuzzy
+msgid "Precipitation"
+msgstr "Υετός:"
 
 msgid "Pressure"
 msgstr ""
@@ -595,6 +624,10 @@ msgstr "Ισπανία"
 msgid "Station Observations"
 msgstr ""
 
+#, fuzzy
+msgid "Sun"
+msgstr "Δύση"
+
 msgid "Sunrise"
 msgstr "Ανατολή"
 
@@ -622,6 +655,9 @@ msgstr "Ρυθμίσεις Διαφάνειας"
 msgid "Transparency level"
 msgstr "Επίπεδο διαφάνειας"
 
+msgid "UV Index"
+msgstr ""
+
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Μενού - Ρυθμίσεις"
@@ -634,6 +670,13 @@ msgstr "Άγνωστο"
 
 msgid "Up - Previous page"
 msgstr "Πάνω - Προηγούμενη σελίδα"
+
+msgid "Use arrow keys to scroll"
+msgstr ""
+
+#, fuzzy
+msgid "Weather"
+msgstr "Χάρτες Καιρού"
 
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
@@ -655,6 +698,10 @@ msgstr "Καιρός σήμερα"
 
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
+
+#, fuzzy
+msgid "Weekly Forecast"
+msgstr "Πρόγνωση"
 
 msgid "Wind"
 msgstr "Άνεμος"
@@ -728,9 +775,6 @@ msgstr ""
 
 #~ msgid "Feels like:"
 #~ msgstr "Αίσθηση όπως:"
-
-#~ msgid "Precipitations:"
-#~ msgstr "Υετός:"
 
 #~ msgid "Temp"
 #~ msgstr "Θερμοκρασία"

@@ -199,12 +199,13 @@ class ForecaMapViewer(Screen):
     else:
         skin = ForecaMapViewer_HD
 
-    def __init__(self, session, api, layer, unit_system='metric'):
+    def __init__(self, session, api, layer, unit_system='metric', region='eu'):
         self.api = api
         self.layer = layer
         self.layer_id = layer['id']
         self.layer_title = layer.get('title', 'Map')
         self.unit_system = unit_system
+        self.region = region
 
         self.zoom = 4
         self.center_lat = 50.0  # Central Germany
@@ -373,7 +374,7 @@ class ForecaMapViewer(Screen):
                 composite_path = create_composite_map(
                     merged_image_path,
                     self.layer_title,
-                    "europe"
+                    self.region
                 )
 
                 if isinstance(composite_path, str) and os.path.exists(composite_path):

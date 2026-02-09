@@ -40,6 +40,10 @@ msgstr "6 - Сегодня + 6 дней"
 msgid "7 - Today + 7 days"
 msgstr "7 - Сегодня + 7 дней"
 
+#, fuzzy
+msgid "7-Day Detailed Forecast"
+msgstr "Прогноз Погоды в Фореке"
+
 msgid "8 - Today + 8 days"
 msgstr "8 - Сегодня + 8 дней"
 
@@ -156,6 +160,9 @@ msgstr "Выбор цвета"
 msgid "Continents Weather Maps"
 msgstr "Погодные карты континентов"
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr "Текущая погода и прогноз погоды"
 
@@ -164,6 +171,9 @@ msgstr "Текущая погода и прогноз на следующие 10
 
 msgid "Czech Republic"
 msgstr "Чешская Республика"
+
+msgid "Data provided by Foreca"
+msgstr ""
 
 msgid "Denmark"
 msgstr "Дания"
@@ -179,6 +189,10 @@ msgstr "Загрузка изображений..."
 
 msgid "East Asia"
 msgstr "Восточная Азия"
+
+#, fuzzy
+msgid "Error displaying forecast"
+msgstr "Ошибка сохранения избранного!"
 
 msgid "Error loading colors"
 msgstr "Ошибка загрузки цветов"
@@ -342,6 +356,10 @@ msgstr "Загрузка доступных карт..."
 msgid "Loading nearby stations..."
 msgstr "Загрузка доступных карт..."
 
+#, fuzzy
+msgid "Loading weekly forecast..."
+msgstr "Загрузка доступных карт..."
+
 msgid "Loading..."
 msgstr "Загрузка..."
 
@@ -405,6 +423,10 @@ msgstr "Данные недоступны"
 
 #, fuzzy
 msgid "No date available"
+msgstr "Данные недоступны"
+
+#, fuzzy
+msgid "No forecast data available"
 msgstr "Данные недоступны"
 
 #, fuzzy
@@ -496,6 +518,9 @@ msgstr "Переменная облачность и сильный снег"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Переменная облачность, возможны грозы с дождем"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Пожалуйста, подождите ..."
 
@@ -504,6 +529,10 @@ msgstr "Польша"
 
 msgid "Portugal"
 msgstr "Португалия"
+
+#, fuzzy
+msgid "Precipitation"
+msgstr "Вероятность осадков:"
 
 msgid "Pressure"
 msgstr ""
@@ -593,6 +622,10 @@ msgstr "Испания"
 msgid "Station Observations"
 msgstr ""
 
+#, fuzzy
+msgid "Sun"
+msgstr "Закат"
+
 msgid "Sunrise"
 msgstr "Восход"
 
@@ -620,6 +653,9 @@ msgstr "Настройки прозрачности"
 msgid "Transparency level"
 msgstr "Уровень прозрачности"
 
+msgid "UV Index"
+msgstr ""
+
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Меню - Настройки"
@@ -632,6 +668,13 @@ msgstr "Неизвестно"
 
 msgid "Up - Previous page"
 msgstr "Вверх - Предыдущая страница"
+
+msgid "Use arrow keys to scroll"
+msgstr ""
+
+#, fuzzy
+msgid "Weather"
+msgstr "Погодные карты"
 
 msgid "Weather Maps"
 msgstr "Погодные карты"
@@ -653,6 +696,10 @@ msgstr "Погода сегодня"
 
 msgid "Weather tomorrow"
 msgstr "Погода завтра"
+
+#, fuzzy
+msgid "Weekly Forecast"
+msgstr "Прогноз"
 
 msgid "Wind"
 msgstr "Ветер"
@@ -726,9 +773,6 @@ msgstr ""
 
 #~ msgid "Feels like:"
 #~ msgstr "По ощущениям:"
-
-#~ msgid "Precipitations:"
-#~ msgstr "Вероятность осадков:"
 
 #~ msgid "Temp"
 #~ msgstr "Темп"
