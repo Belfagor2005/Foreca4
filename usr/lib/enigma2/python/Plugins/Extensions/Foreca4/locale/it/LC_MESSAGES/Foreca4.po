@@ -96,6 +96,15 @@ msgstr "Brandeburgo"
 msgid "Bremen"
 msgstr "Brema"
 
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Celsius, km/h, hPa"
+msgstr "Celsius, km/h, hPa"
+
+msgid "Changes apply immediately"
+msgstr "Applica modifiche immediatamente"
+
 msgid "City Selection"
 msgstr "Selezione Città"
 
@@ -192,6 +201,9 @@ msgstr "Esci"
 msgid "Exit - End"
 msgstr "Uscita - Fine"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr "Fahrenheit, mph, inHg"
+
 msgid "Faster: {}s"
 msgstr "Più veloce: {}s"
 
@@ -267,6 +279,9 @@ msgstr "Ungheria"
 msgid "Image not available"
 msgstr "Immagine non disponibile"
 
+msgid "Imperial System"
+msgstr "Sistema Imperiale"
+
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr "Sistema Imperiale (Fahrenheit, mph, inHg)"
 
@@ -309,6 +324,9 @@ msgstr "Freccia sinistra - Giorno precedente"
 msgid "Loading available maps..."
 msgstr "Caricamento mappe disponibili..."
 
+msgid "Loading nearby stations..."
+msgstr "Caricamento delle stazioni vicine..."
+
 msgid "Loading..."
 msgstr "Caricamento..."
 
@@ -326,6 +344,9 @@ msgstr "Menu - Impostazioni"
 
 msgid "Meteogram"
 msgstr "Meteogramma"
+
+msgid "Metric System"
+msgstr "Sistema Metrico"
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr "Sistema metrico (Celsius, km/h, hPa)"
@@ -371,6 +392,12 @@ msgstr "Nessun dato disponibile"
 
 msgid "No location selected"
 msgstr "Nessuna posizione selezionata"
+
+msgid "No station data available"
+msgstr "Nessun dato sulla stazione disponibile"
+
+msgid "No stations found"
+msgstr "Nessuna stazione trovata"
 
 msgid "North Africa"
 msgstr "Africa del Nord"
@@ -450,6 +477,9 @@ msgstr "Parzialmente nuvoloso e rovesci di neve bagnata"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Parzialmente nuvoloso, possibili temporali con pioggia"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Attendere prego ..."
 
@@ -492,6 +522,9 @@ msgstr "Foto Satellitari"
 msgid "Satellite photos coming soon!"
 msgstr "Foto satellitari in arrivo!"
 
+msgid "Save"
+msgstr "Salva"
+
 msgid "Saxony"
 msgstr "Sassonia"
 
@@ -512,6 +545,9 @@ msgstr "Seleziona una città"
 
 msgid "Select a map with OK"
 msgstr "Seleziona una mappa con OK"
+
+msgid "Select unit system"
+msgstr "Seleziona Sistema Unità"
 
 msgid "Show info"
 msgstr "Mostra info"
@@ -627,20 +663,8 @@ msgstr "• VOL+/VOL- per saltare 100 città"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GIALLO per salvare come Preferito 2\n"
 
-#~ msgid "Cancel"
-#~ msgstr "Annulla"
-
-#~ msgid "Celsius, km/h, hPa"
-#~ msgstr "Celsius, km/h, hPa"
-
-#~ msgid "Changes apply immediately"
-#~ msgstr "Applica modifiche immediatamente"
-
 #~ msgid "Distance"
 #~ msgstr "Distanza"
-
-#~ msgid "Fahrenheit, mph, inHg"
-#~ msgstr "Fahrenheit, mph, inHg"
 
 #~ msgid "Feels like"
 #~ msgstr "Percepita"
@@ -648,32 +672,11 @@ msgstr "• GIALLO per salvare come Preferito 2\n"
 #~ msgid "Humidity"
 #~ msgstr "Umidità"
 
-#~ msgid "Imperial System"
-#~ msgstr "Sistema Imperiale"
-
 #~ msgid "Last update"
 #~ msgstr "Ultimo aggiornamento"
 
-#~ msgid "Loading nearby stations..."
-#~ msgstr "Caricamento delle stazioni vicine..."
-
-#~ msgid "Metric System"
-#~ msgstr "Sistema Metrico"
-
-#~ msgid "No station data available"
-#~ msgstr "Nessun dato sulla stazione disponibile"
-
-#~ msgid "No stations found"
-#~ msgstr "Nessuna stazione trovata"
-
 #~ msgid "Pressure"
 #~ msgstr "Pressione"
-
-#~ msgid "Save"
-#~ msgstr "Salva"
-
-#~ msgid "Select unit system"
-#~ msgstr "Seleziona Sistema Unità"
 
 #~ msgid "Temperature"
 #~ msgstr "Temperatura"

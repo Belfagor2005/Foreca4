@@ -97,6 +97,15 @@ msgstr ""
 msgid "Bremen"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 #, fuzzy
 msgid "City Selection"
 msgstr "Color selection"
@@ -198,6 +207,9 @@ msgstr ""
 msgid "Exit - End"
 msgstr "Exit - End"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr ""
 
@@ -278,6 +290,9 @@ msgstr ""
 msgid "Image not available"
 msgstr ""
 
+msgid "Imperial System"
+msgstr ""
+
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr ""
 
@@ -320,6 +335,9 @@ msgstr "Left arrow - Previous day"
 msgid "Loading available maps..."
 msgstr ""
 
+msgid "Loading nearby stations..."
+msgstr ""
+
 msgid "Loading..."
 msgstr ""
 
@@ -338,6 +356,9 @@ msgstr "Menu - Select transparency"
 
 msgid "Meteogram"
 msgstr "Meteogram"
+
+msgid "Metric System"
+msgstr ""
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr ""
@@ -386,6 +407,12 @@ msgstr ""
 #, fuzzy
 msgid "No location selected"
 msgstr "Color selection"
+
+msgid "No station data available"
+msgstr ""
+
+msgid "No stations found"
+msgstr ""
 
 msgid "North Africa"
 msgstr ""
@@ -465,6 +492,9 @@ msgstr ""
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr ""
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Please wait ..."
 
@@ -509,6 +539,9 @@ msgstr ""
 msgid "Satellite photos coming soon!"
 msgstr ""
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr ""
 
@@ -528,6 +561,9 @@ msgid "Select a city"
 msgstr ""
 
 msgid "Select a map with OK"
+msgstr ""
+
+msgid "Select unit system"
 msgstr ""
 
 msgid "Show info"

@@ -94,6 +94,16 @@ msgstr "Brandenburg"
 msgid "Bremen"
 msgstr "Bremen"
 
+#, fuzzy
+msgid "Cancel"
+msgstr "Frankreich"
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 msgid "City Selection"
 msgstr "Stadtauswahl"
 
@@ -191,6 +201,9 @@ msgstr ""
 msgid "Exit - End"
 msgstr "Verlassen - Beenden"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr "Schneller: {}s"
 
@@ -267,6 +280,9 @@ msgstr "Ungarn"
 msgid "Image not available"
 msgstr "Bild nicht verfügbar"
 
+msgid "Imperial System"
+msgstr ""
+
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr ""
 
@@ -309,6 +325,10 @@ msgstr "Pfeil nach links – Vorheriger Tag"
 msgid "Loading available maps..."
 msgstr "Verfügbare Karten werden geladen..."
 
+#, fuzzy
+msgid "Loading nearby stations..."
+msgstr "Verfügbare Karten werden geladen..."
+
 msgid "Loading..."
 msgstr "Laden..."
 
@@ -326,6 +346,9 @@ msgstr "Menü - Einstellungen"
 
 msgid "Meteogram"
 msgstr "Meteogramm"
+
+msgid "Metric System"
+msgstr ""
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr ""
@@ -374,6 +397,13 @@ msgstr "Keine Daten verfügbar"
 #, fuzzy
 msgid "No location selected"
 msgstr "Stadtauswahl"
+
+#, fuzzy
+msgid "No station data available"
+msgstr "Keine Daten verfügbar"
+
+msgid "No stations found"
+msgstr ""
 
 msgid "North Africa"
 msgstr "Nordafrika"
@@ -453,6 +483,9 @@ msgstr "Teilweise bewölkt und nasse Schneeschauer"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Teilweise bewölkt, mögliche Gewitter mit Regen"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Bitte warten ..."
 
@@ -495,6 +528,9 @@ msgstr "Satellitenfotos"
 msgid "Satellite photos coming soon!"
 msgstr "Satellitenfotos kommen bald!"
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr "Sachsen"
 
@@ -515,6 +551,10 @@ msgstr "Eine Stadt auswählen"
 
 msgid "Select a map with OK"
 msgstr "Eine Karte mit OK auswählen"
+
+#, fuzzy
+msgid "Select unit system"
+msgstr "Eine Stadt auswählen"
 
 msgid "Show info"
 msgstr "Info anzeigen"
@@ -631,28 +671,12 @@ msgstr ""
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "Frankreich"
-
 #~ msgid "Feels like"
 #~ msgstr "Gefühlt wie"
 
 #, fuzzy
 #~ msgid "Humidity"
 #~ msgstr "Luftfeuchtigkeit:"
-
-#, fuzzy
-#~ msgid "Loading nearby stations..."
-#~ msgstr "Verfügbare Karten werden geladen..."
-
-#, fuzzy
-#~ msgid "No station data available"
-#~ msgstr "Keine Daten verfügbar"
-
-#, fuzzy
-#~ msgid "Select unit system"
-#~ msgstr "Eine Stadt auswählen"
 
 #~ msgid "Wind"
 #~ msgstr "Wind"

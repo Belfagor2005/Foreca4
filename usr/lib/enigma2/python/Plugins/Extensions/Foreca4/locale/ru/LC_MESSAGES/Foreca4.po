@@ -94,6 +94,16 @@ msgstr "Бранденбург"
 msgid "Bremen"
 msgstr "Бремен"
 
+#, fuzzy
+msgid "Cancel"
+msgstr "Франция"
+
+msgid "Celsius, km/h, hPa"
+msgstr ""
+
+msgid "Changes apply immediately"
+msgstr ""
+
 msgid "City Selection"
 msgstr "Выбор города"
 
@@ -191,6 +201,9 @@ msgstr "Выход"
 msgid "Exit - End"
 msgstr "Выход - Закрыть"
 
+msgid "Fahrenheit, mph, inHg"
+msgstr ""
+
 msgid "Faster: {}s"
 msgstr "Быстрее: {}с"
 
@@ -267,6 +280,9 @@ msgstr "Венгрия"
 msgid "Image not available"
 msgstr "Изображение недоступно"
 
+msgid "Imperial System"
+msgstr ""
+
 msgid "Imperial System (Fahrenheit, mph, inHg)"
 msgstr ""
 
@@ -309,6 +325,10 @@ msgstr "Стрелка влево - Предыдущий день"
 msgid "Loading available maps..."
 msgstr "Загрузка доступных карт..."
 
+#, fuzzy
+msgid "Loading nearby stations..."
+msgstr "Загрузка доступных карт..."
+
 msgid "Loading..."
 msgstr "Загрузка..."
 
@@ -326,6 +346,9 @@ msgstr "Меню - Настройки"
 
 msgid "Meteogram"
 msgstr "Метеограмма"
+
+msgid "Metric System"
+msgstr ""
 
 msgid "Metric System (Celsius, km/h, hPa)"
 msgstr ""
@@ -374,6 +397,13 @@ msgstr "Данные недоступны"
 #, fuzzy
 msgid "No location selected"
 msgstr "Выбор города"
+
+#, fuzzy
+msgid "No station data available"
+msgstr "Данные недоступны"
+
+msgid "No stations found"
+msgstr ""
 
 msgid "North Africa"
 msgstr "Северная Африка"
@@ -453,6 +483,9 @@ msgstr "Переменная облачность и сильный снег"
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Переменная облачность, возможны грозы с дождем"
 
+msgid "Play/Pause"
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Пожалуйста, подождите ..."
 
@@ -495,6 +528,9 @@ msgstr "Спутниковые снимки"
 msgid "Satellite photos coming soon!"
 msgstr "Спутниковые снимки скоро!"
 
+msgid "Save"
+msgstr ""
+
 msgid "Saxony"
 msgstr "Саксония"
 
@@ -515,6 +551,10 @@ msgstr "Выберите город"
 
 msgid "Select a map with OK"
 msgstr "Выберите карту с OK"
+
+#, fuzzy
+msgid "Select unit system"
+msgstr "Выберите город"
 
 msgid "Show info"
 msgstr "Показать информацию"
@@ -631,28 +671,12 @@ msgstr ""
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "Франция"
-
 #~ msgid "Feels like"
 #~ msgstr "Ощущается как"
 
 #, fuzzy
 #~ msgid "Humidity"
 #~ msgstr "Влажность:"
-
-#, fuzzy
-#~ msgid "Loading nearby stations..."
-#~ msgstr "Загрузка доступных карт..."
-
-#, fuzzy
-#~ msgid "No station data available"
-#~ msgstr "Данные недоступны"
-
-#, fuzzy
-#~ msgid "Select unit system"
-#~ msgstr "Выберите город"
 
 #~ msgid "Wind"
 #~ msgstr "Ветер"
