@@ -42,10 +42,6 @@ msgstr "6 - Σήμερα + 6 ημέρες"
 msgid "7 - Today + 7 days"
 msgstr "7 - Σήμερα + 7 ημέρες"
 
-#, fuzzy
-msgid "7-Day Detailed Forecast"
-msgstr "Πρόγνωση καιρού Foreca"
-
 msgid "8 - Today + 8 days"
 msgstr "8 - Σήμερα + 8 ημέρες"
 
@@ -162,9 +158,6 @@ msgstr "Επιλογή χρώματος"
 msgid "Continents Weather Maps"
 msgstr "Χάρτες Καιρού Ηπείρων"
 
-msgid "Could not load weekly forecast."
-msgstr ""
-
 msgid "Current weather and forecast"
 msgstr "Τρέχων καιρός και πρόγνωση"
 
@@ -174,14 +167,8 @@ msgstr "Τρέχων καιρός και πρόγνωση για τις επόμ
 msgid "Czech Republic"
 msgstr "Τσεχική Δημοκρατία"
 
-msgid "Data provided by Foreca"
-msgstr ""
-
 msgid "Denmark"
 msgstr "Δανία"
-
-msgid "Distance"
-msgstr ""
 
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
@@ -191,10 +178,6 @@ msgstr "Λήψη εικόνων..."
 
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
-
-#, fuzzy
-msgid "Error displaying forecast"
-msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
 
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
@@ -231,9 +214,6 @@ msgstr "Αγαπημένο 1"
 
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
-
-msgid "Feels like"
-msgstr "Αίσθηση"
 
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -296,10 +276,6 @@ msgstr "Έσση"
 msgid "Home"
 msgstr "Αρχική"
 
-#, fuzzy
-msgid "Humidity"
-msgstr "Υγρασία:"
-
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
@@ -339,9 +315,6 @@ msgstr "Μετάβαση 500 πάνω"
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
-msgid "Last update"
-msgstr ""
-
 msgid "Latvia"
 msgstr "Λετονία"
 
@@ -356,10 +329,6 @@ msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
 #, fuzzy
 msgid "Loading nearby stations..."
-msgstr "Φόρτωση διαθέσιμων χαρτών..."
-
-#, fuzzy
-msgid "Loading weekly forecast..."
 msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
 msgid "Loading..."
@@ -425,10 +394,6 @@ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #, fuzzy
 msgid "No date available"
-msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
-
-#, fuzzy
-msgid "No forecast data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #, fuzzy
@@ -532,13 +497,6 @@ msgstr "Πολωνία"
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
-#, fuzzy
-msgid "Precipitation"
-msgstr "Υετός:"
-
-msgid "Pressure"
-msgstr ""
-
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -624,10 +582,6 @@ msgstr "Ισπανία"
 msgid "Station Observations"
 msgstr ""
 
-#, fuzzy
-msgid "Sun"
-msgstr "Δύση"
-
 msgid "Sunrise"
 msgstr "Ανατολή"
 
@@ -639,9 +593,6 @@ msgstr "Σουηδία"
 
 msgid "Switzerland"
 msgstr "Ελβετία"
-
-msgid "Temperature"
-msgstr ""
 
 msgid "Thin upper cloud"
 msgstr "Λεπτό ανώτερο σύννεφο"
@@ -655,9 +606,6 @@ msgstr "Ρυθμίσεις Διαφάνειας"
 msgid "Transparency level"
 msgstr "Επίπεδο διαφάνειας"
 
-msgid "UV Index"
-msgstr ""
-
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Μενού - Ρυθμίσεις"
@@ -670,13 +618,6 @@ msgstr "Άγνωστο"
 
 msgid "Up - Previous page"
 msgstr "Πάνω - Προηγούμενη σελίδα"
-
-msgid "Use arrow keys to scroll"
-msgstr ""
-
-#, fuzzy
-msgid "Weather"
-msgstr "Χάρτες Καιρού"
 
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
@@ -703,17 +644,11 @@ msgstr "Καιρός αύριο"
 msgid "Weekly Forecast"
 msgstr "Πρόγνωση"
 
-msgid "Wind"
-msgstr "Άνεμος"
-
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
 msgid "Yellow - Favorite 2"
 msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
-
-msgid "stations nearby"
-msgstr ""
 
 msgid "v."
 msgstr "έκδ."
@@ -741,6 +676,44 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Πρόγνωση καιρού Foreca"
+
+#, fuzzy
+#~ msgid "Error displaying forecast"
+#~ msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
+
+#~ msgid "Feels like"
+#~ msgstr "Αίσθηση"
+
+#, fuzzy
+#~ msgid "Humidity"
+#~ msgstr "Υγρασία:"
+
+#, fuzzy
+#~ msgid "Loading weekly forecast..."
+#~ msgstr "Φόρτωση διαθέσιμων χαρτών..."
+
+#, fuzzy
+#~ msgid "No forecast data available"
+#~ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+
+#, fuzzy
+#~ msgid "Precipitation"
+#~ msgstr "Υετός:"
+
+#, fuzzy
+#~ msgid "Sun"
+#~ msgstr "Δύση"
+
+#, fuzzy
+#~ msgid "Weather"
+#~ msgstr "Χάρτες Καιρού"
+
+#~ msgid "Wind"
+#~ msgstr "Άνεμος"
 
 #, fuzzy
 #~ msgid "Error saving settings!"

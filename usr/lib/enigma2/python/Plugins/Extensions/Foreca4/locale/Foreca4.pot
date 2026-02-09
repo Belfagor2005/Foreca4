@@ -13,6 +13,7 @@
 
 
 
+
 msgid "0 - Today"
 msgstr ""
 
@@ -35,9 +36,6 @@ msgid "6 - Today + 6 days"
 msgstr ""
 
 msgid "7 - Today + 7 days"
-msgstr ""
-
-msgid "7-Day Detailed Forecast"
 msgstr ""
 
 msgid "8 - Today + 8 days"
@@ -154,9 +152,6 @@ msgstr ""
 msgid "Continents Weather Maps"
 msgstr ""
 
-msgid "Could not load weekly forecast."
-msgstr ""
-
 msgid "Current weather and forecast"
 msgstr ""
 
@@ -166,13 +161,7 @@ msgstr ""
 msgid "Czech Republic"
 msgstr ""
 
-msgid "Data provided by Foreca"
-msgstr ""
-
 msgid "Denmark"
-msgstr ""
-
-msgid "Distance"
 msgstr ""
 
 msgid "Down - Next page"
@@ -182,9 +171,6 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
-msgstr ""
-
-msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -221,9 +207,6 @@ msgid "Favorite 1"
 msgstr ""
 
 msgid "Favorite 2"
-msgstr ""
-
-msgid "Feels like"
 msgstr ""
 
 msgid "Finland"
@@ -286,9 +269,6 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-msgid "Humidity"
-msgstr ""
-
 msgid "Hungary"
 msgstr ""
 
@@ -328,9 +308,6 @@ msgstr ""
 msgid "Keyboard"
 msgstr ""
 
-msgid "Last update"
-msgstr ""
-
 msgid "Latvia"
 msgstr ""
 
@@ -344,9 +321,6 @@ msgid "Loading available maps..."
 msgstr ""
 
 msgid "Loading nearby stations..."
-msgstr ""
-
-msgid "Loading weekly forecast..."
 msgstr ""
 
 msgid "Loading..."
@@ -410,9 +384,6 @@ msgid "No data available"
 msgstr ""
 
 msgid "No date available"
-msgstr ""
-
-msgid "No forecast data available"
 msgstr ""
 
 msgid "No location selected"
@@ -514,12 +485,6 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Precipitation"
-msgstr ""
-
-msgid "Pressure"
-msgstr ""
-
 msgid "Previous"
 msgstr ""
 
@@ -604,9 +569,6 @@ msgstr ""
 msgid "Station Observations"
 msgstr ""
 
-msgid "Sun"
-msgstr ""
-
 msgid "Sunrise"
 msgstr ""
 
@@ -617,9 +579,6 @@ msgid "Sweden"
 msgstr ""
 
 msgid "Switzerland"
-msgstr ""
-
-msgid "Temperature"
 msgstr ""
 
 msgid "Thin upper cloud"
@@ -634,9 +593,6 @@ msgstr ""
 msgid "Transparency level"
 msgstr ""
 
-msgid "UV Index"
-msgstr ""
-
 msgid "Unit Settings"
 msgstr ""
 
@@ -647,12 +603,6 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Up - Previous page"
-msgstr ""
-
-msgid "Use arrow keys to scroll"
-msgstr ""
-
-msgid "Weather"
 msgstr ""
 
 msgid "Weather Maps"
@@ -679,16 +629,10 @@ msgstr ""
 msgid "Weekly Forecast"
 msgstr ""
 
-msgid "Wind"
-msgstr ""
-
 msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
-msgstr ""
-
-msgid "stations nearby"
 msgstr ""
 
 msgid "v."
