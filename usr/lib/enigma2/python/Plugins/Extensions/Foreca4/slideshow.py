@@ -231,13 +231,15 @@ class ForecaSlideshow(Screen):
         """Pause or resume the slideshow"""
         if self.is_playing:
             self.slide_timer.stop()
-            self["info"].setText(f"{self.current_image + 1}/{self.total_images} (Pausa)")
+            self["info"].setText(
+                f"{self.current_image + 1}/{self.total_images} (Pausa)")
             self["playButton"].show()
             self["pauseButton"].hide()
             self.is_playing = False
         else:
             self.slide_timer.start(self.slide_interval)
-            self["info"].setText(f"{self.current_image + 1}/{self.total_images}")
+            self["info"].setText(
+                f"{self.current_image + 1}/{self.total_images}")
             self["playButton"].hide()
             self["pauseButton"].show()
             self.is_playing = True

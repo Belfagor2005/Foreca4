@@ -74,7 +74,12 @@ class ForecaMapMenu(Screen):
         selection = self["list"].getCurrent()
         if selection:
             from .foreca_map_viewer import ForecaMapViewer
-            self.session.open(ForecaMapViewer, self.api, selection[1], self.unit_system, self.region)
+            self.session.open(
+                ForecaMapViewer,
+                self.api,
+                selection[1],
+                self.unit_system,
+                self.region)
 
     def exit(self):
         self.close()
