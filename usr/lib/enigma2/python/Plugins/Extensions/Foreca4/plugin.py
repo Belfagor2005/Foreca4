@@ -943,8 +943,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 MessageBox,
                 _("API configuration file not found!\n\nPlease create file:\n{0}\n\nwith your Foreca API credentials.").format(config_file),
                 MessageBox.TYPE_ERROR,
-                timeout=10
-            )
+                timeout=10)
             return
 
         try:
@@ -953,8 +952,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 location_id=path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0,
                 country_name=country,
                 lon=lon,
-                lat=lat
-            )
+                lat=lat)
 
             print(f"[Foreca4] Using region: {region} for maps")
 
@@ -966,8 +964,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10
-                )
+                    timeout=10)
                 return
 
             # Use the unit_system property
@@ -990,18 +987,28 @@ class ForecaPreview_4(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split(
+                '/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split(
+                '/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split(
+                '/')[0] if '/' in path_loc2 else path_loc2
 
         if not location_id:
-            self.session.open(MessageBox, _("No location selected"), MessageBox.TYPE_INFO)
+            self.session.open(
+                MessageBox,
+                _("No location selected"),
+                MessageBox.TYPE_INFO)
             return
 
         from .daily_forecast import DailyForecast
-        self.session.open(DailyForecast, self.weather_api, location_id, location_name)
+        self.session.open(
+            DailyForecast,
+            self.weather_api,
+            location_id,
+            location_name)
 
     def OK(self):
         PY3 = version_info[0] == 3
@@ -1225,7 +1232,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     temp_c = float(cur_temp)
                     temp_f = (temp_c * 9 / 5) + 32
                     cur_temp_text = f"{temp_f:.1f}°F"
-                except:
+                except BaseException:
                     cur_temp_text = f"{cur_temp}°C"
             else:
                 cur_temp_text = f"{cur_temp}°C"
@@ -1240,9 +1247,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 try:
                     temp_c = float(fl_temp)
                     temp_f = (temp_c * 9 / 5) + 32
-                    self["fl_temp"].setText(trans("Feels like") + f" {temp_f:.1f}°F")
-                except:
-                    self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
+                    self["fl_temp"].setText(
+                        trans("Feels like") + f" {temp_f:.1f}°F")
+                except BaseException:
+                    self["fl_temp"].setText(
+                        trans("Feels like") + f" {fl_temp}°C")
             else:
                 self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
 
@@ -1257,11 +1266,14 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 if unit_system == 'imperial':
                     # Convert km/h to mph
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_mph:.1f} mph")
+                    self["wind_speed"].setText(
+                        trans("Wind speed") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_kmh:.1f} km/h")
-            except:
-                self["wind_speed"].setText(trans("Wind speed") + f" {wind_speed}")
+                    self["wind_speed"].setText(
+                        trans("Wind speed") + f" {wind_kmh:.1f} km/h")
+            except BaseException:
+                self["wind_speed"].setText(
+                    trans("Wind speed") + f" {wind_speed}")
 
         # Wind gust - same conversion
         if is_valid(wind_gust):
@@ -1269,10 +1281,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 wind_kmh = float(wind_gust)
                 if unit_system == 'imperial':
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_gust"].setText(trans("Gust") + f" {wind_mph:.1f} mph")
+                    self["wind_gust"].setText(
+                        trans("Gust") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_gust"].setText(trans("Gust") + f" {wind_kmh:.1f} km/h")
-            except:
+                    self["wind_gust"].setText(
+                        trans("Gust") + f" {wind_kmh:.1f} km/h")
+            except BaseException:
                 self["wind_gust"].setText(trans("Gust") + f" {wind_gust}")
 
         # Pressure - already handled in scraping (mmHg) but convert if needed
@@ -1287,7 +1301,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     # Convert mmHg to hPa (more standard for metric)
                     pressure_hpa = pressure_mmhg * 1.33322
                     self["pressure"].setText(f"{pressure_hpa:.0f} hPa")
-            except:
+            except BaseException:
                 self["pressure"].setText(f"{pressure}")
 
         # Dewpoint
@@ -1511,7 +1525,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def nextDay(self):
         self.right()
 
-    def determine_region_from_location(self, location_id, country_name="", lon="", lat=""):
+    def determine_region_from_location(
+            self,
+            location_id,
+            country_name="",
+            lon="",
+            lat=""):
         """
         Determine the optimal API region based on location.
         Returns: 'eu' or 'us'
@@ -1833,7 +1852,8 @@ class Color_Select(Screen):
             self.update_display(0)
 
             if len(self.original_names) > 30:
-                print("[Color_Select] Starting background translation for remaining items...")
+                print(
+                    "[Color_Select] Starting background translation for remaining items...")
                 self.translate_range(30, 150)
             self.last_translated_idx = 150
 
@@ -1842,9 +1862,11 @@ class Color_Select(Screen):
 
         def translate():
             end_idx_actual = min(end_idx, len(self.original_names))
-            print(f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
+            print(
+                f"[Color_Select] Translating range {start_idx} to {end_idx_actual}")
 
-            # Translate in blocks of 20 items and update the GUI after each block
+            # Translate in blocks of 20 items and update the GUI after each
+            # block
             block_size = 20
             for block_start in range(start_idx, end_idx_actual, block_size):
                 block_end = min(block_start + block_size, end_idx_actual)
@@ -1852,7 +1874,8 @@ class Color_Select(Screen):
 
                 for i in range(block_start, block_end):
                     if self.display_names[i] == self.original_names[i]:
-                        translated = self.translate_color(self.original_names[i])
+                        translated = self.translate_color(
+                            self.original_names[i])
                         if translated != self.original_names[i]:
                             self.display_names[i] = translated
                             self.Clist[i] = f"{i}. {translated}"
@@ -1872,12 +1895,15 @@ class Color_Select(Screen):
                     timer.callback.append(update_gui_safe)
                     timer.start(0, True)
 
-                print(f"[Color_Select] Translated block {block_start}-{block_end}")
+                print(
+                    f"[Color_Select] Translated block {block_start}-{block_end}")
 
-            print(f"[Color_Select] Completed translation of range {start_idx}-{end_idx_actual}")
+            print(
+                f"[Color_Select] Completed translation of range {start_idx}-{end_idx_actual}")
 
             # Update the index of the last translated item
-            self.last_translated_idx = max(self.last_translated_idx, end_idx_actual)
+            self.last_translated_idx = max(
+                self.last_translated_idx, end_idx_actual)
 
         thread = threading.Thread(target=translate, daemon=True)
         thread.start()
@@ -1929,7 +1955,8 @@ class Color_Select(Screen):
 
                 for i in range(start, end):
                     if self.display_names[i] == self.original_names[i]:
-                        translated = self.translate_color(self.original_names[i])
+                        translated = self.translate_color(
+                            self.original_names[i])
                         if translated != self.original_names[i]:
                             self.display_names[i] = translated
                             self.Clist[i] = f"{i}. {translated}"
@@ -2010,8 +2037,10 @@ class Color_Select(Screen):
         self.update_display(current_idx)
 
         if current_idx + 100 > self.last_translated_idx:
-            new_end = min(self.last_translated_idx + 100, len(self.original_names))
-            print(f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
+            new_end = min(self.last_translated_idx +
+                          100, len(self.original_names))
+            print(
+                f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
             self.translate_range(self.last_translated_idx, new_end)
             self.last_translated_idx = new_end
 
@@ -2021,8 +2050,10 @@ class Color_Select(Screen):
         self.update_display(current_idx)
 
         if current_idx + 100 > self.last_translated_idx:
-            new_end = min(self.last_translated_idx + 100, len(self.original_names))
-            print(f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
+            new_end = min(self.last_translated_idx +
+                          100, len(self.original_names))
+            print(
+                f"[Color_Select] Translating ahead: {self.last_translated_idx} to {new_end}")
             self.translate_range(self.last_translated_idx, new_end)
             self.last_translated_idx = new_end
 
@@ -3062,8 +3093,7 @@ def main(session, **kwargs):
         MessageBox,
         _("Loading Foreca4...\n\nPlease wait while initializing API connections."),
         MessageBox.TYPE_INFO,
-        timeout=3
-    )
+        timeout=3)
     session.open(ForecaPreview_4)
 
 

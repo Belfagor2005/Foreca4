@@ -128,9 +128,13 @@ class UnitManager:
             return (0.0, self.get_pressure_label())
 
         if self.pressure_unit == self.PRESSURE_MMHG:
-            return (pressure * 0.750062, self.get_pressure_label())  # hPa to mmHg
+            return (
+                pressure * 0.750062,
+                self.get_pressure_label())  # hPa to mmHg
         elif self.pressure_unit == self.PRESSURE_INHG:
-            return (pressure * 0.02953, self.get_pressure_label())   # hPa to inHg
+            return (
+                pressure * 0.02953,
+                self.get_pressure_label())   # hPa to inHg
         else:  # HPA
             return (pressure, self.get_pressure_label())
 
@@ -278,7 +282,7 @@ class UnitSettingsSimple(Screen):
         if hasattr(self, 'close_timer') and self.close_timer:
             try:
                 self.close_timer.stop()
-            except:
+            except BaseException:
                 pass
 
     def exit(self):

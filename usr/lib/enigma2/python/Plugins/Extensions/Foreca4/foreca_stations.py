@@ -62,7 +62,8 @@ class ForecaStations(Screen):
         """Load nearby weather stations list"""
         self["info"].setText(_("Loading..."))
 
-        self.observations = self.api.get_station_observations(self.location_id, station_limit=15)
+        self.observations = self.api.get_station_observations(
+            self.location_id, station_limit=15)
 
         if not self.observations:
             self["info"].setText(_("No station data available"))
