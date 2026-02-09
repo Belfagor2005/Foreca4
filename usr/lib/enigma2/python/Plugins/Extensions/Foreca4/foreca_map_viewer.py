@@ -30,12 +30,7 @@ def get_background_for_layer(layer_title, region="europe"):
     layer_lower = layer_title.lower()
 
     # Smart mapping based on layer keywords
-    if any(
-        word in layer_lower for word in [
-            'temp',
-            'temperature',
-            'warm',
-            'cold']):
+    if any(word in layer_lower for word in ['temp', 'temperature', 'warm', 'cold']):
         return 'temp_map.png'
     elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
         return 'rain_map.png'
@@ -110,8 +105,7 @@ def create_composite_map(weather_tiles_path, layer_title, region):
     print(f"[DEBUG] Weather data size: {weather_data.size}")
 
     # 4. Resize background to match weather data
-    print(
-        f"[DEBUG] Resizing background: {background.size} -> {weather_data.size}")
+    print(f"[DEBUG] Resizing background: {background.size} -> {weather_data.size}")
     bg_resized = background.resize(weather_data.size, Image.Resampling.LANCZOS)
 
     # 5. Combine: background + weather data
@@ -139,7 +133,7 @@ def create_composite_map(weather_tiles_path, layer_title, region):
     try:
         composite.save(composite_path, 'PNG')
         return composite_path
-    except BaseException:
+    except:
         return weather_tiles_path
 
 
@@ -173,8 +167,7 @@ def debug_map_creation():
     # Create a test tile if it doesn't exist
     if not os.path.exists(test_tile):
         from PIL import Image, ImageDraw
-        # Red semi-transparent
-        img = Image.new('RGBA', (768, 768), (255, 0, 0, 100))
+        img = Image.new('RGBA', (768, 768), (255, 0, 0, 100))  # Red semi-transparent
         draw = ImageDraw.Draw(img)
         draw.text((100, 100), "TEST WEATHER DATA", fill=(255, 255, 255, 255))
         img.save(test_tile)
@@ -206,12 +199,13 @@ class ForecaMapViewer(Screen):
     else:
         skin = ForecaMapViewer_HD
 
-    def __init__(self, session, api, layer, unit_system='metric'):
+    def __init__(self, session, api, layer, unit_system='metric', region='eu'):
         self.api = api
         self.layer = layer
         self.layer_id = layer['id']
         self.layer_title = layer.get('title', 'Map')
         self.unit_system = unit_system
+        self.region = region
 
         self.zoom = 4
         self.center_lat = 50.0  # Central Germany
@@ -380,11 +374,10 @@ class ForecaMapViewer(Screen):
                 composite_path = create_composite_map(
                     merged_image_path,
                     self.layer_title,
-                    "europe"
+                    self.region
                 )
 
-                if isinstance(composite_path,
-                              str) and os.path.exists(composite_path):
+                if isinstance(composite_path, str) and os.path.exists(composite_path):
                     self["map"].instance.setPixmapFromFile(composite_path)
                     self["map"].instance.show()
                 else:
@@ -407,12 +400,10 @@ class ForecaMapViewer(Screen):
                 try:
                     dt = datetime.strptime(current_time, "%Y-%m-%dT%H:%M:%SZ")
                     display_time = dt.strftime("%d/%m %H:%M UTC")
-                except BaseException:
+                except:
                     display_time = current_time
 
-                self["time"].setText(
-                    "{0} | Zoom: {1} | Grid: 3x3".format(
-                        display_time, self.zoom))
+                self["time"].setText("{0} | Zoom: {1} | Grid: 3x3".format(display_time, self.zoom))
                 self["info"].setText("Use ← → to change time | OK to exit")
 
             except Exception as e:
@@ -462,8 +453,7 @@ class ForecaMapViewer(Screen):
             # Determine the data type (Temperature, Wind, etc.)
             data_type = self.get_data_type_from_layer(layer_name)
 
-            # Determine the region (default, could be configurable in the
-            # future)
+            # Determine the region (default, could be configurable in the future)
             region = "Europe"
 
             # Build the informational text
@@ -510,16 +500,14 @@ class ForecaMapViewer(Screen):
     def prev_time(self):
         """Previous time step"""
         if self.timestamps and len(self.timestamps) > 1:
-            self.current_time_index = (
-                self.current_time_index - 1) % len(self.timestamps)
+            self.current_time_index = (self.current_time_index - 1) % len(self.timestamps)
             self.load_current_tile()
             self.update_layer_info()
 
     def next_time(self):
         """Next time step"""
         if self.timestamps and len(self.timestamps) > 1:
-            self.current_time_index = (
-                self.current_time_index + 1) % len(self.timestamps)
+            self.current_time_index = (self.current_time_index + 1) % len(self.timestamps)
             self.load_current_tile()
             self.update_layer_info()
 

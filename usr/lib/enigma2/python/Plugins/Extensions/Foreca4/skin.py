@@ -91,7 +91,7 @@ ColorSelect_FHD = """
 </screen>"""
 
 About_Foreca4_FHD = """
-<screen name="About_Foreca4_FHD" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="960,400">
+<screen name="About_Foreca4_FHD" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="960,450">
     <widget position="center,100" size="750,42" zPosition="3" font="Regular;32" source="ver" render="Label" transparent="1" valign="center" halign="center"/>
     <eLabel position="280,155" size="400,42" zPosition="3" font="Regular;32" text="Create by @Bauernbub" transparent="1" halign="center" valign="center"/>
     <eLabel position="280,200" size="400,42" zPosition="3" font="Regular;32" text="mod Evg77734, 2025" transparent="1" halign="center" valign="center"/>
@@ -178,9 +178,26 @@ ForecaMapsMenu_FHD = """
 
 ForecaSlideshow_FHD = """
 <screen name="ForecaSlideshow_FHD" position="0,0" size="1920,1080" flags="wfNoBorder">
-    <widget name="image" position="0,0" size="1920,1080" zPosition="1" scale="1"/>
-    <widget name="title" position="50,50" size="1820,60" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
-    <widget name="info" position="50,1020" size="1820,40" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center"/>
+    <widget name="image" position="0,0" size="1920,1080" zPosition="1" scale="1" />
+    <widget name="title" position="50,50" size="1820,60" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="info" position="50,970" size="1820,40" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+
+    <!-- Pulsanti Play/Pause -->
+    <widget name="pauseButton" position="380,1015" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/pause.png" zPosition="2" />
+    <widget name="playButton" position="380,1015" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/play.png" zPosition="2" />
+    <!-- Etichette pulsanti colorati -->
+    <eLabel position="445,1020" size="40,40" backgroundColor="red" zPosition="3" />
+    <eLabel position="690,1020" size="40,40" backgroundColor="green" zPosition="3" />
+    <eLabel position="950,1020" size="40,40" backgroundColor="yellow" zPosition="3" />
+    <eLabel position="1210,1020" size="40,40" backgroundColor="blue" zPosition="3" />
+
+    <widget name="key_red" position="492,1015" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="740,1015" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_yellow" position="1001,1015" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_blue" position="1263,1015" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <ePixmap position="1554,1015" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1470,1015" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+
 </screen>"""
 
 ForecaMapMenu_FHD = """
@@ -207,67 +224,63 @@ ForecaStations_FHD = """
 </screen>"""
 
 CityPanel4_FHD = """
-<screen name="CityPanel4_FHD" position="center,center" size="1200,900" title="Select a city">
+<screen name="CityPanel4_FHD" position="center,center" size="1200,720" title="Select a city">
     <!-- Separator -->
-    <eLabel backgroundColor="#fe00" position="10,80" size="1180,2"/>
-    <eLabel backgroundColor="#fe00" position="10,770" size="1180,2"/>
+    <eLabel backgroundColor="#fe00" position="10,80" size="1180,2" />
+    <eLabel backgroundColor="#fe00" position="10,615" size="1180,2" />
     <!-- City list -->
-    <widget name="Mlist" position="21,98" size="1156,650" font="Regular; 30" itemHeight="40" scrollbarMode="showOnDemand" transparent="0"/>
-    <widget name="description" position="9,789" size="1178,56" zPosition="3" font="Regular;34" foregroundColor="white" backgroundColor="red" transparent="0" valign="center" halign="center"/>
+    <widget name="Mlist" position="21,98" size="1156,511" font="Regular; 30" itemHeight="40" scrollbarMode="showOnDemand" transparent="0" />
+    <widget name="description" position="9,619" size="1178,56" zPosition="3" font="Regular;34" foregroundColor="white" backgroundColor="red" transparent="0" valign="center" halign="center" />
     <!-- Button icons -->
-    <ePixmap position="100,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1"/>
-    <ePixmap position="180,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1"/>
-    <ePixmap position="260,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1"/>
-    <ePixmap position="340,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1"/>
-    <ePixmap position="420,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeDown.png" scale="1"/>
-    <ePixmap position="500,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1"/>
-    <ePixmap position="580,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1"/>
-    <ePixmap position="660,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1"/>
-    <ePixmap position="740,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1"/>
-    <ePixmap position="820,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1"/>
-    <ePixmap position="900,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1"/>
-    <ePixmap position="980,854" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch-.png" scale="1"/>
+    <ePixmap position="100,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" />
+    <ePixmap position="180,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" />
+    <ePixmap position="260,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" />
+    <ePixmap position="340,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" />
+    <ePixmap position="420,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeDown.png" scale="1" />
+    <ePixmap position="500,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" />
+    <ePixmap position="580,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
+    <ePixmap position="660,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
+    <ePixmap position="740,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
+    <ePixmap position="820,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
+    <ePixmap position="900,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1" />
+    <ePixmap position="980,675" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch-.png" scale="1" />
     <!-- Button widgets with unified colors -->
     <widget source="key_red" render="Label" position="10,5" size="295,70" backgroundColor="key_red" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
+        <convert type="ConditionalShowHide" />
     </widget>
     <widget source="key_green" render="Label" position="305,5" size="295,70" backgroundColor="key_green" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
+        <convert type="ConditionalShowHide" />
     </widget>
     <widget source="key_yellow" render="Label" position="600,5" size="295,70" backgroundColor="key_yellow" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
+        <convert type="ConditionalShowHide" />
     </widget>
     <widget source="key_blue" render="Label" position="895,5" size="295,70" backgroundColor="key_blue" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
+        <convert type="ConditionalShowHide" />
     </widget>
 </screen>
 """
 UnitSettingsSimple_FHD = """
-<screen name="UnitSettingsSimple_FHD" position="center,center" size="820,550" title="Unit Settings">
+<screen name="UnitSettingsSimple_FHD" position="center,center" size="1200,700" title="Unit Settings">
     <widget name="title" position="20,20" size="780,50" font="Regular;32" halign="center" />
     <widget name="info" position="20,90" size="780,40" font="Regular;26" halign="center" />
     <!-- Button widgets with unified colors -->
-    <!--
-    <widget source="key_red" render="Label" position="53,451" size="295,70" backgroundColor="key_red" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="key_green" render="Label" position="355,450" size="295,70" backgroundColor="key_green" font="Regular;28" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    -->
-
-    <ePixmap name="red" position="25,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
-    <ePixmap name="green" position="579,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
-    <widget name="key_red" position="27,431" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
-    <widget name="key_green" position="579,435" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
-
+    <ePixmap name="red" position="25,485" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
+    <ePixmap name="green" position="580,485" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
+    <widget name="key_red" position="80,485" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="635,485" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" />
     <widget name="option_metric" position="120,180" size="500,50" font="Regular;30" halign="left" />
     <widget name="metric_details" position="150,230" size="470,40" font="Regular;22" halign="left" />
     <widget name="option_imperial" position="120,300" size="500,50" font="Regular;30" halign="left" />
     <widget name="imperial_details" position="150,350" size="470,40" font="Regular;22" halign="left" />
     <widget name="check_metric" position="70,180" size="40,40" alphatest="on" scale="1" />
     <widget name="check_imperial" position="70,300" size="40,40" alphatest="on" scale="1" />
+</screen>
+"""
+DailyForecast_FHD = """
+<screen name="DailyForecast_FHD" position="center,center" size="1200,700" title="Weekly Forecast">
+    <widget name="title" position="20,20" size="1150,40" font="Regular;32" halign="center" zPosition="3" />
+    <widget name="info" position="20,70" size="1150,30" font="Regular;24" halign="center" zPosition="3" />
+    <widget name="forecast_text" position="20,110" size="1150,529" font="Regular;26" zPosition="3" />
 </screen>
 """
 # -----------------------------------------------------------------------
@@ -442,9 +455,24 @@ Meteogram_Foreca4_HD = """
 
 ForecaSlideshow_HD = """
 <screen name="ForecaSlideshow_HD" position="0,0" size="1280,720" flags="wfNoBorder">
-    <widget name="image" position="0,0" size="1280,720" zPosition="1"/>
-    <widget name="title" position="30,30" size="1220,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
-    <widget name="info" position="30,680" size="1220,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center"/>
+    <widget name="image" position="0,0" size="1280,720" zPosition="1" />
+    <widget name="title" position="30,30" size="1220,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="info" position="30,625" size="1220,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <!-- Pulsanti Play/Pause -->
+    <widget name="pauseButton" position="50,660" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/pause.png" zPosition="2" />
+    <widget name="playButton" position="50,660" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/play.png" zPosition="2" />
+    <!-- Etichette pulsanti colorati -->
+    <eLabel position="110,665" size="40,40" backgroundColor="red" zPosition="3" />
+    <eLabel position="362,665" size="40,40" backgroundColor="green" zPosition="3" />
+    <eLabel position="616,665" size="40,40" backgroundColor="yellow" zPosition="3" />
+    <eLabel position="864,665" size="40,40" backgroundColor="blue" zPosition="3" />
+
+    <widget name="key_red" position="160,660" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="413,660" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_yellow" position="666,660" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_blue" position="915,660" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <ePixmap position="1186,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1100,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
 </screen>"""
 
 ForecaMapsMenu_HD = """
@@ -516,20 +544,10 @@ UnitSettingsSimple_HD = """
     <widget name="title" position="16,15" size="580,40" font="Regular;28" halign="center" />
     <widget name="info" position="20,70" size="580,30" font="Regular;22" halign="center" />
     <!-- Button widgets with unified colors -->
-    <!--
-    <widget source="key_red" render="Label" position="27,385" size="196,46" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="key_green" render="Label" position="227,385" size="196,46" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    -->
-    <ePixmap name="red" position="35,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
-    <ePixmap name="green" position="439,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
-    <widget name="key_red" position="33,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
-    <widget name="key_green" position="439,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
-
+    <ePixmap name="red" position="35,390" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
+    <ePixmap name="green" position="389,390" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
+    <widget name="key_red" position="88,390" size="150,50" font="Regular;24" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="439,390" size="150,50" font="Regular;24" halign="left" valign="center" backgroundColor="black" transparent="1" />
     <widget name="option_metric" position="100,150" size="400,40" font="Regular;26" halign="left" />
     <widget name="metric_details" position="120,190" size="380,30" font="Regular;20" halign="left" />
     <widget name="option_imperial" position="100,250" size="400,40" font="Regular;26" halign="left" />
@@ -538,6 +556,19 @@ UnitSettingsSimple_HD = """
     <widget name="check_imperial" position="60,250" size="32,32" alphatest="on" scale="1" />
 </screen>
 """
+
+DailyForecast_HD = """
+<screen name="DailyForecast_HD" position="center,center" size="800,600" title="Weekly Forecast">
+    <widget name="title" position="20,20" size="760,40" font="Regular;28" halign="center" zPosition="3" />
+    <widget name="info" position="20,70" size="760,30" font="Regular;22" halign="center" zPosition="3" />
+    <widget name="forecast_text" position="20,110" size="760,440" font="Regular;22" zPosition="3" />
+    <ePixmap position="380,566" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
+    <ePixmap position="420,566" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="460,566" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+    <ePixmap position="500,566" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+</screen>
+"""
+
 # -----------------------------------------------------------------------
 
 ForecaPreview_4_UHD = """
@@ -721,9 +752,24 @@ ForecaMapsMenu_UHD = """
 
 ForecaSlideshow_UHD = """
 <screen name="ForecaSlideshow_FHD" position="0,0" size="1840,1200" flags="wfNoBorder">
-    <widget name="image" position="0,0" size="1840,1200" zPosition="1" scale="1"/>
-    <widget name="title" position="50,50" size="1820,60" font="Regular; 42" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3"/>
-    <widget name="info" position="50,1020" size="1820,40" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" cornerRadius="3"/>
+    <widget name="image" position="0,0" size="1840,1200" zPosition="1" scale="1" />
+    <widget name="title" position="50,50" size="1820,60" font="Regular; 42" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="info" position="50,1020" size="1820,40" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" cornerRadius="0" zPosition="3" />
+    <!-- Pulsanti Play/Pause -->
+    <widget name="pauseButton" position="380,1090" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/pause.png" zPosition="2" />
+    <widget name="playButton" position="380,1090" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/play.png" zPosition="2" />
+    <!-- Etichette pulsanti colorati -->
+    <eLabel position="445,1095" size="40,40" backgroundColor="red" zPosition="3" />
+    <eLabel position="690,1095" size="40,40" backgroundColor="green" zPosition="3" />
+    <eLabel position="950,1095" size="40,40" backgroundColor="yellow" zPosition="3" />
+    <eLabel position="1210,1095" size="40,40" backgroundColor="blue" zPosition="3" />
+
+    <widget name="key_red" position="492,1090" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="740,1090" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_yellow" position="1001,1090" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_blue" position="1263,1090" size="180,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <ePixmap position="1554,1095" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1470,1095" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
 </screen>"""
 
 ForecaMapMenu_UHD = """
@@ -789,20 +835,10 @@ UnitSettingsSimple_UHD = """
     <widget name="title" position="20,20" size="1060,70" font="Regular;42" halign="center" />
     <widget name="info" position="20,120" size="1060,50" font="Regular;32" halign="center" />
     <!-- Button widgets with unified colors -->
-    <!--
-    <widget source="key_red" render="Label" position="56,554" size="394,94" backgroundColor="key_red" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    <widget source="key_green" render="Label" position="457,552" size="394,94" backgroundColor="key_green" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide" />
-    </widget>
-    -->
-    <ePixmap name="red" position="45,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
-    <ePixmap name="green" position="804,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
-    <widget name="key_red" position="48,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
-    <widget name="key_green" position="804,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
-
+    <ePixmap name="red" position="45,625" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
+    <ePixmap name="green" position="744,625" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
+    <widget name="key_red" position="108,625" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="805,625" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" />
     <widget name="option_metric" position="150,230" size="700,70" font="Regular;38" halign="left" />
     <widget name="metric_details" position="190,300" size="660,50" font="Regular;26" halign="left" />
     <widget name="option_imperial" position="150,380" size="700,70" font="Regular;38" halign="left" />
@@ -810,4 +846,17 @@ UnitSettingsSimple_UHD = """
     <widget name="check_metric" position="90,230" size="50,50" alphatest="on" scale="1" />
     <widget name="check_imperial" position="90,380" size="50,50" alphatest="on" scale="1" />
 </screen>
+"""
+
+DailyForecast_FHD = """
+<screen name="DailyForecast_FHD" position="center,center" size="1840,1200" title="Weekly Forecast">
+    <widget name="title" position="17,20" size="1800,40" font="Regular; 38" halign="center" zPosition="3" />
+    <widget name="info" position="20,68" size="1800,40" font="Regular; 32" halign="center" zPosition="3" />
+    <widget name="forecast_text" position="20,110" size="1800,1005" font="Regular;26" zPosition="3" />
+    <ePixmap position="855,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
+    <ePixmap position="955,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1055,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+    <ePixmap position="1155,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+</screen>
+
 """
