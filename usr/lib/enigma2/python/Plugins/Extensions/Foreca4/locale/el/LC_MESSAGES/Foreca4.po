@@ -163,7 +163,7 @@ msgid "Continents Weather Maps"
 msgstr "Χάρτες Καιρού Ηπείρων"
 
 #, fuzzy
-msgid "Could not load weekly forecast."
+msgid "Could not load weekly forecast. Please check your internet connection."
 msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
 msgid "Current weather and forecast"
@@ -644,6 +644,9 @@ msgid "Up - Previous page"
 msgstr "Πάνω - Προηγούμενη σελίδα"
 
 msgid "Use arrow keys to scroll"
+msgstr ""
+
+msgid "Using fallback data..."
 msgstr ""
 
 msgid "Weather Maps"
