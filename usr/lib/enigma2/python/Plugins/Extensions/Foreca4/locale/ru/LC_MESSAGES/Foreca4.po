@@ -161,7 +161,7 @@ msgid "Continents Weather Maps"
 msgstr "Погодные карты континентов"
 
 #, fuzzy
-msgid "Could not load weekly forecast."
+msgid "Could not load weekly forecast. Please check your internet connection."
 msgstr "Загрузка доступных карт..."
 
 msgid "Current weather and forecast"
@@ -642,6 +642,9 @@ msgid "Up - Previous page"
 msgstr "Вверх - Предыдущая страница"
 
 msgid "Use arrow keys to scroll"
+msgstr ""
+
+msgid "Using fallback data..."
 msgstr ""
 
 msgid "Weather Maps"

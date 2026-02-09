@@ -442,7 +442,8 @@ class ForecaMapViewer(Screen):
 
         # DEBUG: show current coordinates
         print(f"[ForecaMapViewer] Region: {self.region}")
-        print(f"[ForecaMapViewer] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
+        print(
+            f"[ForecaMapViewer] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
 
         # Determine grid size based on region
         if self.region.lower() in ['eu', 'europe', 'us', 'usa']:
@@ -450,7 +451,8 @@ class ForecaMapViewer(Screen):
         else:
             grid_size = 3
 
-        self["time"].setText(f"{display_time} | Zoom: {self.zoom} | Grid: {grid_size}x{grid_size}")
+        self["time"].setText(
+            f"{display_time} | Zoom: {self.zoom} | Grid: {grid_size}x{grid_size}")
         self["info"].setText("Downloading tiles...")
 
         # Download tile grid
@@ -459,12 +461,9 @@ class ForecaMapViewer(Screen):
     def download_tile_grid_async(self, timestamp, callback):
         """Download a grid of tiles in a separate thread"""
 
-        # Use the class grid_size
-        grid_size = self.grid_size
-
-        print(f"[DEBUG] Download grid: {grid_size}x{grid_size} for region: {self.region}")
-        print(f"[DEBUG] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
-
+        grid_size = getattr(self, 'grid_size', 5)
+        print("[DEBUG] Download grid: {}x{} for region: {}".format(grid_size, grid_size, self.region))
+        print("[DEBUG] Center: lat={}, lon={}, zoom={}".format(self.center_lat, self.center_lon, self.zoom))
         api = self.api
         layer_id = self.layer_id
         zoom = self.zoom

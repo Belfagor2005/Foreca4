@@ -181,7 +181,7 @@ class ForecaWeatherAPI:
             from datetime import datetime
             dt = datetime.strptime(date_str, "%Y-%m-%d")
             return dt.strftime("%A")  # Monday, Tuesday, etc.
-        except:
+        except BaseException:
             return date_str
 
     def get_token(self, force_new=False):
@@ -355,7 +355,8 @@ class ForecaWeatherAPI:
             url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
 
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -610,7 +611,7 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
+            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(len(daily_data['days'])))
             return daily_data
 
         except Exception as e:

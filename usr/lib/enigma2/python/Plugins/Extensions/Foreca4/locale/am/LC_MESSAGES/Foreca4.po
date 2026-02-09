@@ -157,7 +157,7 @@ msgstr ""
 msgid "Continents Weather Maps"
 msgstr ""
 
-msgid "Could not load weekly forecast."
+msgid "Could not load weekly forecast. Please check your internet connection."
 msgstr ""
 
 msgid "Current weather and forecast"
@@ -626,6 +626,9 @@ msgid "Up - Previous page"
 msgstr ""
 
 msgid "Use arrow keys to scroll"
+msgstr ""
+
+msgid "Using fallback data..."
 msgstr ""
 
 msgid "Weather Maps"
