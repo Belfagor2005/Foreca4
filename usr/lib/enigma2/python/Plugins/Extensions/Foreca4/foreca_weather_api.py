@@ -181,7 +181,7 @@ class ForecaWeatherAPI:
             from datetime import datetime
             dt = datetime.strptime(date_str, "%Y-%m-%d")
             return dt.strftime("%A")  # Monday, Tuesday, etc.
-        except:
+        except BaseException:
             return date_str
 
     def get_token(self, force_new=False):
@@ -338,7 +338,7 @@ class ForecaWeatherAPI:
         if not token:
             print("[ForecaWeatherAPI] No token for daily forecast")
             return None
-        
+
         try:
             headers = {"Authorization": f"Bearer {token}"}
             params = {
@@ -347,16 +347,17 @@ class ForecaWeatherAPI:
                 "tempunit": "C",
                 "windunit": "KMH"
             }
-            
+
             if self.unit_manager:
                 api_params = self.unit_manager.get_api_params()
                 params.update(api_params)
-            
+
             url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
-            
-            response = requests.get(url, headers=headers, params=params, timeout=15)
-            
+
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
+
             if response.status_code == 200:
                 data = response.json()
                 print("[ForecaWeatherAPI] Daily forecast response received")
@@ -365,7 +366,7 @@ class ForecaWeatherAPI:
                 print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
                 print(f"Response: {response.text[:200]}")
                 return None
-                
+
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
             import traceback
@@ -610,7 +611,8 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
+            print(
+                f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
             return daily_data
 
         except Exception as e:

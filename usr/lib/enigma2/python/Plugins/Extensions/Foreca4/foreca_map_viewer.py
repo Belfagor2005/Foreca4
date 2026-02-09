@@ -225,10 +225,12 @@ class ForecaMapViewer(Screen):
             'samerica': {'zoom': 2, 'lat': -20.0, 'lon': -60.0, 'grid': 6},
             'oceania': {'zoom': 3, 'lat': -25.0, 'lon': 135.0, 'grid': 5},
         }
-        
+
         # Usa la configurazione per la regione o il default
-        config = region_configs.get(region.lower(), {'zoom': 3, 'lat': 50.0, 'lon': 10.0, 'grid': 4})
-        
+        config = region_configs.get(
+            region.lower(), {
+                'zoom': 3, 'lat': 50.0, 'lon': 10.0, 'grid': 4})
+
         self.zoom = config['zoom']
         self.center_lat = config['lat']
         self.center_lon = config['lon']
@@ -239,10 +241,11 @@ class ForecaMapViewer(Screen):
 
         self.size_w = getDesktop(0).size().width()
         self.size_h = getDesktop(0).size().height()
-        
-        print(f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
-              f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}")
-        
+
+        print(
+            f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
+            f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}")
+
         Screen.__init__(self, session)
         self.setTitle(f"Foreca: {self.layer_title}")
         # ... resto del codice ...
@@ -302,7 +305,8 @@ class ForecaMapViewer(Screen):
 
         # DEBUG: show current coordinates
         print(f"[ForecaMapViewer] Region: {self.region}")
-        print(f"[ForecaMapViewer] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
+        print(
+            f"[ForecaMapViewer] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
 
         # Determine grid size based on region
         if self.region.lower() in ['eu', 'europe', 'us', 'usa']:
@@ -310,7 +314,8 @@ class ForecaMapViewer(Screen):
         else:
             grid_size = 3
 
-        self["time"].setText(f"{display_time} | Zoom: {self.zoom} | Grid: {grid_size}x{grid_size}")
+        self["time"].setText(
+            f"{display_time} | Zoom: {self.zoom} | Grid: {grid_size}x{grid_size}")
         self["info"].setText("Downloading tiles...")
 
         # Download tile grid
@@ -318,38 +323,41 @@ class ForecaMapViewer(Screen):
 
     def download_tile_grid_async(self, timestamp, callback):
         """Download a grid of tiles in a separate thread"""
-        
+
         grid_size = getattr(self, 'grid_size', 5)
-        
-        print(f"[DEBUG] Download grid: {grid_size}x{grid_size} for region: {self.region}")
-        
+
+        print(
+            f"[DEBUG] Download grid: {grid_size}x{grid_size} for region: {self.region}")
+
         api = self.api
         layer_id = self.layer_id
         zoom = self.zoom
         center_lat = self.center_lat
         center_lon = self.center_lon
         unit_system = self.unit_system
-        
+
         def download_grid_thread():
             try:
                 # Calcola tile centrale
-                center_x, center_y = self.latlon_to_tile(center_lat, center_lon, zoom)
-                
+                center_x, center_y = self.latlon_to_tile(
+                    center_lat, center_lon, zoom)
+
                 offset = grid_size // 2
                 total_tiles_needed = grid_size * grid_size
-                
+
                 print(f"[DEBUG] Center tile: ({center_x}, {center_y})")
-                print(f"[DEBUG] Grid range: x[{center_x - offset} to {center_x + offset}], "
-                      f"y[{center_y - offset} to {center_y + offset}]")
-                
+                print(
+                    f"[DEBUG] Grid range: x[{center_x - offset} to {center_x + offset}], "
+                    f"y[{center_y - offset} to {center_y + offset}]")
+
                 tile_paths = []
-                
+
                 # Scarica tutti i tile
                 for dx in range(-offset, offset + 1):
                     for dy in range(-offset, offset + 1):
                         tile_x = center_x + dx
                         tile_y = center_y + dy
-                        
+
                         tile_path = api.get_tile(
                             layer_id,
                             timestamp,
@@ -357,34 +365,40 @@ class ForecaMapViewer(Screen):
                             tile_x, tile_y,
                             unit_system
                         )
-                        
+
                         if tile_path:
                             # Calcola posizione nella griglia (0-indexed)
                             grid_x = dx + offset
                             grid_y = dy + offset
                             tile_paths.append((grid_x, grid_y, tile_path))
-                            print(f"[DEBUG] Downloaded tile at grid position ({grid_x}, {grid_y})")
+                            print(
+                                f"[DEBUG] Downloaded tile at grid position ({grid_x}, {grid_y})")
                         else:
-                            print(f"[DEBUG] Failed to download tile ({tile_x}, {tile_y})")
-                
-                print(f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles_needed} tiles")
-                
-                if len(tile_paths) >= (total_tiles_needed * 0.8):  # Almeno l'80%
+                            print(
+                                f"[DEBUG] Failed to download tile ({tile_x}, {tile_y})")
+
+                print(
+                    f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles_needed} tiles")
+
+                if len(tile_paths) >= (
+                        total_tiles_needed *
+                        0.8):  # Almeno l'80%
                     merged_image = self.merge_tile_grid(tile_paths, grid_size)
                     if merged_image and callback:
                         callback(merged_image)
                 else:
-                    print(f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles_needed}")
+                    print(
+                        f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles_needed}")
                     if callback:
                         callback(None)
-                        
+
             except Exception as e:
                 print(f"[ForecaMapViewer] Error in thread: {e}")
                 import traceback
                 traceback.print_exc()
                 if callback:
                     callback(None)
-        
+
         from threading import Thread
         thread = Thread(target=download_grid_thread, daemon=True)
         thread.start()

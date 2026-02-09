@@ -64,7 +64,8 @@ class DailyForecast(Screen):
         # PRIMA prova API
         try:
             if hasattr(self.api, 'get_daily_forecast'):
-                self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
+                self.forecast_data = self.api.get_daily_forecast(
+                    self.location_id, days=7)
             else:
                 print("[DailyForecast] API method get_daily_forecast not available")
                 self.forecast_data = None
@@ -81,14 +82,14 @@ class DailyForecast(Screen):
                 BASEURL = "https://www.forecaweather.com/"
                 url = f"{BASEURL}{self.location_id}"
                 print('load_forecast url is: ', str(url))
-                
+
                 # getPageTT ritorna molti dati, dobbiamo estrarre quelli per 7 giorni
                 # Per ora mostriamo un messaggio
                 self["info"].setText(_("Using fallback data..."))
-                
+
                 # Per semplicità, creiamo dati di esempio
                 self.forecast_data = self.create_sample_data()
-                
+
             except Exception as e:
                 print(f"[DailyForecast] Fallback also failed: {e}")
                 self.forecast_data = None
@@ -97,24 +98,25 @@ class DailyForecast(Screen):
             self.display_forecast()
         else:
             self["info"].setText(_("No forecast data available"))
-            self["forecast_text"].setText(_("Could not load weekly forecast. Please check your internet connection."))
+            self["forecast_text"].setText(
+                _("Could not load weekly forecast. Please check your internet connection."))
 
     def create_sample_data(self):
         """Crea dati di esempio per testing"""
         from datetime import datetime, timedelta
-        
+
         sample_data = {
             'town': self.location_name,
             'country': 'N/A',
             'days': []
         }
-        
+
         today = datetime.now()
         for i in range(7):
             day_date = today + timedelta(days=i)
             day_name = day_date.strftime("%A")
             date_str = day_date.strftime("%Y-%m-%d")
-            
+
             sample_data['days'].append({
                 'date': date_str,
                 'day_name': day_name,
@@ -129,7 +131,7 @@ class DailyForecast(Screen):
                 'uv_index': f"{i % 5}",
                 'description': ['Sunny', 'Cloudy', 'Rainy', 'Windy', 'Clear', 'Foggy', 'Stormy'][i % 7]
             })
-        
+
         return sample_data
 
     def display_forecast(self):
