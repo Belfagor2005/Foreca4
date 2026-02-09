@@ -3089,11 +3089,6 @@ def main(session, **kwargs):
         )
         return
 
-    session.open(
-        MessageBox,
-        _("Loading Foreca4...\n\nPlease wait while initializing API connections."),
-        MessageBox.TYPE_INFO,
-        timeout=3)
     session.open(ForecaPreview_4)
 
 

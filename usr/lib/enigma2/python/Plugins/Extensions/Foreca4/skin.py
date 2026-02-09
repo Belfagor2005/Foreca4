@@ -855,7 +855,7 @@ UnitSettingsSimple_UHD = """
 </screen>
 """
 
-DailyForecast_FHD = """
+DailyForecast_UHD = """
 <screen name="DailyForecast_FHD" position="center,center" size="1840,1200" title="Weekly Forecast">
     <widget name="title" position="17,20" size="1800,40" font="Regular; 38" halign="center" zPosition="3" />
     <widget name="info" position="20,68" size="1800,40" font="Regular; 32" halign="center" zPosition="3" />

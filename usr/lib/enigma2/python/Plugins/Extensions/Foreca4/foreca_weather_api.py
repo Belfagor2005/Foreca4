@@ -19,7 +19,7 @@ class ForecaWeatherAPI:
 
     def __init__(self, unit_manager=None):
         self.unit_manager = unit_manager
-        self.base_url = "https://pfa.foreca.net"
+        self.base_url = "https://pfa.foreca.com"  # <-- CAMBIATO da .net a .com
         self.token = None
         self.token_expire = 0
         self.load_credentials()
@@ -58,11 +58,53 @@ class ForecaWeatherAPI:
             except Exception as e:
                 print(f"[ForecaWeatherAPI] Error loading token: {e}")
 
+    def check_credentials(self):
+        """Verifica se le credenziali sono configurate"""
+        return bool(self.user and self.password)
+
     def _degrees_to_direction(self, degrees):
         """Convert wind degrees to direction string"""
         directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
         index = round(degrees / 45) % 8
         return directions[index]
+
+    def _api_symbol_to_icon(self, api_symbol):
+        """Map API symbols to your local icons"""
+        # Complete mapping based on the available weather codes
+        symbol_map = {
+            'd000': 'd000', 'n000': 'n000',
+            'd100': 'd100', 'n100': 'n100',
+            'd200': 'd200', 'n200': 'n200',
+            'd210': 'd210', 'n210': 'n210',
+            'd211': 'd211', 'n211': 'n211',
+            'd212': 'd212', 'n212': 'n212',
+            'd220': 'd220', 'n220': 'n220',
+            'd221': 'd221', 'n221': 'n221',
+            'd222': 'd222', 'n222': 'n222',
+            'd240': 'd240', 'n240': 'n240',
+            'd300': 'd300', 'n300': 'n300',
+            'd310': 'd310', 'n310': 'n310',
+            'd311': 'd311', 'n311': 'n311',
+            'd312': 'd312', 'n312': 'n312',
+            'd320': 'd320', 'n320': 'n320',
+            'd321': 'd321', 'n321': 'n321',
+            'd322': 'd322', 'n322': 'n322',
+            'd340': 'd340', 'n340': 'n340',
+            'd400': 'd400', 'n400': 'n400',
+            'd410': 'd410', 'n410': 'n410',
+            'd411': 'd411', 'n411': 'n411',
+            'd412': 'd412', 'n412': 'n412',
+            'd420': 'd420', 'n420': 'n420',
+            'd421': 'd421', 'n421': 'n421',
+            'd422': 'd422', 'n422': 'n422',
+            'd430': 'd430', 'n430': 'n430',
+            'd431': 'd431', 'n431': 'n431',
+            'd432': 'd432', 'n432': 'n432',
+            'd440': 'd440', 'n440': 'n440',
+            'd500': 'd500', 'n500': 'n500',
+            'd600': 'd600', 'n600': 'n600'
+        }
+        return symbol_map.get(api_symbol, 'd000')
 
     def _symbol_to_description(self, symbol_code):
         """Convert symbol code to weather description"""
@@ -132,6 +174,15 @@ class ForecaWeatherAPI:
             'n600': _('Fog')
         }
         return descriptions.get(symbol_code, 'Unknown')
+
+    def _get_day_name(self, date_str):
+        """Convert date string to day name"""
+        try:
+            from datetime import datetime
+            dt = datetime.strptime(date_str, "%Y-%m-%d")
+            return dt.strftime("%A")  # Monday, Tuesday, etc.
+        except:
+            return date_str
 
     def get_token(self, force_new=False):
         """Get authentication token"""
@@ -280,6 +331,45 @@ class ForecaWeatherAPI:
 
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error getting current weather: {e}")
+            return None
+
+    def get_daily_forecast(self, location_id, days=7):
+        token = self.get_token()
+        if not token:
+            print("[ForecaWeatherAPI] No token for daily forecast")
+            return None
+        
+        try:
+            headers = {"Authorization": f"Bearer {token}"}
+            params = {
+                "days": min(days, 10),
+                "lang": "en",
+                "tempunit": "C",
+                "windunit": "KMH"
+            }
+            
+            if self.unit_manager:
+                api_params = self.unit_manager.get_api_params()
+                params.update(api_params)
+            
+            url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
+            print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
+            
+            response = requests.get(url, headers=headers, params=params, timeout=15)
+            
+            if response.status_code == 200:
+                data = response.json()
+                print("[ForecaWeatherAPI] Daily forecast response received")
+                return self._parse_daily_forecast_response(data)
+            else:
+                print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
+                print(f"Response: {response.text[:200]}")
+                return None
+                
+        except Exception as e:
+            print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
     def get_hourly_forecast(self, location_id, days=1):
@@ -520,61 +610,11 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print(
-                f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
+            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
             return daily_data
 
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
+            import traceback
+            traceback.print_exc()
             return None
-
-    def _get_day_name(self, date_str):
-        """Convert date string to day name"""
-        try:
-            from datetime import datetime
-            dt = datetime.strptime(date_str, "%Y-%m-%d")
-            return dt.strftime("%A")  # Monday, Tuesday, etc.
-        except BaseException:
-            return date_str
-
-    def _api_symbol_to_icon(self, api_symbol):
-        """Map API symbols to your local icons"""
-        # Complete mapping based on the available weather codes
-        symbol_map = {
-            'd000': 'd000', 'n000': 'n000',
-            'd100': 'd100', 'n100': 'n100',
-            'd200': 'd200', 'n200': 'n200',
-            'd210': 'd210', 'n210': 'n210',
-            'd211': 'd211', 'n211': 'n211',
-            'd212': 'd212', 'n212': 'n212',
-            'd220': 'd220', 'n220': 'n220',
-            'd221': 'd221', 'n221': 'n221',
-            'd222': 'd222', 'n222': 'n222',
-            'd240': 'd240', 'n240': 'n240',
-            'd300': 'd300', 'n300': 'n300',
-            'd310': 'd310', 'n310': 'n310',
-            'd311': 'd311', 'n311': 'n311',
-            'd312': 'd312', 'n312': 'n312',
-            'd320': 'd320', 'n320': 'n320',
-            'd321': 'd321', 'n321': 'n321',
-            'd322': 'd322', 'n322': 'n322',
-            'd340': 'd340', 'n340': 'n340',
-            'd400': 'd400', 'n400': 'n400',
-            'd410': 'd410', 'n410': 'n410',
-            'd411': 'd411', 'n411': 'n411',
-            'd412': 'd412', 'n412': 'n412',
-            'd420': 'd420', 'n420': 'n420',
-            'd421': 'd421', 'n421': 'n421',
-            'd422': 'd422', 'n422': 'n422',
-            'd430': 'd430', 'n430': 'n430',
-            'd431': 'd431', 'n431': 'n431',
-            'd432': 'd432', 'n432': 'n432',
-            'd440': 'd440', 'n440': 'n440',
-            'd500': 'd500', 'n500': 'n500',
-            'd600': 'd600', 'n600': 'n600'
-        }
-        return symbol_map.get(api_symbol, 'd000')
-
-    def check_credentials(self):
-        """Verifica se le credenziali sono configurate"""
-        return bool(self.user and self.password)

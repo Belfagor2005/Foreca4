@@ -21,7 +21,7 @@ from . import _
 
 THUMB_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/"
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
-grid_size = 3
+grid_size = 6
 
 
 def get_background_for_layer(layer_title, region="europe"):
@@ -214,17 +214,39 @@ class ForecaMapViewer(Screen):
         self.unit_system = unit_system
         self.region = region
 
-        self.zoom = 4
-        self.center_lat = 50.0  # Central Germany
-        self.center_lon = 10.0
+        # Configurazioni ottimizzate per ogni regione
+        region_configs = {
+            'eu': {'zoom': 3, 'lat': 52.0, 'lon': 10.0, 'grid': 5},
+            'europe': {'zoom': 3, 'lat': 52.0, 'lon': 10.0, 'grid': 5},
+            'us': {'zoom': 3, 'lat': 40.0, 'lon': -100.0, 'grid': 5},
+            'usa': {'zoom': 3, 'lat': 40.0, 'lon': -100.0, 'grid': 5},
+            'asia': {'zoom': 2, 'lat': 30.0, 'lon': 100.0, 'grid': 6},
+            'africa': {'zoom': 2, 'lat': 0.0, 'lon': 20.0, 'grid': 6},
+            'samerica': {'zoom': 2, 'lat': -20.0, 'lon': -60.0, 'grid': 6},
+            'oceania': {'zoom': 3, 'lat': -25.0, 'lon': 135.0, 'grid': 5},
+        }
+        
+        # Usa la configurazione per la regione o il default
+        config = region_configs.get(region.lower(), {'zoom': 3, 'lat': 50.0, 'lon': 10.0, 'grid': 4})
+        
+        self.zoom = config['zoom']
+        self.center_lat = config['lat']
+        self.center_lon = config['lon']
+        self.grid_size = config['grid']
 
         self.timestamps = layer.get('times', {}).get('available', [])
         self.current_time_index = layer.get('times', {}).get('current', 0)
 
         self.size_w = getDesktop(0).size().width()
         self.size_h = getDesktop(0).size().height()
+        
+        print(f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
+              f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}")
+        
         Screen.__init__(self, session)
         self.setTitle(f"Foreca: {self.layer_title}")
+        # ... resto del codice ...
+
         self["map"] = Pixmap()
         self["title"] = Label(self.layer_title)
         self["layerinfo"] = Label("")
@@ -252,6 +274,14 @@ class ForecaMapViewer(Screen):
         y = int((1.0 - log(tan(lat_rad) + 1.0 / cos(lat_rad)) / pi) / 2.0 * n)
         return x, y
 
+    def get_grid_size_for_region(region):
+        """Returns the optimal grid size for the region"""
+        region_lower = region.lower()
+        if region_lower in ['eu', 'europe', 'us', 'usa']:
+            return 4  # 4x4 for continents
+        else:
+            return 3  # 3x3 for smaller regions
+
     def load_current_tile(self):
         """Load a grid of tiles and merge them"""
         if not self.timestamps:
@@ -270,7 +300,17 @@ class ForecaMapViewer(Screen):
         except BaseException:
             display_time = timestamp
 
-        self["time"].setText(f"{display_time} | Zoom: {self.zoom}")
+        # DEBUG: show current coordinates
+        print(f"[ForecaMapViewer] Region: {self.region}")
+        print(f"[ForecaMapViewer] Center: lat={self.center_lat}, lon={self.center_lon}, zoom={self.zoom}")
+
+        # Determine grid size based on region
+        if self.region.lower() in ['eu', 'europe', 'us', 'usa']:
+            grid_size = 4
+        else:
+            grid_size = 3
+
+        self["time"].setText(f"{display_time} | Zoom: {self.zoom} | Grid: {grid_size}x{grid_size}")
         self["info"].setText("Downloading tiles...")
 
         # Download tile grid
@@ -278,65 +318,83 @@ class ForecaMapViewer(Screen):
 
     def download_tile_grid_async(self, timestamp, callback):
         """Download a grid of tiles in a separate thread"""
-
+        
+        grid_size = getattr(self, 'grid_size', 5)
+        
+        print(f"[DEBUG] Download grid: {grid_size}x{grid_size} for region: {self.region}")
+        
+        api = self.api
+        layer_id = self.layer_id
+        zoom = self.zoom
+        center_lat = self.center_lat
+        center_lon = self.center_lon
+        unit_system = self.unit_system
+        
         def download_grid_thread():
-            # Calculate center tile
-            center_x, center_y = self.latlon_to_tile(
-                self.center_lat, self.center_lon, self.zoom)
-
-            # Grid size (e.g., 3x3 tiles = 768x768 pixels)
-            # grid_size = 3
-            offset = grid_size // 2  # 1
-
-            tile_paths = []
-
-            # Download all tiles in the grid
-            for dx in range(-offset, offset + 1):
-                for dy in range(-offset, offset + 1):
-                    tile_x = center_x + dx
-                    tile_y = center_y + dy
-
-                    # passa unit_system
-                    tile_path = self.api.get_tile(
-                        self.layer_id,
-                        timestamp,
-                        self.zoom,
-                        tile_x, tile_y,
-                        self.unit_system
-                    )
-
-                    if tile_path:
-                        tile_paths.append(
-                            (dx + offset, dy + offset, tile_path))
-
-            if len(tile_paths) == grid_size * grid_size:
-                # All tiles downloaded, merge them
-                merged_image = self.merge_tile_grid(tile_paths, grid_size)
-                if merged_image and callback:
-                    callback(merged_image)
-            else:
-                print(
-                    f"[ForecaMapViewer] Missing tiles: {len(tile_paths)}/{grid_size * grid_size}")
+            try:
+                # Calcola tile centrale
+                center_x, center_y = self.latlon_to_tile(center_lat, center_lon, zoom)
+                
+                offset = grid_size // 2
+                total_tiles_needed = grid_size * grid_size
+                
+                print(f"[DEBUG] Center tile: ({center_x}, {center_y})")
+                print(f"[DEBUG] Grid range: x[{center_x - offset} to {center_x + offset}], "
+                      f"y[{center_y - offset} to {center_y + offset}]")
+                
+                tile_paths = []
+                
+                # Scarica tutti i tile
+                for dx in range(-offset, offset + 1):
+                    for dy in range(-offset, offset + 1):
+                        tile_x = center_x + dx
+                        tile_y = center_y + dy
+                        
+                        tile_path = api.get_tile(
+                            layer_id,
+                            timestamp,
+                            zoom,
+                            tile_x, tile_y,
+                            unit_system
+                        )
+                        
+                        if tile_path:
+                            # Calcola posizione nella griglia (0-indexed)
+                            grid_x = dx + offset
+                            grid_y = dy + offset
+                            tile_paths.append((grid_x, grid_y, tile_path))
+                            print(f"[DEBUG] Downloaded tile at grid position ({grid_x}, {grid_y})")
+                        else:
+                            print(f"[DEBUG] Failed to download tile ({tile_x}, {tile_y})")
+                
+                print(f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles_needed} tiles")
+                
+                if len(tile_paths) >= (total_tiles_needed * 0.8):  # Almeno l'80%
+                    merged_image = self.merge_tile_grid(tile_paths, grid_size)
+                    if merged_image and callback:
+                        callback(merged_image)
+                else:
+                    print(f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles_needed}")
+                    if callback:
+                        callback(None)
+                        
+            except Exception as e:
+                print(f"[ForecaMapViewer] Error in thread: {e}")
+                import traceback
+                traceback.print_exc()
                 if callback:
                     callback(None)
-
+        
         from threading import Thread
-        Thread(target=download_grid_thread).start()
+        thread = Thread(target=download_grid_thread, daemon=True)
+        thread.start()
 
     def merge_tile_grid(self, tile_paths, grid_size):
         """Combines a grid of tiles into a single image"""
         try:
             print(
                 f"[DEBUG] Starting merge. Grid size: {grid_size}, Tiles received: {len(tile_paths)}")
-            """
-            for i, (col, row, tile_path) in enumerate(tile_paths):
-                print(f"[DEBUG] Tile {i}: pos({col},{row}), path: {tile_path}")
-                if not os.path.exists(tile_path):
-                    print(f"[DEBUG] ERRORE: Tile {i} non esiste!")
-                else:
-                    size = os.path.getsize(tile_path)
-                    print(f"[DEBUG] Tile {i} size: {size} bytes")
-            """
+
             # Create new empty image
             tile_size = 256
             total_size = tile_size * grid_size
@@ -353,7 +411,6 @@ class ForecaMapViewer(Screen):
                     tile_img = Image.open(tile_path).convert('RGBA')
                     x = col * tile_size
                     y = row * tile_size
-                    print(f"[DEBUG] Placing tile at ({x},{y})")
                     merged_image.paste(tile_img, (x, y), tile_img)
                     tiles_placed += 1
                 except Exception as e:
@@ -363,7 +420,7 @@ class ForecaMapViewer(Screen):
 
             # Save merged image
             merged_path = os.path.join(
-                CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}.png")
+                CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}_{grid_size}x{grid_size}.png")
             merged_image.save(merged_path, 'PNG')
             print(f"[DEBUG] Merged image saved: {merged_path}")
 
