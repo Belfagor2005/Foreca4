@@ -233,7 +233,7 @@ from .tt_weather import getPageTT
 from .unit_manager import UnitManager, UnitSettingsSimple
 from .foreca_weather_api import ForecaWeatherAPI
 
-VERSION = "1.3.4_r4"
+VERSION = "1.3.4_r5"
 
 TARGET_LANG = _get_system_language()
 
@@ -711,7 +711,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
         elif choice[1] == "stations":
             self.open_station_observations()
         elif choice[1] == "units":
-            self.session.open(UnitSettingsSimple, self.unit_manager)
+            self.session.openWithCallback(
+                self.units_settings_closed,
+                UnitSettingsSimple,
+                self.unit_manager
+            )
         elif choice[1] == "color_select":
             self.session.open(Color_Select)
         elif choice[1] == "transparency":
@@ -862,6 +866,25 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def region_selected_callback(self, result=None):
         """Callback when selecting a region (no need to do anything)"""
         pass
+
+    def units_settings_closed(self, result):
+        """Callback when unit settings are closed"""
+        if result:  # If units were changed
+            print("[Foreca4] Units changed, reloading display...")
+            self.my_cur_weather()
+            self.my_forecast_weather()
+
+    # def units_settings_closed(self, result):
+        # """Callback when unit settings are closed"""
+        # if result:  # If units were changed
+            # print("[Foreca4] Units changed, reloading data...")
+            # # Force reload of current favorite with new units
+            # if myloc == 0:
+                # self.Fav0()
+            # elif myloc == 1:
+                # self.Fav1()
+            # elif myloc == 2:
+                # self.Fav2()
 
     def create_default_unit_config(self):
         """Create the default configuration file if it does not exist"""
@@ -1138,47 +1161,88 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self["menu"].setList(self.list)
 
     def my_cur_weather(self):
-        """Update current weather display with proper translations and formatting"""
+        """Update current weather display with proper conversions"""
+        # Use unit_manager for conversions
+        unit_system = self.unit_manager.get_simple_system()
+        
         # City name
         self["town"].setText(str(town) if is_valid(town) else "N/A")
-
-        # Debug per cur_temp
-        print("[DEBUG cur_temp] Valore: '{0}', is_valid: {1}".format(cur_temp, is_valid(cur_temp)))
-
-        # City name
-        self["town"].setText(str(town) if is_valid(town) else "N/A")
-
-        # Current temperature
-        cur_temp_text = "{0}°C".format(cur_temp) if is_valid(cur_temp) else "N/A"
-        print("[DEBUG cur_temp] Testo da impostare: '{0}'".format(cur_temp_text))
+        
+        # Current temperature - convert if needed
+        if is_valid(cur_temp):
+            if unit_system == 'imperial':
+                # Convert Celsius to Fahrenheit
+                try:
+                    temp_c = float(cur_temp)
+                    temp_f = (temp_c * 9 / 5) + 32
+                    cur_temp_text = f"{temp_f:.1f}°F"
+                except:
+                    cur_temp_text = f"{cur_temp}°C"
+            else:
+                cur_temp_text = f"{cur_temp}°C"
+        else:
+            cur_temp_text = "N/A"
+        
         self["cur_temp"].setText(cur_temp_text)
-
+        
         # Feels like temperature
         if is_valid(fl_temp):
-            self["fl_temp"].setText(trans("Feels like") + " {0}°C".format(fl_temp))
-            print("[WIDGET-FIX] fl_temp settato a: {0}{1}°C".format(trans("Feels like "), fl_temp))
+            if unit_system == 'imperial':
+                try:
+                    temp_c = float(fl_temp)
+                    temp_f = (temp_c * 9 / 5) + 32
+                    self["fl_temp"].setText(trans("Feels like") + f" {temp_f:.1f}°F")
+                except:
+                    self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
+            else:
+                self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
         else:
             self["fl_temp"].setText(trans("Feels like") + " N/A")
-
-        # WIND: use the value directly from scraping
+        
+        # Wind speed - needs conversion
         if is_valid(wind_speed):
-            # wind_speed is already in km/h from the site
-            self["wind_speed"].setText(trans("Wind speed") + " {0} km/h".format(wind_speed))
-
-        # GUST
-        if is_valid(wind_gust):
-            self["wind_gust"].setText(trans("Gust") + " {0} km/h".format(wind_gust))
-
-        # PRESSURE
-        if is_valid(pressure):
-            # pressure is in mmHg from scraping (e.g., "757.3")
-            # Convert to hPa for proper display
             try:
-                pressure_hpa = float(pressure) / 0.750062  # mmHg → hPa
-                self["pressure"].setText("{0:.0f} hPa".format(pressure_hpa))  # Rounded
+                # wind_speed from scraping is in km/h
+                wind_kmh = float(wind_speed)
+                
+                if unit_system == 'imperial':
+                    # Convert km/h to mph
+                    wind_mph = wind_kmh * 0.621371
+                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_mph:.1f} mph")
+                else:
+                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_kmh:.1f} km/h")
             except:
-                self["pressure"].setText("{0} hPa".format(pressure))  # Fallback
-
+                self["wind_speed"].setText(trans("Wind speed") + f" {wind_speed}")
+        
+        # Wind gust - same conversion
+        if is_valid(wind_gust):
+            try:
+                wind_kmh = float(wind_gust)
+                
+                if unit_system == 'imperial':
+                    wind_mph = wind_kmh * 0.621371
+                    self["wind_gust"].setText(trans("Gust") + f" {wind_mph:.1f} mph")
+                else:
+                    self["wind_gust"].setText(trans("Gust") + f" {wind_kmh:.1f} km/h")
+            except:
+                self["wind_gust"].setText(trans("Gust") + f" {wind_gust}")
+        
+        # Pressure - already handled in scraping (mmHg) but convert if needed
+        if is_valid(pressure):
+            try:
+                pressure_mmhg = float(pressure)
+                
+                if unit_system == 'imperial':
+                    # Convert mmHg to inHg
+                    pressure_inhg = pressure_mmhg * 0.03937
+                    self["pressure"].setText(f"{pressure_inhg:.2f} inHg")
+                else:
+                    # Convert mmHg to hPa (more standard for metric)
+                    pressure_hpa = pressure_mmhg * 1.33322
+                    self["pressure"].setText(f"{pressure_hpa:.0f} hPa")
+            except:
+                self["pressure"].setText(f"{pressure}")
+        
         # Dewpoint
         if is_valid(dewpoint):
             self["dewpoint"].setText(trans("Dewpoint") + " {0}°C".format(dewpoint))

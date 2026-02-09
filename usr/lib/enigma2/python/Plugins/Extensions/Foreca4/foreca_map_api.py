@@ -95,16 +95,14 @@ class ForecaMapAPI:
         # ID 2: Temperature
         # ID 8: Wind
         colorschemes = {
-            # Temperature
-            2: {'metric': 'default', 'imperial': 'temp-fahrenheit-noalpha'},
+            2: {'metric': 'default', 'imperial': 'temp-fahrenheit-noalpha'},  # Temperature
             8: {'metric': 'winds-noalpha', 'imperial': 'winds-mph-noalpha'},  # Wind
             # Add other layer IDs here if needed (e.g. 3, 4, etc.)
         }
 
         # Get the mapping for the layer, if it exists
         layer_map = colorschemes.get(layer_id, {})
-        # Return the scheme for the unit system, defaulting to 'default' if not
-        # found
+        # Return the scheme for the unit system, defaulting to 'default' if not found
         return layer_map.get(unit_system, 'default')
 
     def create_example_config(self):
@@ -308,19 +306,10 @@ class ForecaMapAPI:
             print(f"[DEBUG] Tile download exception: {e}")
             return None
 
-    def download_tile_async(
-            self,
-            layer_id,
-            timestamp,
-            zoom,
-            x,
-            y,
-            callback,
-            unit_system='metric'):
+    def download_tile_async(self, layer_id, timestamp, zoom, x, y, callback, unit_system='metric'):
         """Download tile in separate thread"""
         def download_thread():
-            result = self.get_tile(
-                layer_id, timestamp, zoom, x, y, unit_system)
+            result = self.get_tile(layer_id, timestamp, zoom, x, y, unit_system)
             if callback:
                 callback(result)
 

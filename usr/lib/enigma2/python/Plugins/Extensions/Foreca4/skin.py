@@ -191,10 +191,11 @@ ForecaMapMenu_FHD = """
 
 ForecaMapViewer_FHD = """
 <screen name="ForecaMapViewer_FHD" position="center,center" size="1920,1080" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="1920,1080" zPosition="1" scale="1"/>
-    <widget name="title" position="50,30" size="1820,50" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
-    <widget name="time" position="50,1000" size="1820,50" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center"/>
-    <widget name="info" position="50,1050" size="1820,30" font="Regular;24" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center"/>
+    <widget name="map" position="0,0" size="1920,1080" zPosition="1" scale="1" />
+    <widget name="title" position="50,5" size="1820,50" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="time" position="50,1000" size="1820,50" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="50,1050" size="1820,30" font="Regular;24" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="layerinfo" position="60,55" size="1800,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
 </screen>"""
 
 ForecaStations_FHD = """
@@ -257,7 +258,7 @@ UnitSettingsSimple_FHD = """
 
     <ePixmap name="red" position="25,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="579,485" size="180,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
+    
     <widget name="key_red" position="27,431" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="579,435" size="180,50" font="Regular;26" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
 
@@ -459,10 +460,11 @@ ForecaMapMenu_HD = """
 
 ForecaMapViewer_HD = """
 <screen name="ForecaMapViewer_HD" position="center,center" size="1280,720" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="1280,720" zPosition="1"/>
-    <widget name="title" position="30,20" size="1220,35" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
-    <widget name="time" position="30,670" size="1220,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center"/>
-    <widget name="info" position="30,700" size="1220,20" font="Regular;18" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center"/>
+    <widget name="map" position="0,0" size="1280,720" zPosition="1" />
+    <widget name="title" position="30,10" size="1220,35" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="time" position="30,665" size="1220,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="30,695" size="1220,20" font="Regular;20" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="layerinfo" position="29,50" size="1220,40" font="Regular;24" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
 </screen>"""
 
 ForecaStations_HD = """
@@ -524,7 +526,7 @@ UnitSettingsSimple_HD = """
     -->
     <ePixmap name="red" position="35,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="439,390" size="150,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
+    
     <widget name="key_red" position="33,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="439,340" size="150,50" font="Regular;24" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
 
@@ -732,10 +734,11 @@ ForecaMapMenu_UHD = """
 
 ForecaMapViewer_UHD = """
 <screen name="ForecaMapViewer_UHD" position="center,center" size="2560,1440" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="2560,1440" zPosition="1" scale="1"/>
-    <widget name="title" position="67,40" size="2427,67" font="Regular;54" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center"/>
-    <widget name="time" position="67,1334" size="2427,67" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center"/>
-    <widget name="info" position="67,1400" size="2427,40" font="Regular;32" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center"/>
+    <widget name="map" position="0,0" size="2560,1440" zPosition="1" scale="1" />
+    <widget name="title" position="67,15" size="2427,67" font="Regular;54" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="time" position="67,1334" size="2427,67" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="67,1400" size="2427,40" font="Regular;32" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="layerinfo" position="66,83" size="2427,60" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
 </screen>"""
 
 ForecaStations_UHD = """
@@ -796,10 +799,10 @@ UnitSettingsSimple_UHD = """
     -->
     <ePixmap name="red" position="45,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
     <ePixmap name="green" position="804,625" size="250,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-
+    
     <widget name="key_red" position="48,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" zPosition="3" />
     <widget name="key_green" position="804,565" size="250,60" font="Regular;28" halign="center" valign="bottom" backgroundColor="black" transparent="1" />
-
+    
     <widget name="option_metric" position="150,230" size="700,70" font="Regular;38" halign="left" />
     <widget name="metric_details" position="190,300" size="660,50" font="Regular;26" halign="left" />
     <widget name="option_imperial" position="150,380" size="700,70" font="Regular;38" halign="left" />
