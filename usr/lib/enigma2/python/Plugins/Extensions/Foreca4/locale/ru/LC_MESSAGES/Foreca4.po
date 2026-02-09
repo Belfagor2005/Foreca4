@@ -22,8 +22,14 @@ msgstr "0 - Сегодня"
 msgid "1 - Today + 1 day"
 msgstr "1 - Сегодня + 1 день"
 
+msgid "1. No API credentials configured\n"
+msgstr ""
+
 msgid "2 - Today + 2 days"
 msgstr "2 - Сегодня + 2 дня"
+
+msgid "2. API service temporarily unavailable\n"
+msgstr ""
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Сегодня + 3 дня"
@@ -160,9 +166,8 @@ msgstr "Выбор цвета"
 msgid "Continents Weather Maps"
 msgstr "Погодные карты континентов"
 
-#, fuzzy
-msgid "Could not load weekly forecast. Please check your internet connection."
-msgstr "Загрузка доступных карт..."
+msgid "Could not load forecast data"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "Текущая погода и прогноз погоды"
@@ -415,10 +420,6 @@ msgid "No date available"
 msgstr "Данные недоступны"
 
 #, fuzzy
-msgid "No forecast data available"
-msgstr "Данные недоступны"
-
-#, fuzzy
 msgid "No location selected"
 msgstr "Выбор города"
 
@@ -510,6 +511,9 @@ msgstr "Переменная облачность, возможны грозы �
 msgid "Play/Pause"
 msgstr ""
 
+msgid "Please check your api_config.txt file."
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Пожалуйста, подождите ..."
 
@@ -518,6 +522,9 @@ msgstr "Польша"
 
 msgid "Portugal"
 msgstr "Португалия"
+
+msgid "Possible reasons:\n"
+msgstr ""
 
 msgid "Previous"
 msgstr "Предыдущий"
@@ -644,9 +651,6 @@ msgstr "Вверх - Предыдущая страница"
 msgid "Use arrow keys to scroll"
 msgstr ""
 
-msgid "Using fallback data..."
-msgstr ""
-
 msgid "Weather Maps"
 msgstr "Погодные карты"
 
@@ -704,6 +708,14 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Could not load weekly forecast. Please check your internet connection."
+#~ msgstr "Загрузка доступных карт..."
+
+#, fuzzy
+#~ msgid "No forecast data available"
+#~ msgstr "Данные недоступны"
 
 #~ msgid "Feels like"
 #~ msgstr "Ощущается как"

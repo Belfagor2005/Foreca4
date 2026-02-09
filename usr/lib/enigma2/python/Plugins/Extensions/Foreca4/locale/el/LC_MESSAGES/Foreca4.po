@@ -24,8 +24,14 @@ msgstr "0 - Σήμερα"
 msgid "1 - Today + 1 day"
 msgstr "1 - Σήμερα + 1 ημέρα"
 
+msgid "1. No API credentials configured\n"
+msgstr ""
+
 msgid "2 - Today + 2 days"
 msgstr "2 - Σήμερα + 2 ημέρες"
+
+msgid "2. API service temporarily unavailable\n"
+msgstr ""
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Σήμερα + 3 ημέρες"
@@ -162,9 +168,8 @@ msgstr "Επιλογή χρώματος"
 msgid "Continents Weather Maps"
 msgstr "Χάρτες Καιρού Ηπείρων"
 
-#, fuzzy
-msgid "Could not load weekly forecast. Please check your internet connection."
-msgstr "Φόρτωση διαθέσιμων χαρτών..."
+msgid "Could not load forecast data"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "Τρέχων καιρός και πρόγνωση"
@@ -417,10 +422,6 @@ msgid "No date available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #, fuzzy
-msgid "No forecast data available"
-msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
-
-#, fuzzy
 msgid "No location selected"
 msgstr "Επιλογή Πόλης"
 
@@ -512,6 +513,9 @@ msgstr "Μερικώς συννεφιασμένος, πιθανές καταιγ
 msgid "Play/Pause"
 msgstr ""
 
+msgid "Please check your api_config.txt file."
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Παρακαλώ περιμένετε ..."
 
@@ -520,6 +524,9 @@ msgstr "Πολωνία"
 
 msgid "Portugal"
 msgstr "Πορτογαλία"
+
+msgid "Possible reasons:\n"
+msgstr ""
 
 msgid "Previous"
 msgstr "Προηγούμενο"
@@ -646,9 +653,6 @@ msgstr "Πάνω - Προηγούμενη σελίδα"
 msgid "Use arrow keys to scroll"
 msgstr ""
 
-msgid "Using fallback data..."
-msgstr ""
-
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
 
@@ -706,6 +710,14 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Could not load weekly forecast. Please check your internet connection."
+#~ msgstr "Φόρτωση διαθέσιμων χαρτών..."
+
+#, fuzzy
+#~ msgid "No forecast data available"
+#~ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
 #~ msgid "Feels like"
 #~ msgstr "Αίσθηση"

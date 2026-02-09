@@ -22,7 +22,13 @@ msgstr ""
 msgid "1 - Today + 1 day"
 msgstr ""
 
+msgid "1. No API credentials configured\n"
+msgstr ""
+
 msgid "2 - Today + 2 days"
+msgstr ""
+
+msgid "2. API service temporarily unavailable\n"
 msgstr ""
 
 msgid "3 - Today + 3 days"
@@ -157,7 +163,7 @@ msgstr ""
 msgid "Continents Weather Maps"
 msgstr ""
 
-msgid "Could not load weekly forecast. Please check your internet connection."
+msgid "Could not load forecast data"
 msgstr ""
 
 msgid "Current weather and forecast"
@@ -403,9 +409,6 @@ msgstr ""
 msgid "No date available"
 msgstr ""
 
-msgid "No forecast data available"
-msgstr ""
-
 msgid "No location selected"
 msgstr ""
 
@@ -496,6 +499,9 @@ msgstr ""
 msgid "Play/Pause"
 msgstr ""
 
+msgid "Please check your api_config.txt file."
+msgstr ""
+
 msgid "Please wait ..."
 msgstr ""
 
@@ -503,6 +509,9 @@ msgid "Poland"
 msgstr ""
 
 msgid "Portugal"
+msgstr ""
+
+msgid "Possible reasons:\n"
 msgstr ""
 
 msgid "Previous"
@@ -626,9 +635,6 @@ msgid "Up - Previous page"
 msgstr ""
 
 msgid "Use arrow keys to scroll"
-msgstr ""
-
-msgid "Using fallback data..."
 msgstr ""
 
 msgid "Weather Maps"

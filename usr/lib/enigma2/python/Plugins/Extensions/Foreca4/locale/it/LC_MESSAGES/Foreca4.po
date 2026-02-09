@@ -24,8 +24,14 @@ msgstr "0 - Oggi"
 msgid "1 - Today + 1 day"
 msgstr "1 - Oggi + 1 giorno"
 
+msgid "1. No API credentials configured\n"
+msgstr ""
+
 msgid "2 - Today + 2 days"
 msgstr "2 - Oggi + 2 giorni"
+
+msgid "2. API service temporarily unavailable\n"
+msgstr ""
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Oggi + 3 giorni"
@@ -160,9 +166,8 @@ msgstr "Selezione del colore"
 msgid "Continents Weather Maps"
 msgstr "Mappe Meteo dei Continenti"
 
-#, fuzzy
-msgid "Could not load weekly forecast. Please check your internet connection."
-msgstr "Caricamento delle stazioni vicine..."
+msgid "Could not load forecast data"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "Meteo attuale e previsioni"
@@ -410,10 +415,6 @@ msgstr "Nessun dato disponibile"
 msgid "No date available"
 msgstr "Nessun dato disponibile"
 
-#, fuzzy
-msgid "No forecast data available"
-msgstr "Nessun dato disponibile"
-
 msgid "No location selected"
 msgstr "Nessuna posizione selezionata"
 
@@ -504,6 +505,9 @@ msgstr "Parzialmente nuvoloso, possibili temporali con pioggia"
 msgid "Play/Pause"
 msgstr ""
 
+msgid "Please check your api_config.txt file."
+msgstr ""
+
 msgid "Please wait ..."
 msgstr "Attendere prego ..."
 
@@ -512,6 +516,9 @@ msgstr "Polonia"
 
 msgid "Portugal"
 msgstr "Portogallo"
+
+msgid "Possible reasons:\n"
+msgstr ""
 
 msgid "Previous"
 msgstr "Precedente"
@@ -637,9 +644,6 @@ msgstr "Su - Pagina precedente"
 msgid "Use arrow keys to scroll"
 msgstr "• Utilizzare i tasti freccia per navigare\n"
 
-msgid "Using fallback data..."
-msgstr ""
-
 msgid "Weather Maps"
 msgstr "Mappe Meteo"
 
@@ -697,6 +701,14 @@ msgstr "• VOL+/VOL- per saltare 100 città"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GIALLO per salvare come Preferito 2\n"
+
+#, fuzzy
+#~ msgid "Could not load weekly forecast. Please check your internet connection."
+#~ msgstr "Caricamento delle stazioni vicine..."
+
+#, fuzzy
+#~ msgid "No forecast data available"
+#~ msgstr "Nessun dato disponibile"
 
 #~ msgid "Distance"
 #~ msgstr "Distanza"
