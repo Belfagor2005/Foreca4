@@ -347,9 +347,6 @@ msgstr "Πρωί"
 msgid "Mostly clear"
 msgstr "Κυρίως αίθριος"
 
-msgid "N/A"
-msgstr "Δ/Υ"
-
 msgid "Netherlands"
 msgstr "Ολλανδία"
 
@@ -361,6 +358,9 @@ msgstr "Επόμενη σελίδα"
 
 msgid "No City found in search!!!"
 msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
+
+msgid "No Internet connection detected. Please check your network."
+msgstr ""
 
 #, fuzzy
 msgid "No city selected"
@@ -632,6 +632,9 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
+
+#~ msgid "N/A"
+#~ msgstr "Δ/Υ"
 
 #, fuzzy
 #~ msgid "Cancel"

@@ -6,6 +6,7 @@
 
 
 
+
 msgid "0 - Today"
 msgstr ""
 
@@ -333,9 +334,6 @@ msgstr ""
 msgid "Mostly clear"
 msgstr ""
 
-msgid "N/A"
-msgstr ""
-
 msgid "Netherlands"
 msgstr ""
 
@@ -346,6 +344,9 @@ msgid "Next page"
 msgstr ""
 
 msgid "No City found in search!!!"
+msgstr ""
+
+msgid "No Internet connection detected. Please check your network."
 msgstr ""
 
 msgid "No city selected"
