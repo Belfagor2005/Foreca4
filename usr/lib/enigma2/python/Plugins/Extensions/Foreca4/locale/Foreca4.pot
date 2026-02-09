@@ -14,6 +14,7 @@
 
 
 
+
 msgid "0 - Today"
 msgstr ""
 
@@ -36,6 +37,9 @@ msgid "6 - Today + 6 days"
 msgstr ""
 
 msgid "7 - Today + 7 days"
+msgstr ""
+
+msgid "7-Day Detailed Forecast"
 msgstr ""
 
 msgid "8 - Today + 8 days"
@@ -152,6 +156,9 @@ msgstr ""
 msgid "Continents Weather Maps"
 msgstr ""
 
+msgid "Could not load weekly forecast."
+msgstr ""
+
 msgid "Current weather and forecast"
 msgstr ""
 
@@ -159,6 +166,9 @@ msgid "Current weather and forecast for the next 10 days"
 msgstr ""
 
 msgid "Czech Republic"
+msgstr ""
+
+msgid "Data provided by Foreca"
 msgstr ""
 
 msgid "Denmark"
@@ -171,6 +181,9 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
+msgstr ""
+
+msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -323,6 +336,9 @@ msgstr ""
 msgid "Loading nearby stations..."
 msgstr ""
 
+msgid "Loading weekly forecast..."
+msgstr ""
+
 msgid "Loading..."
 msgstr ""
 
@@ -384,6 +400,9 @@ msgid "No data available"
 msgstr ""
 
 msgid "No date available"
+msgstr ""
+
+msgid "No forecast data available"
 msgstr ""
 
 msgid "No location selected"
@@ -603,6 +622,9 @@ msgid "Unknown"
 msgstr ""
 
 msgid "Up - Previous page"
+msgstr ""
+
+msgid "Use arrow keys to scroll"
 msgstr ""
 
 msgid "Weather Maps"
