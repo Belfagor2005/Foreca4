@@ -40,8 +40,7 @@ class ForecaWeatherAPI:
                         elif line.startswith('API_PASSWORD='):
                             self.password = line.split('=', 1)[1].strip()
 
-                print(
-                    f"[ForecaWeatherAPI] Credentials loaded for: {self.user}")
+                print(f"[ForecaWeatherAPI] Credentials loaded for: {self.user}")
             except Exception as e:
                 print(f"[ForecaWeatherAPI] Error loading credentials: {e}")
 
@@ -208,32 +207,27 @@ class ForecaWeatherAPI:
             print(f"[ForecaWeatherAPI] Requesting: {url}")
             print(f"[ForecaWeatherAPI] Params: {params}")
 
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
             print(f"[ForecaWeatherAPI] HTTP Status: {response.status_code}")
 
             if response.status_code == 200:
                 data = response.json()
                 observations = data.get('observations', [])
-                print(
-                    f"[ForecaWeatherAPI] Got {len(observations)} station observations")
+                print(f"[ForecaWeatherAPI] Got {len(observations)} station observations")
 
                 # Debug: print first station sample
                 if observations:
                     first = observations[0]
-                    print(
-                        f"[ForecaWeatherAPI] Sample: {first.get('station')} - {first.get('temperature')}°C")
+                    print(f"[ForecaWeatherAPI] Sample: {first.get('station')} - {first.get('temperature')}°C")
 
                 return observations
             else:
-                print(
-                    f"[ForecaWeatherAPI] Error {response.status_code}: {response.text[:200]}")
+                print(f"[ForecaWeatherAPI] Error {response.status_code}: {response.text[:200]}")
                 return None
 
         except requests.exceptions.ConnectionError as e:
             print(f"[ForecaWeatherAPI] Connection error: {e}")
-            print(
-                "[ForecaWeatherAPI] Check if pfa.foreca.com is reachable from your network")
+            print("[ForecaWeatherAPI] Check if pfa.foreca.com is reachable from your network")
             return None
         except Exception as e:
             print(f"[ForecaWeatherAPI] Exception: {e}")
@@ -268,8 +262,7 @@ class ForecaWeatherAPI:
             url = f"{self.base_url}/api/v1/current/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting: {url}")
 
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -313,15 +306,13 @@ class ForecaWeatherAPI:
             url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting forecast: {url}")
 
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
                 return self._parse_hourly_response(data)
             else:
-                print(
-                    f"[ForecaWeatherAPI] Forecast HTTP error: {response.status_code}")
+                print(f"[ForecaWeatherAPI] Forecast HTTP error: {response.status_code}")
                 return None
 
         except Exception as e:
@@ -346,18 +337,16 @@ class ForecaWeatherAPI:
 
             wind_dir = current.get('windDir', 0)
             wind = f"w{wind_dir}"
-            # Already in the correct units!
-            wind_speed = str(current.get('windSpeed', 'N/A'))
+            wind_speed = str(current.get('windSpeed', 'N/A'))  # Already in the correct units!
             wind_gust = str(current.get('windGust', 'N/A'))
 
             # The API returns pressure in hPa
             pressure_hpa = current.get('pressure', 'N/A')
             # Convert to mmHg if needed (for compatibility)
             try:
-                pressure_mmhg = float(pressure_hpa) * \
-                    0.750062 if pressure_hpa != 'N/A' else 'N/A'
+                pressure_mmhg = float(pressure_hpa) * 0.750062 if pressure_hpa != 'N/A' else 'N/A'
                 pressure = str(pressure_mmhg)
-            except BaseException:
+            except:
                 pressure = str(pressure_hpa)
 
             hum = str(current.get('relHumidity', 'N/A'))
@@ -383,24 +372,8 @@ class ForecaWeatherAPI:
         except Exception as e:
             print(f"[ForecaWeatherAPI] Parsing error: {e}")
             # Fallback to compatible error values
-            return (
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'd000',
-                'w0',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A',
-                'N/A')
+            return ('N/A', 'N/A', 'N/A', 'N/A', 'd000', 'w0', 'N/A', 'N/A',
+                    'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A')
 
     def _parse_hourly_response(self, data):
         """Parse API /forecast/hourly response"""
@@ -444,15 +417,13 @@ class ForecaWeatherAPI:
                 wind_speed3.append(str(item.get('windSpeed', 'N/A')))
 
                 # Precipitation and humidity
-                precipitation3.append(
-                    str(item.get('precipProb', '0')))  # Probability %
+                precipitation3.append(str(item.get('precipProb', '0')))  # Probability %
                 rel_hum3.append(str(item.get('relHumidity', 'N/A')))
 
             # Day (may not be provided by the API)
             day = 'N/A'
 
-            print(
-                f"[ForecaWeatherAPI] Parsed forecast: {town}, {len(forecast)} periods")
+            print(f"[ForecaWeatherAPI] Parsed forecast: {town}, {len(forecast)} periods")
 
             return (town, date, mytime, symb3, cur_temp3, flike_temp3,
                     wind3, wind_speed3, precipitation3, rel_hum3, day)
@@ -520,8 +491,7 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print(
-                f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
+            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
             return daily_data
 
         except Exception as e:
@@ -534,7 +504,7 @@ class ForecaWeatherAPI:
             from datetime import datetime
             dt = datetime.strptime(date_str, "%Y-%m-%d")
             return dt.strftime("%A")  # Monday, Tuesday, etc.
-        except BaseException:
+        except:
             return date_str
 
     def _api_symbol_to_icon(self, api_symbol):

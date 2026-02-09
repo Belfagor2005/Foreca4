@@ -953,7 +953,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 location_id=path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0,
                 country_name=country,
                 lon=lon,
-                lat=lat)
+                lat=lat
+            )
 
             print(f"[Foreca4] Using region: {region} for maps")
 
@@ -1224,7 +1225,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     temp_c = float(cur_temp)
                     temp_f = (temp_c * 9 / 5) + 32
                     cur_temp_text = f"{temp_f:.1f}°F"
-                except BaseException:
+                except:
                     cur_temp_text = f"{cur_temp}°C"
             else:
                 cur_temp_text = f"{cur_temp}°C"
@@ -1239,11 +1240,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 try:
                     temp_c = float(fl_temp)
                     temp_f = (temp_c * 9 / 5) + 32
-                    self["fl_temp"].setText(
-                        trans("Feels like") + f" {temp_f:.1f}°F")
-                except BaseException:
-                    self["fl_temp"].setText(
-                        trans("Feels like") + f" {fl_temp}°C")
+                    self["fl_temp"].setText(trans("Feels like") + f" {temp_f:.1f}°F")
+                except:
+                    self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
             else:
                 self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
 
@@ -1258,14 +1257,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 if unit_system == 'imperial':
                     # Convert km/h to mph
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_speed"].setText(
-                        trans("Wind speed") + f" {wind_mph:.1f} mph")
+                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_speed"].setText(
-                        trans("Wind speed") + f" {wind_kmh:.1f} km/h")
-            except BaseException:
-                self["wind_speed"].setText(
-                    trans("Wind speed") + f" {wind_speed}")
+                    self["wind_speed"].setText(trans("Wind speed") + f" {wind_kmh:.1f} km/h")
+            except:
+                self["wind_speed"].setText(trans("Wind speed") + f" {wind_speed}")
 
         # Wind gust - same conversion
         if is_valid(wind_gust):
@@ -1273,12 +1269,10 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 wind_kmh = float(wind_gust)
                 if unit_system == 'imperial':
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_gust"].setText(
-                        trans("Gust") + f" {wind_mph:.1f} mph")
+                    self["wind_gust"].setText(trans("Gust") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_gust"].setText(
-                        trans("Gust") + f" {wind_kmh:.1f} km/h")
-            except BaseException:
+                    self["wind_gust"].setText(trans("Gust") + f" {wind_kmh:.1f} km/h")
+            except:
                 self["wind_gust"].setText(trans("Gust") + f" {wind_gust}")
 
         # Pressure - already handled in scraping (mmHg) but convert if needed
@@ -1293,7 +1287,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     # Convert mmHg to hPa (more standard for metric)
                     pressure_hpa = pressure_mmhg * 1.33322
                     self["pressure"].setText(f"{pressure_hpa:.0f} hPa")
-            except BaseException:
+            except:
                 self["pressure"].setText(f"{pressure}")
 
         # Dewpoint
