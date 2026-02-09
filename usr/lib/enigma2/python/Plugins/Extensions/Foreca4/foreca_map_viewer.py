@@ -50,7 +50,12 @@ def get_background_for_layer(layer_title, region="europe"):
     # THEN check the layer type
     layer_lower = layer_title.lower()
 
-    if any(word in layer_lower for word in ['temp', 'temperature', 'warm', 'cold']):
+    if any(
+        word in layer_lower for word in [
+            'temp',
+            'temperature',
+            'warm',
+            'cold']):
         return 'temp_map.png'
     elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
         return 'rain_map.png'
@@ -71,11 +76,13 @@ def create_composite_map(weather_tiles_path, layer_title, region):
     from time import time
 
     # 1. Screen dimensions
-    screen_width, screen_height = getDesktop(0).size().width(), getDesktop(0).size().height()
+    screen_width, screen_height = getDesktop(
+        0).size().width(), getDesktop(0).size().height()
 
     # 2. Create OPAQUE background (dark blue)
     # Color: (R, G, B, A) where 255 = fully opaque
-    opaque_background = Image.new('RGBA', (screen_width, screen_height), (30, 40, 60, 255))
+    opaque_background = Image.new(
+        'RGBA', (screen_width, screen_height), (30, 40, 60, 255))
 
     # 3. Load base map (transparent)
     bg_file = get_background_for_layer(layer_title, region)
@@ -87,7 +94,8 @@ def create_composite_map(weather_tiles_path, layer_title, region):
             orig_w, orig_h = background.size
 
             # Resize
-            background = background.resize((screen_width, screen_height), Image.Resampling.LANCZOS)
+            background = background.resize(
+                (screen_width, screen_height), Image.Resampling.LANCZOS)
 
             # Paste transparent map over opaque background
             opaque_background.paste(background, (0, 0), background)
@@ -108,7 +116,8 @@ def create_composite_map(weather_tiles_path, layer_title, region):
     new_tile_w = int(tile_w * scale)
     new_tile_h = int(tile_h * scale)
 
-    weather_data = weather_data.resize((new_tile_w, new_tile_h), Image.Resampling.LANCZOS)
+    weather_data = weather_data.resize(
+        (new_tile_w, new_tile_h), Image.Resampling.LANCZOS)
 
     # 6. Position tile
     x_offset = (screen_width - new_tile_w) // 2
@@ -124,8 +133,26 @@ def create_composite_map(weather_tiles_path, layer_title, region):
     # 8. Add text (no extra background)
     draw = ImageDraw.Draw(composite)
     draw.text((20, 20), f"Foreca: {layer_title}", fill=(255, 255, 255, 230))
-    draw.text((20, screen_height - 60), f"Region: {region}", fill=(200, 200, 200, 200))
-    draw.text((20, screen_height - 30), f"Weather data overlay", fill=(180, 180, 180, 180))
+    draw.text(
+        (20,
+         screen_height -
+         60),
+        f"Region: {region}",
+        fill=(
+            200,
+            200,
+            200,
+            200))
+    draw.text(
+        (20,
+         screen_height -
+         30),
+        f"Weather data overlay",
+        fill=(
+            180,
+            180,
+            180,
+            180))
 
     # 9. Save
     output_path = os.path.join(CACHE_BASE, f"foreca_opaque_{int(time())}.png")
@@ -365,7 +392,8 @@ class ForecaMapViewer(Screen):
         self.grid_size = config['grid']
 
         print(f"[ForecaMapViewer] Region: {self.region}")
-        print(f"[ForecaMapViewer] Zoom: {self.zoom}, Center: ({self.center_lat}, {self.center_lon})")
+        print(
+            f"[ForecaMapViewer] Zoom: {self.zoom}, Center: ({self.center_lat}, {self.center_lon})")
         print(f"[ForecaMapViewer] Grid: {self.grid_size}x{self.grid_size}")
 
         self.timestamps = layer.get('times', {}).get('available', [])
@@ -376,8 +404,7 @@ class ForecaMapViewer(Screen):
 
         print(
             f"[ForecaMapViewer] Initialized: region={region}, zoom={self.zoom}, "
-            f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}"
-        )
+            f"center=({self.center_lat}, {self.center_lon}), grid={self.grid_size}x{self.grid_size}")
 
         Screen.__init__(self, session)
         self.setTitle(f"Foreca: {self.layer_title}")
@@ -410,7 +437,15 @@ class ForecaMapViewer(Screen):
         n = 2.0 ** zoom
         x_tile = int((lon + 180.0) / 360.0 * n)
         # Formula corretta per la coordinata Y
-        y_tile = int((1.0 - math.log(math.tan(lat_rad) + 1.0 / math.cos(lat_rad)) / math.pi) / 2.0 * n)
+        y_tile = int(
+            (1.0 -
+             math.log(
+                 math.tan(lat_rad) +
+                 1.0 /
+                 math.cos(lat_rad)) /
+                math.pi) /
+            2.0 *
+            n)
 
         return x_tile, y_tile
 
@@ -462,8 +497,13 @@ class ForecaMapViewer(Screen):
         """Download a grid of tiles in a separate thread"""
 
         grid_size = getattr(self, 'grid_size', 5)
-        print("[DEBUG] Download grid: {}x{} for region: {}".format(grid_size, grid_size, self.region))
-        print("[DEBUG] Center: lat={}, lon={}, zoom={}".format(self.center_lat, self.center_lon, self.zoom))
+        print(
+            "[DEBUG] Download grid: {}x{} for region: {}".format(
+                grid_size,
+                grid_size,
+                self.region))
+        print("[DEBUG] Center: lat={}, lon={}, zoom={}".format(
+            self.center_lat, self.center_lon, self.zoom))
         api = self.api
         layer_id = self.layer_id
         zoom = self.zoom
@@ -474,7 +514,8 @@ class ForecaMapViewer(Screen):
         def download_grid_thread():
             try:
                 # Calculate center tile
-                center_x, center_y = self.latlon_to_tile(center_lat, center_lon, zoom)
+                center_x, center_y = self.latlon_to_tile(
+                    center_lat, center_lon, zoom)
                 print(f"[DEBUG] Center tile: ({center_x}, {center_y})")
 
                 # For even grids (4x4, 6x6), a different offset is required
@@ -493,7 +534,8 @@ class ForecaMapViewer(Screen):
                     end_x = center_x + offset
                     end_y = center_y + offset
 
-                print(f"[DEBUG] Grid range: x[{start_x} to {end_x}], y[{start_y} to {end_y}]")
+                print(
+                    f"[DEBUG] Grid range: x[{start_x} to {end_x}], y[{start_y} to {end_y}]")
 
                 tile_paths = []
                 total_tiles = (end_x - start_x + 1) * (end_y - start_y + 1)
@@ -515,18 +557,22 @@ class ForecaMapViewer(Screen):
                             grid_x = tile_x - start_x
                             grid_y = tile_y - start_y
                             tile_paths.append((grid_x, grid_y, tile_path))
-                            print(f"[DEBUG] Downloaded tile ({tile_x}, {tile_y}) -> ({grid_x}, {grid_y})")
+                            print(
+                                f"[DEBUG] Downloaded tile ({tile_x}, {tile_y}) -> ({grid_x}, {grid_y})")
                         else:
                             print(f"[DEBUG] FAILED tile ({tile_x}, {tile_y})")
 
-                print(f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles} tiles")
+                print(
+                    f"[DEBUG] Downloaded {len(tile_paths)}/{total_tiles} tiles")
 
-                if len(tile_paths) >= max(1, total_tiles * 0.5):  # At least 50%
+                if len(tile_paths) >= max(
+                        1, total_tiles * 0.5):  # At least 50%
                     merged_image = self.merge_tile_grid(tile_paths, grid_size)
                     if merged_image and callback:
                         callback(merged_image)
                 else:
-                    print(f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles}")
+                    print(
+                        f"[ForecaMapViewer] Not enough tiles: {len(tile_paths)}/{total_tiles}")
                     if callback:
                         callback(None)
 
