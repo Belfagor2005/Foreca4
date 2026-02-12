@@ -8,7 +8,7 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
-from Components.Sources.StaticText import StaticText
+# from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
 from enigma import eTimer, ePicLoad
 import os
@@ -100,10 +100,10 @@ class ForecaSlideshow(Screen):
         self["image"] = Pixmap()
         self["title"] = Label(region_name)
         self["info"] = Label(_("Loading..."))
-        self["key_red"] = StaticText(_("Play/Pause"))
-        self["key_green"] = StaticText(_("Next"))
-        self["key_yellow"] = StaticText(_("Previous"))
-        self["key_blue"] = StaticText(_("Exit"))
+        self["key_red"] = Label(_("Play/Pause"))
+        self["key_green"] = Label(_("Next"))
+        self["key_yellow"] = Label(_("Previous"))
+        self["key_blue"] = Label(_("Exit"))
         self["playButton"] = Pixmap()
         self["pauseButton"] = Pixmap()
         self.region_code = region_code
