@@ -1,3 +1,5 @@
 <screen name="ForecaMapsMenu" position="center,center" size="800,600" title="Select Region">
-    <widget name="list" position="50,50" size="700,500" itemHeight="35" font="Regular;24" enableWrapAround="1" scrollbarMode="showOnDemand"/>
+    <widget name="list" position="50,50" size="700,500" itemHeight="35" font="Regular;24" enableWrapAround="1" scrollbarMode="showOnDemand" zPosition="3" />
+    <eLabel name="plate0" size="799,603" zPosition="1" position="-7,-1" backgroundColor="#000050ef" cornerRadius="50" />
+    <eLabel name="plate1" size="779,588" zPosition="2" position="10,8" backgroundColor="#40000000" cornerRadius="50" />
 </screen>

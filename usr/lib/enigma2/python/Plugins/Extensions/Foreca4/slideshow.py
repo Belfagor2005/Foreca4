@@ -261,7 +261,7 @@ class ForecaSlideshow(Screen):
 class ForecaMapsMenu(Screen):
 
     def __init__(self, session, map_type):
-        self.skin = (ForecaMapsMenu)
+        self.skin = load_skin_for_class(ForecaMapsMenu)
 
         self.session = session
         self.map_type = map_type  # 'europe', 'germany', 'continents'

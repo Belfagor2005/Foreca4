@@ -1,9 +1,13 @@
-<screen name="DailyForecast" position="center,center" size="1840,1200" title="Weekly Forecast">
-    <widget name="title" position="17,20" size="1800,40" font="Regular; 38" halign="center" zPosition="3" />
-    <widget name="info" position="20,68" size="1800,40" font="Regular; 32" halign="center" zPosition="3" />
-    <widget name="forecast_text" position="20,110" size="1800,1005" font="Regular;26" zPosition="3" />
-    <ePixmap position="855,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
-    <ePixmap position="955,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
-    <ePixmap position="1055,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
-    <ePixmap position="1155,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+<screen name="DailyForecast" position="center,center" size="1920,1080" title="Weekly Forecast">
+    <widget name="title" position="60,20" size="1800,50" font="Regular;38" halign="center" zPosition="3" foregroundColor="#ffffff" transparent="1" />
+    <widget name="info" position="60,80" size="1800,40" font="Regular;32" halign="center" zPosition="3" foregroundColor="#c0c0c0" transparent="1" />
+    <widget name="forecast_text" position="60,140" size="1800,820" font="Regular;28" zPosition="3" foregroundColor="#ffffff" transparent="1" />
+    
+    <ePixmap position="755,980" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
+    <ePixmap position="855,980" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="955,980" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+    <ePixmap position="1055,980" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+    
+    <eLabel name="plate0" size="1920,1080" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
+    <eLabel name="plate1" size="1894,1054" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
 </screen>

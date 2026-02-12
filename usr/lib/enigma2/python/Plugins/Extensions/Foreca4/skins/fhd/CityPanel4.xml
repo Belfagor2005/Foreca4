@@ -1,33 +1,42 @@
-<screen name="CityPanel4" position="center,center" size="1600,1200" title="Select a city">
-    <!-- Separator -->
-    <eLabel backgroundColor="#fe00" position="0,107" size="1600,3"/>
-    <eLabel backgroundColor="#fe00" position="0,1027" size="1600,3"/>
+<screen name="CityPanel4" position="center,center" size="1920,1080" title="Select a city">
+    <!-- Background plates (aggiunte per uniformità) -->
+    <eLabel name="plate0" size="1920,1080" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
+    <eLabel name="plate1" size="1894,1054" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
+    
+    <!-- Button widgets top -->
+    <widget source="key_red" render="Label" position="60,20" size="420,80" backgroundColor="key_red" font="Regular;32" foregroundColor="#ffffff" halign="center" valign="center" zPosition="3">
+        <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_green" render="Label" position="500,20" size="420,80" backgroundColor="key_green" font="Regular;32" foregroundColor="#ffffff" halign="center" valign="center" zPosition="3">
+        <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_yellow" render="Label" position="940,20" size="420,80" backgroundColor="key_yellow" font="Regular;32" foregroundColor="#ffffff" halign="center" valign="center" zPosition="3">
+        <convert type="ConditionalShowHide"/>
+    </widget>
+    <widget source="key_blue" render="Label" position="1380,20" size="420,80" backgroundColor="key_blue" font="Regular;32" foregroundColor="#ffffff" halign="center" valign="center" zPosition="3">
+        <convert type="ConditionalShowHide"/>
+    </widget>
+    
+    <!-- Separators -->
+    <eLabel backgroundColor="#fe00" position="40,120" size="1840,3" zPosition="3"/>
+    <eLabel backgroundColor="#fe00" position="40,950" size="1840,3" zPosition="3"/>
+    
     <!-- City list -->
-    <widget name="Mlist" position="14,120" size="1574,887" font="Regular;32" itemHeight="47" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="0"/>
-    <widget name="description" position="14,1060" size="1573,56" zPosition="3" font="Regular; 32" foregroundColor="white" backgroundColor="red" transparent="0" valign="center" halign="center"/>
-    <!-- Button icons -->
-    <ePixmap position="255,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1"/>
-    <ePixmap position="355,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1"/>
-    <ePixmap position="455,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1"/>
-    <ePixmap position="555,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1"/>
-    <ePixmap position="655,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeDown.png" scale="1"/>
-    <ePixmap position="755,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1"/>
-    <ePixmap position="855,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1"/>
-    <ePixmap position="955,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1"/>
-    <ePixmap position="1055,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1"/>
-    <ePixmap position="1155,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1"/>
-    <ePixmap position="1255,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch.png" scale="1"/>
-    <!-- Button widgets with unified colors -->
-    <widget source="key_red" render="Label" position="14,7" size="394,94" backgroundColor="key_red" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget source="key_green" render="Label" position="407,7" size="394,94" backgroundColor="key_green" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget source="key_yellow" render="Label" position="800,7" size="394,94" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
-    </widget>
-    <widget source="key_blue" render="Label" position="1194,7" size="394,94" backgroundColor="key_blue" font="Regular; 32" foregroundColor="#ffffff" halign="center" valign="center">
-        <convert type="ConditionalShowHide"/>
-    </widget>
+    <widget name="Mlist" position="60,140" size="1800,790" font="Regular;34" itemHeight="54" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="0" zPosition="3"/>
+    
+    <!-- Description -->
+    <widget name="description" position="60,960" size="1800,60" zPosition="3" font="Regular;32" foregroundColor="white" backgroundColor="#40000000" transparent="0" valign="center" halign="center" cornerRadius="25"/>
+    
+    <!-- Button icons bottom -->
+    <ePixmap position="300,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" zPosition="3"/>
+    <ePixmap position="400,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" zPosition="3"/>
+    <ePixmap position="500,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" zPosition="3"/>
+    <ePixmap position="600,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" zPosition="3"/>
+    <ePixmap position="700,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeDown.png" scale="1" zPosition="3"/>
+    <ePixmap position="800,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" zPosition="3"/>
+    <ePixmap position="900,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3"/>
+    <ePixmap position="1000,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3"/>
+    <ePixmap position="1100,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3"/>
+    <ePixmap position="1200,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3"/>
+    <ePixmap position="1300,1030" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch.png" scale="1" zPosition="3"/>
 </screen>

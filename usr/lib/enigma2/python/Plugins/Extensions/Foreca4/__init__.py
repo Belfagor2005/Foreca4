@@ -7,7 +7,7 @@ import codecs
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Components.Language import language
-from Tools.Directories import fileExists
+# from Tools.Directories import fileExists
 from os.path import join, dirname
 from enigma import getDesktop
 
@@ -71,20 +71,48 @@ def get_resolution_type():
 
 def load_skin_by_class(class_name):
     """Load skin using class name and current resolution"""
-
+    
+    print("\n" + "=" * 60)
+    print(f"[SKIN DEBUG] Looking for skin: '{class_name}'")
+    print(f"[SKIN DEBUG] SKINS_PATH = {SKINS_PATH}")
+    
+    # Lista tutte le cartelle skins
+    import os
+    if os.path.exists(SKINS_PATH):
+        print(f"[SKIN DEBUG] Contents of {SKINS_PATH}:")
+        for item in os.listdir(SKINS_PATH):
+            print(f"  - {item}")
+    else:
+        print("[SKIN DEBUG] SKINS_PATH does NOT exist!")
+    
     resolution = get_resolution_type()
-    skin_file = join(SKINS_PATH, resolution, "%s.xml" % class_name)
-
-    if not fileExists(skin_file):
-        skin_file = join(SKINS_PATH, "hd", "%s.xml" % class_name)
-
-    if fileExists(skin_file):
+    print(f"[SKIN DEBUG] resolution = {resolution}")
+    
+    skin_file = join(SKINS_PATH, resolution, f"{class_name}.xml")
+    print(f"[SKIN DEBUG] Trying: {skin_file}")
+    print(f"[SKIN DEBUG] Exists? {os.path.exists(skin_file)}")
+    
+    if not os.path.exists(skin_file):
+        print("[SKIN DEBUG] NOT FOUND, trying HD fallback")
+        skin_file = join(SKINS_PATH, "hd", f"{class_name}.xml")
+        print(f"[SKIN DEBUG] Trying: {skin_file}")
+        print(f"[SKIN DEBUG] Exists? {os.path.exists(skin_file)}")
+    
+    if os.path.exists(skin_file):
+        print("[SKIN DEBUG] ✓ FOUND! Loading file...")
         try:
             with codecs.open(skin_file, 'r', 'utf-8') as f:
-                return f.read()
-        except BaseException:
-            pass
-
+                content = f.read()
+                print(f"[SKIN DEBUG] ✓ Loaded {len(content)} bytes")
+                print(f"[SKIN DEBUG] First 100 chars: {content[:100].replace(chr(10), ' ')}")
+                print("=" * 60 + "\n")
+                return content
+        except Exception as e:
+            print(f"[SKIN DEBUG] ✗ Error reading file: {e}")
+    else:
+        print(f"[SKIN DEBUG] ✗ SKIN FILE MISSING: {skin_file}")
+    
+    print("=" * 60 + "\n")
     return None
 
 
