@@ -1,0 +1,71 @@
+<screen name="ForecaPreview_4" position="center,center" size="2560,1440" title="Foreca Weather Preview" flags="wfNoBorder" backgroundColor="transparent">
+    <ePixmap name="" position="273,187" size="533,115" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/forecalogo.png" zPosition="3" scale="1" transparent="1" />
+    <widget source="mytitel2" render="Label" position="327,1340" size="400,57" font="Regular;43" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    <widget source="mytitel1" render="Label" position="40,35" size="1000,75" font="Regular;45" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    <widget source="Titel" render="Label" position="1131,35" size="1313,75" font="Regular;45" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    <widget source="Titel2" render="Label" position="1864,35" size="1313,75" font="Regular;45" foregroundColor="black" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="right" />
+    <widget name="town" position="207,347" size="667,53" zPosition="3" font="Regular;37" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="cur_temp" position="80,527" size="267,93" zPosition="3" font="Regular;67" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="fl_temp" position="53,767" size="400,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="pressure_pic" position="495,927" size="64,64" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="rain_mm_pic" position="149,927" size="64,64" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="hum_pic" position="887,927" size="64,64" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="description_w" position="53,680" size="973,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="dewpoint" position="53,840" size="400,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="pic" position="473,507" size="133,133" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="sun" position="393,1103" size="267,84" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="wind" position="789,513" size="53,55" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="wind_speed" position="587,767" size="440,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="wind_gust" position="587,840" size="440,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="rain_mm" position="67,1020" size="227,53" zPosition="3" font="Regular;35" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="hum" position="813,1020" size="213,53" zPosition="3" font="Regular;35" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="pressure" position="360,1020" size="333,53" zPosition="3" font="Regular;32" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="day_len" position="360,1200" size="333,51" zPosition="3" font="Regular;29" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunrise_text" position="67,1200" size="227,51" zPosition="3" font="Regular;29" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunrise_val" position="67,1133" size="227,51" zPosition="3" font="Regular;29" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunset_text" position="760,1200" size="213,51" zPosition="3" font="Regular;29" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunset_val" position="760,1133" size="213,51" zPosition="3" font="Regular;29" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <ePixmap name="" position="64,431" size="64,64" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/observation.png" zPosition="3" scale="1" transparent="1" />
+    <widget name="station" position="133,433" size="533,64" font="Regular;32" halign="left" backgroundColor="black" transparent="1" valign="center" zPosition="3" />
+    <ePixmap position="87,1339" size="107,53" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" zPosition="3" />
+    <ePixmap position="200,1339" size="107,53" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" zPosition="3" />
+    <ePixmap position="740,1339" size="107,53" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" zPosition="3" />
+    <ePixmap position="853,1339" size="107,53" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_help.png" scale="1" zPosition="3" />
+    
+    <eLabel position="797,420" size="37,37" transparent="1" backgroundColor="#000080" text="N" foregroundColor="#0053a9ff" font="Regular;24" zPosition="3" halign="center" valign="center" />
+    <eLabel position="797,628" size="37,37" transparent="1" backgroundColor="#000080" text="S" foregroundColor="#0053a9ff" font="Regular;24" zPosition="3" halign="center" valign="center" />
+    <eLabel position="897,521" size="37,37" transparent="1" backgroundColor="#000080" text="E" foregroundColor="#0053a9ff" font="Regular;24" zPosition="3" halign="center" valign="center" />
+    <eLabel position="697,521" size="37,37" transparent="1" backgroundColor="#000080" text="W" foregroundColor="#0053a9ff" font="Regular;24" zPosition="3" halign="center" valign="center" />
+    
+    <widget name="plate1" zPosition="1" size="1467,1280" position="1080,147" backgroundColor="#000050ef" cornerRadius="67" />
+    <widget name="plate11" size="1440,1253" zPosition="2" position="1093,160" backgroundColor="#40000000" cornerRadius="67" />
+    <widget name="plate2" size="1053,1147" zPosition="1" position="13,147" backgroundColor="#000050ef" cornerRadius="67" />
+    <widget name="plate22" size="1027,1120" zPosition="2" position="27,160" backgroundColor="#40000000" cornerRadius="67" />
+    <widget name="plate3" size="1053,120" zPosition="1" position="13,1307" backgroundColor="#000050ef" cornerRadius="67" />
+    <widget name="plate33" size="1027,93" zPosition="2" position="27,1320" backgroundColor="#40000000" cornerRadius="67" />
+    <widget name="plate4" size="1467,120" zPosition="1" position="1080,13" backgroundColor="#000050ef" cornerRadius="67" />
+    <widget name="plate5" size="1053,120" zPosition="1" position="13,13" backgroundColor="#000050ef" cornerRadius="67" />
+    <widget name="plate44" size="1440,93" zPosition="2" position="1093,27" backgroundColor="#40000000" cornerRadius="67" />
+    <widget name="plate55" size="1027,93" zPosition="2" position="27,27" backgroundColor="#40000000" cornerRadius="67" />
+    
+    <widget source="menu" render="Listbox" position="1111,191" size="1407,1180" scrollbarMode="showOnDemand" zPosition="3" transparent="1" backgroundColor="black">
+        <convert type="TemplatedMultiContent">
+            {"template": [
+                MultiContentEntryText(pos = (53, 65), size = (120, 40), font=0, flags = RT_HALIGN_LEFT, text = 0),
+                MultiContentEntryText(pos = (360, 27), size = (160, 40), font=0, flags = RT_HALIGN_LEFT, text = 1),
+                MultiContentEntryPixmapAlphaTest(pos = (207, 32), size = (93, 93), png = 2),
+                MultiContentEntryText(pos = (360, 85), size = (160, 40), font=0, flags = RT_HALIGN_LEFT, text = 3),
+                MultiContentEntryPixmapAlphaTest(pos = (520, 55), size = (36, 37), png = 4),
+                MultiContentEntryText(pos = (607, 27), size = (160, 40), font=0, flags = RT_HALIGN_LEFT, text = 5),
+                MultiContentEntryText(pos = (607, 85), size = (160, 40), font=0, flags = RT_HALIGN_LEFT, text = 6),
+                MultiContentEntryText(pos = (773, 1), size = (627, 40), font=0, flags = RT_HALIGN_LEFT, text = 7),
+                MultiContentEntryText(pos = (773, 41), size = (627, 32), font=1, flags = RT_HALIGN_LEFT, text = 8),
+                MultiContentEntryText(pos = (773, 75), size = (627, 32), font=1, flags = RT_HALIGN_LEFT, text = 9),
+                MultiContentEntryText(pos = (773, 108), size = (627, 32), font=1, flags = RT_HALIGN_LEFT, text = 10),
+            ],
+            "fonts": [gFont("Regular", 35), gFont("Regular", 27)],
+            "itemHeight": 147
+            }
+        </convert>
+    </widget>
+</screen>

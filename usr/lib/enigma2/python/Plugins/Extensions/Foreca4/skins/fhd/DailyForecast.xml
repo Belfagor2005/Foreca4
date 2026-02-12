@@ -1,0 +1,9 @@
+<screen name="DailyForecast" position="center,center" size="1840,1200" title="Weekly Forecast">
+    <widget name="title" position="17,20" size="1800,40" font="Regular; 38" halign="center" zPosition="3" />
+    <widget name="info" position="20,68" size="1800,40" font="Regular; 32" halign="center" zPosition="3" />
+    <widget name="forecast_text" position="20,110" size="1800,1005" font="Regular;26" zPosition="3" />
+    <ePixmap position="855,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
+    <ePixmap position="955,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1055,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+    <ePixmap position="1155,1127" size="100,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+</screen>

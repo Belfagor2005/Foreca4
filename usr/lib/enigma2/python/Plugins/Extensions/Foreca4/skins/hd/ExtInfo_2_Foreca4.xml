@@ -1,0 +1,10 @@
+<screen name="ExtInfo_2_Foreca4" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="383,573">
+    <widget position="33,33" size="315,28" zPosition="3" font="Regular;21" source="title1" render="Label" transparent="1" valign="center"/>
+    <widget position="228,507" size="120,28" zPosition="3" font="Regular;21" source="lon_val" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget position="67,507" size="120,28" zPosition="3" font="Regular;21" source="lat_val" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget name="plate1" size="370,560" zPosition="2" position="7,7" backgroundColor="#40000000" cornerRadius="50"/>
+    <widget name="plate0" size="383,573" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget name="pic" position="33,83" size="315,385" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" borderColor="#000050ef" borderWidth="5"/>
+    <widget name="pic_lot" position="197,507" size="28,28" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_lat" position="33,507" size="28,28" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+</screen>

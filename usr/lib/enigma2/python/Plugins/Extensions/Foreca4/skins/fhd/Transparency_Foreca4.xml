@@ -1,0 +1,6 @@
+<screen name="Transparency_Foreca4" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1154,880">
+    <widget position="134,67" size="867,56" zPosition="3" font="Regular;43" source="text1" render="Label" transparent="1" valign="center" halign="center"/>
+    <widget name="plate1" size="1114,840" zPosition="2" position="20,20" backgroundColor="#40000000" cornerRadius="50"/>
+    <widget name="plate0" size="1154,880" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget name="list" position="134,163" size="867,624" itemHeight="70" valign="center" font="Regular;43" zPosition="3" transparent="1"/>
+</screen>

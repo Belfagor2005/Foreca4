@@ -1,0 +1,22 @@
+<screen name="ForecaSlideshow_HD" position="320,180" size="1280,720" flags="wfNoBorder">
+    <widget name="image" position="0,0" size="1280,625" zPosition="1" scale="1" />
+    <widget name="title" position="30,30" size="1220,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="info" position="0,625" size="1274,30" font="Regular;20" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <!-- Pulsanti Play/Pause -->
+    <widget name="pauseButton" position="10,660" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/pause.png" zPosition="2" scale="1" />
+    <widget name="playButton" position="10,660" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/play.png" zPosition="2" scale="1" />
+    <!-- Etichette pulsanti colorati -->
+    <eLabel position="65,665" size="40,40" backgroundColor="red" zPosition="3" />
+    <eLabel position="277,665" size="40,40" backgroundColor="green" zPosition="3" />
+    <eLabel position="491,665" size="40,40" backgroundColor="yellow" zPosition="3" />
+    <eLabel position="704,665" size="40,40" backgroundColor="blue" zPosition="3" />
+
+    <widget name="key_red" position="107,660" size="160,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" foregroundColor="#ffffff" transparent="1" zPosition="3" />
+    <widget name="key_green" position="320,660" size="160,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" foregroundColor="#ffffff" transparent="1" zPosition="3" />
+    <widget name="key_yellow" position="536,660" size="160,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" foregroundColor="#ffffff" transparent="1" zPosition="3" />
+    <widget name="key_blue" position="750,660" size="160,50" font="Regular;26" halign="left" valign="center" backgroundColor="black" foregroundColor="#ffffff" transparent="1" zPosition="3" />
+    <ePixmap position="920,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
+    <ePixmap position="1011,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" zPosition="3" />
+    <ePixmap position="1098,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
+    <ePixmap position="1184,665" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
+</screen>

@@ -1,0 +1,34 @@
+<screen name="CityPanel4" position="center,center" size="800,600" title="Select a city">
+    <!-- Separator -->
+    <eLabel backgroundColor="#fe00" position="5,53" size="785,1" />
+    <eLabel backgroundColor="#fe00" position="5,513" size="785,1" />
+    <!-- City list -->
+    <widget name="Mlist" position="6,60" size="786,443" font="Regular;24" itemHeight="30" enableWrapAround="1" scrollbarMode="showOnDemand" transparent="0" />
+    <widget name="description" position="5,517" size="787,35" zPosition="3" font="Regular; 22" foregroundColor="white" backgroundColor="red" transparent="0" valign="center" halign="center" />
+    <!-- Button icons -->
+    <ePixmap position="140,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" />
+    <ePixmap position="180,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" />
+    <ePixmap position="220,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" />
+    <ePixmap position="260,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_text.png" scale="1" />
+    <ePixmap position="300,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeDown.png" scale="1" />
+    <ePixmap position="340,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/volumeUp.png" scale="1" />
+    <ePixmap position="380,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" />
+    <ePixmap position="420,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_next.png" scale="1" />
+    <ePixmap position="460,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" />
+    <ePixmap position="500,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" />
+    <ePixmap position="540,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1" />
+    <ePixmap position="580,576" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ch+.png" scale="1" />
+    <!-- Button widgets with unified colors -->
+    <widget source="key_red" render="Label" position="6,3" size="196,46" backgroundColor="key_red" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_green" render="Label" position="203,3" size="196,46" backgroundColor="key_green" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_yellow" render="Label" position="400,3" size="196,46" backgroundColor="key_yellow" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+        <convert type="ConditionalShowHide" />
+    </widget>
+    <widget source="key_blue" render="Label" position="596,3" size="196,46" backgroundColor="key_blue" font="Regular;20" foregroundColor="#ffffff" halign="center" valign="center">
+        <convert type="ConditionalShowHide" />
+    </widget>
+</screen>

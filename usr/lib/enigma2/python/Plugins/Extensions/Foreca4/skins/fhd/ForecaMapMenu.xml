@@ -1,0 +1,4 @@
+<screen name="ForecaMapMenu" position="center,center" size="1067,934" title="Foreca Live Maps">
+    <widget name="list" position="62,10" size="934,867" itemHeight="47" font="Regular;43" scrollbarMode="showNever"/>
+    <widget name="info" position="67,887" size="934,40" font="Regular;32" halign="center"/>
+</screen>

@@ -1,0 +1,7 @@
+<screen name="ForecaMapViewer" position="center,center" size="2560,1440" flags="wfNoBorder">
+    <widget name="map" position="0,0" size="2560,1440" zPosition="1" scale="1" backgroundColor="#40000000" />
+    <widget name="title" position="67,15" size="2427,67" font="Regular;54" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
+    <widget name="time" position="67,1334" size="2427,67" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="67,1400" size="2427,40" font="Regular;32" foregroundColor="#c0c0c0" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="layerinfo" position="66,83" size="2427,60" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+</screen>

@@ -1,0 +1,15 @@
+<screen name="UnitSettingsSimple" position="center,center" size="620,450" title="Unit Settings">
+    <widget name="title" position="16,15" size="580,40" font="Regular;28" halign="center" />
+    <widget name="info" position="20,70" size="580,30" font="Regular;22" halign="center" />
+    <!-- Button widgets with unified colors -->
+    <ePixmap name="red" position="35,390" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
+    <ePixmap name="green" position="389,390" size="50,50" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
+    <widget name="key_red" position="88,390" size="150,50" font="Regular;24" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="439,390" size="150,50" font="Regular;24" halign="left" valign="center" backgroundColor="black" transparent="1" />
+    <widget name="option_metric" position="100,150" size="400,40" font="Regular;26" halign="left" />
+    <widget name="metric_details" position="120,190" size="380,30" font="Regular;20" halign="left" />
+    <widget name="option_imperial" position="100,250" size="400,40" font="Regular;26" halign="left" />
+    <widget name="imperial_details" position="120,290" size="380,30" font="Regular;20" halign="left" />
+    <widget name="check_metric" position="60,150" size="32,32" alphatest="on" scale="1" />
+    <widget name="check_imperial" position="60,250" size="32,32" alphatest="on" scale="1" />
+</screen>

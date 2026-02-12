@@ -1,0 +1,39 @@
+<screen name="ExtInfo_Foreca4" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1840,1200">
+    <widget position="1147,94" size="631,56" zPosition="3" font="Regular;43" source="title1" render="Label" transparent="1" valign="center"/>
+    <widget position="40,94" size="1067,56" zPosition="3" font="Regular;43" source="title3" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget position="40,704" size="1067,200" zPosition="3" font="Regular;38" source="text2" render="Label" transparent="1"/>
+    <widget position="40,167" size="1067,200" zPosition="3" font="Regular;38" source="text1" render="Label" transparent="1"/>
+    <widget position="40,634" size="1067,56" zPosition="3" font="Regular;43" source="title4" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget position="40,376" size="267,56" zPosition="3" font="Regular;43" source="mo1" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="40,570" size="267,56" zPosition="3" font="Regular;43" source="mo1_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="40,1110" size="267,56" zPosition="3" font="Regular;43" source="mo2_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="40,914" size="267,56" zPosition="3" font="Regular;43" source="mo2" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="307,376" size="267,56" zPosition="3" font="Regular;43" source="af1" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="307,570" size="267,56" zPosition="3" font="Regular;43" source="af1_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="307,1110" size="267,56" zPosition="3" font="Regular;43" source="af2_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="307,914" size="267,56" zPosition="3" font="Regular;43" source="af2" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="574,376" size="267,56" zPosition="3" font="Regular;43" source="ev1" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="574,570" size="267,56" zPosition="3" font="Regular;43" source="ev1_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="574,1110" size="267,56" zPosition="3" font="Regular;43" source="ev2_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="574,914" size="267,56" zPosition="3" font="Regular;43" source="ev2" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="840,376" size="267,56" zPosition="3" font="Regular;43" source="ov1" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="840,570" size="267,56" zPosition="3" font="Regular;43" source="ov1_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="840,1110" size="267,56" zPosition="3" font="Regular;43" source="ov2_text" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="1540,1014" size="240,56" zPosition="3" font="Regular;43" source="lon_val" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget position="1220,1014" size="240,56" zPosition="3" font="Regular;43" source="lat_val" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff"/>
+    <widget position="840,914" size="267,56" zPosition="3" font="Regular;43" source="ov2" render="Label" transparent="1" valign="center" foregroundColor="#0053a9ff" halign="center"/>
+    <widget position="40,27" size="1067,56" zPosition="3" font="Regular;43" source="title2" render="Label" transparent="1" valign="center" halign="center"/>
+    <widget name="plate1" size="1814,1174" zPosition="2" position="14,14" backgroundColor="#40000000" cornerRadius="50"/>
+    <widget name="plate0" size="1840,1200" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+    <widget name="pic" position="1147,167" size="631,771" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" borderColor="#000050ef" borderWidth="7"/>
+    <widget name="pic_af1" position="394,454" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_af2" position="394,994" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_ev1" position="660,454" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_ev2" position="660,994" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_ov1" position="927,454" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_ov2" position="927,994" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_lot" position="1467,1014" size="56,56" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_lat" position="1147,1014" size="56,56" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_mo1" position="127,454" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+    <widget name="pic_mo2" position="127,994" size="94,94" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on"/>
+</screen>

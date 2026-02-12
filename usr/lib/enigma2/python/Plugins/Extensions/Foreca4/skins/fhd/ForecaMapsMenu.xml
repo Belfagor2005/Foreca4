@@ -1,0 +1,3 @@
+<screen name="ForecaMapsMenu" position="center,center" size="1600,1200" title="Select Region">
+    <widget name="list" position="134,134" size="1334,934" itemHeight="47" font="Regular;43" enableWrapAround="1" scrollbarMode="showOnDemand"/>
+</screen>
