@@ -183,6 +183,9 @@ msgstr "Δεδομένα παρεχόμενα από την Foreca"
 msgid "Denmark"
 msgstr "Δανία"
 
+msgid "Distance"
+msgstr "Απόσταση"
+
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
 
@@ -230,6 +233,9 @@ msgstr "Αγαπημένο 1"
 
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
+
+msgid "Feels like"
+msgstr "Αίσθηση"
 
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -291,6 +297,9 @@ msgstr "Έσση"
 msgid "Home"
 msgstr "Αρχική"
 
+msgid "Humidity"
+msgstr "Υγρασία"
+
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
@@ -326,6 +335,9 @@ msgstr "Μετάβαση 500 πάνω"
 
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
+
+msgid "Last update"
+msgstr "Τελευταία ενημέρωση"
 
 msgid "Latvia"
 msgstr "Λετονία"
@@ -510,6 +522,12 @@ msgstr "Πορτογαλία"
 msgid "Possible reasons:\n"
 msgstr "Πιθανοί λόγοι:\n"
 
+msgid "Precipitation"
+msgstr "Υετός"
+
+msgid "Pressure"
+msgstr "Πίεση"
+
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -594,6 +612,9 @@ msgstr "Ισπανία"
 msgid "Station Observations"
 msgstr "Παρατηρήσεις Σταθμού"
 
+msgid "Sun"
+msgstr "Ήλιος"
+
 msgid "Sunrise"
 msgstr "Ανατολή ηλίου"
 
@@ -605,6 +626,9 @@ msgstr "Σουηδία"
 
 msgid "Switzerland"
 msgstr "Ελβετία"
+
+msgid "Temperature"
+msgstr "Θερμοκρασία"
 
 msgid "Thin upper cloud"
 msgstr "Λεπτή ανώτερη νέφωση"
@@ -618,6 +642,9 @@ msgstr "Ρυθμίσεις Διαφάνειας"
 msgid "Transparency level"
 msgstr "Επίπεδο διαφάνειας"
 
+msgid "UV Index"
+msgstr "Δείκτης Υπεριώδους Ακτινοβολίας"
+
 msgid "Unit Settings"
 msgstr "Ρυθμίσεις Μονάδων"
 
@@ -629,6 +656,9 @@ msgstr "Πάνω - Προηγούμενη σελίδα"
 
 msgid "Use arrow keys to scroll"
 msgstr "Χρησιμοποιήστε τα βέλη για κύλιση"
+
+msgid "Weather"
+msgstr "Καιρός"
 
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
@@ -654,11 +684,17 @@ msgstr "Καιρός αύριο"
 msgid "Weekly Forecast"
 msgstr "Εβδομαδιαία Πρόγνωση"
 
+msgid "Wind"
+msgstr "Άνεμος"
+
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
 msgid "Yellow - Favorite 2"
 msgstr "Κίτρινο - Αγαπημένο 2"
+
+msgid "stations nearby"
+msgstr "κοντινοί σταθμοί"
 
 msgid "v."
 msgstr "έκδ."
@@ -695,39 +731,3 @@ msgstr "• ΚΙΤΡΙΝΟ για αποθήκευση ως Αγαπημένο 2
 
 #~ msgid "Unit settings saved. Restart plugin to apply changes."
 #~ msgstr "Οι ρυθμίσεις μονάδων αποθηκεύτηκαν. Επανεκκινήστε το πρόσθετο για να εφαρμοστούν οι αλλαγές."
-
-#~ msgid "Distance"
-#~ msgstr "Απόσταση"
-
-#~ msgid "Feels like"
-#~ msgstr "Αίσθηση"
-
-#~ msgid "Humidity"
-#~ msgstr "Υγρασία"
-
-#~ msgid "Last update"
-#~ msgstr "Τελευταία ενημέρωση"
-
-#~ msgid "Precipitation"
-#~ msgstr "Υετός"
-
-#~ msgid "Pressure"
-#~ msgstr "Πίεση"
-
-#~ msgid "Sun"
-#~ msgstr "Ήλιος"
-
-#~ msgid "Temperature"
-#~ msgstr "Θερμοκρασία"
-
-#~ msgid "UV Index"
-#~ msgstr "Δείκτης Υπεριώδους Ακτινοβολίας"
-
-#~ msgid "Weather"
-#~ msgstr "Καιρός"
-
-#~ msgid "Wind"
-#~ msgstr "Άνεμος"
-
-#~ msgid "stations nearby"
-#~ msgstr "κοντινοί σταθμοί"

@@ -182,6 +182,9 @@ msgstr "البيانات مقدمة من Foreca"
 msgid "Denmark"
 msgstr "الدنمارك"
 
+msgid "Distance"
+msgstr "المسافة"
+
 msgid "Down - Next page"
 msgstr "أسفل - الصفحة التالية"
 
@@ -229,6 +232,9 @@ msgstr "المفضلة 1"
 
 msgid "Favorite 2"
 msgstr "المفضلة 2"
+
+msgid "Feels like"
+msgstr "يبدو كـ"
 
 msgid "Finland"
 msgstr "فنلندا"
@@ -290,6 +296,9 @@ msgstr "هيسن"
 msgid "Home"
 msgstr "الصفحة الرئيسية"
 
+msgid "Humidity"
+msgstr "الرطوبة"
+
 msgid "Hungary"
 msgstr "المجر"
 
@@ -325,6 +334,9 @@ msgstr "القفز 500 لأعلى"
 
 msgid "Keyboard"
 msgstr "لوحة المفاتيح"
+
+msgid "Last update"
+msgstr "آخر تحديث"
 
 msgid "Latvia"
 msgstr "لاتفيا"
@@ -509,6 +521,12 @@ msgstr "البرتغال"
 msgid "Possible reasons:\n"
 msgstr "الأسباب المحتملة:\n"
 
+msgid "Precipitation"
+msgstr "هطول الأمطار"
+
+msgid "Pressure"
+msgstr "الضغط الجوي"
+
 msgid "Previous"
 msgstr "السابق"
 
@@ -593,6 +611,9 @@ msgstr "إسبانيا"
 msgid "Station Observations"
 msgstr "ملاحظات المحطة"
 
+msgid "Sun"
+msgstr "الشمس"
+
 msgid "Sunrise"
 msgstr "شروق الشمس"
 
@@ -604,6 +625,9 @@ msgstr "السويد"
 
 msgid "Switzerland"
 msgstr "سويسرا"
+
+msgid "Temperature"
+msgstr "درجة الحرارة"
 
 msgid "Thin upper cloud"
 msgstr "سحب عليا رقيقة"
@@ -617,6 +641,9 @@ msgstr "إعدادات الشفافية"
 msgid "Transparency level"
 msgstr "مستوى الشفافية"
 
+msgid "UV Index"
+msgstr "مؤشر الأشعة فوق البنفسجية"
+
 msgid "Unit Settings"
 msgstr "إعدادات الوحدات"
 
@@ -628,6 +655,9 @@ msgstr "أعلى - الصفحة السابقة"
 
 msgid "Use arrow keys to scroll"
 msgstr "استخدم مفاتيح الأسهم للتمرير"
+
+msgid "Weather"
+msgstr "الطقس"
 
 msgid "Weather Maps"
 msgstr "خرائط الطقس"
@@ -653,11 +683,17 @@ msgstr "طقس الغد"
 msgid "Weekly Forecast"
 msgstr "التوقعات الأسبوعية"
 
+msgid "Wind"
+msgstr "الرياح"
+
 msgid "Window transparency"
 msgstr "شفافية النافذة"
 
 msgid "Yellow - Favorite 2"
 msgstr "أصفر - المفضلة 2"
+
+msgid "stations nearby"
+msgstr "المحطات القريبة"
 
 msgid "v."
 msgstr "إصدار."
@@ -694,39 +730,3 @@ msgstr "• أصفر للحفظ كالمفضلة 2\n"
 
 #~ msgid "Unit settings saved. Restart plugin to apply changes."
 #~ msgstr "تم حفظ إعدادات الوحدات. أعد تشغيل الملحق لتطبيق التغييرات."
-
-#~ msgid "Distance"
-#~ msgstr "المسافة"
-
-#~ msgid "Feels like"
-#~ msgstr "يبدو كـ"
-
-#~ msgid "Humidity"
-#~ msgstr "الرطوبة"
-
-#~ msgid "Last update"
-#~ msgstr "آخر تحديث"
-
-#~ msgid "Precipitation"
-#~ msgstr "هطول الأمطار"
-
-#~ msgid "Pressure"
-#~ msgstr "الضغط الجوي"
-
-#~ msgid "Sun"
-#~ msgstr "الشمس"
-
-#~ msgid "Temperature"
-#~ msgstr "درجة الحرارة"
-
-#~ msgid "UV Index"
-#~ msgstr "مؤشر الأشعة فوق البنفسجية"
-
-#~ msgid "Weather"
-#~ msgstr "الطقس"
-
-#~ msgid "Wind"
-#~ msgstr "الرياح"
-
-#~ msgid "stations nearby"
-#~ msgstr "المحطات القريبة"

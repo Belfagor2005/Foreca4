@@ -182,6 +182,9 @@ msgstr ""
 msgid "Denmark"
 msgstr ""
 
+msgid "Distance"
+msgstr ""
+
 msgid "Down - Next page"
 msgstr ""
 
@@ -228,6 +231,9 @@ msgid "Favorite 1"
 msgstr ""
 
 msgid "Favorite 2"
+msgstr ""
+
+msgid "Feels like"
 msgstr ""
 
 msgid "Finland"
@@ -290,6 +296,9 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+msgid "Humidity"
+msgstr ""
+
 msgid "Hungary"
 msgstr ""
 
@@ -324,6 +333,9 @@ msgid "Jump 500 up"
 msgstr ""
 
 msgid "Keyboard"
+msgstr ""
+
+msgid "Last update"
 msgstr ""
 
 msgid "Latvia"
@@ -509,6 +521,12 @@ msgstr ""
 msgid "Possible reasons:\n"
 msgstr ""
 
+msgid "Precipitation"
+msgstr ""
+
+msgid "Pressure"
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -593,6 +611,9 @@ msgstr ""
 msgid "Station Observations"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
 msgid "Sunrise"
 msgstr ""
 
@@ -603,6 +624,9 @@ msgid "Sweden"
 msgstr ""
 
 msgid "Switzerland"
+msgstr ""
+
+msgid "Temperature"
 msgstr ""
 
 msgid "Thin upper cloud"
@@ -617,6 +641,9 @@ msgstr ""
 msgid "Transparency level"
 msgstr ""
 
+msgid "UV Index"
+msgstr ""
+
 msgid "Unit Settings"
 msgstr ""
 
@@ -627,6 +654,9 @@ msgid "Up - Previous page"
 msgstr ""
 
 msgid "Use arrow keys to scroll"
+msgstr ""
+
+msgid "Weather"
 msgstr ""
 
 msgid "Weather Maps"
@@ -653,10 +683,16 @@ msgstr ""
 msgid "Weekly Forecast"
 msgstr ""
 
+msgid "Wind"
+msgstr ""
+
 msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
+msgstr ""
+
+msgid "stations nearby"
 msgstr ""
 
 msgid "v."

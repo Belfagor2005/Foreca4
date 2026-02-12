@@ -181,6 +181,9 @@ msgstr "Daten bereitgestellt von Foreca"
 msgid "Denmark"
 msgstr "Dänemark"
 
+msgid "Distance"
+msgstr "Entfernung"
+
 msgid "Down - Next page"
 msgstr "Nach unten – Nächste Seite"
 
@@ -228,6 +231,9 @@ msgstr "Favorit 1"
 
 msgid "Favorite 2"
 msgstr "Favorit 2"
+
+msgid "Feels like"
+msgstr "Gefühlt wie"
 
 msgid "Finland"
 msgstr "Finnland"
@@ -289,6 +295,9 @@ msgstr "Hessen"
 msgid "Home"
 msgstr "Startseite"
 
+msgid "Humidity"
+msgstr "Luftfeuchtigkeit"
+
 msgid "Hungary"
 msgstr "Ungarn"
 
@@ -324,6 +333,9 @@ msgstr "500 nach oben springen"
 
 msgid "Keyboard"
 msgstr "Tastatur"
+
+msgid "Last update"
+msgstr "Letzte Aktualisierung"
 
 msgid "Latvia"
 msgstr "Lettland"
@@ -508,6 +520,12 @@ msgstr "Portugal"
 msgid "Possible reasons:\n"
 msgstr "Mögliche Gründe:\n"
 
+msgid "Precipitation"
+msgstr "Niederschlag"
+
+msgid "Pressure"
+msgstr "Luftdruck"
+
 msgid "Previous"
 msgstr "Zurück"
 
@@ -592,6 +610,9 @@ msgstr "Spanien"
 msgid "Station Observations"
 msgstr "Station Beobachtungen"
 
+msgid "Sun"
+msgstr "Sonne"
+
 msgid "Sunrise"
 msgstr "Sonnenaufgang"
 
@@ -603,6 +624,9 @@ msgstr "Schweden"
 
 msgid "Switzerland"
 msgstr "Schweiz"
+
+msgid "Temperature"
+msgstr "Temperatur"
 
 msgid "Thin upper cloud"
 msgstr "Dünne hohe Bewölkung"
@@ -616,6 +640,9 @@ msgstr "Transparenzeinstellungen"
 msgid "Transparency level"
 msgstr "Transparenzgrad"
 
+msgid "UV Index"
+msgstr "UV-Index"
+
 msgid "Unit Settings"
 msgstr "Einheiteneinstellungen"
 
@@ -627,6 +654,9 @@ msgstr "Nach oben – Vorherige Seite"
 
 msgid "Use arrow keys to scroll"
 msgstr "Pfeiltasten zum Blättern verwenden"
+
+msgid "Weather"
+msgstr "Wetter"
 
 msgid "Weather Maps"
 msgstr "Wetterkarten"
@@ -652,11 +682,17 @@ msgstr "Wetter morgen"
 msgid "Weekly Forecast"
 msgstr "Wochenvorhersage"
 
+msgid "Wind"
+msgstr "Wind"
+
 msgid "Window transparency"
 msgstr "Fenstertransparenz"
 
 msgid "Yellow - Favorite 2"
 msgstr "Gelb – Favorit 2"
+
+msgid "stations nearby"
+msgstr "Stationen in der Nähe"
 
 msgid "v."
 msgstr "v."
@@ -693,39 +729,3 @@ msgstr "• GELB zum Speichern als Favorit 2\n"
 
 #~ msgid "Unit settings saved. Restart plugin to apply changes."
 #~ msgstr "Einheiteneinstellungen gespeichert. Plugin neu starten, um Änderungen zu übernehmen."
-
-#~ msgid "Distance"
-#~ msgstr "Entfernung"
-
-#~ msgid "Feels like"
-#~ msgstr "Gefühlt wie"
-
-#~ msgid "Humidity"
-#~ msgstr "Luftfeuchtigkeit"
-
-#~ msgid "Last update"
-#~ msgstr "Letzte Aktualisierung"
-
-#~ msgid "Precipitation"
-#~ msgstr "Niederschlag"
-
-#~ msgid "Pressure"
-#~ msgstr "Luftdruck"
-
-#~ msgid "Sun"
-#~ msgstr "Sonne"
-
-#~ msgid "Temperature"
-#~ msgstr "Temperatur"
-
-#~ msgid "UV Index"
-#~ msgstr "UV-Index"
-
-#~ msgid "Weather"
-#~ msgstr "Wetter"
-
-#~ msgid "Wind"
-#~ msgstr "Wind"
-
-#~ msgid "stations nearby"
-#~ msgstr "Stationen in der Nähe"

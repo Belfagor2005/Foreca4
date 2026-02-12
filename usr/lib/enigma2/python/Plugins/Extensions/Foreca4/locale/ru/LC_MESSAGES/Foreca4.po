@@ -181,6 +181,9 @@ msgstr "Данные предоставлены Foreca"
 msgid "Denmark"
 msgstr "Дания"
 
+msgid "Distance"
+msgstr "Расстояние"
+
 msgid "Down - Next page"
 msgstr "Вниз - Следующая страница"
 
@@ -228,6 +231,9 @@ msgstr "Избранное 1"
 
 msgid "Favorite 2"
 msgstr "Избранное 2"
+
+msgid "Feels like"
+msgstr "Ощущается как"
 
 msgid "Finland"
 msgstr "Финляндия"
@@ -289,6 +295,9 @@ msgstr "Гессен"
 msgid "Home"
 msgstr "Домашнее"
 
+msgid "Humidity"
+msgstr "Влажность"
+
 msgid "Hungary"
 msgstr "Венгрия"
 
@@ -324,6 +333,9 @@ msgstr "Перейти на 500 вверх"
 
 msgid "Keyboard"
 msgstr "Клавиатура"
+
+msgid "Last update"
+msgstr "Последнее обновление"
 
 msgid "Latvia"
 msgstr "Латвия"
@@ -508,6 +520,12 @@ msgstr "Португалия"
 msgid "Possible reasons:\n"
 msgstr "Возможные причины:\n"
 
+msgid "Precipitation"
+msgstr "Осадки"
+
+msgid "Pressure"
+msgstr "Давление"
+
 msgid "Previous"
 msgstr "Предыдущий"
 
@@ -592,6 +610,9 @@ msgstr "Испания"
 msgid "Station Observations"
 msgstr "Наблюдения со станции"
 
+msgid "Sun"
+msgstr "Солнце"
+
 msgid "Sunrise"
 msgstr "Восход"
 
@@ -603,6 +624,9 @@ msgstr "Швеция"
 
 msgid "Switzerland"
 msgstr "Швейцария"
+
+msgid "Temperature"
+msgstr "Температура"
 
 msgid "Thin upper cloud"
 msgstr "Дымка"
@@ -616,6 +640,9 @@ msgstr "Настройки прозрачности"
 msgid "Transparency level"
 msgstr "Уровень прозрачности"
 
+msgid "UV Index"
+msgstr "УФ-индекс"
+
 msgid "Unit Settings"
 msgstr "Настройки единиц"
 
@@ -627,6 +654,9 @@ msgstr "Вверх - Предыдущая страница"
 
 msgid "Use arrow keys to scroll"
 msgstr "Используйте клавиши со стрелками для прокрутки"
+
+msgid "Weather"
+msgstr "Погода"
 
 msgid "Weather Maps"
 msgstr "Погодные карты"
@@ -652,11 +682,17 @@ msgstr "Погода завтра"
 msgid "Weekly Forecast"
 msgstr "Недельный прогноз"
 
+msgid "Wind"
+msgstr "Ветер"
+
 msgid "Window transparency"
 msgstr "Прозрачность окон"
 
 msgid "Yellow - Favorite 2"
 msgstr "Желтая кнопка - Избранное 2"
+
+msgid "stations nearby"
+msgstr "станции поблизости"
 
 msgid "v."
 msgstr "в."
@@ -694,39 +730,3 @@ msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное
 
 #~ msgid "Unit settings saved. Restart plugin to apply changes."
 #~ msgstr "Настройки единиц сохранены. Перезапустите плагин для применения изменений."
-
-#~ msgid "Distance"
-#~ msgstr "Расстояние"
-
-#~ msgid "Feels like"
-#~ msgstr "Ощущается как"
-
-#~ msgid "Humidity"
-#~ msgstr "Влажность"
-
-#~ msgid "Last update"
-#~ msgstr "Последнее обновление"
-
-#~ msgid "Precipitation"
-#~ msgstr "Осадки"
-
-#~ msgid "Pressure"
-#~ msgstr "Давление"
-
-#~ msgid "Sun"
-#~ msgstr "Солнце"
-
-#~ msgid "Temperature"
-#~ msgstr "Температура"
-
-#~ msgid "UV Index"
-#~ msgstr "УФ-индекс"
-
-#~ msgid "Weather"
-#~ msgstr "Погода"
-
-#~ msgid "Wind"
-#~ msgstr "Ветер"
-
-#~ msgid "stations nearby"
-#~ msgstr "станции поблизости"

@@ -189,6 +189,9 @@ msgstr ""
 msgid "Denmark"
 msgstr ""
 
+msgid "Distance"
+msgstr ""
+
 msgid "Down - Next page"
 msgstr "Down - Next page"
 
@@ -239,6 +242,9 @@ msgstr "Green - Favorite 1"
 #, fuzzy
 msgid "Favorite 2"
 msgstr "Yellow - Favorite 2"
+
+msgid "Feels like"
+msgstr "Feels like"
 
 msgid "Finland"
 msgstr ""
@@ -303,6 +309,10 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#, fuzzy
+msgid "Humidity"
+msgstr "Humidity:"
+
 msgid "Hungary"
 msgstr ""
 
@@ -337,6 +347,9 @@ msgid "Jump 500 up"
 msgstr ""
 
 msgid "Keyboard"
+msgstr ""
+
+msgid "Last update"
 msgstr ""
 
 msgid "Latvia"
@@ -527,6 +540,13 @@ msgid "Possible reasons:\n"
 msgstr ""
 
 #, fuzzy
+msgid "Precipitation"
+msgstr "Precipitations:"
+
+msgid "Pressure"
+msgstr ""
+
+#, fuzzy
 msgid "Previous"
 msgstr "Up - Previous page"
 
@@ -612,6 +632,10 @@ msgstr ""
 msgid "Station Observations"
 msgstr ""
 
+#, fuzzy
+msgid "Sun"
+msgstr "Sunset"
+
 msgid "Sunrise"
 msgstr "Sunrise"
 
@@ -622,6 +646,9 @@ msgid "Sweden"
 msgstr ""
 
 msgid "Switzerland"
+msgstr ""
+
+msgid "Temperature"
 msgstr ""
 
 msgid "Thin upper cloud"
@@ -637,6 +664,9 @@ msgstr "Transparency level"
 msgid "Transparency level"
 msgstr "Transparency level"
 
+msgid "UV Index"
+msgstr ""
+
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Menu - Select transparency"
@@ -649,6 +679,10 @@ msgstr "Up - Previous page"
 
 msgid "Use arrow keys to scroll"
 msgstr ""
+
+#, fuzzy
+msgid "Weather"
+msgstr "Weather Radar"
 
 #, fuzzy
 msgid "Weather Maps"
@@ -676,11 +710,17 @@ msgstr "Weather tomorrow"
 msgid "Weekly Forecast"
 msgstr "Foreca 4"
 
+msgid "Wind"
+msgstr "Wind"
+
 msgid "Window transparency"
 msgstr "Window transparency"
 
 msgid "Yellow - Favorite 2"
 msgstr "Yellow - Favorite 2"
+
+msgid "stations nearby"
+msgstr ""
 
 msgid "v."
 msgstr "v."
@@ -708,25 +748,3 @@ msgstr ""
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
-
-#~ msgid "Feels like"
-#~ msgstr "Feels like"
-
-#, fuzzy
-#~ msgid "Humidity"
-#~ msgstr "Humidity:"
-
-#, fuzzy
-#~ msgid "Precipitation"
-#~ msgstr "Precipitations:"
-
-#, fuzzy
-#~ msgid "Sun"
-#~ msgstr "Sunset"
-
-#, fuzzy
-#~ msgid "Weather"
-#~ msgstr "Weather Radar"
-
-#~ msgid "Wind"
-#~ msgstr "Wind"
