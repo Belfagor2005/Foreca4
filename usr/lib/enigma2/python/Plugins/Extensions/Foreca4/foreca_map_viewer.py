@@ -8,19 +8,13 @@ from Components.Pixmap import Pixmap
 from Components.Label import Label
 from enigma import getDesktop
 from math import log, tan, pi, radians, cos
-from PIL import Image, ImageDraw
+from PIL import Image  # , ImageDraw
 from datetime import datetime
 import os
 
-from .skin import (
-    ForecaMapViewer_UHD,
-    ForecaMapViewer_FHD,
-    ForecaMapViewer_HD
-)
-from . import _
+from . import _, load_skin_for_class
 
 # -------------------------------
-# Costanti
 TILE_SIZE = 256
 THUMB_PATH = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/"
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
@@ -49,12 +43,7 @@ REGION_CENTERS = {
 def get_background_for_layer(layer_title, region="europe"):
     """Select geographic background based on layer and region"""
     layer_lower = layer_title.lower()
-    if any(
-        word in layer_lower for word in [
-            'temp',
-            'temperature',
-            'warm',
-            'cold']):
+    if any(word in layer_lower for word in ['temp', 'temperature', 'warm', 'cold']):
         return 'temp_map.png'
     elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
         return 'rain_map.png'
@@ -84,13 +73,7 @@ def get_background_for_layer(layer_title, region="europe"):
 
 
 # ------------------------------------------------------------
-def create_composite_map(
-    weather_tiles_path,
-    layer_title,
-    region,
-    canvas_size=(
-        FINAL_WIDTH,
-        FINAL_HEIGHT)):
+def create_composite_map(weather_tiles_path, layer_title, region, canvas_size=(FINAL_WIDTH, FINAL_HEIGHT)):
     """
     Create composite map with tiles.
     canvas_size = tuple(width, height) for final output
@@ -137,15 +120,9 @@ def create_composite_map(
 # ------------------------------------------------------------
 class ForecaMapViewer(Screen):
     """Foreca Map Viewer – 16:9, dynamic grid, corrupt tile handling"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ForecaMapViewer_FHD
-    elif sz_w == 2560:
-        skin = ForecaMapViewer_UHD
-    else:
-        skin = ForecaMapViewer_HD
 
     def __init__(self, session, api, layer, unit_system='metric', region='eu'):
+        self.skin = load_skin_for_class(ForecaMapViewer)
         Screen.__init__(self, session)
         self.api = api
         self.layer = layer
@@ -236,7 +213,7 @@ class ForecaMapViewer(Screen):
         try:
             dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")
             display_time = dt.strftime("%d/%m %H:%M UTC")
-        except BaseException:
+        except:
             display_time = timestamp
 
         self["time"].setText(f"{display_time} | Zoom: {self.zoom}")
@@ -246,8 +223,7 @@ class ForecaMapViewer(Screen):
     # ------------------------------------------------------------
     def download_tile_grid_async(self, timestamp, callback):
         def download_thread():
-            cx, cy = self.latlon_to_tile(
-                self.center_lat, self.center_lon, self.zoom)
+            cx, cy = self.latlon_to_tile(self.center_lat, self.center_lon, self.zoom)
             offset_cols = self.grid_cols // 2
             offset_rows = self.grid_rows // 2
 
@@ -264,8 +240,7 @@ class ForecaMapViewer(Screen):
                         self.unit_system
                     )
                     if path:
-                        tile_paths.append(
-                            (dx + offset_cols, dy + offset_rows, path))
+                        tile_paths.append((dx + offset_cols, dy + offset_rows, path))
 
             if len(tile_paths) > 0:
                 merged = self.merge_tile_grid(tile_paths)
@@ -299,8 +274,7 @@ class ForecaMapViewer(Screen):
                 y = row * self.tile_size
                 merged.paste(tile, (x, y), tile)
 
-            merged_path = os.path.join(
-                CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}.png")
+            merged_path = os.path.join(CACHE_BASE, f"merged_{self.layer_id}_{self.zoom}.png")
             merged.save(merged_path, 'PNG')
             return merged_path
 
@@ -329,11 +303,10 @@ class ForecaMapViewer(Screen):
                 try:
                     dt = datetime.strptime(current_time, "%Y-%m-%dT%H:%M:%SZ")
                     display_time = dt.strftime("%d/%m %H:%M UTC")
-                except BaseException:
+                except:
                     display_time = current_time
 
-                self["time"].setText(
-                    f"{display_time} | Zoom: {self.zoom} | Grid: {self.grid_cols}x{self.grid_rows}")
+                self["time"].setText(f"{display_time} | Zoom: {self.zoom} | Grid: {self.grid_cols}x{self.grid_rows}")
                 self["info"].setText("Use ← → to change time | OK to exit")
 
             except Exception as e:
@@ -354,7 +327,7 @@ class ForecaMapViewer(Screen):
             region_name = self.region.upper()
             unit = "Metric" if self.unit_system == 'metric' else "Imperial"
             self["layerinfo"].setText(f"{data_type} - {region_name} ({unit})")
-        except BaseException:
+        except:
             self["layerinfo"].setText(self.layer_title)
 
     def get_data_type_from_layer(self, layer_name):

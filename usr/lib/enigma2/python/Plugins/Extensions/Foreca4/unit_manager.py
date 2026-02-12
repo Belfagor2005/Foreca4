@@ -8,14 +8,9 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from enigma import getDesktop
 import os
-from .skin import (
-    UnitSettingsSimple_UHD,
-    UnitSettingsSimple_FHD,
-    UnitSettingsSimple_HD
-)
-from . import _
+
+from . import _, load_skin_for_class
 
 
 class UnitManager:
@@ -187,15 +182,9 @@ class UnitManager:
 
 class UnitSettingsSimple(Screen):
     """Screen for changing units (metric/imperial)"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = UnitSettingsSimple_FHD
-    elif sz_w == 2560:
-        skin = UnitSettingsSimple_UHD
-    else:
-        skin = UnitSettingsSimple_HD
 
     def __init__(self, session, unit_manager):
+        self.skin = load_skin_for_class(UnitSettingsSimple)
         Screen.__init__(self, session)
         self.unit_manager = unit_manager
         self.current_system = unit_manager.get_simple_system()

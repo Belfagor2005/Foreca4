@@ -6,27 +6,15 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Label import Label
-from enigma import getDesktop
 
-from .skin import (
-    ForecaMapMenu_UHD,
-    ForecaMapMenu_FHD,
-    ForecaMapMenu_HD
-)
-from . import _
+from . import _, load_skin_for_class
 
 
 class ForecaMapMenu(Screen):
     """Menu to select Foreca map layers"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ForecaMapMenu_FHD
-    elif sz_w == 2560:
-        skin = ForecaMapMenu_UHD
-    else:
-        skin = ForecaMapMenu_HD
 
     def __init__(self, session, api, unit_system='metric', region='eu'):
+        self.skin = load_skin_for_class(ForecaMapMenu)
         self.session = session
         self.api = api
         self.unit_system = unit_system

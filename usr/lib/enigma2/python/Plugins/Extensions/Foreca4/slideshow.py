@@ -10,20 +10,12 @@ from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.Sources.StaticText import StaticText
 from Screens.Screen import Screen
-from enigma import eTimer, ePicLoad, getDesktop
+from enigma import eTimer, ePicLoad
 import os
 import requests
 from threading import Thread
 
-from .skin import (
-    ForecaMapsMenu_UHD,
-    ForecaMapsMenu_FHD,
-    ForecaMapsMenu_HD,
-    ForecaSlideshow_UHD,
-    ForecaSlideshow_FHD,
-    ForecaSlideshow_HD
-)
-from . import _
+from . import _, load_skin_for_class
 
 
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
@@ -95,17 +87,13 @@ REGION_MAPS_CONTINENTS = [
 
 class ForecaSlideshow(Screen):
     """Slideshow for Wetterkontor weather maps"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ForecaSlideshow_FHD
-    elif sz_w == 2560:
-        skin = ForecaSlideshow_UHD
-    else:
-        skin = ForecaSlideshow_HD
 
     def __init__(self, session, region_code, region_name):
         print("[Foreca4] ForecaSlideshow class loaded")
         print(f"[Foreca4] Region code: {region_code}, Name: {region_name}")
+
+        self.skin = load_skin_for_class(ForecaSlideshow)
+
         Screen.__init__(self, session)
         self.setTitle(_("Weather Maps Slideshow"))
 
@@ -118,8 +106,6 @@ class ForecaSlideshow(Screen):
         self["key_blue"] = StaticText(_("Exit"))
         self["playButton"] = Pixmap()
         self["pauseButton"] = Pixmap()
-        # self["playButton"].hide()
-        # self["pauseButton"].hide()
         self.region_code = region_code
         self.current_image = 0
         self.total_images = 6
@@ -273,15 +259,10 @@ class ForecaSlideshow(Screen):
 
 
 class ForecaMapsMenu(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ForecaMapsMenu_FHD
-    elif sz_w == 2560:
-        skin = ForecaMapsMenu_UHD
-    else:
-        skin = ForecaMapsMenu_HD
 
     def __init__(self, session, map_type):
+        self.skin = (ForecaMapsMenu)
+
         self.session = session
         self.map_type = map_type  # 'europe', 'germany', 'continents'
         Screen.__init__(self, session)

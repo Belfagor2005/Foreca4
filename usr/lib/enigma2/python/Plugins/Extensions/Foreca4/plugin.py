@@ -163,6 +163,9 @@
 
 # mod @lululla 2026.01.25 v.1.3.5
 # fix map viewer transcode to api from scraper
+# mod @lululla 2026.01.25 v.1.3.6
+# complete conversion migration from scraper to api foreca.
+
 
 from __future__ import absolute_import
 
@@ -200,45 +203,17 @@ from Tools.LoadPixmap import LoadPixmap
 import six
 
 # Local application imports
-from . import _
-from .cur_weather import getPageF
-from .forecast_weather import getPageF_F
+from . import _, load_skin_for_class
+
 from .foreca_map_api import ForecaMapAPI
 from .foreca_map_menu import ForecaMapMenu
 from .google_translate import translate_text, safe_translate, _get_system_language, translate_batch
-from .skin import (
-    About_Foreca4_UHD,
-    About_Foreca4_FHD,
-    About_Foreca4_HD,
-    ColorSelect_UHD,
-    ColorSelect_FHD,
-    ColorSelect_HD,
-    ExtInfo_2_Foreca4_UHD,
-    ExtInfo_2_Foreca4_FHD,
-    ExtInfo_2_Foreca4_HD,
-    ExtInfo_Foreca4_UHD,
-    ExtInfo_Foreca4_FHD,
-    ExtInfo_Foreca4_HD,
-    ForecaPreview_4_UHD,
-    ForecaPreview_4_FHD,
-    ForecaPreview_4_HD,
-    Meteogram_Foreca4_UHD,
-    Meteogram_Foreca4_FHD,
-    Meteogram_Foreca4_HD,
-    Transparency_Foreca4_UHD,
-    Transparency_Foreca4_FHD,
-    Transparency_Foreca4_HD,
-    CityPanel4_UHD,
-    CityPanel4_FHD,
-    CityPanel4_HD
-)
 from .slideshow import ForecaMapsMenu
-from .tt_weather import getPageTT
 from .unit_manager import UnitManager, UnitSettingsSimple
 from .foreca_weather_api import ForecaWeatherAPI
 from .daily_forecast import DailyForecast
 
-VERSION = "1.3.5"
+VERSION = "1.3.6"
 
 TARGET_LANG = _get_system_language()
 
@@ -296,6 +271,7 @@ wind_speed = ' n/a'
 wind_gust = ' n/a'
 rain_mm = ' n/a'
 hum = ' n/a'
+daylen = ' n/a'
 pressure = ' n/a'
 country = ' n/a'
 MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
@@ -315,6 +291,10 @@ rgbmyb = 239
 alpha = '#40000000'
 share_town0 = ''
 f_day = ' n/a'
+lon = ' n/a'
+lat = ' n/a'
+sunrise = ' n/a'
+sunset = ' n/a'
 
 # other constant @lululla
 cur_wind_speed_recalc = 1
@@ -527,7 +507,6 @@ def translate_batch_strings(texts):
 
 class ForecaPreview_4(Screen, HelpableScreen):
     def __init__(self, session):
-        # GLOBAL VARIABLES – KEPT FOR COMPATIBILITY
         global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
         global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
         global lon, lat, sunrise, daylen, sunset, f_day
@@ -541,40 +520,25 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # DETERMINE LOCATION ID FROM PATH
         location_id = path_loc0.split(
             '/')[0] if '/' in path_loc0 else path_loc0
-
-        # STRATEGY: TRY API FIRST, THEN FALL BACK TO SCRAPING
-        api_current_ok = False
-        api_forecast_ok = False
-
         # 1. TRY CURRENT WEATHER VIA API
+        town = cur_temp = fl_temp = dewpoint = pic = wind = wind_speed = wind_gust = rain_mm = hum = pressure = country = lon = lat = sunrise = daylen = sunset = 'N/A'
+
         if self.weather_api.check_credentials():
-            print(
-                "[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
+            print("[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
             result_current = self.weather_api.get_current_weather(location_id)
-            if result_current and result_current[0] != 'N/A':
+
+            if (
+                result_current
+                and isinstance(result_current, (list, tuple))
+                and len(result_current) == 17
+                and result_current[0] != 'N/A'
+            ):
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                api_current_ok = True
                 print("[Foreca4] Current weather obtained via API")
             else:
-                print(
-                    "[Foreca4] Current weather API failed, falling back to scraping")
+                print("[Foreca4] Current weather API failed, falling back to scraping")
         else:
             print("[Foreca4] API credentials not configured, using scraping")
-
-        # FALLBACK TO SCRAPING FOR CURRENT WEATHER
-        if not api_current_ok:
-            try:
-                MAIN_PAGE_F = str(BASEURL) + path_loc0
-                print("[Foreca4] Scraping from: {0}".format(MAIN_PAGE_F))
-                result_current = getPageF(MAIN_PAGE_F)
-                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-            except Exception as e:
-                print(
-                    "[Foreca4] Error scraping current weather: {0}".format(e))
-                # DEFAULT VALUES
-                town = cur_temp = fl_temp = dewpoint = pic = wind = 'N/A'
-                wind_speed = wind_gust = rain_mm = hum = pressure = 'N/A'
-                country = lon = lat = sunrise = daylen = sunset = 'N/A'
 
         # 2. TRY HOURLY FORECASTS VIA API
         if self.weather_api.check_credentials():
@@ -584,7 +548,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
-                api_forecast_ok = True
+                # api_forecast_ok = True
                 print(
                     "[Foreca4] Forecasts obtained via API: {0} periods".format(
                         len(f_time)))
@@ -593,27 +557,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         else:
             print("[Foreca4] API credentials not configured for forecasts")
 
-        # 3. FALLBACK TO FORECAST SCRAPING
-        if not api_forecast_ok:
-            try:
-                MAIN_PAGE_FF = str(BASEURL) + path_loc0 + '/hourly?day=0'
-                result_forecast = getPageF_F(MAIN_PAGE_FF)
-                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
-            except Exception as e:
-                print("[Foreca4] Error scraping forecasts: {0}".format(e))
-                # DEFAULT VALUES
-                f_town = 'N/A'
-                f_date = f_time = f_symb = f_cur_temp = f_flike_temp = []
-                f_wind = f_wind_speed = f_precipitation = f_rel_hum = []
-                f_day = 'N/A'
-
-        if size_w == 1920:
-            self.skin = ForecaPreview_4_FHD
-        elif size_w == 2560:
-            self.skin = ForecaPreview_4_UHD
-        else:
-            self.skin = ForecaPreview_4_HD
-
+        self.skin = load_skin_for_class(ForecaPreview_4)
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
@@ -845,6 +789,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
             if location_id and hasattr(self, 'weather_api'):
                 # Request only the nearest station
+                self.weather_api.get_token(force_new=True)
+
                 observations = self.weather_api.get_station_observations(
                     location_id, station_limit=1)
 
@@ -992,24 +938,21 @@ class ForecaPreview_4(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split(
-                '/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split(
-                '/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split(
-                '/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
 
-        print(
-            f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
+        print(f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
 
         if not self.weather_api.check_credentials():
             print("[DEBUG] API credentials not configured")
             self.session.open(
                 MessageBox,
                 _("API credentials not configured!\n\nPlease create api_config.txt file."),
-                MessageBox.TYPE_ERROR)
+                MessageBox.TYPE_ERROR
+            )
             return
 
         if not location_id:
@@ -1028,9 +971,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def OK(self):
         PY3 = version_info[0] == 3
         if PY3:
-            self.session.open(ExtInfo_Foreca4_FHD)
+            self.session.open(ExtInfo_Foreca4, self.weather_api)
         else:
-            self.session.open(ExtInfo_2_Foreca4_FHD)
+            self.session.open(ExtInfo_2_Foreca4)
 
     def savesetcolor(self, indata):
         f = open(
@@ -1414,24 +1357,18 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # 1. CURRENT WEATHER VIA API (or scraping fallback)
         if self.weather_api.check_credentials():
             result_current = self.weather_api.get_current_weather(location_id)
-            if result_current and result_current[0] != 'N/A':
+            if (
+                result_current
+                and isinstance(result_current, (list, tuple))
+                and len(result_current) == 17
+                and result_current[0] != 'N/A'
+            ):
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print(
-                    "[Foreca4] Fav{0}: Current weather via API".format(fav_index))
+                print("[Foreca4] Fav{0}: Current weather via API".format(fav_index))
             else:
-                # Fallback to scraping
-                MAIN_PAGE_F = str(BASEURL) + path_loc
-                result_current = getPageF(MAIN_PAGE_F)
-                town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print(
-                    "[Foreca4] Fav{0}: Current weather via scraping".format(fav_index))
-        else:
-            # Scraping only
-            MAIN_PAGE_F = str(BASEURL) + path_loc
-            result_current = getPageF(MAIN_PAGE_F)
-            town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
+                town = cur_temp = fl_temp = dewpoint = pic = wind = wind_speed = wind_gust = rain_mm = hum = pressure = country = lon = lat = sunrise = daylen = sunset = 'N/A'
 
-        self.my_cur_weather()
+        # self.my_cur_weather()
 
         # 2. FORECAST VIA API (or scraping fallback)
         if self.weather_api.check_credentials():
@@ -1439,16 +1376,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 location_id, days=1)
             if result_forecast and result_forecast[0] != 'N/A':
                 f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = result_forecast
-            else:
-                # Fallback
-                MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-                f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                    MAIN_PAGE_FF)
-        else:
-            # Scraping only
-            MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=0'
-            f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-                MAIN_PAGE_FF)
 
         self.my_forecast_weather()
 
@@ -1506,11 +1433,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 self.my_forecast_weather()
                 self.StartPage()
                 return
-
-        # FALLBACK TO SCRAPING
-        MAIN_PAGE_FF = str(BASEURL) + path_loc + '/hourly?day=' + str(ztag)
-        f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum, f_day = getPageF_F(
-            MAIN_PAGE_FF)
 
         self.my_forecast_weather()
         self.StartPage()
@@ -1757,19 +1679,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
 
 class Color_Select(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ColorSelect_FHD
-    elif sz_w == 2560:
-        skin = ColorSelect_UHD
-    else:
-        skin = ColorSelect_HD
 
     def __init__(self, session, args=0):
+        self.skin = load_skin_for_class(Color_Select)
         self.session = session
         Screen.__init__(self, session)
         self.setTitle(_('Color selection'))
-
         self.Clist = []
         self.original_names = []
         self.display_names = []
@@ -2024,8 +1939,18 @@ class Color_Select(Screen):
                         self["pic1"].instance.setPixmapFromFile(img_path)
                         self["pic1"].instance.show()
 
-    def update_gui(self):
+    def update_gui(self, sort=False):
         print("[Color_Select] update_gui()")
+
+        if sort:
+            combined = list(zip(self.display_names, self.Clist, self.original_names, self.mydata))
+            combined.sort(key=lambda x: x[0].lower())
+            self.display_names, self.Clist, self.original_names, self.mydata = zip(*combined)
+            self.display_names = list(self.display_names)
+            self.Clist = list(self.Clist)
+            self.original_names = list(self.original_names)
+            self.mydata = list(self.mydata)
+
         self["Clist"].l.setList(self.Clist)
         current_idx = self["Clist"].getCurrentIndex()
         if current_idx < len(self.display_names):
@@ -2091,15 +2016,9 @@ class Color_Select(Screen):
 
 
 class InfoBox1(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = About_Foreca4_FHD
-    elif sz_w == 2560:
-        skin = About_Foreca4_UHD
-    else:
-        skin = About_Foreca4_HD
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(InfoBox1)
 
         Screen.__init__(self, session)
 
@@ -2135,28 +2054,38 @@ class InfoBox1(Screen):
         self.close()
 
 
-class ExtInfo_Foreca4_FHD(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ExtInfo_Foreca4_FHD
-    elif sz_w == 2560:
-        skin = ExtInfo_Foreca4_UHD
-    else:
-        skin = ExtInfo_Foreca4_HD
-
-    def __init__(self, session):
+class ExtInfo_Foreca4(Screen):
+    def __init__(self, session, weather_api):  # <-- add parameter
+        self.skin = load_skin_for_class(ExtInfo_Foreca4)
         Screen.__init__(self, session)
+        self.weather_api = weather_api
 
+        # Determine location path
         if myloc == 0:
-            MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc0)
+            location_path = path_loc0
         elif myloc == 1:
-            MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc1)
-        elif myloc == 2:
-            MAIN_PAGE_TT = 'https://www.forecaweather.com/' + str(path_loc2)
+            location_path = path_loc1
+        else:
+            location_path = path_loc2
 
-        self.mytown, self.mytext1, self.myh_temp, self.myl_temp, self.mytext2, self.mytext3, self.myh2_temp, self.myl2_temp, self.mytext4, self.mysymb_mo1, self.mysymb_mo2, self.myt_mo1, self.myt_mo2, self.mysymb_af1, self.mysymb_af2, self.myt_af1, self.myt_af2, self.mysymb_ev1, self.mysymb_ev2, self.myt_ev1, self.myt_ev2, self.mysymb_ov1, self.mysymb_ov2, self.myt_ov1, self.myt_ov2 = getPageTT(
-            MAIN_PAGE_TT)
+        location_id = location_path.split('/')[0] if '/' in location_path else location_path
 
+        # Get weather data if API credentials exist
+        self.data = None
+        if self.weather_api and self.weather_api.check_credentials():
+            self.data = self.weather_api.get_today_tomorrow_details(location_id)
+
+        # Fallback if data not available
+        if not self.data:
+            self.data = {
+                'town': 'N/A',
+                'country': 'N/A',
+                'lat': lat,  # fallback to global variables
+                'lon': lon,
+                'today': {}, 'tomorrow': {}
+            }
+
+        # UI Elements
         self['title1'] = StaticText(_('Weather Radar'))
         self['title2'] = StaticText()
         self['title3'] = StaticText(_('Weather today'))
@@ -2199,13 +2128,9 @@ class ExtInfo_Foreca4_FHD(Screen):
         self['lat_val'] = StaticText()
         self['lon_val'] = StaticText()
 
+        # Action map
         self["actions"] = ActionMap(
-            [
-                "OkCancelActions",
-                "DirectionActions",
-                "HelpActions",
-                "EPGSelectActions"
-            ],
+            ["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
             {
                 "cancel": self.Exit,
                 'ok': self.OK,
@@ -2221,17 +2146,20 @@ class ExtInfo_Foreca4_FHD(Screen):
     def Start2(self):
         self['title3'].text = str(_('Weather today'))
         self['title4'].text = str(_('Weather tomorrow'))
+        self['title2'].text = str(self.data.get('town', 'N/A'))
 
-        self['title2'].text = str(self.mytown)
+        today = self.data.get('today', {})
+        tomorrow = self.data.get('tomorrow', {})
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
-        self["text1"].text = str(t1)
+        # Today summary
+        t1 = f"{today.get('text', 'N/A')} {today.get('max_temp', 'N/A')}°C, {today.get('min_temp', 'N/A')}°C. {today.get('rain_mm', '0')} mm."
+        self["text1"].text = t1
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
-        self["text2"].text = str(t2)
+        # Tomorrow summary
+        t2 = f"{tomorrow.get('text', 'N/A')} {tomorrow.get('max_temp', 'N/A')}°C, {tomorrow.get('min_temp', 'N/A')}°C. {tomorrow.get('rain_mm', '0')} mm."
+        self["text2"].text = t2
 
+        # Period labels
         self['mo1'].text = _('Morning')
         self['mo2'].text = _('Morning')
         self['af1'].text = _('Afternoon')
@@ -2241,58 +2169,46 @@ class ExtInfo_Foreca4_FHD(Screen):
         self['ov1'].text = _('Overnight')
         self['ov2'].text = _('Overnight')
 
+        # Colors
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["plate0"].instance.setBackgroundColor(self.color)
         self["plate1"].instance.setBackgroundColor(parseColor(alpha))
 
-        Thread4 = Thread(target=self.mytranslate)
-        Thread4.start()
+        # Start translation thread
+        Thread(target=self.mytranslate).start()
 
     def mytranslate(self):
+        # Translate UI texts
         self['title3'].text = _('Weather today')
         self['title4'].text = _('Weather tomorrow')
+        self['title2'].text = str(trans(self.data.get('town', 'N/A')))
 
-        self['title2'].text = str(trans(self.mytown))
+        today = self.data.get('today', {})
+        tomorrow = self.data.get('tomorrow', {})
 
-        t1 = str(self.mytext1) + ' ' + str(self.myh_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext2) + ' mm.'
+        t1 = f"{today.get('text', 'N/A')} {today.get('max_temp', 'N/A')}°C, {today.get('min_temp', 'N/A')}°C. {today.get('rain_mm', '0')} mm."
         self["text1"].text = str(trans(t1))
 
-        t2 = str(self.mytext3) + ' ' + str(self.myh2_temp) + six.ensure_str(six.unichr(176)) + 'C, ' + \
-            str(self.myl2_temp) + six.ensure_str(six.unichr(176)) + 'C. ' + str(self.mytext4) + ' mm.'
+        t2 = f"{tomorrow.get('text', 'N/A')} {tomorrow.get('max_temp', 'N/A')}°C, {tomorrow.get('min_temp', 'N/A')}°C. {tomorrow.get('rain_mm', '0')} mm."
         self["text2"].text = str(trans(t2))
 
     def Start1(self):
+        # Radar map (if exists)
         if os.path.exists("/tmp/385.png"):
             self["pic"].instance.setPixmapFromFile("/tmp/385.png")
             self["pic"].instance.show()
 
-        self["pic_af1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af1) + ".png")
-        self["pic_af1"].instance.show()
-        self["pic_ev1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev1) + ".png")
-        self["pic_ev1"].instance.show()
-        self["pic_ov1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov1) + ".png")
-        self["pic_ov1"].instance.show()
-        self["pic_mo1"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo1) + ".png")
-        self["pic_mo1"].instance.show()
+        # Today - symbols and temperatures
+        today = self.data.get('today', {})
+        self._set_period_data('1', today.get('morning', {}), today.get('afternoon', {}),
+                              today.get('evening', {}), today.get('overnight', {}))
 
-        self["pic_af2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_af2) + ".png")
-        self["pic_af2"].instance.show()
-        self["pic_ev2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ev2) + ".png")
-        self["pic_ev2"].instance.show()
-        self["pic_ov2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_ov2) + ".png")
-        self["pic_ov2"].instance.show()
-        self["pic_mo2"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/" + str(self.mysymb_mo2) + ".png")
-        self["pic_mo2"].instance.show()
+        # Tomorrow - symbols and temperatures
+        tomorrow = self.data.get('tomorrow', {})
+        self._set_period_data('2', tomorrow.get('morning', {}), tomorrow.get('afternoon', {}),
+                              tomorrow.get('evening', {}), tomorrow.get('overnight', {}))
 
+        # Coordinate icons
         self["pic_lot"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
         self["pic_lot"].instance.show()
@@ -2300,33 +2216,42 @@ class ExtInfo_Foreca4_FHD(Screen):
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
-        self['mo1_text'].text = str(self.myt_mo1)
-        self['af1_text'].text = str(self.myt_af1)
-        self['ev1_text'].text = str(self.myt_ev1)
-        self['ov1_text'].text = str(self.myt_ov1)
+        self['lat_val'].text = str(self.data.get('lat', lat))
+        self['lon_val'].text = str(self.data.get('lon', lon))
 
-        self['mo2_text'].text = str(self.myt_mo2)
-        self['af2_text'].text = str(self.myt_af2)
-        self['ev2_text'].text = str(self.myt_ev2)
-        self['ov2_text'].text = str(self.myt_ov2)
+    def _set_period_data(self, suffix, morning, afternoon, evening, overnight):
+        """Helper to set symbols and temperatures"""
+        # Symbols
+        self[f"pic_mo{suffix}"].instance.setPixmapFromFile(
+            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{morning.get('symbol', 'd000')}.png")
+        self[f"pic_mo{suffix}"].instance.show()
 
-        self['lat_val'].text = str(lat)
-        self['lon_val'].text = str(lon)
+        self[f"pic_af{suffix}"].instance.setPixmapFromFile(
+            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{afternoon.get('symbol', 'd000')}.png")
+        self[f"pic_af{suffix}"].instance.show()
+
+        self[f"pic_ev{suffix}"].instance.setPixmapFromFile(
+            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{evening.get('symbol', 'd000')}.png")
+        self[f"pic_ev{suffix}"].instance.show()
+
+        self[f"pic_ov{suffix}"].instance.setPixmapFromFile(
+            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{overnight.get('symbol', 'd000')}.png")
+        self[f"pic_ov{suffix}"].instance.show()
+
+        # Temperatures
+        self[f'mo{suffix}_text'].text = str(morning.get('temp', 'N/A'))
+        self[f'af{suffix}_text'].text = str(afternoon.get('temp', 'N/A'))
+        self[f'ev{suffix}_text'].text = str(evening.get('temp', 'N/A'))
+        self[f'ov{suffix}_text'].text = str(overnight.get('temp', 'N/A'))
 
     def Exit(self):
         self.close()
 
 
-class ExtInfo_2_Foreca4_FHD(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ExtInfo_2_Foreca4_FHD
-    elif sz_w == 2560:
-        skin = ExtInfo_2_Foreca4_UHD
-    else:
-        skin = ExtInfo_2_Foreca4_HD
+class ExtInfo_2_Foreca4(Screen):
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(ExtInfo_2_Foreca4)
 
         Screen.__init__(self, session)
 
@@ -2383,15 +2308,9 @@ class ExtInfo_2_Foreca4_FHD(Screen):
 
 
 class TransparencyBox(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = Transparency_Foreca4_FHD
-    elif sz_w == 2560:
-        skin = Transparency_Foreca4_UHD
-    else:
-        skin = Transparency_Foreca4_HD
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(TransparencyBox)
 
         Screen.__init__(self, session)
 
@@ -2477,15 +2396,9 @@ class TransparencyBox(Screen):
 
 
 class Meteogram_Foreca4_FHD(Screen):
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = Meteogram_Foreca4_FHD
-    elif sz_w == 2560:
-        skin = Meteogram_Foreca4_UHD
-    else:
-        skin = Meteogram_Foreca4_HD
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(Meteogram_Foreca4_FHD)
         Screen.__init__(self, session)
 
         if myloc == 0:
@@ -2591,15 +2504,9 @@ class CityPanel4List(GUIComponent):
 
 class CityPanel4(Screen):
     """City selection panel for Foreca4 plugin"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = CityPanel4_FHD
-    elif sz_w == 2560:
-        skin = CityPanel4_UHD
-    else:
-        skin = CityPanel4_HD
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(CityPanel4)
         self.session = session
         self.config_path = config_path
         Screen.__init__(self, session)
@@ -3050,6 +2957,7 @@ class UnitSettings(Screen):
     """Unit settings screen"""
 
     def __init__(self, session):
+        self.skin = load_skin_for_class(UnitSettings)
         Screen.__init__(self, session)
         self.setTitle(_("Unit Settings"))
 

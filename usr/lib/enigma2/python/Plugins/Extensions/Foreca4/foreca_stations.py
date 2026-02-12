@@ -8,27 +8,15 @@ from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ScrollLabel import ScrollLabel
-from enigma import getDesktop
 
-from .skin import (
-    ForecaStations_UHD,
-    ForecaStations_FHD,
-    ForecaStations_HD
-)
-from . import _
+from . import _, load_skin_for_class
 
 
 class ForecaStations(Screen):
     """Screen for nearby weather station observations"""
-    sz_w = getDesktop(0).size().width()
-    if sz_w == 1920:
-        skin = ForecaStations_FHD
-    elif sz_w == 2560:
-        skin = ForecaStations_UHD
-    else:
-        skin = ForecaStations_HD
 
     def __init__(self, session, api, location_id, location_name):
+        self.skin = load_skin_for_class(ForecaStations)
         self.session = session
         self.api = api
         self.location_id = location_id

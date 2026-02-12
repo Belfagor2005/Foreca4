@@ -175,6 +175,27 @@ class ForecaWeatherAPI:
         }
         return descriptions.get(symbol_code, 'Unknown')
 
+    def _get_location_details(self, location_id):
+        """Get location name, country, coordinates from API"""
+        token = self.get_token()
+        if not token:
+            return {'name': 'N/A', 'country': 'N/A', 'lon': 'N/A', 'lat': 'N/A'}
+        try:
+            headers = {"Authorization": f"Bearer {token}"}
+            url = f"{self.base_url}/api/v1/location/{location_id}"
+            resp = requests.get(url, headers=headers, timeout=10)
+            if resp.status_code == 200:
+                data = resp.json()
+                return {
+                    'name': data.get('name', 'N/A'),
+                    'country': data.get('country', 'N/A'),
+                    'lon': data.get('lon', 'N/A'),
+                    'lat': data.get('lat', 'N/A')
+                }
+        except Exception as e:
+            print(f"[ForecaWeatherAPI] Error getting location: {e}")
+        return {'name': 'N/A', 'country': 'N/A', 'lon': 'N/A', 'lat': 'N/A'}
+
     def _get_day_name(self, date_str):
         """Convert date string to day name"""
         try:
@@ -190,10 +211,11 @@ class ForecaWeatherAPI:
             print("[ForecaWeatherAPI] ERROR: Missing credentials!")
             return None
 
-        # Use cache token if valid (within 5 minutes)
         if not force_new and self.token and self.token_expire > time() + 300:
+            print("[ForecaWeatherAPI] Using cached token")
             return self.token
 
+        print("[ForecaWeatherAPI] Requesting NEW token...")
         try:
             url = f"{self.base_url}/authorize/token?expire_hours=720"
             data = {"user": self.user, "password": self.password}
@@ -205,7 +227,7 @@ class ForecaWeatherAPI:
                 self.token = result['access_token']
                 self.token_expire = time() + result['expires_in']
 
-                # Save to cache (shared with maps)
+                # Salva in cache
                 with open(TOKEN_FILE, 'w') as f:
                     json.dump({
                         'token': self.token,
@@ -216,6 +238,7 @@ class ForecaWeatherAPI:
                 return self.token
             else:
                 print(f"[ForecaWeatherAPI] Auth error: {response.status_code}")
+                print(f"Response: {response.text[:200]}")
                 return None
 
         except Exception as e:
@@ -291,46 +314,27 @@ class ForecaWeatherAPI:
             return None
 
     def get_current_weather(self, location_id):
-        """
-        Get current weather via API
-        Args:
-            location_id: Foreca location ID (e.g., "100659935")
-        Returns:
-            Tuple compatible with getPageF() or None
-        """
         token = self.get_token()
         if not token:
-            print("[ForecaWeatherAPI] No token for current weather")
             return None
-
         try:
             headers = {"Authorization": f"Bearer {token}"}
-            params = {
-                "lang": "it",
-                "tempunit": "C",  # Default Celsius
-                "windunit": "KMH"  # Default km/h
-            }
-
-            # Add unit parameters if we have UnitManager
+            params = {"lang": "it", "tempunit": "C", "windunit": "KMH"}
             if self.unit_manager:
-                api_params = self.unit_manager.get_api_params()
-                params.update(api_params)
+                params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/current/{location_id}"
-            print(f"[ForecaWeatherAPI] Requesting: {url}")
-
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
+                location_data = self._get_location_details(location_id)
+                data['location'] = location_data
                 return self._parse_current_response(data)
             else:
-                print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
                 return None
-
         except Exception as e:
-            print(f"[ForecaWeatherAPI] Error getting current weather: {e}")
+            print(f"[ForecaWeatherAPI] Error: {e}")
             return None
 
     def get_daily_forecast(self, location_id, days=7):
@@ -373,50 +377,136 @@ class ForecaWeatherAPI:
             traceback.print_exc()
             return None
 
-    def get_hourly_forecast(self, location_id, days=1):
+    def get_today_tomorrow_details(self, location_id):
         """
-        Get hourly forecasts via API
-        Args:
-            location_id: Foreca location ID
-            days: forecast days (max 7)
-
-        Returns:
-            Tuple compatible with getPageF_F() or None
+        Returns the data required for ExtInfo_Foreca4:
+        - town, country
+        - today: weather text, max/min temperature, rain in mm, symbols and temperatures for 4 time slots
+        - tomorrow: same
+        - latitude, longitude
         """
         token = self.get_token()
         if not token:
-            print("[ForecaWeatherAPI] No token for forecast")
             return None
 
         try:
             headers = {"Authorization": f"Bearer {token}"}
+            
+            # 1. Location details
+            location = self._get_location_details(location_id)
+            
+            # 2. Current weather (for radar map and coordinates)
+            current_url = f"{self.base_url}/api/v1/current/{location_id}"
+            current_resp = requests.get(current_url, headers=headers, params={"lang": "it", "tempunit": "C"}, timeout=10)
+            current_data = current_resp.json() if current_resp.status_code == 200 else {}
+            
+            # 3. Hourly forecast (at least 48h)
+            hourly_url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
+            hourly_resp = requests.get(hourly_url, headers=headers, params={"periods": 48, "lang": "it", "tempunit": "C"}, timeout=15)
+            
+            if hourly_resp.status_code != 200:
+                return None
+            
+            hourly_data = hourly_resp.json()
+            forecast = hourly_data.get('forecast', [])
+            
+            # Organize by day
+            from datetime import datetime, timedelta
+            today = datetime.now().strftime("%Y-%m-%d")
+            tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
+            
+            today_periods = [p for p in forecast if p.get('time', '').startswith(today)]
+            tomorrow_periods = [p for p in forecast if p.get('time', '').startswith(tomorrow)]
+            
+            # Time slots (approximation)
+            def extract_period(periods, hour_range):
+                for p in periods:
+                    hour = int(p.get('time', '12:00').split('T')[1].split(':')[0])
+                    if hour_range[0] <= hour <= hour_range[1]:
+                        return p
+                return periods[0] if periods else None
+            
+            # Today
+            morning = extract_period(today_periods, (6, 10))
+            afternoon = extract_period(today_periods, (11, 16))
+            evening = extract_period(today_periods, (17, 21))
+            overnight = extract_period(today_periods, (22, 5))
+            
+            # Tomorrow
+            morning2 = extract_period(tomorrow_periods, (6, 10))
+            afternoon2 = extract_period(tomorrow_periods, (11, 16))
+            evening2 = extract_period(tomorrow_periods, (17, 21))
+            overnight2 = extract_period(tomorrow_periods, (22, 5))
+            
+            # Summary texts (from current or first period)
+            today_summary = current_data.get('current', {}).get('symbolPhrase', 'N/A')
+            today_max = max([p.get('temperature', 0) for p in today_periods]) if today_periods else 'N/A'
+            today_min = min([p.get('temperature', 0) for p in today_periods]) if today_periods else 'N/A'
+            today_rain = sum([p.get('precipAccum', 0) for p in today_periods]) if today_periods else 0
+            
+            tomorrow_max = max([p.get('temperature', 0) for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
+            tomorrow_min = min([p.get('temperature', 0) for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
+            tomorrow_rain = sum([p.get('precipAccum', 0) for p in tomorrow_periods]) if tomorrow_periods else 0
+            
+            return {
+                'town': location.get('name', 'N/A'),
+                'country': location.get('country', 'N/A'),
+                'lat': location.get('lat', 'N/A'),
+                'lon': location.get('lon', 'N/A'),
+                'today': {
+                    'text': today_summary,
+                    'max_temp': today_max,
+                    'min_temp': today_min,
+                    'rain_mm': f"{today_rain:.1f}",
+                    'morning': {'symbol': morning.get('symbol', 'd000') if morning else 'd000', 'temp': morning.get('temperature', 'N/A') if morning else 'N/A'},
+                    'afternoon': {'symbol': afternoon.get('symbol', 'd000') if afternoon else 'd000', 'temp': afternoon.get('temperature', 'N/A') if afternoon else 'N/A'},
+                    'evening': {'symbol': evening.get('symbol', 'd000') if evening else 'd000', 'temp': evening.get('temperature', 'N/A') if evening else 'N/A'},
+                    'overnight': {'symbol': overnight.get('symbol', 'd000') if overnight else 'd000', 'temp': overnight.get('temperature', 'N/A') if overnight else 'N/A'},
+                },
+                'tomorrow': {
+                    'text': 'N/A',  # Could add tomorrow summary if available
+                    'max_temp': tomorrow_max,
+                    'min_temp': tomorrow_min,
+                    'rain_mm': f"{tomorrow_rain:.1f}",
+                    'morning': {'symbol': morning2.get('symbol', 'd000') if morning2 else 'd000', 'temp': morning2.get('temperature', 'N/A') if morning2 else 'N/A'},
+                    'afternoon': {'symbol': afternoon2.get('symbol', 'd000') if afternoon2 else 'd000', 'temp': afternoon2.get('temperature', 'N/A') if afternoon2 else 'N/A'},
+                    'evening': {'symbol': evening2.get('symbol', 'd000') if evening2 else 'd000', 'temp': evening2.get('temperature', 'N/A') if evening2 else 'N/A'},
+                    'overnight': {'symbol': overnight2.get('symbol', 'd000') if overnight2 else 'd000', 'temp': overnight2.get('temperature', 'N/A') if overnight2 else 'N/A'},
+                }
+            }
+        except Exception as e:
+            print(f"[ForecaWeatherAPI] Error in get_today_tomorrow_details: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def get_hourly_forecast(self, location_id, days=1):
+        token = self.get_token()
+        if not token:
+            return None
+        try:
+            headers = {"Authorization": f"Bearer {token}"}
             params = {
-                "periods": 24 * days,  # Schedules for requested days
+                "periods": 24 * days,
                 "lang": "it",
                 "tempunit": "C",
                 "windunit": "KMH"
             }
-
             if self.unit_manager:
-                api_params = self.unit_manager.get_api_params()
-                params.update(api_params)
+                params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
-            print(f"[ForecaWeatherAPI] Requesting forecast: {url}")
-
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
+                location_data = self._get_location_details(location_id)
+                data['location'] = location_data
                 return self._parse_hourly_response(data)
             else:
-                print(
-                    f"[ForecaWeatherAPI] Forecast HTTP error: {response.status_code}")
                 return None
-
         except Exception as e:
-            print(f"[ForecaWeatherAPI] Error getting forecast: {e}")
+            print(f"[ForecaWeatherAPI] Error: {e}")
             return None
 
     def _parse_current_response(self, data):
@@ -425,7 +515,7 @@ class ForecaWeatherAPI:
             current = data.get('current', {})
             location = data.get('location', {})
 
-            # Extract data in the same format as getPageF()
+            # Extract data in the same format as
             town = location.get('name', 'N/A')
             cur_temp = str(current.get('temperature', 'N/A'))
             fl_temp = str(current.get('feelsLikeTemp', 'N/A'))
@@ -611,8 +701,7 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(
-                len(daily_data['days'])))
+            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(len(daily_data['days'])))
             return daily_data
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
