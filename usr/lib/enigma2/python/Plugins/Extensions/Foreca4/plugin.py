@@ -2970,9 +2970,6 @@ class CityPanel4(Screen):
             self.timer.stop()
         self.close(None)
 
-    def exit(self):
-        self.close()
-
 
 def checkInternet():
     try:
