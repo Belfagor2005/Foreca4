@@ -2970,41 +2970,6 @@ class CityPanel4(Screen):
             self.timer.stop()
         self.close(None)
 
-
-class UnitSettings(Screen):
-    """Unit settings screen"""
-
-    def __init__(self, session):
-        self.skin = load_skin_for_class(UnitSettings)
-        Screen.__init__(self, session)
-        self.setTitle(_("Unit Settings"))
-
-        self["list"] = MenuList([
-            _("Metric System (Celsius, km/h, hPa)"),
-            _("Imperial System (Fahrenheit, mph, inHg)")
-        ])
-
-        self["actions"] = ActionMap(["OkCancelActions"], {
-            "ok": self.select_unit,
-            "cancel": self.exit
-        }, -1)
-
-    def select_unit(self):
-        selection = self["list"].getCurrentIndex()
-        unit_system = "metric" if selection == 0 else "imperial"
-
-        # Save to configuration file
-        with open(unit_file, "w") as f:
-            f.write("# configuration file for the units : metric or imperial\n{0}".format(
-                unit_system))
-
-        self.session.open(
-            MessageBox,
-            _("Unit settings saved. Restart plugin to apply changes."),
-            MessageBox.TYPE_INFO
-        )
-        self.close()
-
     def exit(self):
         self.close()
 
