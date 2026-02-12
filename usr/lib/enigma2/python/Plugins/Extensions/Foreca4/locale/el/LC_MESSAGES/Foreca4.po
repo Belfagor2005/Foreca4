@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Foreca4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-06 21:51+0100\n"
+"PO-Revision-Date: 2026-02-12 16:44+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Greek <team@lists.gnome.gr>\n"
 "Language: el\n"
@@ -25,13 +25,13 @@ msgid "1 - Today + 1 day"
 msgstr "1 - Σήμερα + 1 ημέρα"
 
 msgid "1. No API credentials configured\n"
-msgstr ""
+msgstr "1. Δεν έχουν ρυθμιστεί διαπιστευτήρια API\n"
 
 msgid "2 - Today + 2 days"
 msgstr "2 - Σήμερα + 2 ημέρες"
 
 msgid "2. API service temporarily unavailable\n"
-msgstr ""
+msgstr "2. Η υπηρεσία API είναι προσωρινά μη διαθέσιμη\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Σήμερα + 3 ημέρες"
@@ -48,9 +48,8 @@ msgstr "6 - Σήμερα + 6 ημέρες"
 msgid "7 - Today + 7 days"
 msgstr "7 - Σήμερα + 7 ημέρες"
 
-#, fuzzy
 msgid "7-Day Detailed Forecast"
-msgstr "Πρόγνωση καιρού Foreca"
+msgstr "Λεπτομερής πρόγνωση 7 ημερών"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Σήμερα + 8 ημέρες"
@@ -98,7 +97,7 @@ msgid "Blue"
 msgstr "Μπλε"
 
 msgid "Blue - Home"
-msgstr "Μπλε κουμπί - Αρχική σελίδα"
+msgstr "Μπλε - Αρχική"
 
 msgid "Brandenburg"
 msgstr "Βρανδεμβούργο"
@@ -106,15 +105,14 @@ msgstr "Βρανδεμβούργο"
 msgid "Bremen"
 msgstr "Βρέμη"
 
-#, fuzzy
 msgid "Cancel"
-msgstr "Γαλλία"
+msgstr "Ακύρωση"
 
 msgid "Celsius, km/h, hPa"
-msgstr ""
+msgstr "Κελσίου, χλμ/ώρα, hPa"
 
 msgid "Changes apply immediately"
-msgstr ""
+msgstr "Οι αλλαγές εφαρμόζονται άμεσα"
 
 msgid "City Selection"
 msgstr "Επιλογή Πόλης"
@@ -135,16 +133,16 @@ msgid "Cloudy and light snow"
 msgstr "Συννεφιασμένος και ελαφριά χιονόπτωση"
 
 msgid "Cloudy and light wet snow"
-msgstr "Συννεφιασμένος και ελαφριά βρεγμένο χιόνι"
+msgstr "Συννεφιασμένος και ελαφρύ υγρό χιόνι"
 
 msgid "Cloudy and showers"
-msgstr "Συννεφιασμένος και νερόπτωση"
+msgstr "Συννεφιασμένος και μπόρες"
 
 msgid "Cloudy and snow showers"
-msgstr "Συννεφιασμένος και χιονοπτώσεις"
+msgstr "Συννεφιασμένος και χιονομπόρες"
 
 msgid "Cloudy and wet snow showers"
-msgstr "Συννεφιασμένος και βρεγμένες χιονοπτώσεις"
+msgstr "Συννεφιασμένος και μπόρες υγρού χιονιού"
 
 msgid "Cloudy, thunderstorms with rain"
 msgstr "Συννεφιασμένος, καταιγίδες με βροχή"
@@ -158,7 +156,6 @@ msgstr "Το αρχείο χρώματος δεν βρέθηκε"
 msgid "Color name"
 msgstr "Όνομα χρώματος"
 
-#, fuzzy
 msgid "Color select"
 msgstr "Επιλογή χρώματος"
 
@@ -169,7 +166,7 @@ msgid "Continents Weather Maps"
 msgstr "Χάρτες Καιρού Ηπείρων"
 
 msgid "Could not load forecast data"
-msgstr ""
+msgstr "Δεν ήταν δυνατή η φόρτωση δεδομένων πρόγνωσης"
 
 msgid "Current weather and forecast"
 msgstr "Τρέχων καιρός και πρόγνωση"
@@ -178,14 +175,16 @@ msgid "Current weather and forecast for the next 10 days"
 msgstr "Τρέχων καιρός και πρόγνωση για τις επόμενες 10 ημέρες"
 
 msgid "Czech Republic"
-msgstr "Τσεχική Δημοκρατία"
+msgstr "Τσεχία"
 
-#, fuzzy
 msgid "Data provided by Foreca"
-msgstr "Πρόγνωση καιρού Foreca"
+msgstr "Δεδομένα παρεχόμενα από την Foreca"
 
 msgid "Denmark"
 msgstr "Δανία"
+
+msgid "Distance"
+msgstr "Απόσταση"
 
 msgid "Down - Next page"
 msgstr "Κάτω - Επόμενη σελίδα"
@@ -196,9 +195,8 @@ msgstr "Λήψη εικόνων..."
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
 
-#, fuzzy
 msgid "Error displaying forecast"
-msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
+msgstr "Σφάλμα εμφάνισης πρόγνωσης"
 
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
@@ -225,16 +223,19 @@ msgid "Exit - End"
 msgstr "Έξοδος - Τέλος"
 
 msgid "Fahrenheit, mph, inHg"
-msgstr ""
+msgstr "Φαρενάιτ, μίλια/ώρα, inHg"
 
 msgid "Faster: {}s"
-msgstr "Πιο γρήγορα: {}s"
+msgstr "Ταχύτερα: {}δ"
 
 msgid "Favorite 1"
 msgstr "Αγαπημένο 1"
 
 msgid "Favorite 2"
 msgstr "Αγαπημένο 2"
+
+msgid "Feels like"
+msgstr "Αίσθηση"
 
 msgid "Finland"
 msgstr "Φινλανδία"
@@ -264,7 +265,7 @@ msgid "France"
 msgstr "Γαλλία"
 
 msgid "German States Weather Maps"
-msgstr "Χάρτες Καιρού Γερμανικών Πολιτειών"
+msgstr "Χάρτες Καιρού Γερμανικών Κρατιδίων"
 
 msgid "Germany"
 msgstr "Γερμανία"
@@ -279,7 +280,7 @@ msgid "Green"
 msgstr "Πράσινο"
 
 msgid "Green - Favorite 1"
-msgstr "Πράσινο κουμπί - Αγαπημένο 1"
+msgstr "Πράσινο - Αγαπημένο 1"
 
 msgid "HTML"
 msgstr "HTML"
@@ -287,15 +288,17 @@ msgstr "HTML"
 msgid "Hamburg"
 msgstr "Αμβούργο"
 
-#, fuzzy
 msgid "Header - not selectable"
-msgstr "Κόκκινο κουμπί - Επιλογή χρώματος"
+msgstr "Κεφαλίδα - μη επιλέξιμο"
 
 msgid "Hesse"
 msgstr "Έσση"
 
 msgid "Home"
 msgstr "Αρχική"
+
+msgid "Humidity"
+msgstr "Υγρασία"
 
 msgid "Hungary"
 msgstr "Ουγγαρία"
@@ -304,13 +307,13 @@ msgid "Image not available"
 msgstr "Η εικόνα δεν είναι διαθέσιμη"
 
 msgid "Imperial System"
-msgstr ""
+msgstr "Αυτοκρατορικό Σύστημα"
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr ""
+msgstr "Αυτοκρατορικό Σύστημα (Φαρενάιτ, μίλια/ώρα, inHg)"
 
 msgid "Info"
-msgstr ""
+msgstr "Πληροφορίες"
 
 msgid "Info - About"
 msgstr "Πληροφορίες - Σχετικά"
@@ -336,6 +339,9 @@ msgstr "Μετάβαση 500 πάνω"
 msgid "Keyboard"
 msgstr "Πληκτρολόγιο"
 
+msgid "Last update"
+msgstr "Τελευταία ενημέρωση"
+
 msgid "Latvia"
 msgstr "Λετονία"
 
@@ -348,13 +354,11 @@ msgstr "Βέλος αριστερά - Προηγούμενη ημέρα"
 msgid "Loading available maps..."
 msgstr "Φόρτωση διαθέσιμων χαρτών..."
 
-#, fuzzy
 msgid "Loading nearby stations..."
-msgstr "Φόρτωση διαθέσιμων χαρτών..."
+msgstr "Φόρτωση κοντινών σταθμών..."
 
-#, fuzzy
 msgid "Loading weekly forecast..."
-msgstr "Φόρτωση διαθέσιμων χαρτών..."
+msgstr "Φόρτωση εβδομαδιαίας πρόγνωσης..."
 
 msgid "Loading..."
 msgstr "Φόρτωση..."
@@ -366,19 +370,19 @@ msgid "Luxembourg"
 msgstr "Λουξεμβούργο"
 
 msgid "Mecklenburg-Vorpommern"
-msgstr "Μέκλενμπουργκ-Δυτική Πομερανία"
+msgstr "Μεκλεμβούργο-Δυτική Πομερανία"
 
 msgid "Menu - Settings"
 msgstr "Μενού - Ρυθμίσεις"
 
 msgid "Meteogram"
-msgstr "Μετεωγράμμα"
+msgstr "Μετεωρογράφημα"
 
 msgid "Metric System"
-msgstr ""
+msgstr "Μετρικό Σύστημα"
 
 msgid "Metric System (Celsius, km/h, hPa)"
-msgstr ""
+msgstr "Μετρικό Σύστημα (Κελσίου, χλμ/ώρα, hPa)"
 
 msgid "Middle America"
 msgstr "Κεντρική Αμερική"
@@ -408,29 +412,25 @@ msgid "No City found in search!!!"
 msgstr "Δεν βρέθηκε πόλη στην αναζήτηση!!!"
 
 msgid "No Internet connection detected. Please check your network."
-msgstr ""
+msgstr "Δεν εντοπίστηκε σύνδεση στο διαδίκτυο. Ελέγξτε το δίκτυό σας."
 
-#, fuzzy
 msgid "No city selected"
-msgstr "Επιλογή Πόλης"
+msgstr "Δεν επιλέχθηκε πόλη"
 
 msgid "No data available"
 msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
 
-#, fuzzy
 msgid "No date available"
-msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+msgstr "Δεν υπάρχει διαθέσιμη ημερομηνία"
 
-#, fuzzy
 msgid "No location selected"
-msgstr "Επιλογή Πόλης"
+msgstr "Δεν επιλέχθηκε τοποθεσία"
 
-#, fuzzy
 msgid "No station data available"
-msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
+msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα σταθμού"
 
 msgid "No stations found"
-msgstr ""
+msgstr "Δεν βρέθηκαν σταθμοί"
 
 msgid "North Africa"
 msgstr "Βόρεια Αφρική"
@@ -442,10 +442,10 @@ msgid "North Rhine-Westphalia"
 msgstr "Βόρεια Ρηνανία-Βεστφαλία"
 
 msgid "Norway"
-msgstr "Νορβηγί"
+msgstr "Νορβηγία"
 
 msgid "OK - Ext Info"
-msgstr "ΟΚ - Επιπλέον πληροφορίες"
+msgstr "ΟΚ - Επιπλέον Πληροφορίες"
 
 msgid "Open Keyboard"
 msgstr "Άνοιγμα Πληκτρολογίου"
@@ -460,31 +460,31 @@ msgid "Overcast and light snow"
 msgstr "Νεφελώδης και ελαφριά χιονόπτωση"
 
 msgid "Overcast and light wet snow"
-msgstr "Νεφελώδης και ελαφριά βρεγμένο χιόνι"
+msgstr "Νεφελώδης και ελαφρύ υγρό χιόνι"
 
 msgid "Overcast and rain"
 msgstr "Νεφελώδης και βροχή"
 
 msgid "Overcast and showers"
-msgstr "Νεφελώδης και νερόπτωση"
+msgstr "Νεφελώδης και μπόρες"
 
 msgid "Overcast and snow"
 msgstr "Νεφελώδης και χιόνι"
 
 msgid "Overcast and snow showers"
-msgstr "Νεφελώδης και χιονοπτώσεις"
+msgstr "Νεφελώδης και χιονομπόρες"
 
 msgid "Overcast and wet snow"
-msgstr "Νεφελώδης και βρεγμένο χιόνι"
+msgstr "Νεφελώδης και υγρό χιόνι"
 
 msgid "Overcast and wet snow showers"
-msgstr "Νεφελώδης και βρεγμένες χιονοπτώσεις"
+msgstr "Νεφελώδης και μπόρες υγρού χιονιού"
 
 msgid "Overcast, thunderstorms with rain"
 msgstr "Νεφελώδης, καταιγίδες με βροχή"
 
 msgid "Overnight"
-msgstr "Νύχτα"
+msgstr "Διανυκτέρευση"
 
 msgid "Partly cloudy"
 msgstr "Μερικώς συννεφιασμένος"
@@ -496,25 +496,25 @@ msgid "Partly cloudy and light snow"
 msgstr "Μερικώς συννεφιασμένος και ελαφριά χιονόπτωση"
 
 msgid "Partly cloudy and light wet snow"
-msgstr "Μερικώς συννεφιασμένος και ελαφριά βρεγμένο χιόνι"
+msgstr "Μερικώς συννεφιασμένος και ελαφρύ υγρό χιόνι"
 
 msgid "Partly cloudy and showers"
-msgstr "Μερικώς συννεφιασμένος και νερόπτωση"
+msgstr "Μερικώς συννεφιασμένος και μπόρες"
 
 msgid "Partly cloudy and snow showers"
-msgstr "Μερικώς συννεφιασμένος και χιονοπτώσεις"
+msgstr "Μερικώς συννεφιασμένος και χιονομπόρες"
 
 msgid "Partly cloudy and wet snow showers"
-msgstr "Μερικώς συννεφιασμένος και βρεγμένες χιονοπτώσεις"
+msgstr "Μερικώς συννεφιασμένος και μπόρες υγρού χιονιού"
 
 msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Μερικώς συννεφιασμένος, πιθανές καταιγίδες με βροχή"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Αναπαραγωγή/Παύση"
 
 msgid "Please check your api_config.txt file."
-msgstr ""
+msgstr "Ελέγξτε το αρχείο api_config.txt σας."
 
 msgid "Please wait ..."
 msgstr "Παρακαλώ περιμένετε ..."
@@ -526,7 +526,13 @@ msgid "Portugal"
 msgstr "Πορτογαλία"
 
 msgid "Possible reasons:\n"
-msgstr ""
+msgstr "Πιθανοί λόγοι:\n"
+
+msgid "Precipitation"
+msgstr "Υετός"
+
+msgid "Pressure"
+msgstr "Πίεση"
 
 msgid "Previous"
 msgstr "Προηγούμενο"
@@ -538,7 +544,7 @@ msgid "Red"
 msgstr "Κόκκινο"
 
 msgid "Red - Color select"
-msgstr "Κόκκινο κουμπί - Επιλογή χρώματος"
+msgstr "Κόκκινο - Επιλογή χρώματος"
 
 msgid "Rhineland-Palatine"
 msgstr "Ρηνανία-Παλατινάτο"
@@ -562,7 +568,7 @@ msgid "Satellite photos coming soon!"
 msgstr "Δορυφορικές φωτογραφίες σύντομα!"
 
 msgid "Save"
-msgstr ""
+msgstr "Αποθήκευση"
 
 msgid "Saxony"
 msgstr "Σαξονία"
@@ -574,7 +580,7 @@ msgid "Schleswig-Holstein"
 msgstr "Σλέσβιχ-Χόλσταϊν"
 
 msgid "Search your City"
-msgstr "Αναζήτηση της Πόλης σας"
+msgstr "Αναζητήστε την Πόλη σας"
 
 msgid "Select"
 msgstr "Επιλογή"
@@ -583,11 +589,10 @@ msgid "Select a city"
 msgstr "Επιλέξτε μια πόλη"
 
 msgid "Select a map with OK"
-msgstr "Επιλέξτε έναν χάρτη με OK"
+msgstr "Επιλέξτε έναν χάρτη με ΟΚ"
 
-#, fuzzy
 msgid "Select unit system"
-msgstr "Επιλέξτε μια πόλη"
+msgstr "Επιλέξτε σύστημα μονάδων"
 
 msgid "Show info"
 msgstr "Εμφάνιση πληροφοριών"
@@ -596,7 +601,7 @@ msgid "Slovakia"
 msgstr "Σλοβακία"
 
 msgid "Slower: {}s"
-msgstr "Πιο αργά: {}s"
+msgstr "Αργότερα: {}δ"
 
 msgid "South Africa"
 msgstr "Νότια Αφρική"
@@ -611,13 +616,16 @@ msgid "Spain"
 msgstr "Ισπανία"
 
 msgid "Station Observations"
-msgstr ""
+msgstr "Παρατηρήσεις Σταθμού"
+
+msgid "Sun"
+msgstr "Ήλιος"
 
 msgid "Sunrise"
-msgstr "Ανατολή"
+msgstr "Ανατολή ηλίου"
 
 msgid "Sunset"
-msgstr "Δύση"
+msgstr "Δύση ηλίου"
 
 msgid "Sweden"
 msgstr "Σουηδία"
@@ -625,8 +633,11 @@ msgstr "Σουηδία"
 msgid "Switzerland"
 msgstr "Ελβετία"
 
+msgid "Temperature"
+msgstr "Θερμοκρασία"
+
 msgid "Thin upper cloud"
-msgstr "Λεπτό ανώτερο σύννεφο"
+msgstr "Λεπτή ανώτερη νέφωση"
 
 msgid "Thuringia"
 msgstr "Θουριγγία"
@@ -637,12 +648,14 @@ msgstr "Ρυθμίσεις Διαφάνειας"
 msgid "Transparency level"
 msgstr "Επίπεδο διαφάνειας"
 
-#, fuzzy
+msgid "UV Index"
+msgstr "Δείκτης Υπεριώδους Ακτινοβολίας"
+
 msgid "Unit Settings"
-msgstr "Μενού - Ρυθμίσεις"
+msgstr "Ρυθμίσεις Μονάδων"
 
 msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr ""
+msgstr "Οι ρυθμίσεις μονάδων αποθηκεύτηκαν. Επανεκκινήστε το πρόσθετο για να εφαρμοστούν οι αλλαγές."
 
 msgid "Unknown"
 msgstr "Άγνωστο"
@@ -651,7 +664,10 @@ msgid "Up - Previous page"
 msgstr "Πάνω - Προηγούμενη σελίδα"
 
 msgid "Use arrow keys to scroll"
-msgstr ""
+msgstr "Χρησιμοποιήστε τα βέλη για κύλιση"
+
+msgid "Weather"
+msgstr "Καιρός"
 
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
@@ -663,10 +679,10 @@ msgid "Weather Maps (Wetterkontor)"
 msgstr "Χάρτες Καιρού (Wetterkontor)"
 
 msgid "Weather Maps Slideshow"
-msgstr "Παρουσίαση Χαρτών Καιρού"
+msgstr "Προβολή Διαφανειών Χαρτών Καιρού"
 
 msgid "Weather Radar"
-msgstr "Ραντάρ καιρού"
+msgstr "Μετεωρολογικό Ραντάρ"
 
 msgid "Weather today"
 msgstr "Καιρός σήμερα"
@@ -674,106 +690,44 @@ msgstr "Καιρός σήμερα"
 msgid "Weather tomorrow"
 msgstr "Καιρός αύριο"
 
-#, fuzzy
 msgid "Weekly Forecast"
-msgstr "Πρόγνωση"
+msgstr "Εβδομαδιαία Πρόγνωση"
+
+msgid "Wind"
+msgstr "Άνεμος"
 
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
 
 msgid "Yellow - Favorite 2"
-msgstr "Κίτρινο κουμπί - Αγαπημένο 2"
+msgstr "Κίτρινο - Αγαπημένο 2"
+
+msgid "stations nearby"
+msgstr "κοντινοί σταθμοί"
 
 msgid "v."
 msgstr "έκδ."
 
 msgid "• BLUE to save as Home\n"
-msgstr ""
+msgstr "• ΜΠΛΕ για αποθήκευση ως Αρχική\n"
 
 msgid "• CH+/CH- to jump 500 cities\n"
-msgstr ""
+msgstr "• CH+/CH- για μετάβαση 500 πόλεων\n"
 
 msgid "• GREEN to save as Favorite 1\n"
-msgstr ""
+msgstr "• ΠΡΑΣΙΝΟ για αποθήκευση ως Αγαπημένο 1\n"
 
 msgid "• OK to select city\n"
-msgstr ""
+msgstr "• ΟΚ για επιλογή πόλης\n"
 
 msgid "• RED to open search keyboard\n"
-msgstr ""
+msgstr "• ΚΟΚΚΙΝΟ για άνοιγμα πληκτρολογίου αναζήτησης\n"
 
 msgid "• Use arrow keys to navigate\n"
-msgstr ""
+msgstr "• Χρησιμοποιήστε τα βέλη για πλοήγηση\n"
 
 msgid "• VOL+/VOL- to jump 100 cities"
-msgstr ""
+msgstr "• VOL+/VOL- για μετάβαση 100 πόλεων"
 
 msgid "• YELLOW to save as Favorite 2\n"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Could not load weekly forecast. Please check your internet connection."
-#~ msgstr "Φόρτωση διαθέσιμων χαρτών..."
-
-#, fuzzy
-#~ msgid "No forecast data available"
-#~ msgstr "Δεν υπάρχουν διαθέσιμα δεδομένα"
-
-#~ msgid "Feels like"
-#~ msgstr "Αίσθηση"
-
-#, fuzzy
-#~ msgid "Humidity"
-#~ msgstr "Υγρασία:"
-
-#, fuzzy
-#~ msgid "Precipitation"
-#~ msgstr "Υετός:"
-
-#, fuzzy
-#~ msgid "Sun"
-#~ msgstr "Δύση"
-
-#, fuzzy
-#~ msgid "Weather"
-#~ msgstr "Χάρτες Καιρού"
-
-#~ msgid "Wind"
-#~ msgstr "Άνεμος"
-
-#, fuzzy
-#~ msgid "Error saving settings!"
-#~ msgstr "Σφάλμα αποθήκευσης αγαπημένου!"
-
-#~ msgid "N/A"
-#~ msgstr "Δ/Υ"
-
-#~ msgid "Dewpoint"
-#~ msgstr "Σημείο δρόσου"
-
-#~ msgid "Error loading city list!"
-#~ msgstr "Σφάλμα φόρτωσης λίστας πόλεων!"
-
-#~ msgid "Gust"
-#~ msgstr "Ρίπες"
-
-#~ msgid "Wind speed"
-#~ msgstr "Ταχύτητα ανέμου"
-
-#~ msgid "hPa"
-#~ msgstr "hPa"
-
-#~ msgid "km/h"
-#~ msgstr "χλμ/ώρα"
-
-#~ msgid "mm"
-#~ msgstr "mm"
-
-#~ msgid "<< ver."
-#~ msgstr "<< έκδ."
-
-#~ msgid "Feels like:"
-#~ msgstr "Αίσθηση όπως:"
-
-#~ msgid "Temp"
-#~ msgstr "Θερμοκρασία"
+msgstr "• ΚΙΤΡΙΝΟ για αποθήκευση ως Αγαπημένο 2\n"

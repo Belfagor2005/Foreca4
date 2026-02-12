@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-06 21:42+0100\n"
+"PO-Revision-Date: 2026-02-12 16:35+0100\n"
 "Last-Translator: Warder <ciksa@seznam.cz>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -23,13 +23,13 @@ msgid "1 - Today + 1 day"
 msgstr "1 - Сегодня + 1 день"
 
 msgid "1. No API credentials configured\n"
-msgstr ""
+msgstr "1. Не настроены учётные данные API\n"
 
 msgid "2 - Today + 2 days"
 msgstr "2 - Сегодня + 2 дня"
 
 msgid "2. API service temporarily unavailable\n"
-msgstr ""
+msgstr "2. Сервис API временно недоступен\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Сегодня + 3 дня"
@@ -46,9 +46,8 @@ msgstr "6 - Сегодня + 6 дней"
 msgid "7 - Today + 7 days"
 msgstr "7 - Сегодня + 7 дней"
 
-#, fuzzy
 msgid "7-Day Detailed Forecast"
-msgstr "Прогноз Погоды в Фореке"
+msgstr "Детальный прогноз на 7 дней"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Сегодня + 8 дней"
@@ -104,15 +103,14 @@ msgstr "Бранденбург"
 msgid "Bremen"
 msgstr "Бремен"
 
-#, fuzzy
 msgid "Cancel"
-msgstr "Франция"
+msgstr "Отмена"
 
 msgid "Celsius, km/h, hPa"
-msgstr ""
+msgstr "Цельсий, км/ч, гПа"
 
 msgid "Changes apply immediately"
-msgstr ""
+msgstr "Изменения применяются немедленно"
 
 msgid "City Selection"
 msgstr "Выбор города"
@@ -156,7 +154,6 @@ msgstr "Файл цвета не найден"
 msgid "Color name"
 msgstr "Название цвета"
 
-#, fuzzy
 msgid "Color select"
 msgstr "Выбор цвета"
 
@@ -167,7 +164,7 @@ msgid "Continents Weather Maps"
 msgstr "Погодные карты континентов"
 
 msgid "Could not load forecast data"
-msgstr ""
+msgstr "Не удалось загрузить данные прогноза"
 
 msgid "Current weather and forecast"
 msgstr "Текущая погода и прогноз погоды"
@@ -178,12 +175,14 @@ msgstr "Текущая погода и прогноз на следующие 10
 msgid "Czech Republic"
 msgstr "Чешская Республика"
 
-#, fuzzy
 msgid "Data provided by Foreca"
-msgstr "Прогноз Погоды в Фореке"
+msgstr "Данные предоставлены Foreca"
 
 msgid "Denmark"
 msgstr "Дания"
+
+msgid "Distance"
+msgstr "Расстояние"
 
 msgid "Down - Next page"
 msgstr "Вниз - Следующая страница"
@@ -194,9 +193,8 @@ msgstr "Загрузка изображений..."
 msgid "East Asia"
 msgstr "Восточная Азия"
 
-#, fuzzy
 msgid "Error displaying forecast"
-msgstr "Ошибка сохранения избранного!"
+msgstr "Ошибка отображения прогноза"
 
 msgid "Error loading colors"
 msgstr "Ошибка загрузки цветов"
@@ -223,7 +221,7 @@ msgid "Exit - End"
 msgstr "Выход - Закрыть"
 
 msgid "Fahrenheit, mph, inHg"
-msgstr ""
+msgstr "Фаренгейт, миль/ч, дюйм рт. ст"
 
 msgid "Faster: {}s"
 msgstr "Быстрее: {}с"
@@ -233,6 +231,9 @@ msgstr "Избранное 1"
 
 msgid "Favorite 2"
 msgstr "Избранное 2"
+
+msgid "Feels like"
+msgstr "Ощущается как"
 
 msgid "Finland"
 msgstr "Финляндия"
@@ -285,15 +286,17 @@ msgstr "HTML"
 msgid "Hamburg"
 msgstr "Гамбург"
 
-#, fuzzy
 msgid "Header - not selectable"
-msgstr "Красная кнопка - Выбор цвета"
+msgstr "Заголовок - не выбирается"
 
 msgid "Hesse"
 msgstr "Гессен"
 
 msgid "Home"
 msgstr "Домашнее"
+
+msgid "Humidity"
+msgstr "Влажность"
 
 msgid "Hungary"
 msgstr "Венгрия"
@@ -302,13 +305,13 @@ msgid "Image not available"
 msgstr "Изображение недоступно"
 
 msgid "Imperial System"
-msgstr ""
+msgstr "Имперская система"
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr ""
+msgstr "Имперская система (Фаренгейт, миль/ч, дюйм рт. ст.)"
 
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 msgid "Info - About"
 msgstr "Инфо - О программе"
@@ -334,6 +337,9 @@ msgstr "Перейти на 500 вверх"
 msgid "Keyboard"
 msgstr "Клавиатура"
 
+msgid "Last update"
+msgstr "Последнее обновление"
+
 msgid "Latvia"
 msgstr "Латвия"
 
@@ -346,13 +352,11 @@ msgstr "Стрелка влево - Предыдущий день"
 msgid "Loading available maps..."
 msgstr "Загрузка доступных карт..."
 
-#, fuzzy
 msgid "Loading nearby stations..."
-msgstr "Загрузка доступных карт..."
+msgstr "Загрузка ближайших станций..."
 
-#, fuzzy
 msgid "Loading weekly forecast..."
-msgstr "Загрузка доступных карт..."
+msgstr "Загрузка недельного прогноза..."
 
 msgid "Loading..."
 msgstr "Загрузка..."
@@ -373,10 +377,10 @@ msgid "Meteogram"
 msgstr "Метеограмма"
 
 msgid "Metric System"
-msgstr ""
+msgstr "Метрическая система"
 
 msgid "Metric System (Celsius, km/h, hPa)"
-msgstr ""
+msgstr "Метрическая система (Цельсий, км/ч, гПа)"
 
 msgid "Middle America"
 msgstr "Центральная Америка"
@@ -406,29 +410,25 @@ msgid "No City found in search!!!"
 msgstr "Город не найден в поиске!!!"
 
 msgid "No Internet connection detected. Please check your network."
-msgstr ""
+msgstr "Не обнаружено подключение к Интернету. Пожалуйста, проверьте вашу сеть."
 
-#, fuzzy
 msgid "No city selected"
-msgstr "Выбор города"
+msgstr "Город не выбран"
 
 msgid "No data available"
 msgstr "Данные недоступны"
 
-#, fuzzy
 msgid "No date available"
-msgstr "Данные недоступны"
+msgstr "Нет доступной даты"
 
-#, fuzzy
 msgid "No location selected"
-msgstr "Выбор города"
+msgstr "Местоположение не выбрано"
 
-#, fuzzy
 msgid "No station data available"
-msgstr "Данные недоступны"
+msgstr "Нет данных со станции"
 
 msgid "No stations found"
-msgstr ""
+msgstr "Станции не найдены"
 
 msgid "North Africa"
 msgstr "Северная Африка"
@@ -509,10 +509,10 @@ msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Переменная облачность, возможны грозы с дождем"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Воспроизведение/Пауза"
 
 msgid "Please check your api_config.txt file."
-msgstr ""
+msgstr "Пожалуйста, проверьте ваш файл api_config.txt."
 
 msgid "Please wait ..."
 msgstr "Пожалуйста, подождите ..."
@@ -524,7 +524,13 @@ msgid "Portugal"
 msgstr "Португалия"
 
 msgid "Possible reasons:\n"
-msgstr ""
+msgstr "Возможные причины:\n"
+
+msgid "Precipitation"
+msgstr "Осадки"
+
+msgid "Pressure"
+msgstr "Давление"
 
 msgid "Previous"
 msgstr "Предыдущий"
@@ -560,7 +566,7 @@ msgid "Satellite photos coming soon!"
 msgstr "Спутниковые снимки скоро!"
 
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Saxony"
 msgstr "Саксония"
@@ -583,9 +589,8 @@ msgstr "Выберите город"
 msgid "Select a map with OK"
 msgstr "Выберите карту с OK"
 
-#, fuzzy
 msgid "Select unit system"
-msgstr "Выберите город"
+msgstr "Выберите систему единиц"
 
 msgid "Show info"
 msgstr "Показать информацию"
@@ -609,7 +614,10 @@ msgid "Spain"
 msgstr "Испания"
 
 msgid "Station Observations"
-msgstr ""
+msgstr "Наблюдения со станции"
+
+msgid "Sun"
+msgstr "Солнце"
 
 msgid "Sunrise"
 msgstr "Восход"
@@ -623,6 +631,9 @@ msgstr "Швеция"
 msgid "Switzerland"
 msgstr "Швейцария"
 
+msgid "Temperature"
+msgstr "Температура"
+
 msgid "Thin upper cloud"
 msgstr "Дымка"
 
@@ -635,12 +646,14 @@ msgstr "Настройки прозрачности"
 msgid "Transparency level"
 msgstr "Уровень прозрачности"
 
-#, fuzzy
+msgid "UV Index"
+msgstr "УФ-индекс"
+
 msgid "Unit Settings"
-msgstr "Меню - Настройки"
+msgstr "Настройки единиц"
 
 msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr ""
+msgstr "Настройки единиц сохранены. Перезапустите плагин для применения изменений."
 
 msgid "Unknown"
 msgstr "Неизвестно"
@@ -649,7 +662,10 @@ msgid "Up - Previous page"
 msgstr "Вверх - Предыдущая страница"
 
 msgid "Use arrow keys to scroll"
-msgstr ""
+msgstr "Используйте клавиши со стрелками для прокрутки"
+
+msgid "Weather"
+msgstr "Погода"
 
 msgid "Weather Maps"
 msgstr "Погодные карты"
@@ -672,9 +688,11 @@ msgstr "Погода сегодня"
 msgid "Weather tomorrow"
 msgstr "Погода завтра"
 
-#, fuzzy
 msgid "Weekly Forecast"
-msgstr "Прогноз"
+msgstr "Недельный прогноз"
+
+msgid "Wind"
+msgstr "Ветер"
 
 msgid "Window transparency"
 msgstr "Прозрачность окон"
@@ -682,96 +700,29 @@ msgstr "Прозрачность окон"
 msgid "Yellow - Favorite 2"
 msgstr "Желтая кнопка - Избранное 2"
 
+msgid "stations nearby"
+msgstr "станции поблизости"
+
 msgid "v."
 msgstr "в."
 
 msgid "• BLUE to save as Home\n"
-msgstr ""
+msgstr "• СИНИЙ для сохранения как Домой\n"
 
 msgid "• CH+/CH- to jump 500 cities\n"
-msgstr ""
+msgstr "• CH+/CH- для перехода на 500 городов\n"
 
 msgid "• GREEN to save as Favorite 1\n"
-msgstr ""
+msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное 1\n"
 
 msgid "• OK to select city\n"
-msgstr ""
+msgstr "• OK для выбора города\n"
 
 msgid "• RED to open search keyboard\n"
-msgstr ""
+msgstr "• КРАСНЫЙ для открытия клавиатуры поиска\n"
 
 msgid "• Use arrow keys to navigate\n"
-msgstr ""
+msgstr "• Используйте клавиши со стрелками для навигации\n"
 
 msgid "• VOL+/VOL- to jump 100 cities"
-msgstr ""
-
-msgid "• YELLOW to save as Favorite 2\n"
-msgstr ""
-
-#, fuzzy
-#~ msgid "Could not load weekly forecast. Please check your internet connection."
-#~ msgstr "Загрузка доступных карт..."
-
-#, fuzzy
-#~ msgid "No forecast data available"
-#~ msgstr "Данные недоступны"
-
-#~ msgid "Feels like"
-#~ msgstr "Ощущается как"
-
-#, fuzzy
-#~ msgid "Humidity"
-#~ msgstr "Влажность:"
-
-#, fuzzy
-#~ msgid "Precipitation"
-#~ msgstr "Вероятность осадков:"
-
-#, fuzzy
-#~ msgid "Sun"
-#~ msgstr "Закат"
-
-#, fuzzy
-#~ msgid "Weather"
-#~ msgstr "Погодные карты"
-
-#~ msgid "Wind"
-#~ msgstr "Ветер"
-
-#, fuzzy
-#~ msgid "Error saving settings!"
-#~ msgstr "Ошибка сохранения избранного!"
-
-#~ msgid "N/A"
-#~ msgstr "Н/Д"
-
-#~ msgid "Dewpoint"
-#~ msgstr "Точка росы"
-
-#~ msgid "Error loading city list!"
-#~ msgstr "Ошибка загрузки списка городов!"
-
-#~ msgid "Gust"
-#~ msgstr "Порыв ветра"
-
-#~ msgid "Wind speed"
-#~ msgstr "Скорость ветра"
-
-#~ msgid "hPa"
-#~ msgstr "гПа"
-
-#~ msgid "km/h"
-#~ msgstr "км/ч"
-
-#~ msgid "mm"
-#~ msgstr "мм"
-
-#~ msgid "<< ver."
-#~ msgstr "<< вер."
-
-#~ msgid "Feels like:"
-#~ msgstr "По ощущениям:"
-
-#~ msgid "Temp"
-#~ msgstr "Темп"
+msgstr "• VOL+/VOL- для перехода на 100 городов"

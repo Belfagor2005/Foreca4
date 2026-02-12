@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Foreca4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-05 17:54+0100\n"
+"PO-Revision-Date: 2026-02-12 16:41+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Czech <translation-team-cs@lists.sourceforge.net>\n"
 "Language: cs\n"
@@ -16,681 +16,718 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Poedit 3.8\n"
 
 msgid "0 - Today"
-msgstr ""
+msgstr "0 - Dnes"
 
 msgid "1 - Today + 1 day"
-msgstr ""
+msgstr "1 - Dnes + 1 den"
 
 msgid "1. No API credentials configured\n"
-msgstr ""
+msgstr "1. Nejsou nakonfigurovány přihlašovací údaje API\n"
 
 msgid "2 - Today + 2 days"
-msgstr ""
+msgstr "2 - Dnes + 2 dny"
 
 msgid "2. API service temporarily unavailable\n"
-msgstr ""
+msgstr "2. Služba API je dočasně nedostupná\n"
 
 msgid "3 - Today + 3 days"
-msgstr ""
+msgstr "3 - Dnes + 3 dny"
 
 msgid "4 - Today + 4 days"
-msgstr ""
+msgstr "4 - Dnes + 4 dny"
 
 msgid "5 - Today + 5 days"
-msgstr ""
+msgstr "5 - Dnes + 5 dnů"
 
 msgid "6 - Today + 6 days"
-msgstr ""
+msgstr "6 - Dnes + 6 dnů"
 
 msgid "7 - Today + 7 days"
-msgstr ""
+msgstr "7 - Dnes + 7 dnů"
 
 msgid "7-Day Detailed Forecast"
-msgstr ""
+msgstr "Podrobná předpověď na 7 dní"
 
 msgid "8 - Today + 8 days"
-msgstr ""
+msgstr "8 - Dnes + 8 dnů"
 
 msgid "9 - Today + 9 days"
-msgstr ""
+msgstr "9 - Dnes + 9 dnů"
 
 msgid "Afternoon"
-msgstr ""
+msgstr "Odpoledne"
 
 msgid "An error occurred during search!"
-msgstr ""
+msgstr "Během vyhledávání došlo k chybě!"
 
 msgid "Assign to Favorite 1"
-msgstr ""
+msgstr "Přiřadit k Oblíbeným 1"
 
 msgid "Assign to Favorite 2"
-msgstr ""
+msgstr "Přiřadit k Oblíbeným 2"
 
 msgid "Assign to Home"
-msgstr ""
+msgstr "Nastavit jako Domov"
 
 msgid "Australia"
-msgstr ""
+msgstr "Austrálie"
 
 msgid "Austria"
-msgstr ""
+msgstr "Rakousko"
 
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 msgid "Baden-Wuerttemberg"
-msgstr ""
+msgstr "Bádensko-Württembersko"
 
 msgid "Bavaria"
-msgstr ""
+msgstr "Bavorsko"
 
 msgid "Belgium"
-msgstr ""
+msgstr "Belgie"
 
 msgid "Berlin"
-msgstr ""
+msgstr "Berlín"
 
 msgid "Blue"
-msgstr ""
+msgstr "Modrá"
 
 msgid "Blue - Home"
-msgstr ""
+msgstr "Modrá - Domov"
 
 msgid "Brandenburg"
-msgstr ""
+msgstr "Braniborsko"
 
 msgid "Bremen"
-msgstr ""
+msgstr "Brémy"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 msgid "Celsius, km/h, hPa"
-msgstr ""
+msgstr "Celsia, km/h, hPa"
 
 msgid "Changes apply immediately"
-msgstr ""
+msgstr "Změny se projeví okamžitě"
 
 msgid "City Selection"
-msgstr ""
+msgstr "Výběr města"
 
 msgid "City list file not found!"
-msgstr ""
+msgstr "Soubor se seznamem měst nebyl nalezen!"
 
 msgid "Clear"
-msgstr ""
+msgstr "Jasno"
 
 msgid "Cloudy"
-msgstr ""
+msgstr "Oblačno"
 
 msgid "Cloudy and light rain"
-msgstr ""
+msgstr "Oblačno a slabý déšť"
 
 msgid "Cloudy and light snow"
-msgstr ""
+msgstr "Oblačno a slabé sněžení"
 
 msgid "Cloudy and light wet snow"
-msgstr ""
+msgstr "Oblačno a slabý mokrý sníh"
 
 msgid "Cloudy and showers"
-msgstr ""
+msgstr "Oblačno a přeháňky"
 
 msgid "Cloudy and snow showers"
-msgstr ""
+msgstr "Oblačno a sněhové přeháňky"
 
 msgid "Cloudy and wet snow showers"
-msgstr ""
+msgstr "Oblačno a přeháňky mokrého sněhu"
 
 msgid "Cloudy, thunderstorms with rain"
-msgstr ""
+msgstr "Oblačno, bouřky s deštěm"
 
 msgid "Color data"
-msgstr ""
+msgstr "Data barev"
 
 msgid "Color file not found"
-msgstr ""
+msgstr "Soubor s barvami nebyl nalezen"
 
 msgid "Color name"
-msgstr ""
+msgstr "Název barvy"
 
 msgid "Color select"
-msgstr ""
+msgstr "Výběr barvy"
 
 msgid "Color selection"
-msgstr ""
+msgstr "Výběr barvy"
 
 msgid "Continents Weather Maps"
-msgstr ""
+msgstr "Mapy počasí kontinentů"
 
 msgid "Could not load forecast data"
-msgstr ""
+msgstr "Nelze načíst data předpovědi"
 
 msgid "Current weather and forecast"
-msgstr ""
+msgstr "Aktuální počasí a předpověď"
 
 msgid "Current weather and forecast for the next 10 days"
-msgstr ""
+msgstr "Aktuální počasí a předpověď na následujících 10 dní"
 
 msgid "Czech Republic"
-msgstr ""
+msgstr "Česká republika"
 
 msgid "Data provided by Foreca"
-msgstr ""
+msgstr "Data poskytuje Foreca"
 
 msgid "Denmark"
-msgstr ""
+msgstr "Dánsko"
+
+msgid "Distance"
+msgstr "Vzdálenost"
 
 msgid "Down - Next page"
-msgstr ""
+msgstr "Dolů - Další strana"
 
 msgid "Downloading images..."
-msgstr ""
+msgstr "Stahování obrázků..."
 
 msgid "East Asia"
-msgstr ""
+msgstr "Východní Asie"
 
 msgid "Error displaying forecast"
-msgstr ""
+msgstr "Chyba při zobrazování předpovědi"
 
 msgid "Error loading colors"
-msgstr ""
+msgstr "Chyba při načítání barev"
 
 msgid "Error loading maps. Check connection."
-msgstr ""
+msgstr "Chyba při načítání map. Zkontrolujte připojení."
 
 msgid "Error saving favorite!"
-msgstr ""
+msgstr "Chyba při ukládání oblíbené položky!"
 
 msgid "Europe"
-msgstr ""
+msgstr "Evropa"
 
 msgid "European Weather Maps"
-msgstr ""
+msgstr "Evropské mapy počasí"
 
 msgid "Evening"
-msgstr ""
+msgstr "Večer"
 
 msgid "Exit"
-msgstr ""
+msgstr "Konec"
 
 msgid "Exit - End"
-msgstr ""
+msgstr "Konec - Ukončit"
 
 msgid "Fahrenheit, mph, inHg"
-msgstr ""
+msgstr "Fahrenheit, mph, inHg"
 
 msgid "Faster: {}s"
-msgstr ""
+msgstr "Rychleji: {}s"
 
 msgid "Favorite 1"
-msgstr ""
+msgstr "Oblíbené 1"
 
 msgid "Favorite 2"
-msgstr ""
+msgstr "Oblíbené 2"
+
+msgid "Feels like"
+msgstr "Pocitová teplota"
 
 msgid "Finland"
-msgstr ""
+msgstr "Finsko"
 
 msgid "Fog"
-msgstr ""
+msgstr "Mlha"
 
 msgid "Foreca 4"
-msgstr ""
+msgstr "Foreca 4"
 
 msgid "Foreca 4 Weather and Forecast"
-msgstr ""
+msgstr "Foreca 4 Počasí a předpověď"
 
 msgid "Foreca Live Maps (API)"
-msgstr ""
+msgstr "Foreca Živé mapy (API)"
 
 msgid "Foreca Menu"
-msgstr ""
+msgstr "Menu Foreca"
 
 msgid "Foreca Weather Forecast"
-msgstr ""
+msgstr "Předpověď počasí Foreca"
 
 msgid "Forecast"
-msgstr ""
+msgstr "Předpověď"
 
 msgid "France"
-msgstr ""
+msgstr "Francie"
 
 msgid "German States Weather Maps"
-msgstr ""
+msgstr "Mapy počasí německých spolkových zemí"
 
 msgid "Germany"
-msgstr ""
+msgstr "Německo"
 
 msgid "Great Britain"
-msgstr ""
+msgstr "Velká Británie"
 
 msgid "Greece"
-msgstr ""
+msgstr "Řecko"
 
 msgid "Green"
-msgstr ""
+msgstr "Zelená"
 
 msgid "Green - Favorite 1"
-msgstr ""
+msgstr "Zelená - Oblíbené 1"
 
 msgid "HTML"
-msgstr ""
+msgstr "HTML"
 
 msgid "Hamburg"
-msgstr ""
+msgstr "Hamburk"
 
 msgid "Header - not selectable"
-msgstr ""
+msgstr "Záhlaví - nelze vybrat"
 
 msgid "Hesse"
-msgstr ""
+msgstr "Hesensko"
 
 msgid "Home"
-msgstr ""
+msgstr "Domov"
+
+msgid "Humidity"
+msgstr "Vlhkost"
 
 msgid "Hungary"
-msgstr ""
+msgstr "Maďarsko"
 
 msgid "Image not available"
-msgstr ""
+msgstr "Obrázek není k dispozici"
 
 msgid "Imperial System"
-msgstr ""
+msgstr "Imperiální systém"
 
 msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr ""
+msgstr "Imperiální systém (Fahrenheit, mph, inHg)"
 
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 msgid "Info - About"
-msgstr ""
+msgstr "Info - O aplikaci"
 
 msgid "Ireland"
-msgstr ""
+msgstr "Irsko"
 
 msgid "Italy"
-msgstr ""
+msgstr "Itálie"
 
 msgid "Jump 100 down"
-msgstr ""
+msgstr "Skočit o 100 dolů"
 
 msgid "Jump 100 up"
-msgstr ""
+msgstr "Skočit o 100 nahoru"
 
 msgid "Jump 500 down"
-msgstr ""
+msgstr "Skočit o 500 dolů"
 
 msgid "Jump 500 up"
-msgstr ""
+msgstr "Skočit o 500 nahoru"
 
 msgid "Keyboard"
-msgstr ""
+msgstr "Klávesnice"
+
+msgid "Last update"
+msgstr "Poslední aktualizace"
 
 msgid "Latvia"
-msgstr ""
+msgstr "Lotyšsko"
 
 msgid "Left - Previous day"
-msgstr ""
+msgstr "Doleva - Předchozí den"
 
 msgid "Left arrow - Previous day"
-msgstr ""
+msgstr "Šipka doleva - Předchozí den"
 
 msgid "Loading available maps..."
-msgstr ""
+msgstr "Načítání dostupných map..."
 
 msgid "Loading nearby stations..."
-msgstr ""
+msgstr "Načítání blízkých stanic..."
 
 msgid "Loading weekly forecast..."
-msgstr ""
+msgstr "Načítání týdenní předpovědi..."
 
 msgid "Loading..."
-msgstr ""
+msgstr "Načítání..."
 
 msgid "Lower Saxony"
-msgstr ""
+msgstr "Dolní Sasko"
 
 msgid "Luxembourg"
-msgstr ""
+msgstr "Lucembursko"
 
 msgid "Mecklenburg-Vorpommern"
-msgstr ""
+msgstr "Meklenbursko-Přední Pomořansko"
 
 msgid "Menu - Settings"
-msgstr ""
+msgstr "Menu - Nastavení"
 
 msgid "Meteogram"
-msgstr ""
+msgstr "Meteogram"
 
 msgid "Metric System"
-msgstr ""
+msgstr "Metrický systém"
 
 msgid "Metric System (Celsius, km/h, hPa)"
-msgstr ""
+msgstr "Metrický systém (Celsia, km/h, hPa)"
 
 msgid "Middle America"
-msgstr ""
+msgstr "Střední Amerika"
 
 msgid "Middle Asia"
-msgstr ""
+msgstr "Střední Asie"
 
 msgid "Middle East"
-msgstr ""
+msgstr "Střední východ"
 
 msgid "Morning"
-msgstr ""
+msgstr "Ráno"
 
 msgid "Mostly clear"
-msgstr ""
+msgstr "Většinou jasno"
 
 msgid "Netherlands"
-msgstr ""
+msgstr "Nizozemsko"
 
 msgid "Next"
-msgstr ""
+msgstr "Další"
 
 msgid "Next page"
-msgstr ""
+msgstr "Další strana"
 
 msgid "No City found in search!!!"
-msgstr ""
+msgstr "Nebylo nalezeno žádné město!!!"
 
 msgid "No Internet connection detected. Please check your network."
-msgstr ""
+msgstr "Nebylo zjištěno připojení k internetu. Zkontrolujte svou síť."
 
 msgid "No city selected"
-msgstr ""
+msgstr "Není vybráno město"
 
 msgid "No data available"
-msgstr ""
+msgstr "Žádná dostupná data"
 
 msgid "No date available"
-msgstr ""
+msgstr "Žádné dostupné datum"
 
 msgid "No location selected"
-msgstr ""
+msgstr "Není vybráno místo"
 
 msgid "No station data available"
-msgstr ""
+msgstr "Nejsou k dispozici žádná data ze stanice"
 
 msgid "No stations found"
-msgstr ""
+msgstr "Nebyly nalezeny žádné stanice"
 
 msgid "North Africa"
-msgstr ""
+msgstr "Severní Afrika"
 
 msgid "North America"
-msgstr ""
+msgstr "Severní Amerika"
 
 msgid "North Rhine-Westphalia"
-msgstr ""
+msgstr "Severní Porýní-Vestfálsko"
 
 msgid "Norway"
-msgstr ""
+msgstr "Norsko"
 
 msgid "OK - Ext Info"
-msgstr ""
+msgstr "OK - Další info"
 
 msgid "Open Keyboard"
-msgstr ""
+msgstr "Otevřít klávesnici"
 
 msgid "Overcast"
-msgstr ""
+msgstr "Zataženo"
 
 msgid "Overcast and light rain"
-msgstr ""
+msgstr "Zataženo a slabý déšť"
 
 msgid "Overcast and light snow"
-msgstr ""
+msgstr "Zataženo a slabé sněžení"
 
 msgid "Overcast and light wet snow"
-msgstr ""
+msgstr "Zataženo a slabý mokrý sníh"
 
 msgid "Overcast and rain"
-msgstr ""
+msgstr "Zataženo a déšť"
 
 msgid "Overcast and showers"
-msgstr ""
+msgstr "Zataženo a přeháňky"
 
 msgid "Overcast and snow"
-msgstr ""
+msgstr "Zataženo a sněžení"
 
 msgid "Overcast and snow showers"
-msgstr ""
+msgstr "Zataženo a sněhové přeháňky"
 
 msgid "Overcast and wet snow"
-msgstr ""
+msgstr "Zataženo a mokrý sníh"
 
 msgid "Overcast and wet snow showers"
-msgstr ""
+msgstr "Zataženo a přeháňky mokrého sněhu"
 
 msgid "Overcast, thunderstorms with rain"
-msgstr ""
+msgstr "Zataženo, bouřky s deštěm"
 
 msgid "Overnight"
-msgstr ""
+msgstr "Přes noc"
 
 msgid "Partly cloudy"
-msgstr ""
+msgstr "Polojasno"
 
 msgid "Partly cloudy and light rain"
-msgstr ""
+msgstr "Polojasno a slabý déšť"
 
 msgid "Partly cloudy and light snow"
-msgstr ""
+msgstr "Polojasno a slabé sněžení"
 
 msgid "Partly cloudy and light wet snow"
-msgstr ""
+msgstr "Polojasno a slabý mokrý sníh"
 
 msgid "Partly cloudy and showers"
-msgstr ""
+msgstr "Polojasno a přeháňky"
 
 msgid "Partly cloudy and snow showers"
-msgstr ""
+msgstr "Polojasno a sněhové přeháňky"
 
 msgid "Partly cloudy and wet snow showers"
-msgstr ""
+msgstr "Polojasno a přeháňky mokrého sněhu"
 
 msgid "Partly cloudy, possible thunderstorms with rain"
-msgstr ""
+msgstr "Polojasno, možné bouřky s deštěm"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Přehrát/Pozastavit"
 
 msgid "Please check your api_config.txt file."
-msgstr ""
+msgstr "Zkontrolujte prosím svůj soubor api_config.txt."
 
 msgid "Please wait ..."
-msgstr ""
+msgstr "Prosím čekejte ..."
 
 msgid "Poland"
-msgstr ""
+msgstr "Polsko"
 
 msgid "Portugal"
-msgstr ""
+msgstr "Portugalsko"
 
 msgid "Possible reasons:\n"
-msgstr ""
+msgstr "Možné důvody:\n"
+
+msgid "Precipitation"
+msgstr "Srážky"
+
+msgid "Pressure"
+msgstr "Tlak"
 
 msgid "Previous"
-msgstr ""
+msgstr "Předchozí"
 
 msgid "Previous page"
-msgstr ""
+msgstr "Předchozí strana"
 
 msgid "Red"
-msgstr ""
+msgstr "Červená"
 
 msgid "Red - Color select"
-msgstr ""
+msgstr "Červená - Výběr barvy"
 
 msgid "Rhineland-Palatine"
-msgstr ""
+msgstr "Porýní-Falc"
 
 msgid "Right - Next day"
-msgstr ""
+msgstr "Doprava - Následující den"
 
 msgid "Right arrow - Next day"
-msgstr ""
+msgstr "Šipka doprava - Následující den"
 
 msgid "Russia"
-msgstr ""
+msgstr "Rusko"
 
 msgid "Saarland"
-msgstr ""
+msgstr "Sársko"
 
 msgid "Satellite Photos"
-msgstr ""
+msgstr "Satelitní snímky"
 
 msgid "Satellite photos coming soon!"
-msgstr ""
+msgstr "Satelitní snímky již brzy!"
 
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 msgid "Saxony"
-msgstr ""
+msgstr "Sasko"
 
 msgid "Saxony-Anhalt"
-msgstr ""
+msgstr "Sasko-Anhaltsko"
 
 msgid "Schleswig-Holstein"
-msgstr ""
+msgstr "Šlesvicko-Holštýnsko"
 
 msgid "Search your City"
-msgstr ""
+msgstr "Vyhledejte své město"
 
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 msgid "Select a city"
-msgstr ""
+msgstr "Vyberte město"
 
 msgid "Select a map with OK"
-msgstr ""
+msgstr "Vyberte mapu pomocí OK"
 
 msgid "Select unit system"
-msgstr ""
+msgstr "Vyberte systém jednotek"
 
 msgid "Show info"
-msgstr ""
+msgstr "Zobrazit informace"
 
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovensko"
 
 msgid "Slower: {}s"
-msgstr ""
+msgstr "Pomaleji: {}s"
 
 msgid "South Africa"
-msgstr ""
+msgstr "Jihoafrická republika"
 
 msgid "South America"
-msgstr ""
+msgstr "Jižní Amerika"
 
 msgid "Southeast Asia"
-msgstr ""
+msgstr "Jihovýchodní Asie"
 
 msgid "Spain"
-msgstr ""
+msgstr "Španělsko"
 
 msgid "Station Observations"
-msgstr ""
+msgstr "Pozorování ze stanic"
+
+msgid "Sun"
+msgstr "Slunce"
 
 msgid "Sunrise"
-msgstr ""
+msgstr "Východ slunce"
 
 msgid "Sunset"
-msgstr ""
+msgstr "Západ slunce"
 
 msgid "Sweden"
-msgstr ""
+msgstr "Švédsko"
 
 msgid "Switzerland"
-msgstr ""
+msgstr "Švýcarsko"
+
+msgid "Temperature"
+msgstr "Teplota"
 
 msgid "Thin upper cloud"
-msgstr ""
+msgstr "Vysoká oblačnost"
 
 msgid "Thuringia"
-msgstr ""
+msgstr "Durynsko"
 
 msgid "Transparency Settings"
-msgstr ""
+msgstr "Nastavení průhlednosti"
 
 msgid "Transparency level"
-msgstr ""
+msgstr "Úroveň průhlednosti"
+
+msgid "UV Index"
+msgstr "UV index"
 
 msgid "Unit Settings"
-msgstr ""
+msgstr "Nastavení jednotek"
 
 msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr ""
+msgstr "Nastavení jednotek uloženo. Pro použití změn restartujte plugin."
 
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámé"
 
 msgid "Up - Previous page"
-msgstr ""
+msgstr "Nahoru - Předchozí strana"
 
 msgid "Use arrow keys to scroll"
-msgstr ""
+msgstr "Pro posouvání použijte šipky"
+
+msgid "Weather"
+msgstr "Počasí"
 
 msgid "Weather Maps"
-msgstr ""
+msgstr "Mapy počasí"
 
 msgid "Weather Maps & Satellite"
-msgstr ""
+msgstr "Mapy počasí a satelit"
 
 msgid "Weather Maps (Wetterkontor)"
-msgstr ""
+msgstr "Mapy počasí (Wetterkontor)"
 
 msgid "Weather Maps Slideshow"
-msgstr ""
+msgstr "Prezentace map počasí"
 
 msgid "Weather Radar"
-msgstr ""
+msgstr "Meteorologický radar"
 
 msgid "Weather today"
-msgstr ""
+msgstr "Počasí dnes"
 
 msgid "Weather tomorrow"
-msgstr ""
+msgstr "Počasí zítra"
 
 msgid "Weekly Forecast"
-msgstr ""
+msgstr "Týdenní předpověď"
+
+msgid "Wind"
+msgstr "Vítr"
 
 msgid "Window transparency"
-msgstr ""
+msgstr "Průhlednost okna"
 
 msgid "Yellow - Favorite 2"
-msgstr ""
+msgstr "Žlutá - Oblíbené 2"
+
+msgid "stations nearby"
+msgstr "stanice v okolí"
 
 msgid "v."
-msgstr ""
+msgstr "v."
 
 msgid "• BLUE to save as Home\n"
-msgstr ""
+msgstr "• MODRÁ pro uložení jako Domov\n"
 
 msgid "• CH+/CH- to jump 500 cities\n"
-msgstr ""
+msgstr "• CH+/CH- pro skok o 500 měst\n"
 
 msgid "• GREEN to save as Favorite 1\n"
-msgstr ""
+msgstr "• ZELENÁ pro uložení jako Oblíbené 1\n"
 
 msgid "• OK to select city\n"
-msgstr ""
+msgstr "• OK pro výběr města\n"
 
 msgid "• RED to open search keyboard\n"
-msgstr ""
+msgstr "• ČERVENÁ pro otevření vyhledávací klávesnice\n"
 
 msgid "• Use arrow keys to navigate\n"
-msgstr ""
+msgstr "• Pro navigaci použijte šipky\n"
 
 msgid "• VOL+/VOL- to jump 100 cities"
-msgstr ""
+msgstr "• VOL+/VOL- pro skok o 100 měst"
 
 msgid "• YELLOW to save as Favorite 2\n"
-msgstr ""
+msgstr "• ŽLUTÁ pro uložení jako Oblíbené 2\n"

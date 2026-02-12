@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Foreca4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-02-09 13:02+0100\n"
+"PO-Revision-Date: 2026-02-12 16:10+0100\n"
 "Last-Translator: root <EMAIL@ADDRESS>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -25,13 +25,13 @@ msgid "1 - Today + 1 day"
 msgstr "1 - Oggi + 1 giorno"
 
 msgid "1. No API credentials configured\n"
-msgstr ""
+msgstr "1. Nessuna credenziale API configurata\n"
 
 msgid "2 - Today + 2 days"
 msgstr "2 - Oggi + 2 giorni"
 
 msgid "2. API service temporarily unavailable\n"
-msgstr ""
+msgstr "2. Servizio API temporaneamente non disponibile\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Oggi + 3 giorni"
@@ -48,9 +48,8 @@ msgstr "6 - Oggi + 6 giorni"
 msgid "7 - Today + 7 days"
 msgstr "7 - Oggi + 7 giorni"
 
-#, fuzzy
 msgid "7-Day Detailed Forecast"
-msgstr "Previsioni del tempo Foreca"
+msgstr "Previsioni dettagliate a 7 giorni"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Oggi + 8 giorni"
@@ -167,7 +166,7 @@ msgid "Continents Weather Maps"
 msgstr "Mappe Meteo dei Continenti"
 
 msgid "Could not load forecast data"
-msgstr ""
+msgstr "Impossibile caricare i dati delle previsioni"
 
 msgid "Current weather and forecast"
 msgstr "Meteo attuale e previsioni"
@@ -178,12 +177,14 @@ msgstr "Meteo attuale e previsioni per i prossimi 10 giorni"
 msgid "Czech Republic"
 msgstr "Repubblica Ceca"
 
-#, fuzzy
 msgid "Data provided by Foreca"
-msgstr "Previsioni del tempo Foreca"
+msgstr "Dati forniti da Foreca"
 
 msgid "Denmark"
 msgstr "Danimarca"
+
+msgid "Distance"
+msgstr "Distanza"
 
 msgid "Down - Next page"
 msgstr "Giù - Pagina successiva"
@@ -194,9 +195,8 @@ msgstr "Download immagini in corso..."
 msgid "East Asia"
 msgstr "Asia Orientale"
 
-#, fuzzy
 msgid "Error displaying forecast"
-msgstr "Errore durante il salvataggio dei preferiti!"
+msgstr "Errore nella visualizzazione delle previsioni"
 
 msgid "Error loading colors"
 msgstr "Errore nel caricamento dei colori"
@@ -233,6 +233,9 @@ msgstr "Preferito 1"
 
 msgid "Favorite 2"
 msgstr "Preferito 2"
+
+msgid "Feels like"
+msgstr "Percepita"
 
 msgid "Finland"
 msgstr "Finlandia"
@@ -294,6 +297,9 @@ msgstr "Assia"
 msgid "Home"
 msgstr ""
 
+msgid "Humidity"
+msgstr "Umidità"
+
 msgid "Hungary"
 msgstr "Ungheria"
 
@@ -333,6 +339,9 @@ msgstr "Salta 500 in su"
 msgid "Keyboard"
 msgstr "Tastiera"
 
+msgid "Last update"
+msgstr "Ultimo aggiornamento"
+
 msgid "Latvia"
 msgstr "Lettonia"
 
@@ -348,9 +357,8 @@ msgstr "Caricamento mappe disponibili..."
 msgid "Loading nearby stations..."
 msgstr "Caricamento delle stazioni vicine..."
 
-#, fuzzy
 msgid "Loading weekly forecast..."
-msgstr "Caricamento delle stazioni vicine..."
+msgstr "Caricamento previsioni settimanali..."
 
 msgid "Loading..."
 msgstr "Caricamento..."
@@ -404,7 +412,7 @@ msgid "No City found in search!!!"
 msgstr "Nessuna città trovata nella ricerca!!!"
 
 msgid "No Internet connection detected. Please check your network."
-msgstr ""
+msgstr "Nessuna connessione Internet rilevata. Controlla la tua rete."
 
 msgid "No city selected"
 msgstr "Nessuna Città selezionata"
@@ -503,10 +511,10 @@ msgid "Partly cloudy, possible thunderstorms with rain"
 msgstr "Parzialmente nuvoloso, possibili temporali con pioggia"
 
 msgid "Play/Pause"
-msgstr ""
+msgstr "Riproduci/Pausa"
 
 msgid "Please check your api_config.txt file."
-msgstr ""
+msgstr "Controlla il tuo file api_config.txt."
 
 msgid "Please wait ..."
 msgstr "Attendere prego ..."
@@ -518,7 +526,13 @@ msgid "Portugal"
 msgstr "Portogallo"
 
 msgid "Possible reasons:\n"
-msgstr ""
+msgstr "Possibili motivi:\n"
+
+msgid "Precipitation"
+msgstr "Precipitazioni"
+
+msgid "Pressure"
+msgstr "Pressione"
 
 msgid "Previous"
 msgstr "Precedente"
@@ -604,6 +618,9 @@ msgstr "Spagna"
 msgid "Station Observations"
 msgstr "Stazione di Osservazione"
 
+msgid "Sun"
+msgstr "Sole"
+
 msgid "Sunrise"
 msgstr "Alba"
 
@@ -615,6 +632,9 @@ msgstr "Svezia"
 
 msgid "Switzerland"
 msgstr "Svizzera"
+
+msgid "Temperature"
+msgstr "Temperatura"
 
 msgid "Thin upper cloud"
 msgstr "Nubi alte sottili"
@@ -628,6 +648,9 @@ msgstr "Impostazioni Trasparenza"
 msgid "Transparency level"
 msgstr "Livello trasparenza"
 
+msgid "UV Index"
+msgstr "Indice UV"
+
 msgid "Unit Settings"
 msgstr "Impostazioni Unità"
 
@@ -640,9 +663,11 @@ msgstr "Sconosciuto"
 msgid "Up - Previous page"
 msgstr "Su - Pagina precedente"
 
-#, fuzzy
 msgid "Use arrow keys to scroll"
-msgstr "• Utilizzare i tasti freccia per navigare\n"
+msgstr "Utilizzare i tasti freccia per scorrere"
+
+msgid "Weather"
+msgstr "Meteo"
 
 msgid "Weather Maps"
 msgstr "Mappe Meteo"
@@ -665,15 +690,20 @@ msgstr "Meteo oggi"
 msgid "Weather tomorrow"
 msgstr "Meteo domani"
 
-#, fuzzy
 msgid "Weekly Forecast"
-msgstr "Previsione"
+msgstr "Previsioni settimanali"
+
+msgid "Wind"
+msgstr "Vento"
 
 msgid "Window transparency"
 msgstr "Trasparenza Finestra"
 
 msgid "Yellow - Favorite 2"
 msgstr "Giallo - Favorito 2"
+
+msgid "stations nearby"
+msgstr "stazioni vicine"
 
 msgid "v."
 msgstr "v."
@@ -701,83 +731,3 @@ msgstr "• VOL+/VOL- per saltare 100 città"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GIALLO per salvare come Preferito 2\n"
-
-#, fuzzy
-#~ msgid "Could not load weekly forecast. Please check your internet connection."
-#~ msgstr "Caricamento delle stazioni vicine..."
-
-#, fuzzy
-#~ msgid "No forecast data available"
-#~ msgstr "Nessun dato disponibile"
-
-#~ msgid "Distance"
-#~ msgstr "Distanza"
-
-#~ msgid "Feels like"
-#~ msgstr "Percepita"
-
-#~ msgid "Humidity"
-#~ msgstr "Umidità"
-
-#~ msgid "Last update"
-#~ msgstr "Ultimo aggiornamento"
-
-#, fuzzy
-#~ msgid "Precipitation"
-#~ msgstr "Precipitazioni:"
-
-#~ msgid "Pressure"
-#~ msgstr "Pressione"
-
-#, fuzzy
-#~ msgid "Sun"
-#~ msgstr "Tramonto"
-
-#~ msgid "Temperature"
-#~ msgstr "Temperatura"
-
-#, fuzzy
-#~ msgid "Weather"
-#~ msgstr "Mappe Meteo"
-
-#~ msgid "Wind"
-#~ msgstr "Vento"
-
-#~ msgid "stations nearby"
-#~ msgstr "stazioni vicine"
-
-#~ msgid "Error saving settings!"
-#~ msgstr "Errore durante il salvataggio delle impostazioni!"
-
-#~ msgid "N/A"
-#~ msgstr "N/D"
-
-#~ msgid "Dewpoint"
-#~ msgstr "Punto di rugiada"
-
-#~ msgid "Error loading city list!"
-#~ msgstr "Errore nel caricamento della lista città!"
-
-#~ msgid "Gust"
-#~ msgstr "Raffica"
-
-#~ msgid "Wind speed"
-#~ msgstr "Velocità del vento"
-
-#~ msgid "hPa"
-#~ msgstr "hPa"
-
-#~ msgid "km/h"
-#~ msgstr "km/h"
-
-#~ msgid "mm"
-#~ msgstr "mm"
-
-#~ msgid "<< ver."
-#~ msgstr "<< ver."
-
-#~ msgid "Feels like:"
-#~ msgstr "Percepita:"
-
-#~ msgid "Temp"
-#~ msgstr "Temperatura"
