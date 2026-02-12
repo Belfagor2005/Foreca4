@@ -804,6 +804,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     print("[DEBUG] Station text: {0}".format(text))
 
                     from enigma import eTimer
+
                     def update_ui():
                         try:
                             if "station" in self:
@@ -2281,7 +2282,8 @@ class ExtInfo_2_Foreca4(Screen):
         else:
             location_path = path_loc2
 
-        location_id = location_path.split('/')[0] if '/' in location_path else location_path
+        location_id = location_path.split(
+            '/')[0] if '/' in location_path else location_path
 
         self.lat_val = lat
         self.lon_val = lon
