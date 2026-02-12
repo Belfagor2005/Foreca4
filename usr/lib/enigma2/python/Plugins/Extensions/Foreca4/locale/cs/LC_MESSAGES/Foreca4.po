@@ -183,9 +183,6 @@ msgstr "Data poskytuje Foreca"
 msgid "Denmark"
 msgstr "Dánsko"
 
-msgid "Distance"
-msgstr "Vzdálenost"
-
 msgid "Down - Next page"
 msgstr "Dolů - Další strana"
 
@@ -233,9 +230,6 @@ msgstr "Oblíbené 1"
 
 msgid "Favorite 2"
 msgstr "Oblíbené 2"
-
-msgid "Feels like"
-msgstr "Pocitová teplota"
 
 msgid "Finland"
 msgstr "Finsko"
@@ -297,9 +291,6 @@ msgstr "Hesensko"
 msgid "Home"
 msgstr "Domov"
 
-msgid "Humidity"
-msgstr "Vlhkost"
-
 msgid "Hungary"
 msgstr "Maďarsko"
 
@@ -335,9 +326,6 @@ msgstr "Skočit o 500 nahoru"
 
 msgid "Keyboard"
 msgstr "Klávesnice"
-
-msgid "Last update"
-msgstr "Poslední aktualizace"
 
 msgid "Latvia"
 msgstr "Lotyšsko"
@@ -522,12 +510,6 @@ msgstr "Portugalsko"
 msgid "Possible reasons:\n"
 msgstr "Možné důvody:\n"
 
-msgid "Precipitation"
-msgstr "Srážky"
-
-msgid "Pressure"
-msgstr "Tlak"
-
 msgid "Previous"
 msgstr "Předchozí"
 
@@ -612,9 +594,6 @@ msgstr "Španělsko"
 msgid "Station Observations"
 msgstr "Pozorování ze stanic"
 
-msgid "Sun"
-msgstr "Slunce"
-
 msgid "Sunrise"
 msgstr "Východ slunce"
 
@@ -626,9 +605,6 @@ msgstr "Švédsko"
 
 msgid "Switzerland"
 msgstr "Švýcarsko"
-
-msgid "Temperature"
-msgstr "Teplota"
 
 msgid "Thin upper cloud"
 msgstr "Vysoká oblačnost"
@@ -642,9 +618,6 @@ msgstr "Nastavení průhlednosti"
 msgid "Transparency level"
 msgstr "Úroveň průhlednosti"
 
-msgid "UV Index"
-msgstr "UV index"
-
 msgid "Unit Settings"
 msgstr "Nastavení jednotek"
 
@@ -656,9 +629,6 @@ msgstr "Nahoru - Předchozí strana"
 
 msgid "Use arrow keys to scroll"
 msgstr "Pro posouvání použijte šipky"
-
-msgid "Weather"
-msgstr "Počasí"
 
 msgid "Weather Maps"
 msgstr "Mapy počasí"
@@ -684,17 +654,11 @@ msgstr "Počasí zítra"
 msgid "Weekly Forecast"
 msgstr "Týdenní předpověď"
 
-msgid "Wind"
-msgstr "Vítr"
-
 msgid "Window transparency"
 msgstr "Průhlednost okna"
 
 msgid "Yellow - Favorite 2"
 msgstr "Žlutá - Oblíbené 2"
-
-msgid "stations nearby"
-msgstr "stanice v okolí"
 
 msgid "v."
 msgstr "v."
@@ -722,6 +686,42 @@ msgstr "• VOL+/VOL- pro skok o 100 měst"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• ŽLUTÁ pro uložení jako Oblíbené 2\n"
+
+#~ msgid "Distance"
+#~ msgstr "Vzdálenost"
+
+#~ msgid "Feels like"
+#~ msgstr "Pocitová teplota"
+
+#~ msgid "Humidity"
+#~ msgstr "Vlhkost"
+
+#~ msgid "Last update"
+#~ msgstr "Poslední aktualizace"
+
+#~ msgid "Precipitation"
+#~ msgstr "Srážky"
+
+#~ msgid "Pressure"
+#~ msgstr "Tlak"
+
+#~ msgid "Sun"
+#~ msgstr "Slunce"
+
+#~ msgid "Temperature"
+#~ msgstr "Teplota"
+
+#~ msgid "UV Index"
+#~ msgstr "UV index"
+
+#~ msgid "Weather"
+#~ msgstr "Počasí"
+
+#~ msgid "Wind"
+#~ msgstr "Vítr"
+
+#~ msgid "stations nearby"
+#~ msgstr "stanice v okolí"
 
 #~ msgid "Imperial System (Fahrenheit, mph, inHg)"
 #~ msgstr "Imperiální systém (Fahrenheit, mph, inHg)"
