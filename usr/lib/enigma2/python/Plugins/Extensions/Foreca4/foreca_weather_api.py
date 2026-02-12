@@ -179,7 +179,11 @@ class ForecaWeatherAPI:
         """Get location name, country, coordinates from API"""
         token = self.get_token()
         if not token:
-            return {'name': 'N/A', 'country': 'N/A', 'lon': 'N/A', 'lat': 'N/A'}
+            return {
+                'name': 'N/A',
+                'country': 'N/A',
+                'lon': 'N/A',
+                'lat': 'N/A'}
         try:
             headers = {"Authorization": f"Bearer {token}"}
             url = f"{self.base_url}/api/v1/location/{location_id}"
@@ -324,7 +328,8 @@ class ForecaWeatherAPI:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/current/{location_id}"
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -391,63 +396,90 @@ class ForecaWeatherAPI:
 
         try:
             headers = {"Authorization": f"Bearer {token}"}
-            
+
             # 1. Location details
             location = self._get_location_details(location_id)
-            
+
             # 2. Current weather (for radar map and coordinates)
             current_url = f"{self.base_url}/api/v1/current/{location_id}"
-            current_resp = requests.get(current_url, headers=headers, params={"lang": "it", "tempunit": "C"}, timeout=10)
+            current_resp = requests.get(
+                current_url, headers=headers, params={
+                    "lang": "it", "tempunit": "C"}, timeout=10)
             current_data = current_resp.json() if current_resp.status_code == 200 else {}
-            
+
             # 3. Hourly forecast (at least 48h)
             hourly_url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
-            hourly_resp = requests.get(hourly_url, headers=headers, params={"periods": 48, "lang": "it", "tempunit": "C"}, timeout=15)
-            
+            hourly_resp = requests.get(
+                hourly_url,
+                headers=headers,
+                params={
+                    "periods": 48,
+                    "lang": "it",
+                    "tempunit": "C"},
+                timeout=15)
+
             if hourly_resp.status_code != 200:
                 return None
-            
+
             hourly_data = hourly_resp.json()
             forecast = hourly_data.get('forecast', [])
-            
+
             # Organize by day
             from datetime import datetime, timedelta
             today = datetime.now().strftime("%Y-%m-%d")
-            tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-            
-            today_periods = [p for p in forecast if p.get('time', '').startswith(today)]
-            tomorrow_periods = [p for p in forecast if p.get('time', '').startswith(tomorrow)]
-            
+            tomorrow = (
+                datetime.now() +
+                timedelta(
+                    days=1)).strftime("%Y-%m-%d")
+
+            today_periods = [
+                p for p in forecast if p.get(
+                    'time', '').startswith(today)]
+            tomorrow_periods = [
+                p for p in forecast if p.get(
+                    'time', '').startswith(tomorrow)]
+
             # Time slots (approximation)
             def extract_period(periods, hour_range):
                 for p in periods:
-                    hour = int(p.get('time', '12:00').split('T')[1].split(':')[0])
+                    hour = int(
+                        p.get(
+                            'time',
+                            '12:00').split('T')[1].split(':')[0])
                     if hour_range[0] <= hour <= hour_range[1]:
                         return p
                 return periods[0] if periods else None
-            
+
             # Today
             morning = extract_period(today_periods, (6, 10))
             afternoon = extract_period(today_periods, (11, 16))
             evening = extract_period(today_periods, (17, 21))
             overnight = extract_period(today_periods, (22, 5))
-            
+
             # Tomorrow
             morning2 = extract_period(tomorrow_periods, (6, 10))
             afternoon2 = extract_period(tomorrow_periods, (11, 16))
             evening2 = extract_period(tomorrow_periods, (17, 21))
             overnight2 = extract_period(tomorrow_periods, (22, 5))
-            
+
             # Summary texts (from current or first period)
-            today_summary = current_data.get('current', {}).get('symbolPhrase', 'N/A')
-            today_max = max([p.get('temperature', 0) for p in today_periods]) if today_periods else 'N/A'
-            today_min = min([p.get('temperature', 0) for p in today_periods]) if today_periods else 'N/A'
-            today_rain = sum([p.get('precipAccum', 0) for p in today_periods]) if today_periods else 0
-            
-            tomorrow_max = max([p.get('temperature', 0) for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
-            tomorrow_min = min([p.get('temperature', 0) for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
-            tomorrow_rain = sum([p.get('precipAccum', 0) for p in tomorrow_periods]) if tomorrow_periods else 0
-            
+            today_summary = current_data.get(
+                'current', {}).get(
+                'symbolPhrase', 'N/A')
+            today_max = max([p.get('temperature', 0)
+                            for p in today_periods]) if today_periods else 'N/A'
+            today_min = min([p.get('temperature', 0)
+                            for p in today_periods]) if today_periods else 'N/A'
+            today_rain = sum([p.get('precipAccum', 0)
+                             for p in today_periods]) if today_periods else 0
+
+            tomorrow_max = max([p.get('temperature', 0)
+                               for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
+            tomorrow_min = min([p.get('temperature', 0)
+                               for p in tomorrow_periods]) if tomorrow_periods else 'N/A'
+            tomorrow_rain = sum([p.get('precipAccum', 0)
+                                for p in tomorrow_periods]) if tomorrow_periods else 0
+
             return {
                 'town': location.get('name', 'N/A'),
                 'country': location.get('country', 'N/A'),
@@ -475,7 +507,8 @@ class ForecaWeatherAPI:
                 }
             }
         except Exception as e:
-            print(f"[ForecaWeatherAPI] Error in get_today_tomorrow_details: {e}")
+            print(
+                f"[ForecaWeatherAPI] Error in get_today_tomorrow_details: {e}")
             import traceback
             traceback.print_exc()
             return None
@@ -496,7 +529,8 @@ class ForecaWeatherAPI:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -701,7 +735,8 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(len(daily_data['days'])))
+            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(
+                len(daily_data['days'])))
             return daily_data
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")

@@ -82,7 +82,7 @@ def load_skin_by_class(class_name):
         try:
             with codecs.open(skin_file, 'r', 'utf-8') as f:
                 return f.read()
-        except:
+        except BaseException:
             pass
 
     return None

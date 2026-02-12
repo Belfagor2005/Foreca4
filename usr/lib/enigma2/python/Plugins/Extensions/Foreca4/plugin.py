@@ -524,7 +524,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         town = cur_temp = fl_temp = dewpoint = pic = wind = wind_speed = wind_gust = rain_mm = hum = pressure = country = lon = lat = sunrise = daylen = sunset = 'N/A'
 
         if self.weather_api.check_credentials():
-            print("[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
+            print(
+                "[Foreca4] Trying API for current weather, ID: {0}".format(location_id))
             result_current = self.weather_api.get_current_weather(location_id)
 
             if (
@@ -536,7 +537,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
                 print("[Foreca4] Current weather obtained via API")
             else:
-                print("[Foreca4] Current weather API failed, falling back to scraping")
+                print(
+                    "[Foreca4] Current weather API failed, falling back to scraping")
         else:
             print("[Foreca4] API credentials not configured, using scraping")
 
@@ -938,21 +940,24 @@ class ForecaPreview_4(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split(
+                '/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split(
+                '/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split(
+                '/')[0] if '/' in path_loc2 else path_loc2
 
-        print(f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
+        print(
+            f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
 
         if not self.weather_api.check_credentials():
             print("[DEBUG] API credentials not configured")
             self.session.open(
                 MessageBox,
                 _("API credentials not configured!\n\nPlease create api_config.txt file."),
-                MessageBox.TYPE_ERROR
-            )
+                MessageBox.TYPE_ERROR)
             return
 
         if not location_id:
@@ -1364,7 +1369,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 and result_current[0] != 'N/A'
             ):
                 town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country, lon, lat, sunrise, daylen, sunset = result_current
-                print("[Foreca4] Fav{0}: Current weather via API".format(fav_index))
+                print(
+                    "[Foreca4] Fav{0}: Current weather via API".format(fav_index))
             else:
                 town = cur_temp = fl_temp = dewpoint = pic = wind = wind_speed = wind_gust = rain_mm = hum = pressure = country = lon = lat = sunrise = daylen = sunset = 'N/A'
 
@@ -1943,9 +1949,11 @@ class Color_Select(Screen):
         print("[Color_Select] update_gui()")
 
         if sort:
-            combined = list(zip(self.display_names, self.Clist, self.original_names, self.mydata))
+            combined = list(zip(self.display_names, self.Clist,
+                            self.original_names, self.mydata))
             combined.sort(key=lambda x: x[0].lower())
-            self.display_names, self.Clist, self.original_names, self.mydata = zip(*combined)
+            self.display_names, self.Clist, self.original_names, self.mydata = zip(
+                *combined)
             self.display_names = list(self.display_names)
             self.Clist = list(self.Clist)
             self.original_names = list(self.original_names)
@@ -2068,12 +2076,14 @@ class ExtInfo_Foreca4(Screen):
         else:
             location_path = path_loc2
 
-        location_id = location_path.split('/')[0] if '/' in location_path else location_path
+        location_id = location_path.split(
+            '/')[0] if '/' in location_path else location_path
 
         # Get weather data if API credentials exist
         self.data = None
         if self.weather_api and self.weather_api.check_credentials():
-            self.data = self.weather_api.get_today_tomorrow_details(location_id)
+            self.data = self.weather_api.get_today_tomorrow_details(
+                location_id)
 
         # Fallback if data not available
         if not self.data:
@@ -2200,13 +2210,21 @@ class ExtInfo_Foreca4(Screen):
 
         # Today - symbols and temperatures
         today = self.data.get('today', {})
-        self._set_period_data('1', today.get('morning', {}), today.get('afternoon', {}),
-                              today.get('evening', {}), today.get('overnight', {}))
+        self._set_period_data(
+            '1', today.get(
+                'morning', {}), today.get(
+                'afternoon', {}), today.get(
+                'evening', {}), today.get(
+                    'overnight', {}))
 
         # Tomorrow - symbols and temperatures
         tomorrow = self.data.get('tomorrow', {})
-        self._set_period_data('2', tomorrow.get('morning', {}), tomorrow.get('afternoon', {}),
-                              tomorrow.get('evening', {}), tomorrow.get('overnight', {}))
+        self._set_period_data(
+            '2', tomorrow.get(
+                'morning', {}), tomorrow.get(
+                'afternoon', {}), tomorrow.get(
+                'evening', {}), tomorrow.get(
+                    'overnight', {}))
 
         # Coordinate icons
         self["pic_lot"].instance.setPixmapFromFile(

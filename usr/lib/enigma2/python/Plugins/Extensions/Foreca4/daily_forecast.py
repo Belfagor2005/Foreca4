@@ -48,11 +48,14 @@ class DailyForecast(Screen):
         self["info"].setText(_("Loading weekly forecast..."))
         try:
             if hasattr(self.api, 'get_daily_forecast'):
-                print(f"[DailyForecast] Calling API for location: {self.location_id}")
-                self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
+                print(
+                    f"[DailyForecast] Calling API for location: {self.location_id}")
+                self.forecast_data = self.api.get_daily_forecast(
+                    self.location_id, days=7)
 
                 if self.forecast_data:
-                    print(f"[DailyForecast] API returned {len(self.forecast_data.get('days', []))} days")
+                    print(
+                        f"[DailyForecast] API returned {len(self.forecast_data.get('days', []))} days")
                 else:
                     print("[DailyForecast] API returned None")
             else:
@@ -114,7 +117,8 @@ class DailyForecast(Screen):
         """Format and display the forecast data without BBCode tags"""
         try:
             text_lines = []
-            text_lines.append(f"{self.forecast_data['town']}, {self.forecast_data['country']}")
+            text_lines.append(
+                f"{self.forecast_data['town']}, {self.forecast_data['country']}")
             text_lines.append(_("7-Day Detailed Forecast"))
             text_lines.append("=" * 40)
 
@@ -178,19 +182,23 @@ class DailyForecast(Screen):
 
             url = f"{self.base_url}/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
-            response = requests.get(url, headers=headers, params=params, timeout=15)
-            print(f"[ForecaWeatherAPI] Response status: {response.status_code}")
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
+            print(
+                f"[ForecaWeatherAPI] Response status: {response.status_code}")
 
             if response.status_code == 200:
                 data = response.json()
-                print(f"[ForecaWeatherAPI] Daily forecast response received: {len(data.get('forecast', []))} days")
+                print(
+                    f"[ForecaWeatherAPI] Daily forecast response received: {len(data.get('forecast', []))} days")
                 return self._parse_daily_forecast_response(data)
             elif response.status_code == 401:
                 print("[ForecaWeatherAPI] Token expired, forcing new token...")
                 token = self.get_token(force_new=True)
                 if token:
                     headers = {"Authorization": f"Bearer {token}"}
-                    response = requests.get(url, headers=headers, params=params, timeout=15)
+                    response = requests.get(
+                        url, headers=headers, params=params, timeout=15)
                     if response.status_code == 200:
                         data = response.json()
                         return self._parse_daily_forecast_response(data)
