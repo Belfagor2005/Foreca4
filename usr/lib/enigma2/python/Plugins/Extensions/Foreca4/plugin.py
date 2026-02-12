@@ -2151,7 +2151,7 @@ class ExtInfo_Foreca4(Screen):
         self.onShow.append(self.Start2)
 
     def OK(self):
-        self.session.open(Meteogram_Foreca4_FHD)
+        self.session.open(Meteogram_Foreca4)
 
     def Start2(self):
         self['title3'].text = str(_('Weather today'))
@@ -2319,7 +2319,7 @@ class ExtInfo_2_Foreca4(Screen):
         self['lon_val'].text = str(lon)
 
     def OK(self):
-        self.session.open(Meteogram_Foreca4_FHD)
+        self.session.open(Meteogram_Foreca4)
 
     def Exit(self):
         self.close()
@@ -2413,10 +2413,10 @@ class TransparencyBox(Screen):
         self.close()
 
 
-class Meteogram_Foreca4_FHD(Screen):
+class Meteogram_Foreca4(Screen):
 
     def __init__(self, session):
-        self.skin = load_skin_for_class(Meteogram_Foreca4_FHD)
+        self.skin = load_skin_for_class(Meteogram_Foreca4)
         Screen.__init__(self, session)
 
         if myloc == 0:
