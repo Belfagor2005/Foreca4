@@ -169,12 +169,10 @@
 
 from __future__ import absolute_import
 
-# Standard library imports
 import os
 from sys import version_info
 from threading import Thread
 
-# Enigma2 imports
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.GUIComponent import GUIComponent
 from Components.Label import Label
@@ -189,7 +187,8 @@ from enigma import (
     getDesktop,
     RT_VALIGN_CENTER,
     eListbox,
-    gRGB
+    gRGB,
+    eTimer
 )
 from Screens.HelpMenu import HelpableScreen
 from Screens.MessageBox import MessageBox
@@ -198,13 +197,9 @@ from skin import parseColor
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
-
-# Third-party imports
 import six
 
-# Local application imports
 from . import _, load_skin_for_class
-
 from .foreca_map_api import ForecaMapAPI
 from .foreca_map_menu import ForecaMapMenu
 from .google_translate import translate_text, safe_translate, _get_system_language, translate_batch
@@ -220,7 +215,6 @@ TARGET_LANG = _get_system_language()
 
 # base constant
 BASEURL = "https://www.foreca.com/"
-
 config_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/"
 unit_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/unit_config.conf"
 config_file = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/api_config.txt"
@@ -305,26 +299,26 @@ size_h = getDesktop(0).size().height()
 
 # utils
 def conv_alpha(insel):
-    rez = ' n/a'
+    trspz = ' n/a'
     if insel == "#90000000":
-        rez = '56%'
+        trspz = '56%'
     elif insel == "#80000000":
-        rez = '50%'
+        trspz = '50%'
     elif insel == "#70000000":
-        rez = '44%'
+        trspz = '44%'
     elif insel == "#60000000":
-        rez = '38%'
+        trspz = '38%'
     elif insel == "#50000000":
-        rez = '31%'
+        trspz = '31%'
     elif insel == "#40000000":
-        rez = '25%'
+        trspz = '25%'
     elif insel == "#30000000":
-        rez = '19%'
+        trspz = '19%'
     elif insel == "#20000000":
-        rez = '13%'
+        trspz = '13%'
     elif insel == "#10000000":
-        rez = '6%'
-    return rez
+        trspz = '6%'
+    return trspz
 
 
 def readsetalpha():
@@ -354,15 +348,15 @@ def savesetalpha(indata):
 
 
 def conv_day_len(indata):
-    rez = indata
+    trspz = indata
     try:
         inall = indata.split(' ')
         in2 = _(str(inall[1]))
         in3 = _(str(inall[3]))
-        rez = inall[0] + ' ' + str(in2) + ' ' + inall[2] + ' ' + str(in3)
+        trspz = inall[0] + ' ' + str(in2) + ' ' + inall[2] + ' ' + str(in3)
     except BaseException:
-        rez = indata
-    return rez
+        trspz = indata
+    return trspz
 
 
 def is_valid(v):
@@ -371,13 +365,13 @@ def is_valid(v):
 
 def mywindSpeed(indata, metka):
     try:
-        rez = 0
-        rez = '%.01f' % float(int(indata) / 1)
+        trspz = 0
+        trspz = '%.01f' % float(int(indata) / 1)
         if metka == 1:
-            return float(rez)
+            return float(trspz)
         else:
-            rez = '%.01f' % float(int(indata))
-            return float(rez)
+            trspz = '%.01f' % float(int(indata))
+            return float(trspz)
     except BaseException:
         return 0.00
 
@@ -803,7 +797,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
                         station_name, station_dist)
                     print("[DEBUG] Station text: {0}".format(text))
 
-                    from enigma import eTimer
                     def update_ui():
                         try:
                             if "station" in self:
@@ -997,10 +990,10 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf", "r") as file:
                     contents = file.readlines()
                     a = str(contents[0])
-                    rez = a.rstrip()
-                    rgbmyr = rez.split(' ')[0]
-                    rgbmyg = rez.split(' ')[1]
-                    rgbmyb = rez.split(' ')[2]
+                    trspz = a.rstrip()
+                    rgbmyr = trspz.split(' ')[0]
+                    rgbmyg = trspz.split(' ')[1]
+                    rgbmyb = trspz.split(' ')[2]
                     file.close()
             except BaseException:
                 rgbmyr = 0
@@ -1674,8 +1667,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.cleanup_background_threads()
 
         # Config Save
-        rez = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
-        self.savesetcolor(rez)
+        trspz = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
+        self.savesetcolor(trspz)
         savesetalpha(alpha)
 
         # Clean cache on exit (optional)
@@ -1897,7 +1890,6 @@ class Color_Select(Screen):
                             self.Clist[i] = f"{i}. {translated}"
 
                 # Update the GUI after each block
-                from enigma import eTimer
                 timer = eTimer()
                 timer.callback.append(self.update_gui)
                 timer.start(0, True)
