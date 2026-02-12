@@ -183,9 +183,6 @@ msgstr "Dades proporcionades per Foreca"
 msgid "Denmark"
 msgstr "Dinamarca"
 
-msgid "Distance"
-msgstr "Distància"
-
 msgid "Down - Next page"
 msgstr "Avall - Pàgina següent"
 
@@ -233,9 +230,6 @@ msgstr "Favorit 1"
 
 msgid "Favorite 2"
 msgstr "Favorit 2"
-
-msgid "Feels like"
-msgstr "Sensació tèrmica"
 
 msgid "Finland"
 msgstr "Finlàndia"
@@ -297,9 +291,6 @@ msgstr "Hessen"
 msgid "Home"
 msgstr "Inici"
 
-msgid "Humidity"
-msgstr "Humitat"
-
 msgid "Hungary"
 msgstr "Hongria"
 
@@ -338,9 +329,6 @@ msgstr "Saltar 500 amunt"
 
 msgid "Keyboard"
 msgstr "Teclat"
-
-msgid "Last update"
-msgstr "Última actualització"
 
 msgid "Latvia"
 msgstr "Letònia"
@@ -528,12 +516,6 @@ msgstr "Portugal"
 msgid "Possible reasons:\n"
 msgstr "Possibles raons:\n"
 
-msgid "Precipitation"
-msgstr "Precipitació"
-
-msgid "Pressure"
-msgstr "Pressió"
-
 msgid "Previous"
 msgstr "Anterior"
 
@@ -618,9 +600,6 @@ msgstr "Espanya"
 msgid "Station Observations"
 msgstr "Observacions d'estació"
 
-msgid "Sun"
-msgstr "Sol"
-
 msgid "Sunrise"
 msgstr "Sortida del sol"
 
@@ -633,9 +612,6 @@ msgstr "Suècia"
 msgid "Switzerland"
 msgstr "Suïssa"
 
-msgid "Temperature"
-msgstr "Temperatura"
-
 msgid "Thin upper cloud"
 msgstr "Capa fina de núvols alts"
 
@@ -647,9 +623,6 @@ msgstr "Configuració de transparència"
 
 msgid "Transparency level"
 msgstr "Nivell de transparència"
-
-msgid "UV Index"
-msgstr "Índex UV"
 
 msgid "Unit Settings"
 msgstr "Configuració d'unitats"
@@ -665,9 +638,6 @@ msgstr "Amunt - Pàgina anterior"
 
 msgid "Use arrow keys to scroll"
 msgstr "Utilitza les tecles de fletxa per desplaçar-te"
-
-msgid "Weather"
-msgstr "Temps"
 
 msgid "Weather Maps"
 msgstr "Mapes meteorològics"
@@ -693,17 +663,11 @@ msgstr "Temps demà"
 msgid "Weekly Forecast"
 msgstr "Pronòstic setmanal"
 
-msgid "Wind"
-msgstr "Vent"
-
 msgid "Window transparency"
 msgstr "Transparència de finestra"
 
 msgid "Yellow - Favorite 2"
 msgstr "Groc - Favorit 2"
-
-msgid "stations nearby"
-msgstr "estacions properes"
 
 msgid "v."
 msgstr "v."
@@ -731,3 +695,39 @@ msgstr "• VOL+/VOL- per saltar 100 ciutats"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GROC per desar com a Favorit 2\n"
+
+#~ msgid "Distance"
+#~ msgstr "Distància"
+
+#~ msgid "Feels like"
+#~ msgstr "Sensació tèrmica"
+
+#~ msgid "Humidity"
+#~ msgstr "Humitat"
+
+#~ msgid "Last update"
+#~ msgstr "Última actualització"
+
+#~ msgid "Precipitation"
+#~ msgstr "Precipitació"
+
+#~ msgid "Pressure"
+#~ msgstr "Pressió"
+
+#~ msgid "Sun"
+#~ msgstr "Sol"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatura"
+
+#~ msgid "UV Index"
+#~ msgstr "Índex UV"
+
+#~ msgid "Weather"
+#~ msgstr "Temps"
+
+#~ msgid "Wind"
+#~ msgstr "Vent"
+
+#~ msgid "stations nearby"
+#~ msgstr "estacions properes"
