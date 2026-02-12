@@ -162,7 +162,7 @@
 # graphic @Oktus
 
 # mod @lululla 2026.01.25 v.1.3.5
-#fix map viewer transcode to api from scraper
+# fix map viewer transcode to api from scraper
 
 from __future__ import absolute_import
 
@@ -992,21 +992,24 @@ class ForecaPreview_4(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split(
+                '/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split(
+                '/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split(
+                '/')[0] if '/' in path_loc2 else path_loc2
 
-        print(f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
-        
+        print(
+            f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
+
         if not self.weather_api.check_credentials():
             print("[DEBUG] API credentials not configured")
             self.session.open(
                 MessageBox,
                 _("API credentials not configured!\n\nPlease create api_config.txt file."),
-                MessageBox.TYPE_ERROR
-            )
+                MessageBox.TYPE_ERROR)
             return
 
         if not location_id:

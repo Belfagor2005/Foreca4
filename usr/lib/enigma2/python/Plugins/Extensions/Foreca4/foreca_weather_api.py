@@ -611,7 +611,8 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(len(daily_data['days'])))
+            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(
+                len(daily_data['days'])))
             return daily_data
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
