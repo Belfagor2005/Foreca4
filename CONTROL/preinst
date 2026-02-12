@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Installing Foreca 4 v.1.3.4 by Evg77734 2025 ↓      "
+echo "Installing Foreca 4     "
 
 status='/var/lib/opkg/status'
 package='enigma2-plugin-extensions-foreca4'

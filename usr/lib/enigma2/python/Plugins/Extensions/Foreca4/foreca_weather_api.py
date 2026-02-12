@@ -19,7 +19,7 @@ class ForecaWeatherAPI:
 
     def __init__(self, unit_manager=None):
         self.unit_manager = unit_manager
-        self.base_url = "https://pfa.foreca.com"  # <-- CAMBIATO da .net a .com
+        self.base_url = "https://pfa.foreca.com"
         self.token = None
         self.token_expire = 0
         self.load_credentials()
@@ -611,10 +611,8 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(
-                len(daily_data['days'])))
+            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(len(daily_data['days'])))
             return daily_data
-
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
             import traceback

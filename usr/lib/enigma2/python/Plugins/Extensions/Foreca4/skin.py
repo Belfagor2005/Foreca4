@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Created (C) Evg77734, 2025
+# Modded from lululla added screen
 
 ForecaPreview_4_FHD = """
 <screen name="ForecaPreview_4_FHD" position="center,center" size="1920,1080" title="Foreca Weather Preview" flags="wfNoBorder" backgroundColor="transparent">
@@ -204,18 +205,23 @@ ForecaSlideshow_FHD = """
 
 ForecaMapMenu_FHD = """
 <screen name="ForecaMapMenu_FHD" position="center,center" size="800,700" title="Foreca Live Maps">
-    <widget name="list" position="46,7" size="700,650" itemHeight="35" font="Regular;32" scrollbarMode="showNever"/>
+    <widget name="list" position="46,7" size="700,630" itemHeight="35" font="Regular;32" scrollbarMode="showNever"/>
     <widget name="info" position="50,665" size="700,30" font="Regular;24" halign="center"/>
 </screen>"""
 
+
 ForecaMapViewer_FHD = """
 <screen name="ForecaMapViewer_FHD" position="center,center" size="1920,1080" flags="wfNoBorder">
-    <widget name="map" position="0,0" size="1920,1080" zPosition="1" scale="1" backgroundColor="#40000000" />
+    <widget name="map" position="center,center" size="1280,1280" zPosition="1" scale="1" />
+    <!--
+    <eLabel position="0,0" size="1920,1080" backgroundColor="#00000000" zPosition="0" />
+    -->
     <widget name="title" position="50,5" size="1820,50" font="Regular;40" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" valign="center" zPosition="3" />
     <widget name="time" position="50,995" size="1820,50" font="Regular;30" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
-    <widget name="info" position="50,1045" size="1820,35" font="Regular; 28" foregroundColor="#f4f4f4" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
+    <widget name="info" position="50,1045" size="1820,35" font="Regular;28" foregroundColor="#f4f4f4" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
     <widget name="layerinfo" position="60,55" size="1800,40" font="Regular;28" foregroundColor="#ffffff" backgroundColor="#40000000" transparent="1" halign="center" zPosition="3" />
 </screen>"""
+
 
 ForecaStations_FHD = """
 <screen name="ForecaStations_FHD" position="center,center" size="820,560" title="Station Observations">

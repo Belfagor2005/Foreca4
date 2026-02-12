@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version='1.3.4_r5'
-changelog='\nRecoded Foreca Fiz MapViewer'
+version='1.3.5'
+changelog='\nRecoded Foreca Fix MapViewer'
 
 TMPPATH=/tmp/Foreca4-install
 FILEPATH=/tmp/Foreca4-main.tar.gz
