@@ -299,9 +299,6 @@ msgstr "الصورة غير متوفرة"
 msgid "Imperial System"
 msgstr "النظام الإمبراطوري"
 
-msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr "النظام الإمبراطوري (فهرنهايت، ميل/س، بوصة زئبقية)"
-
 msgid "Info"
 msgstr "معلومات"
 
@@ -367,9 +364,6 @@ msgstr "الرسم الجوي"
 
 msgid "Metric System"
 msgstr "النظام المتري"
-
-msgid "Metric System (Celsius, km/h, hPa)"
-msgstr "النظام المتري (مئوية، كم/س، هيكتوباسكال)"
 
 msgid "Middle America"
 msgstr "أمريكا الوسطى"
@@ -626,9 +620,6 @@ msgstr "مستوى الشفافية"
 msgid "Unit Settings"
 msgstr "إعدادات الوحدات"
 
-msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr "تم حفظ إعدادات الوحدات. أعد تشغيل الملحق لتطبيق التغييرات."
-
 msgid "Unknown"
 msgstr "غير معروف"
 
@@ -694,6 +685,15 @@ msgstr "• VOL+/VOL- للقفز 100 مدينة"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• أصفر للحفظ كالمفضلة 2\n"
+
+#~ msgid "Imperial System (Fahrenheit, mph, inHg)"
+#~ msgstr "النظام الإمبراطوري (فهرنهايت، ميل/س، بوصة زئبقية)"
+
+#~ msgid "Metric System (Celsius, km/h, hPa)"
+#~ msgstr "النظام المتري (مئوية، كم/س، هيكتوباسكال)"
+
+#~ msgid "Unit settings saved. Restart plugin to apply changes."
+#~ msgstr "تم حفظ إعدادات الوحدات. أعد تشغيل الملحق لتطبيق التغييرات."
 
 #~ msgid "Distance"
 #~ msgstr "المسافة"

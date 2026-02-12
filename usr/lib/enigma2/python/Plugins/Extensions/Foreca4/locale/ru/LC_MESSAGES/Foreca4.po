@@ -298,9 +298,6 @@ msgstr "Изображение недоступно"
 msgid "Imperial System"
 msgstr "Имперская система"
 
-msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr "Имперская система (Фаренгейт, миль/ч, дюйм рт. ст.)"
-
 msgid "Info"
 msgstr "Информация"
 
@@ -366,9 +363,6 @@ msgstr "Метеограмма"
 
 msgid "Metric System"
 msgstr "Метрическая система"
-
-msgid "Metric System (Celsius, km/h, hPa)"
-msgstr "Метрическая система (Цельсий, км/ч, гПа)"
 
 msgid "Middle America"
 msgstr "Центральная Америка"
@@ -625,9 +619,6 @@ msgstr "Уровень прозрачности"
 msgid "Unit Settings"
 msgstr "Настройки единиц"
 
-msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr "Настройки единиц сохранены. Перезапустите плагин для применения изменений."
-
 msgid "Unknown"
 msgstr "Неизвестно"
 
@@ -694,6 +685,15 @@ msgstr "• VOL+/VOL- для перехода на 100 городов"
 #, fuzzy
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное 1\n"
+
+#~ msgid "Imperial System (Fahrenheit, mph, inHg)"
+#~ msgstr "Имперская система (Фаренгейт, миль/ч, дюйм рт. ст.)"
+
+#~ msgid "Metric System (Celsius, km/h, hPa)"
+#~ msgstr "Метрическая система (Цельсий, км/ч, гПа)"
+
+#~ msgid "Unit settings saved. Restart plugin to apply changes."
+#~ msgstr "Настройки единиц сохранены. Перезапустите плагин для применения изменений."
 
 #~ msgid "Distance"
 #~ msgstr "Расстояние"

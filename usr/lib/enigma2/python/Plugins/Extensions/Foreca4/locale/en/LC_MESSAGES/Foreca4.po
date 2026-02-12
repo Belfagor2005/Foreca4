@@ -312,9 +312,6 @@ msgstr ""
 msgid "Imperial System"
 msgstr ""
 
-msgid "Imperial System (Fahrenheit, mph, inHg)"
-msgstr ""
-
 msgid "Info"
 msgstr ""
 
@@ -380,9 +377,6 @@ msgid "Meteogram"
 msgstr "Meteogram"
 
 msgid "Metric System"
-msgstr ""
-
-msgid "Metric System (Celsius, km/h, hPa)"
 msgstr ""
 
 msgid "Middle America"
@@ -646,9 +640,6 @@ msgstr "Transparency level"
 #, fuzzy
 msgid "Unit Settings"
 msgstr "Menu - Select transparency"
-
-msgid "Unit settings saved. Restart plugin to apply changes."
-msgstr ""
 
 msgid "Unknown"
 msgstr ""
