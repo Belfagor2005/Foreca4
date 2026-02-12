@@ -804,7 +804,6 @@ class ForecaPreview_4(Screen, HelpableScreen):
                     print("[DEBUG] Station text: {0}".format(text))
 
                     from enigma import eTimer
-
                     def update_ui():
                         try:
                             if "station" in self:
@@ -2268,10 +2267,30 @@ class ExtInfo_Foreca4(Screen):
 
 class ExtInfo_2_Foreca4(Screen):
 
-    def __init__(self, session):
+    def __init__(self, session, weather_api):
         self.skin = load_skin_for_class(ExtInfo_2_Foreca4)
 
         Screen.__init__(self, session)
+
+        self.weather_api = weather_api
+
+        if myloc == 0:
+            location_path = path_loc0
+        elif myloc == 1:
+            location_path = path_loc1
+        else:
+            location_path = path_loc2
+
+        location_id = location_path.split('/')[0] if '/' in location_path else location_path
+
+        self.lat_val = lat
+        self.lon_val = lon
+
+        if self.weather_api and self.weather_api.check_credentials():
+            location_data = self.weather_api._get_location_details(location_id)
+            if location_data:
+                self.lat_val = location_data.get('lat', lat)
+                self.lon_val = location_data.get('lon', lon)
 
         self['title1'] = StaticText(_('Weather Radar'))
         self["pic"] = Pixmap()
@@ -2315,8 +2334,8 @@ class ExtInfo_2_Foreca4(Screen):
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
         self["pic_lat"].instance.show()
 
-        self['lat_val'].text = str(lat)
-        self['lon_val'].text = str(lon)
+        self['lat_val'].text = str(self.lat_val)
+        self['lon_val'].text = str(self.lon_val)
 
     def OK(self):
         self.session.open(Meteogram_Foreca4)
