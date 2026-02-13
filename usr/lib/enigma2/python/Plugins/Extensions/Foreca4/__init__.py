@@ -103,7 +103,8 @@ def load_skin_by_class(class_name):
             with codecs.open(skin_file, 'r', 'utf-8') as f:
                 content = f.read()
                 print(f"[SKIN DEBUG] ✓ Loaded {len(content)} bytes")
-                print(f"[SKIN DEBUG] First 100 chars: {content[:100].replace(chr(10), ' ')}")
+                print(
+                    f"[SKIN DEBUG] First 100 chars: {content[:100].replace(chr(10), ' ')}")
                 print("=" * 60 + "\n")
                 return content
         except Exception as e:

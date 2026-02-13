@@ -137,6 +137,9 @@ msgstr ""
 msgid "Cloudy, thunderstorms with rain"
 msgstr ""
 
+msgid "Color Selector"
+msgstr ""
+
 msgid "Color data"
 msgstr ""
 
@@ -149,13 +152,13 @@ msgstr ""
 msgid "Color select"
 msgstr ""
 
-msgid "Color selection"
-msgstr ""
-
 msgid "Continents Weather Maps"
 msgstr ""
 
 msgid "Could not load forecast data"
+msgstr ""
+
+msgid "Created by @Bauernbub"
 msgstr ""
 
 msgid "Current weather and forecast"
@@ -348,9 +351,6 @@ msgid "Mecklenburg-Vorpommern"
 msgstr ""
 
 msgid "Menu - Settings"
-msgstr ""
-
-msgid "Meteogram"
 msgstr ""
 
 msgid "Metric System"
@@ -654,6 +654,12 @@ msgid "Window transparency"
 msgstr ""
 
 msgid "Yellow - Favorite 2"
+msgstr ""
+
+msgid "https://linuxsat-support.com"
+msgstr ""
+
+msgid "mod Lululla, 2026"
 msgstr ""
 
 msgid "v."

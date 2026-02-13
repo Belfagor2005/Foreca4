@@ -138,6 +138,10 @@ msgstr "Nuageux et averses de neige humide"
 msgid "Cloudy, thunderstorms with rain"
 msgstr "Nuageux, orages avec pluie"
 
+#, fuzzy
+msgid "Color Selector"
+msgstr "Sélection de couleur"
+
 msgid "Color data"
 msgstr "Données de couleur"
 
@@ -150,14 +154,14 @@ msgstr "Nom de couleur"
 msgid "Color select"
 msgstr "Sélection de couleur"
 
-msgid "Color selection"
-msgstr "Sélection de couleur"
-
 msgid "Continents Weather Maps"
 msgstr "Cartes météo des continents"
 
 msgid "Could not load forecast data"
 msgstr "Impossible de charger les données de prévision"
+
+msgid "Created by @Bauernbub"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "Météo actuelle et prévisions"
@@ -350,9 +354,6 @@ msgstr "Mecklembourg-Poméranie-Occidentale"
 
 msgid "Menu - Settings"
 msgstr "Menu - Paramètres"
-
-msgid "Meteogram"
-msgstr "Météogramme"
 
 msgid "Metric System"
 msgstr "Système métrique"
@@ -658,6 +659,12 @@ msgstr "Transparence de la fenêtre"
 msgid "Yellow - Favorite 2"
 msgstr "Jaune - Favori 2"
 
+msgid "https://linuxsat-support.com"
+msgstr ""
+
+msgid "mod Lululla, 2026"
+msgstr ""
+
 msgid "v."
 msgstr "v."
 
@@ -684,6 +691,12 @@ msgstr "• VOL+/VOL- pour sauter 100 villes"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• JAUNE pour enregistrer comme Favori 2\n"
+
+#~ msgid "Color selection"
+#~ msgstr "Sélection de couleur"
+
+#~ msgid "Meteogram"
+#~ msgstr "Météogramme"
 
 #~ msgid "1. No API credentials configured\n"
 #~ msgstr "1. Aucune identifiant API configuré\n"

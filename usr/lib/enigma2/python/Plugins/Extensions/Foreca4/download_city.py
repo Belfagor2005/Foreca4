@@ -8,6 +8,7 @@ BASE_URL = "https://pfa.foreca.com"
 INPUT_FILE = "City.cfg"   # Your file in the format "Country/City"
 OUTPUT_FILE = "new_city.cfg"
 
+
 def search_city_id(original_search_string):
     """
     Searches for a location ID. Tries multiple query strategies.
@@ -15,7 +16,8 @@ def search_city_id(original_search_string):
     import re
     import urllib.parse
 
-    # 1. Extract and clean parts from the original line (e.g. 'Estonia/Kohtla-Järve')
+    # 1. Extract and clean parts from the original line (e.g.
+    # 'Estonia/Kohtla-Järve')
     parts = [p.strip() for p in original_search_string.split('/') if p.strip()]
     if len(parts) < 2:
         return None
@@ -26,15 +28,18 @@ def search_city_id(original_search_string):
     # 2. CRITICAL CLEANUP: remove hyphens FROM THE CITY NAME for searching
     #    but keep the original name for the final output format.
     #    Convert 'Kohtla-Järve' into 'Kohtla Järve' for the query.
-    city_name_for_query = city_name_raw.replace('-', ' ').replace('_', ' ').strip()
+    city_name_for_query = city_name_raw.replace(
+        '-', ' ').replace('_', ' ').strip()
     # Also remove any parentheses
     city_name_for_query = re.sub(r'\s*\(.*?\)', '', city_name_for_query)
 
     # 3. Define search strategies using the CLEANED name
     search_strategies = [
         city_name_for_query,                          # 1. Clean name: 'Kohtla Järve'
-        f"{city_name_for_query}, {target_country}",   # 2. 'Kohtla Järve, Estonia'
-        f"{city_name_for_query} {target_country}",    # 3. 'Kohtla Järve Estonia'
+        # 2. 'Kohtla Järve, Estonia'
+        f"{city_name_for_query}, {target_country}",
+        # 3. 'Kohtla Järve Estonia'
+        f"{city_name_for_query} {target_country}",
     ]
 
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
@@ -69,7 +74,8 @@ def search_city_id(original_search_string):
             break
 
     if not selected_location:
-        print(f"  Warning: no result for country '{target_country}'. Using the first available result.")
+        print(
+            f"  Warning: no result for country '{target_country}'. Using the first available result.")
         selected_location = found_locations[0]
 
     # 6. BUILD FINAL FORMAT STRING
@@ -93,7 +99,7 @@ def main():
     total_requests = 0  # To monitor the 1000/day limit
 
     with open(INPUT_FILE, 'r', encoding='utf-8') as infile, \
-         open(OUTPUT_FILE, 'w', encoding='utf-8') as outfile:
+            open(OUTPUT_FILE, 'w', encoding='utf-8') as outfile:
 
         for line_num, original_line in enumerate(infile, 1):
             original_line = original_line.strip()
@@ -145,7 +151,9 @@ def main():
     print(f"Estimated total API requests: {total_requests}")
     print(f"New file saved as: {OUTPUT_FILE}")
     if total_requests >= 950:
-        print("⚠️  Warning: You have used over 950 requests today. Respect the daily limit.")
+        print(
+            "⚠️  Warning: You have used over 950 requests today. Respect the daily limit.")
+
 
 if __name__ == "__main__":
     main()

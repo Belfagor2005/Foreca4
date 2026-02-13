@@ -138,6 +138,10 @@ msgstr "Ennuvolat i xàfecs de neu humida"
 msgid "Cloudy, thunderstorms with rain"
 msgstr "Ennuvolat, tempestes amb pluja"
 
+#, fuzzy
+msgid "Color Selector"
+msgstr "Selecció de color"
+
 msgid "Color data"
 msgstr "Dades de color"
 
@@ -150,14 +154,14 @@ msgstr "Nom del color"
 msgid "Color select"
 msgstr "Selecció de color"
 
-msgid "Color selection"
-msgstr "Selecció de color"
-
 msgid "Continents Weather Maps"
 msgstr "Mapes meteorològics dels continents"
 
 msgid "Could not load forecast data"
 msgstr "No s'han pogut carregar les dades de pronòstic"
+
+msgid "Created by @Bauernbub"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "Temps actual i pronòstic"
@@ -350,9 +354,6 @@ msgstr "Mecklenburg-Pomerània Occidental"
 
 msgid "Menu - Settings"
 msgstr "Menú - Configuració"
-
-msgid "Meteogram"
-msgstr "Meteograma"
 
 msgid "Metric System"
 msgstr "Sistema mètric"
@@ -658,6 +659,12 @@ msgstr "Transparència de finestra"
 msgid "Yellow - Favorite 2"
 msgstr "Groc - Favorit 2"
 
+msgid "https://linuxsat-support.com"
+msgstr ""
+
+msgid "mod Lululla, 2026"
+msgstr ""
+
 msgid "v."
 msgstr "v."
 
@@ -684,6 +691,12 @@ msgstr "• VOL+/VOL- per saltar 100 ciutats"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GROC per desar com a Favorit 2\n"
+
+#~ msgid "Color selection"
+#~ msgstr "Selecció de color"
+
+#~ msgid "Meteogram"
+#~ msgstr "Meteograma"
 
 #~ msgid "1. No API credentials configured\n"
 #~ msgstr "1. No hi ha credencials API configurades\n"
