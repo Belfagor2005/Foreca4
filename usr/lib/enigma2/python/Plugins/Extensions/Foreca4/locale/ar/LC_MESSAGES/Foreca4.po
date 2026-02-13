@@ -137,6 +137,10 @@ msgstr "غائم وزخات ثلج رطب"
 msgid "Cloudy, thunderstorms with rain"
 msgstr "غائم، عواصف رعدية مع أمطار"
 
+#, fuzzy
+msgid "Color Selector"
+msgstr "اختيار اللون"
+
 msgid "Color data"
 msgstr "بيانات الألوان"
 
@@ -149,14 +153,14 @@ msgstr "اسم اللون"
 msgid "Color select"
 msgstr "اختيار اللون"
 
-msgid "Color selection"
-msgstr "اختيار اللون"
-
 msgid "Continents Weather Maps"
 msgstr "خرائط الطقس للقارات"
 
 msgid "Could not load forecast data"
 msgstr "تعذر تحميل بيانات التوقعات"
+
+msgid "Created by @Bauernbub"
+msgstr ""
 
 msgid "Current weather and forecast"
 msgstr "الطقس الحالي والتوقعات"
@@ -349,9 +353,6 @@ msgstr "مكلنبورغ-فوربومرن"
 
 msgid "Menu - Settings"
 msgstr "القائمة - الإعدادات"
-
-msgid "Meteogram"
-msgstr "الرسم الجوي"
 
 msgid "Metric System"
 msgstr "النظام المتري"
@@ -657,6 +658,12 @@ msgstr "شفافية النافذة"
 msgid "Yellow - Favorite 2"
 msgstr "أصفر - المفضلة 2"
 
+msgid "https://linuxsat-support.com"
+msgstr ""
+
+msgid "mod Lululla, 2026"
+msgstr ""
+
 msgid "v."
 msgstr "إصدار."
 
@@ -683,6 +690,12 @@ msgstr "• VOL+/VOL- للقفز 100 مدينة"
 
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• أصفر للحفظ كالمفضلة 2\n"
+
+#~ msgid "Color selection"
+#~ msgstr "اختيار اللون"
+
+#~ msgid "Meteogram"
+#~ msgstr "الرسم الجوي"
 
 #~ msgid "1. No API credentials configured\n"
 #~ msgstr "1. لم يتم تكوين بيانات اعتماد API\n"
