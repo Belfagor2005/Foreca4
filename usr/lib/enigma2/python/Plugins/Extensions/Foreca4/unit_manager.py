@@ -8,9 +8,36 @@ from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Pixmap import Pixmap
+from enigma import gRGB
+from skin import parseColor
+
 import os
 
 from . import _, load_skin_for_class
+
+global rgbmyr, rgbmyg, rgbmyb, alpha
+rgbmyr = 0
+rgbmyg = 80
+rgbmyb = 239
+alpha = '#40000000'
+
+
+def read_alpha():
+    global alpha
+    alpha = '#40000000'
+    if os.path.exists(
+            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf") is True:
+        try:
+            with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf", "r") as file:
+                contents = file.readlines()
+                a = str(contents[0])
+                alpha = a.rstrip()
+                file.close()
+        except BaseException:
+            alpha = '#40000000'
+
+
+read_alpha()
 
 
 class UnitManager:
@@ -37,6 +64,7 @@ class UnitManager:
         self.wind_unit = self.WIND_KMH
         self.pressure_unit = self.PRESSURE_HPA
         self.temp_unit = self.TEMP_C
+        self.readsetcolor()
         self.load_config()
 
     def load_config(self):
@@ -70,6 +98,27 @@ class UnitManager:
                 f.write(f"temp_unit={self.temp_unit}\n")
         except Exception as e:
             print(f"[Foreca4] Error saving unit config: {e}")
+
+    def readsetcolor(self):
+        global rgbmyr, rgbmyg, rgbmyb
+        rgbmyr = 0
+        rgbmyg = 80
+        rgbmyb = 239
+        if os.path.exists(
+                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf") is True:
+            try:
+                with open("/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_color.conf", "r") as file:
+                    contents = file.readlines()
+                    a = str(contents[0])
+                    trspz = a.rstrip()
+                    rgbmyr = trspz.split(' ')[0]
+                    rgbmyg = trspz.split(' ')[1]
+                    rgbmyb = trspz.split(' ')[2]
+                    file.close()
+            except BaseException:
+                rgbmyr = 0
+                rgbmyg = 80
+                rgbmyb = 239
 
     def set_simple_unit_system(self, system):
         """
