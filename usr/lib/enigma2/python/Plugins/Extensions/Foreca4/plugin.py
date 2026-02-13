@@ -1771,7 +1771,8 @@ class ColorSelector(Screen):
         if self.color_list:
             for idx in range(0, min(30, len(self.source_names))):
                 if self.translated_names[idx] == self.source_names[idx]:
-                    translated_text = self.translate_color_name(self.source_names[idx])
+                    translated_text = self.translate_color_name(
+                        self.source_names[idx])
                     if translated_text != self.source_names[idx]:
                         self.translated_names[idx] = translated_text
                         self.color_list[idx] = f"{idx}. {translated_text}"
@@ -1789,7 +1790,8 @@ class ColorSelector(Screen):
         def translation_worker():
             nonlocal end_position  # Dichiara che stai usando la variabile esterna
             end_position = min(end_position, len(self.source_names))
-            print(f"[ColorSelector] Processing range {start_position} - {end_position}")
+            print(
+                f"[ColorSelector] Processing range {start_position} - {end_position}")
 
             batch_size = 20
             for batch_start in range(start_position, end_position, batch_size):
@@ -1798,7 +1800,8 @@ class ColorSelector(Screen):
 
                 for position in range(batch_start, batch_end):
                     if self.translated_names[position] == self.source_names[position]:
-                        translated_text = self.translate_color_name(self.source_names[position])
+                        translated_text = self.translate_color_name(
+                            self.source_names[position])
                         if translated_text != self.source_names[position]:
                             self.translated_names[position] = translated_text
                             self.color_list[position] = f"{position}. {translated_text}"
@@ -1815,12 +1818,16 @@ class ColorSelector(Screen):
                     update_timer.callback.append(safe_refresh)
                     update_timer.start(0, True)
 
-                print(f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
+                print(
+                    f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
 
-            print(f"[ColorSelector] Completed range {start_position}-{end_position}")
-            self.last_processed_index = max(self.last_processed_index, end_position)
+            print(
+                f"[ColorSelector] Completed range {start_position}-{end_position}")
+            self.last_processed_index = max(
+                self.last_processed_index, end_position)
 
-        worker_thread = threading.Thread(target=translation_worker, daemon=True)
+        worker_thread = threading.Thread(
+            target=translation_worker, daemon=True)
         worker_thread.start()
 
     def translate_color_name(self, original_text):
@@ -1842,22 +1849,26 @@ class ColorSelector(Screen):
                         translated_parts.append("")
 
                 final_text = '-'.join(translated_parts)
-                print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+                print(
+                    f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
                 return final_text
 
             final_text = trans(original_text)
-            print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+            print(
+                f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
             return final_text
 
         except Exception as error:
-            print(f"[ColorSelector] ERROR translating '{original_text}': {error}")
+            print(
+                f"[ColorSelector] ERROR translating '{original_text}': {error}")
             return original_text
 
     def update_current_selection(self, selected_index):
         print(f"[ColorSelector] Updating selection {selected_index}")
         if 0 <= selected_index < len(self.translated_names):
             if self.translated_names[selected_index] == self.source_names[selected_index]:
-                translated_text = self.translate_color_name(self.source_names[selected_index])
+                translated_text = self.translate_color_name(
+                    self.source_names[selected_index])
                 if translated_text != self.translated_names[selected_index]:
                     self.translated_names[selected_index] = translated_text
                     self.color_list[selected_index] = f"{selected_index}. {translated_text}"
@@ -1866,7 +1877,8 @@ class ColorSelector(Screen):
             display_name = self.translated_names[selected_index]
             self["color_name_label"].setText(display_name)
 
-            if selected_index < len(self.color_data) and self.color_data[selected_index]:
+            if selected_index < len(
+                    self.color_data) and self.color_data[selected_index]:
                 color_values = self.color_data[selected_index]
                 value_parts = color_values.split(' ')
 
@@ -1880,7 +1892,8 @@ class ColorSelector(Screen):
                     color_object = gRGB(red_value, green_value, blue_value)
 
                     # Calculate brightness for text contrast (0-255)
-                    brightness = (red_value * 299 + green_value * 587 + blue_value * 114) / 1000
+                    brightness = (
+                        red_value * 299 + green_value * 587 + blue_value * 114) / 1000
 
                     # Choose text color based on background brightness
                     if brightness > 128:
@@ -1892,17 +1905,21 @@ class ColorSelector(Screen):
 
                     # --- COLOR_NAME_LABEL (colored text) ---
                     # The color_name_label text takes the selected color
-                    self["color_name_label"].instance.setForegroundColor(color_object)
+                    self["color_name_label"].instance.setForegroundColor(
+                        color_object)
 
                     # --- COLOR_INFO_LABEL (colored background with contrasting text) ---
                     # Colored background
-                    self["color_info_label"].instance.setBackgroundColor(color_object)
+                    self["color_info_label"].instance.setBackgroundColor(
+                        color_object)
                     self["color_info_label"].instance.setTransparent(False)
                     # Contrasting text (white or black for readability)
-                    self["color_info_label"].instance.setForegroundColor(text_color)
+                    self["color_info_label"].instance.setForegroundColor(
+                        text_color)
 
                     # --- COLOR_PREVIEW ---
-                    self["color_preview"].instance.setBackgroundColor(color_object)
+                    self["color_preview"].instance.setBackgroundColor(
+                        color_object)
 
                     info_text = (_('HTML') + ' (' + html_code + ')   ' +
                                  _('Red') + ' (' + str(red_value) + ')   ' +
@@ -1918,7 +1935,8 @@ class ColorSelector(Screen):
             combined_data = list(zip(self.translated_names, self.color_list,
                                      self.source_names, self.color_data))
             combined_data.sort(key=lambda item: item[0].lower())
-            self.translated_names, self.color_list, self.source_names, self.color_data = zip(*combined_data)
+            self.translated_names, self.color_list, self.source_names, self.color_data = zip(
+                *combined_data)
             self.translated_names = list(self.translated_names)
             self.color_list = list(self.color_list)
             self.source_names = list(self.source_names)
@@ -1928,7 +1946,8 @@ class ColorSelector(Screen):
         current_position = self["menu"].getCurrentIndex()
 
         if current_position < len(self.translated_names):
-            self["color_name_label"].setText(self.translated_names[current_position])
+            self["color_name_label"].setText(
+                self.translated_names[current_position])
 
         self["menu"].instance.invalidate()
         self["color_name_label"].instance.invalidate()
@@ -1951,8 +1970,10 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index + 100, len(self.source_names))
-            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index +
+                            100, len(self.source_names))
+            print(
+                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1962,8 +1983,10 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index + 100, len(self.source_names))
-            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index +
+                            100, len(self.source_names))
+            print(
+                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1971,7 +1994,8 @@ class ColorSelector(Screen):
         global rgbmyr, rgbmyg, rgbmyb
         current_position = self["menu"].getCurrentIndex()
 
-        if current_position < len(self.color_data) and self.color_data[current_position]:
+        if current_position < len(
+                self.color_data) and self.color_data[current_position]:
             color_values = self.color_data[current_position]
             value_parts = color_values.split(' ')
 
@@ -2006,20 +2030,20 @@ class ColorSelector(Screen):
         # self["plate0"] = Label("N/A")
         # self["plate1"] = Label("N/A")
         # self["actions"] = ActionMap(
-            # [
-                # "OkCancelActions",
-                # "DirectionActions",
-                # "HelpActions",
-                # "EPGSelectActions"
-            # ],
-            # {
-                # "cancel": self.Exit,
-                # "left": self.left,
-                # "right": self.right,
-                # "up": self.up,
-                # "down": self.down,
-                # "ok": self.OK,
-            # }, -1
+        # [
+        # "OkCancelActions",
+        # "DirectionActions",
+        # "HelpActions",
+        # "EPGSelectActions"
+        # ],
+        # {
+        # "cancel": self.Exit,
+        # "left": self.left,
+        # "right": self.right,
+        # "up": self.up,
+        # "down": self.down,
+        # "ok": self.OK,
+        # }, -1
         # )
         # self.onShown.append(self.prepare)
 
@@ -2037,39 +2061,39 @@ class ColorSelector(Screen):
         # file_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/new_rgb_full.txt"
 
         # if os.path.exists(file_path):
-            # try:
-                # with open(file_path, "r", encoding="utf-8") as f:
-                    # lines = f.readlines()
+        # try:
+        # with open(file_path, "r", encoding="utf-8") as f:
+        # lines = f.readlines()
 
-                # for i, line in enumerate(lines):
-                    # line = line.strip()
-                    # if not line:
-                        # continue
+        # for i, line in enumerate(lines):
+        # line = line.strip()
+        # if not line:
+        # continue
 
-                    # if " #" in line:
-                        # name_part, data_part = line.split(" #", 1)
-                        # name_part = name_part.strip()
-                        # data_part = data_part.strip()
-                    # else:
-                        # name_part = line.strip()
-                        # data_part = ""
-
-                    # self.original_names.append(name_part)
-                    # self.display_names.append(name_part)
-                    # self.mydata.append(data_part)
-                    # self.Clist.append(f"{i}. {name_part}")
-
-            # except Exception as e:
-                # print(f"[Foreca4] Error reading color file: {e}")
-                # self.Clist.append("0. " + _("Error loading colors"))
-                # self.original_names.append("")
-                # self.display_names.append("")
-                # self.mydata.append("")
+        # if " #" in line:
+        # name_part, data_part = line.split(" #", 1)
+        # name_part = name_part.strip()
+        # data_part = data_part.strip()
         # else:
-            # self.Clist.append("0. " + _("Color file not found"))
-            # self.original_names.append("")
-            # self.display_names.append("")
-            # self.mydata.append("")
+        # name_part = line.strip()
+        # data_part = ""
+
+        # self.original_names.append(name_part)
+        # self.display_names.append(name_part)
+        # self.mydata.append(data_part)
+        # self.Clist.append(f"{i}. {name_part}")
+
+        # except Exception as e:
+        # print(f"[Foreca4] Error reading color file: {e}")
+        # self.Clist.append("0. " + _("Error loading colors"))
+        # self.original_names.append("")
+        # self.display_names.append("")
+        # self.mydata.append("")
+        # else:
+        # self.Clist.append("0. " + _("Color file not found"))
+        # self.original_names.append("")
+        # self.display_names.append("")
+        # self.mydata.append("")
 
         # self["Clist"].l.setList(self.Clist)
         # self["Clist"].selectionEnabled(1)
@@ -2077,135 +2101,136 @@ class ColorSelector(Screen):
         # print(f"[ColorSelector] Loaded items: {len(self.original_names)}")
 
         # if self.Clist:
-            # print("[ColorSelector] Translating first 30 items synchronously...")
-            # for i in range(0, min(30, len(self.original_names))):
-                # if self.display_names[i] == self.original_names[i]:
-                    # translated = self.translate_color(self.original_names[i])
-                    # if translated != self.original_names[i]:
-                        # self.display_names[i] = translated
-                        # self.Clist[i] = f"{i}. {translated}"
+        # print("[ColorSelector] Translating first 30 items synchronously...")
+        # for i in range(0, min(30, len(self.original_names))):
+        # if self.display_names[i] == self.original_names[i]:
+        # translated = self.translate_color(self.original_names[i])
+        # if translated != self.original_names[i]:
+        # self.display_names[i] = translated
+        # self.Clist[i] = f"{i}. {translated}"
 
-            # self.update_gui()
-            # self.update_display(0)
+        # self.update_gui()
+        # self.update_display(0)
 
-            # if len(self.original_names) > 30:
-                # print(
-                    # "[ColorSelector] Starting background translation for remaining items...")
-                # self.translate_range(30, 150)
-            # self.last_translated_idx = 150
+        # if len(self.original_names) > 30:
+        # print(
+        # "[ColorSelector] Starting background translation for remaining items...")
+        # self.translate_range(30, 150)
+        # self.last_translated_idx = 150
 
     # def translate_range(self, start_idx, end_idx):
         # import threading
 
         # def translate():
-            # end_idx_actual = min(end_idx, len(self.original_names))
-            # print(
-                # f"[ColorSelector] Translating range {start_idx} to {end_idx_actual}")
+        # end_idx_actual = min(end_idx, len(self.original_names))
+        # print(
+        # f"[ColorSelector] Translating range {start_idx} to {end_idx_actual}")
 
-            # # Translate in blocks of 20 items and update the GUI after each
-            # # block
-            # block_size = 20
-            # for block_start in range(start_idx, end_idx_actual, block_size):
-                # block_end = min(block_start + block_size, end_idx_actual)
-                # translated_in_block = False
+        # # Translate in blocks of 20 items and update the GUI after each
+        # # block
+        # block_size = 20
+        # for block_start in range(start_idx, end_idx_actual, block_size):
+        # block_end = min(block_start + block_size, end_idx_actual)
+        # translated_in_block = False
 
-                # for i in range(block_start, block_end):
-                    # if self.display_names[i] == self.original_names[i]:
-                        # translated = self.translate_color(
-                            # self.original_names[i])
-                        # if translated != self.original_names[i]:
-                            # self.display_names[i] = translated
-                            # self.Clist[i] = f"{i}. {translated}"
-                            # translated_in_block = True
+        # for i in range(block_start, block_end):
+        # if self.display_names[i] == self.original_names[i]:
+        # translated = self.translate_color(
+        # self.original_names[i])
+        # if translated != self.original_names[i]:
+        # self.display_names[i] = translated
+        # self.Clist[i] = f"{i}. {translated}"
+        # translated_in_block = True
 
-                # # Update the GUI after each block
-                # if translated_in_block:
-                    # from enigma import eTimer
+        # # Update the GUI after each block
+        # if translated_in_block:
+        # from enigma import eTimer
 
-                    # def update_gui_safe():
-                        # try:
-                            # self.update_gui()
-                        # except Exception as e:
-                            # print(f"[ColorSelector] Error updating GUI: {e}")
+        # def update_gui_safe():
+        # try:
+        # self.update_gui()
+        # except Exception as e:
+        # print(f"[ColorSelector] Error updating GUI: {e}")
 
-                    # timer = eTimer()
-                    # timer.callback.append(update_gui_safe)
-                    # timer.start(0, True)
+        # timer = eTimer()
+        # timer.callback.append(update_gui_safe)
+        # timer.start(0, True)
 
-                # print(
-                    # f"[ColorSelector] Translated block {block_start}-{block_end}")
+        # print(
+        # f"[ColorSelector] Translated block {block_start}-{block_end}")
 
-            # print(
-                # f"[ColorSelector] Completed translation of range {start_idx}-{end_idx_actual}")
+        # print(
+        # f"[ColorSelector] Completed translation of range
+        # {start_idx}-{end_idx_actual}")
 
-            # # Update the index of the last translated item
-            # self.last_translated_idx = max(
-                # self.last_translated_idx, end_idx_actual)
+        # # Update the index of the last translated item
+        # self.last_translated_idx = max(
+        # self.last_translated_idx, end_idx_actual)
 
         # thread = threading.Thread(target=translate, daemon=True)
         # thread.start()
 
     # def translate_color(self, color_name):
         # if not color_name:
-            # return color_name
+        # return color_name
 
         # print("[ColorSelector] Translate: '{0}'".format(color_name))
         # try:
-            # if '-' in color_name:
-                # parts = color_name.split('-')
-                # translated_parts = []
+        # if '-' in color_name:
+        # parts = color_name.split('-')
+        # translated_parts = []
 
-                # for part in parts:
-                    # part = part.strip()
-                    # if part:
-                        # translated_part = trans(part)
-                        # translated_parts.append(translated_part)
-                    # else:
-                        # translated_parts.append("")
+        # for part in parts:
+        # part = part.strip()
+        # if part:
+        # translated_part = trans(part)
+        # translated_parts.append(translated_part)
+        # else:
+        # translated_parts.append("")
 
-                # result = '-'.join(translated_parts)
-                # print(
-                    # "[ColorSelector] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
-                # return result
+        # result = '-'.join(translated_parts)
+        # print(
+        # "[ColorSelector] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
+        # return result
 
-            # result = trans(color_name)
-            # print(
-                # "[ColorSelector] Result: '{0}' -> '{1}'".format(color_name, result))
-            # return result
+        # result = trans(color_name)
+        # print(
+        # "[ColorSelector] Result: '{0}' -> '{1}'".format(color_name, result))
+        # return result
 
         # except Exception as e:
-            # print(
-                # "[ColorSelector] ERROR translating '{0}': {1}".format(
-                    # color_name, e))
-            # return color_name
+        # print(
+        # "[ColorSelector] ERROR translating '{0}': {1}".format(
+        # color_name, e))
+        # return color_name
 
     # def translate_all_async(self):
         # """Translate all items in the background"""
         # import threading
 
         # def translate_all():
-            # total = len(self.original_names)
-            # block_size = 50
+        # total = len(self.original_names)
+        # block_size = 50
 
-            # for start in range(0, total, block_size):
-                # end = min(start + block_size, total)
+        # for start in range(0, total, block_size):
+        # end = min(start + block_size, total)
 
-                # for i in range(start, end):
-                    # if self.display_names[i] == self.original_names[i]:
-                        # translated = self.translate_color(
-                            # self.original_names[i])
-                        # if translated != self.original_names[i]:
-                            # self.display_names[i] = translated
-                            # self.Clist[i] = f"{i}. {translated}"
+        # for i in range(start, end):
+        # if self.display_names[i] == self.original_names[i]:
+        # translated = self.translate_color(
+        # self.original_names[i])
+        # if translated != self.original_names[i]:
+        # self.display_names[i] = translated
+        # self.Clist[i] = f"{i}. {translated}"
 
-                # # Update the GUI after each block
-                # timer = eTimer()
-                # timer.callback.append(self.update_gui)
-                # timer.start(0, True)
+        # # Update the GUI after each block
+        # timer = eTimer()
+        # timer.callback.append(self.update_gui)
+        # timer.start(0, True)
 
-                # print(f"[ColorSelector] Translated block {start}-{end}")
+        # print(f"[ColorSelector] Translated block {start}-{end}")
 
-            # print(f"[ColorSelector] All {total} items translated")
+        # print(f"[ColorSelector] All {total} items translated")
 
         # thread = threading.Thread(target=translate_all, daemon=True)
         # thread.start()
@@ -2213,56 +2238,56 @@ class ColorSelector(Screen):
     # def update_display(self, index):
         # print(f"[ColorSelector] update_display({index})")
         # if 0 <= index < len(self.display_names):
-            # # self.translate_all_async()
-            # if self.display_names[index] == self.original_names[index]:
-                # translated = self.translate_color(self.original_names[index])
-                # if translated != self.display_names[index]:
-                    # self.display_names[index] = translated
-                    # self.Clist[index] = f"{index}. {translated}"
-                    # self.update_gui()
-                    # print(f"[ColorSelector] Translated item {index} on the fly")
+        # # self.translate_all_async()
+        # if self.display_names[index] == self.original_names[index]:
+        # translated = self.translate_color(self.original_names[index])
+        # if translated != self.display_names[index]:
+        # self.display_names[index] = translated
+        # self.Clist[index] = f"{index}. {translated}"
+        # self.update_gui()
+        # print(f"[ColorSelector] Translated item {index} on the fly")
 
-            # display_name = self.display_names[index]
-            # self["colorname"].setText(display_name)
-            # print(f"[ColorSelector] Set colorname: '{display_name}'")
-            # if index < len(self.mydata) and self.mydata[index]:
-                # color_info = self.mydata[index]
-                # parts = color_info.split(' ')
-                # if len(parts) >= 4:
-                    # myhtml = '#' + parts[0]
-                    # myr = parts[1]
-                    # myg = parts[2]
-                    # myb = parts[3]
+        # display_name = self.display_names[index]
+        # self["colorname"].setText(display_name)
+        # print(f"[ColorSelector] Set colorname: '{display_name}'")
+        # if index < len(self.mydata) and self.mydata[index]:
+        # color_info = self.mydata[index]
+        # parts = color_info.split(' ')
+        # if len(parts) >= 4:
+        # myhtml = '#' + parts[0]
+        # myr = parts[1]
+        # myg = parts[2]
+        # myb = parts[3]
 
-                    # color_text = (_('HTML') + ' (' + myhtml + ')   ' +
-                                  # _('Red') + ' (' + myr + ')   ' +
-                                  # _('Green') + ' (' + myg + ')   ' +
-                                  # _('Blue') + ' (' + myb + ')')
+        # color_text = (_('HTML') + ' (' + myhtml + ')   ' +
+        # _('Red') + ' (' + myr + ')   ' +
+        # _('Green') + ' (' + myg + ')   ' +
+        # _('Blue') + ' (' + myb + ')')
 
-                    # self["colordatas"].setText(color_text)
-                    # img_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{myhtml}.png"
-                    # if os.path.exists(img_path):
-                        # self["pic1"].instance.setPixmapFromFile(img_path)
-                        # self["pic1"].instance.show()
+        # self["colordatas"].setText(color_text)
+        # img_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{myhtml}.png"
+        # if os.path.exists(img_path):
+        # self["pic1"].instance.setPixmapFromFile(img_path)
+        # self["pic1"].instance.show()
 
     # def update_gui(self, sort=False):
         # print("[ColorSelector] update_gui()")
 
         # if sort:
-            # combined = list(zip(self.display_names, self.Clist,
-                            # self.original_names, self.mydata))
-            # combined.sort(key=lambda x: x[0].lower())
-            # self.display_names, self.Clist, self.original_names, self.mydata = zip(
-                # *combined)
-            # self.display_names = list(self.display_names)
-            # self.Clist = list(self.Clist)
-            # self.original_names = list(self.original_names)
-            # self.mydata = list(self.mydata)
+        # combined = list(zip(self.display_names, self.Clist,
+        # self.original_names, self.mydata))
+        # combined.sort(key=lambda x: x[0].lower())
+        # self.display_names, self.Clist, self.original_names, self.mydata = zip(
+        # *combined)
+        # self.display_names = list(self.display_names)
+        # self.Clist = list(self.Clist)
+        # self.original_names = list(self.original_names)
+        # self.mydata = list(self.mydata)
 
         # self["Clist"].l.setList(self.Clist)
         # current_idx = self["Clist"].getCurrentIndex()
         # if current_idx < len(self.display_names):
-            # self["colorname"].setText(self.display_names[current_idx])
+        # self["colorname"].setText(self.display_names[current_idx])
 
         # self["Clist"].instance.invalidate()
         # self["colorname"].instance.invalidate()
@@ -2285,12 +2310,12 @@ class ColorSelector(Screen):
         # self.update_display(current_idx)
 
         # if current_idx + 100 > self.last_translated_idx:
-            # new_end = min(self.last_translated_idx +
-                          # 100, len(self.original_names))
-            # print(
-                # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
-            # self.translate_range(self.last_translated_idx, new_end)
-            # self.last_translated_idx = new_end
+        # new_end = min(self.last_translated_idx +
+        # 100, len(self.original_names))
+        # print(
+        # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
+        # self.translate_range(self.last_translated_idx, new_end)
+        # self.last_translated_idx = new_end
 
     # def right(self):
         # self["Clist"].pageDown()
@@ -2298,24 +2323,24 @@ class ColorSelector(Screen):
         # self.update_display(current_idx)
 
         # if current_idx + 100 > self.last_translated_idx:
-            # new_end = min(self.last_translated_idx +
-                          # 100, len(self.original_names))
-            # print(
-                # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
-            # self.translate_range(self.last_translated_idx, new_end)
-            # self.last_translated_idx = new_end
+        # new_end = min(self.last_translated_idx +
+        # 100, len(self.original_names))
+        # print(
+        # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
+        # self.translate_range(self.last_translated_idx, new_end)
+        # self.last_translated_idx = new_end
 
     # def OK(self):
         # global rgbmyr, rgbmyg, rgbmyb
         # current_idx = self["Clist"].getCurrentIndex()
 
         # if current_idx < len(self.mydata) and self.mydata[current_idx]:
-            # color_info = self.mydata[current_idx]
-            # parts = color_info.split(' ')
-            # if len(parts) >= 4:
-                # rgbmyr = parts[1]
-                # rgbmyg = parts[2]
-                # rgbmyb = parts[3]
+        # color_info = self.mydata[current_idx]
+        # parts = color_info.split(' ')
+        # if len(parts) >= 4:
+        # rgbmyr = parts[1]
+        # rgbmyg = parts[2]
+        # rgbmyb = parts[3]
 
         # self.close()
 
