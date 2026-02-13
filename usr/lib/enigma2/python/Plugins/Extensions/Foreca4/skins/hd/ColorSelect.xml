@@ -1,9 +1,0 @@
-<screen name="ColorSelect" position="center,center" backgroundColor="transparent" size="773,627" flags="wfNoBorder">
-    <widget name="Clist" itemHeight="35" position="30,70" size="713,397" enableWrapAround="1" scrollbarMode="showOnDemand" valign="center" font="Console;19" transparent="1" backgroundColor="black" zPosition="3"/>
-    <widget name="colordatas" position="30,567" size="713,28" font="Regular;21" transparent="1" zPosition="3" halign="center" valign="center" backgroundColor="black"/>
-    <widget name="colorname" position="30,527" size="713,28" font="Regular;21" transparent="1" zPosition="3" halign="center" valign="center" backgroundColor="black"/>
-    <widget position="30,480" name="pic1" zPosition="3" size="713,33" scale="1" transparent="1" backgroundColor="black"/>
-    <widget name="plate0" position="7,7" backgroundColor="#000050ef" size="760,613" zPosition="1" cornerRadius="30"/>
-    <widget name="plate1" position="13,13" backgroundColor="#40000000" size="747,600" zPosition="2" cornerRadius="30"/>
-    <eLabel position="30,27" text="Color selection" font="Regular;21" valign="center" halign="center" size="713,28" zPosition="3" transparent="1"/>
-</screen>

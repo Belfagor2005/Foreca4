@@ -69,8 +69,7 @@ class DailyForecast(Screen):
 
         try:
             if hasattr(self.api, 'get_daily_forecast'):
-                self.forecast_data = self.api.get_daily_forecast(
-                    self.location_id, days=7)
+                self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
         except Exception as e:
             print(f"[DailyForecast] API error: {e}")
             self.forecast_data = None
@@ -188,7 +187,7 @@ class DailyForecast(Screen):
                 color = 0x55ff55  # Verde
             else:
                 color = 0x5555ff  # Blu
-        except BaseException:
+        except:
             color = 0xffffff  # Bianco
 
         return [
