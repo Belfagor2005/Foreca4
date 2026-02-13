@@ -22,14 +22,8 @@ msgstr "0 - Сегодня"
 msgid "1 - Today + 1 day"
 msgstr "1 - Сегодня + 1 день"
 
-msgid "1. No API credentials configured\n"
-msgstr "1. Не настроены учётные данные API\n"
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Сегодня + 2 дня"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr "2. Сервис API временно недоступен\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Сегодня + 3 дня"
@@ -45,9 +39,6 @@ msgstr "6 - Сегодня + 6 дней"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Сегодня + 7 дней"
-
-msgid "7-Day Detailed Forecast"
-msgstr "Детальный прогноз на 7 дней"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Сегодня + 8 дней"
@@ -178,6 +169,9 @@ msgstr "Чешская Республика"
 msgid "Data provided by Foreca"
 msgstr "Данные предоставлены Foreca"
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr "Дания"
 
@@ -189,9 +183,6 @@ msgstr "Загрузка изображений..."
 
 msgid "East Asia"
 msgstr "Восточная Азия"
-
-msgid "Error displaying forecast"
-msgstr "Ошибка отображения прогноза"
 
 msgid "Error loading colors"
 msgstr "Ошибка загрузки цветов"
@@ -493,9 +484,6 @@ msgstr "Переменная облачность, возможны грозы �
 msgid "Play/Pause"
 msgstr "Воспроизведение/Пауза"
 
-msgid "Please check your api_config.txt file."
-msgstr "Пожалуйста, проверьте ваш файл api_config.txt."
-
 msgid "Please wait ..."
 msgstr "Пожалуйста, подождите ..."
 
@@ -505,8 +493,9 @@ msgstr "Польша"
 msgid "Portugal"
 msgstr "Португалия"
 
-msgid "Possible reasons:\n"
-msgstr "Возможные причины:\n"
+#, fuzzy
+msgid "Precip"
+msgstr "Осадки"
 
 msgid "Previous"
 msgstr "Предыдущий"
@@ -604,6 +593,9 @@ msgstr "Швеция"
 msgid "Switzerland"
 msgstr "Швейцария"
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Дымка"
 
@@ -628,6 +620,9 @@ msgstr "Вверх - Предыдущая страница"
 msgid "Use arrow keys to scroll"
 msgstr "Используйте клавиши со стрелками для прокрутки"
 
+msgid "Weather"
+msgstr "Погода"
+
 msgid "Weather Maps"
 msgstr "Погодные карты"
 
@@ -651,6 +646,9 @@ msgstr "Погода завтра"
 
 msgid "Weekly Forecast"
 msgstr "Недельный прогноз"
+
+msgid "Wind"
+msgstr "Ветер"
 
 msgid "Window transparency"
 msgstr "Прозрачность окон"
@@ -686,6 +684,24 @@ msgstr "• VOL+/VOL- для перехода на 100 городов"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное 1\n"
 
+#~ msgid "1. No API credentials configured\n"
+#~ msgstr "1. Не настроены учётные данные API\n"
+
+#~ msgid "2. API service temporarily unavailable\n"
+#~ msgstr "2. Сервис API временно недоступен\n"
+
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Детальный прогноз на 7 дней"
+
+#~ msgid "Error displaying forecast"
+#~ msgstr "Ошибка отображения прогноза"
+
+#~ msgid "Please check your api_config.txt file."
+#~ msgstr "Пожалуйста, проверьте ваш файл api_config.txt."
+
+#~ msgid "Possible reasons:\n"
+#~ msgstr "Возможные причины:\n"
+
 #~ msgid "Distance"
 #~ msgstr "Расстояние"
 
@@ -698,9 +714,6 @@ msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное
 #~ msgid "Last update"
 #~ msgstr "Последнее обновление"
 
-#~ msgid "Precipitation"
-#~ msgstr "Осадки"
-
 #~ msgid "Pressure"
 #~ msgstr "Давление"
 
@@ -712,12 +725,6 @@ msgstr "• ЗЕЛЁНЫЙ для сохранения как Избранное
 
 #~ msgid "UV Index"
 #~ msgstr "УФ-индекс"
-
-#~ msgid "Weather"
-#~ msgstr "Погода"
-
-#~ msgid "Wind"
-#~ msgstr "Ветер"
 
 #~ msgid "stations nearby"
 #~ msgstr "станции поблизости"

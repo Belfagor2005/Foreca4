@@ -24,14 +24,8 @@ msgstr "0 - Σήμερα"
 msgid "1 - Today + 1 day"
 msgstr "1 - Σήμερα + 1 ημέρα"
 
-msgid "1. No API credentials configured\n"
-msgstr "1. Δεν έχουν ρυθμιστεί διαπιστευτήρια API\n"
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Σήμερα + 2 ημέρες"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr "2. Η υπηρεσία API είναι προσωρινά μη διαθέσιμη\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Σήμερα + 3 ημέρες"
@@ -47,9 +41,6 @@ msgstr "6 - Σήμερα + 6 ημέρες"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Σήμερα + 7 ημέρες"
-
-msgid "7-Day Detailed Forecast"
-msgstr "Λεπτομερής πρόγνωση 7 ημερών"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Σήμερα + 8 ημέρες"
@@ -180,6 +171,9 @@ msgstr "Τσεχία"
 msgid "Data provided by Foreca"
 msgstr "Δεδομένα παρεχόμενα από την Foreca"
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr "Δανία"
 
@@ -191,9 +185,6 @@ msgstr "Λήψη εικόνων..."
 
 msgid "East Asia"
 msgstr "Ανατολική Ασία"
-
-msgid "Error displaying forecast"
-msgstr "Σφάλμα εμφάνισης πρόγνωσης"
 
 msgid "Error loading colors"
 msgstr "Σφάλμα φόρτωσης χρωμάτων"
@@ -495,9 +486,6 @@ msgstr "Μερικώς συννεφιασμένος, πιθανές καταιγ
 msgid "Play/Pause"
 msgstr "Αναπαραγωγή/Παύση"
 
-msgid "Please check your api_config.txt file."
-msgstr "Ελέγξτε το αρχείο api_config.txt σας."
-
 msgid "Please wait ..."
 msgstr "Παρακαλώ περιμένετε ..."
 
@@ -507,8 +495,9 @@ msgstr "Πολωνία"
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
-msgid "Possible reasons:\n"
-msgstr "Πιθανοί λόγοι:\n"
+#, fuzzy
+msgid "Precip"
+msgstr "Υετός"
 
 msgid "Previous"
 msgstr "Προηγούμενο"
@@ -606,6 +595,9 @@ msgstr "Σουηδία"
 msgid "Switzerland"
 msgstr "Ελβετία"
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Λεπτή ανώτερη νέφωση"
 
@@ -630,6 +622,9 @@ msgstr "Πάνω - Προηγούμενη σελίδα"
 msgid "Use arrow keys to scroll"
 msgstr "Χρησιμοποιήστε τα βέλη για κύλιση"
 
+msgid "Weather"
+msgstr "Καιρός"
+
 msgid "Weather Maps"
 msgstr "Χάρτες Καιρού"
 
@@ -653,6 +648,9 @@ msgstr "Καιρός αύριο"
 
 msgid "Weekly Forecast"
 msgstr "Εβδομαδιαία Πρόγνωση"
+
+msgid "Wind"
+msgstr "Άνεμος"
 
 msgid "Window transparency"
 msgstr "Διαφάνεια παραθύρου"
@@ -687,6 +685,24 @@ msgstr "• VOL+/VOL- για μετάβαση 100 πόλεων"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• ΚΙΤΡΙΝΟ για αποθήκευση ως Αγαπημένο 2\n"
 
+#~ msgid "1. No API credentials configured\n"
+#~ msgstr "1. Δεν έχουν ρυθμιστεί διαπιστευτήρια API\n"
+
+#~ msgid "2. API service temporarily unavailable\n"
+#~ msgstr "2. Η υπηρεσία API είναι προσωρινά μη διαθέσιμη\n"
+
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Λεπτομερής πρόγνωση 7 ημερών"
+
+#~ msgid "Error displaying forecast"
+#~ msgstr "Σφάλμα εμφάνισης πρόγνωσης"
+
+#~ msgid "Please check your api_config.txt file."
+#~ msgstr "Ελέγξτε το αρχείο api_config.txt σας."
+
+#~ msgid "Possible reasons:\n"
+#~ msgstr "Πιθανοί λόγοι:\n"
+
 #~ msgid "Distance"
 #~ msgstr "Απόσταση"
 
@@ -699,9 +715,6 @@ msgstr "• ΚΙΤΡΙΝΟ για αποθήκευση ως Αγαπημένο 2
 #~ msgid "Last update"
 #~ msgstr "Τελευταία ενημέρωση"
 
-#~ msgid "Precipitation"
-#~ msgstr "Υετός"
-
 #~ msgid "Pressure"
 #~ msgstr "Πίεση"
 
@@ -713,12 +726,6 @@ msgstr "• ΚΙΤΡΙΝΟ για αποθήκευση ως Αγαπημένο 2
 
 #~ msgid "UV Index"
 #~ msgstr "Δείκτης Υπεριώδους Ακτινοβολίας"
-
-#~ msgid "Weather"
-#~ msgstr "Καιρός"
-
-#~ msgid "Wind"
-#~ msgstr "Άνεμος"
 
 #~ msgid "stations nearby"
 #~ msgstr "κοντινοί σταθμοί"

@@ -23,13 +23,7 @@ msgstr ""
 msgid "1 - Today + 1 day"
 msgstr ""
 
-msgid "1. No API credentials configured\n"
-msgstr ""
-
 msgid "2 - Today + 2 days"
-msgstr ""
-
-msgid "2. API service temporarily unavailable\n"
 msgstr ""
 
 msgid "3 - Today + 3 days"
@@ -45,9 +39,6 @@ msgid "6 - Today + 6 days"
 msgstr ""
 
 msgid "7 - Today + 7 days"
-msgstr ""
-
-msgid "7-Day Detailed Forecast"
 msgstr ""
 
 msgid "8 - Today + 8 days"
@@ -179,6 +170,9 @@ msgstr ""
 msgid "Data provided by Foreca"
 msgstr ""
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr ""
 
@@ -189,9 +183,6 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
-msgstr ""
-
-msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -494,9 +485,6 @@ msgstr ""
 msgid "Play/Pause"
 msgstr ""
 
-msgid "Please check your api_config.txt file."
-msgstr ""
-
 msgid "Please wait ..."
 msgstr ""
 
@@ -506,7 +494,7 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Possible reasons:\n"
+msgid "Precip"
 msgstr ""
 
 msgid "Previous"
@@ -605,6 +593,9 @@ msgstr ""
 msgid "Switzerland"
 msgstr ""
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr ""
 
@@ -629,6 +620,9 @@ msgstr ""
 msgid "Use arrow keys to scroll"
 msgstr ""
 
+msgid "Weather"
+msgstr ""
+
 msgid "Weather Maps"
 msgstr ""
 
@@ -651,6 +645,9 @@ msgid "Weather tomorrow"
 msgstr ""
 
 msgid "Weekly Forecast"
+msgstr ""
+
+msgid "Wind"
 msgstr ""
 
 msgid "Window transparency"

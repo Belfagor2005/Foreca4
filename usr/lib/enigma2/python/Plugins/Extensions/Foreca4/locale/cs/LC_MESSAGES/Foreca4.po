@@ -24,14 +24,8 @@ msgstr "0 - Dnes"
 msgid "1 - Today + 1 day"
 msgstr "1 - Dnes + 1 den"
 
-msgid "1. No API credentials configured\n"
-msgstr "1. Nejsou nakonfigurovány přihlašovací údaje API\n"
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Dnes + 2 dny"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr "2. Služba API je dočasně nedostupná\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Dnes + 3 dny"
@@ -47,9 +41,6 @@ msgstr "6 - Dnes + 6 dnů"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Dnes + 7 dnů"
-
-msgid "7-Day Detailed Forecast"
-msgstr "Podrobná předpověď na 7 dní"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Dnes + 8 dnů"
@@ -180,6 +171,9 @@ msgstr "Česká republika"
 msgid "Data provided by Foreca"
 msgstr "Data poskytuje Foreca"
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr "Dánsko"
 
@@ -191,9 +185,6 @@ msgstr "Stahování obrázků..."
 
 msgid "East Asia"
 msgstr "Východní Asie"
-
-msgid "Error displaying forecast"
-msgstr "Chyba při zobrazování předpovědi"
 
 msgid "Error loading colors"
 msgstr "Chyba při načítání barev"
@@ -495,9 +486,6 @@ msgstr "Polojasno, možné bouřky s deštěm"
 msgid "Play/Pause"
 msgstr "Přehrát/Pozastavit"
 
-msgid "Please check your api_config.txt file."
-msgstr "Zkontrolujte prosím svůj soubor api_config.txt."
-
 msgid "Please wait ..."
 msgstr "Prosím čekejte ..."
 
@@ -507,8 +495,9 @@ msgstr "Polsko"
 msgid "Portugal"
 msgstr "Portugalsko"
 
-msgid "Possible reasons:\n"
-msgstr "Možné důvody:\n"
+#, fuzzy
+msgid "Precip"
+msgstr "Srážky"
 
 msgid "Previous"
 msgstr "Předchozí"
@@ -606,6 +595,9 @@ msgstr "Švédsko"
 msgid "Switzerland"
 msgstr "Švýcarsko"
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Vysoká oblačnost"
 
@@ -630,6 +622,9 @@ msgstr "Nahoru - Předchozí strana"
 msgid "Use arrow keys to scroll"
 msgstr "Pro posouvání použijte šipky"
 
+msgid "Weather"
+msgstr "Počasí"
+
 msgid "Weather Maps"
 msgstr "Mapy počasí"
 
@@ -653,6 +648,9 @@ msgstr "Počasí zítra"
 
 msgid "Weekly Forecast"
 msgstr "Týdenní předpověď"
+
+msgid "Wind"
+msgstr "Vítr"
 
 msgid "Window transparency"
 msgstr "Průhlednost okna"
@@ -687,6 +685,24 @@ msgstr "• VOL+/VOL- pro skok o 100 měst"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• ŽLUTÁ pro uložení jako Oblíbené 2\n"
 
+#~ msgid "1. No API credentials configured\n"
+#~ msgstr "1. Nejsou nakonfigurovány přihlašovací údaje API\n"
+
+#~ msgid "2. API service temporarily unavailable\n"
+#~ msgstr "2. Služba API je dočasně nedostupná\n"
+
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Podrobná předpověď na 7 dní"
+
+#~ msgid "Error displaying forecast"
+#~ msgstr "Chyba při zobrazování předpovědi"
+
+#~ msgid "Please check your api_config.txt file."
+#~ msgstr "Zkontrolujte prosím svůj soubor api_config.txt."
+
+#~ msgid "Possible reasons:\n"
+#~ msgstr "Možné důvody:\n"
+
 #~ msgid "Distance"
 #~ msgstr "Vzdálenost"
 
@@ -699,9 +715,6 @@ msgstr "• ŽLUTÁ pro uložení jako Oblíbené 2\n"
 #~ msgid "Last update"
 #~ msgstr "Poslední aktualizace"
 
-#~ msgid "Precipitation"
-#~ msgstr "Srážky"
-
 #~ msgid "Pressure"
 #~ msgstr "Tlak"
 
@@ -713,12 +726,6 @@ msgstr "• ŽLUTÁ pro uložení jako Oblíbené 2\n"
 
 #~ msgid "UV Index"
 #~ msgstr "UV index"
-
-#~ msgid "Weather"
-#~ msgstr "Počasí"
-
-#~ msgid "Wind"
-#~ msgstr "Vítr"
 
 #~ msgid "stations nearby"
 #~ msgstr "stanice v okolí"

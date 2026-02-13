@@ -24,14 +24,8 @@ msgstr "0 - Aujourd'hui"
 msgid "1 - Today + 1 day"
 msgstr "1 - Aujourd'hui + 1 jour"
 
-msgid "1. No API credentials configured\n"
-msgstr "1. Aucune identifiant API configuré\n"
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Aujourd'hui + 2 jours"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr "2. Service API temporairement indisponible\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Aujourd'hui + 3 jours"
@@ -47,9 +41,6 @@ msgstr "6 - Aujourd'hui + 6 jours"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Aujourd'hui + 7 jours"
-
-msgid "7-Day Detailed Forecast"
-msgstr "Prévisions détaillées sur 7 jours"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Aujourd'hui + 8 jours"
@@ -180,6 +171,9 @@ msgstr "République tchèque"
 msgid "Data provided by Foreca"
 msgstr "Données fournies par Foreca"
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr "Danemark"
 
@@ -191,9 +185,6 @@ msgstr "Téléchargement des images..."
 
 msgid "East Asia"
 msgstr "Asie de l'Est"
-
-msgid "Error displaying forecast"
-msgstr "Erreur lors de l'affichage des prévisions"
 
 msgid "Error loading colors"
 msgstr "Erreur lors du chargement des couleurs"
@@ -495,9 +486,6 @@ msgstr "Partiellement nuageux, possibles orages avec pluie"
 msgid "Play/Pause"
 msgstr "Lecture/Pause"
 
-msgid "Please check your api_config.txt file."
-msgstr "Veuillez vérifier votre fichier api_config.txt."
-
 msgid "Please wait ..."
 msgstr "Veuillez patienter..."
 
@@ -507,8 +495,9 @@ msgstr "Pologne"
 msgid "Portugal"
 msgstr "Portugal"
 
-msgid "Possible reasons:\n"
-msgstr "Raisons possibles :\n"
+#, fuzzy
+msgid "Precip"
+msgstr "Précipitations"
 
 msgid "Previous"
 msgstr "Précédent"
@@ -606,6 +595,9 @@ msgstr "Suède"
 msgid "Switzerland"
 msgstr "Suisse"
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Nuages élevés minces"
 
@@ -630,6 +622,9 @@ msgstr "Haut - Page précédente"
 msgid "Use arrow keys to scroll"
 msgstr "Utilisez les touches fléchées pour défiler"
 
+msgid "Weather"
+msgstr "Météo"
+
 msgid "Weather Maps"
 msgstr "Cartes météo"
 
@@ -653,6 +648,9 @@ msgstr "Météo demain"
 
 msgid "Weekly Forecast"
 msgstr "Prévisions hebdomadaires"
+
+msgid "Wind"
+msgstr "Vent"
 
 msgid "Window transparency"
 msgstr "Transparence de la fenêtre"
@@ -687,6 +685,24 @@ msgstr "• VOL+/VOL- pour sauter 100 villes"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• JAUNE pour enregistrer comme Favori 2\n"
 
+#~ msgid "1. No API credentials configured\n"
+#~ msgstr "1. Aucune identifiant API configuré\n"
+
+#~ msgid "2. API service temporarily unavailable\n"
+#~ msgstr "2. Service API temporairement indisponible\n"
+
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Prévisions détaillées sur 7 jours"
+
+#~ msgid "Error displaying forecast"
+#~ msgstr "Erreur lors de l'affichage des prévisions"
+
+#~ msgid "Please check your api_config.txt file."
+#~ msgstr "Veuillez vérifier votre fichier api_config.txt."
+
+#~ msgid "Possible reasons:\n"
+#~ msgstr "Raisons possibles :\n"
+
 #~ msgid "Distance"
 #~ msgstr "Distance"
 
@@ -699,9 +715,6 @@ msgstr "• JAUNE pour enregistrer comme Favori 2\n"
 #~ msgid "Last update"
 #~ msgstr "Dernière mise à jour"
 
-#~ msgid "Precipitation"
-#~ msgstr "Précipitations"
-
 #~ msgid "Pressure"
 #~ msgstr "Pression"
 
@@ -713,12 +726,6 @@ msgstr "• JAUNE pour enregistrer comme Favori 2\n"
 
 #~ msgid "UV Index"
 #~ msgstr "Indice UV"
-
-#~ msgid "Weather"
-#~ msgstr "Météo"
-
-#~ msgid "Wind"
-#~ msgstr "Vent"
 
 #~ msgid "stations nearby"
 #~ msgstr "stations à proximité"

@@ -24,14 +24,8 @@ msgstr "0 - Avui"
 msgid "1 - Today + 1 day"
 msgstr "1 - Avui + 1 dia"
 
-msgid "1. No API credentials configured\n"
-msgstr "1. No hi ha credencials API configurades\n"
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Avui + 2 dies"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr "2. Servei API temporalment no disponible\n"
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Avui + 3 dies"
@@ -47,9 +41,6 @@ msgstr "6 - Avui + 6 dies"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Avui + 7 dies"
-
-msgid "7-Day Detailed Forecast"
-msgstr "Pronòstic detallat de 7 dies"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Avui + 8 dies"
@@ -180,6 +171,9 @@ msgstr "República Txeca"
 msgid "Data provided by Foreca"
 msgstr "Dades proporcionades per Foreca"
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr "Dinamarca"
 
@@ -191,9 +185,6 @@ msgstr "Descarregant imatges..."
 
 msgid "East Asia"
 msgstr "Àsia Oriental"
-
-msgid "Error displaying forecast"
-msgstr "Error en mostrar el pronòstic"
 
 msgid "Error loading colors"
 msgstr "Error en carregar colors"
@@ -495,9 +486,6 @@ msgstr "Parcialment ennuvolat, possibles tempestes amb pluja"
 msgid "Play/Pause"
 msgstr "Reproduir/Pausa"
 
-msgid "Please check your api_config.txt file."
-msgstr "Comprova el teu fitxer api_config.txt."
-
 msgid "Please wait ..."
 msgstr "Espera, si us plau ..."
 
@@ -507,8 +495,9 @@ msgstr "Polònia"
 msgid "Portugal"
 msgstr "Portugal"
 
-msgid "Possible reasons:\n"
-msgstr "Possibles raons:\n"
+#, fuzzy
+msgid "Precip"
+msgstr "Precipitació"
 
 msgid "Previous"
 msgstr "Anterior"
@@ -606,6 +595,9 @@ msgstr "Suècia"
 msgid "Switzerland"
 msgstr "Suïssa"
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr "Capa fina de núvols alts"
 
@@ -630,6 +622,9 @@ msgstr "Amunt - Pàgina anterior"
 msgid "Use arrow keys to scroll"
 msgstr "Utilitza les tecles de fletxa per desplaçar-te"
 
+msgid "Weather"
+msgstr "Temps"
+
 msgid "Weather Maps"
 msgstr "Mapes meteorològics"
 
@@ -653,6 +648,9 @@ msgstr "Temps demà"
 
 msgid "Weekly Forecast"
 msgstr "Pronòstic setmanal"
+
+msgid "Wind"
+msgstr "Vent"
 
 msgid "Window transparency"
 msgstr "Transparència de finestra"
@@ -687,6 +685,24 @@ msgstr "• VOL+/VOL- per saltar 100 ciutats"
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr "• GROC per desar com a Favorit 2\n"
 
+#~ msgid "1. No API credentials configured\n"
+#~ msgstr "1. No hi ha credencials API configurades\n"
+
+#~ msgid "2. API service temporarily unavailable\n"
+#~ msgstr "2. Servei API temporalment no disponible\n"
+
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Pronòstic detallat de 7 dies"
+
+#~ msgid "Error displaying forecast"
+#~ msgstr "Error en mostrar el pronòstic"
+
+#~ msgid "Please check your api_config.txt file."
+#~ msgstr "Comprova el teu fitxer api_config.txt."
+
+#~ msgid "Possible reasons:\n"
+#~ msgstr "Possibles raons:\n"
+
 #~ msgid "Distance"
 #~ msgstr "Distància"
 
@@ -699,9 +715,6 @@ msgstr "• GROC per desar com a Favorit 2\n"
 #~ msgid "Last update"
 #~ msgstr "Última actualització"
 
-#~ msgid "Precipitation"
-#~ msgstr "Precipitació"
-
 #~ msgid "Pressure"
 #~ msgstr "Pressió"
 
@@ -713,12 +726,6 @@ msgstr "• GROC per desar com a Favorit 2\n"
 
 #~ msgid "UV Index"
 #~ msgstr "Índex UV"
-
-#~ msgid "Weather"
-#~ msgstr "Temps"
-
-#~ msgid "Wind"
-#~ msgstr "Vent"
 
 #~ msgid "stations nearby"
 #~ msgstr "estacions properes"

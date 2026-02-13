@@ -23,14 +23,8 @@ msgstr "0 - Today"
 msgid "1 - Today + 1 day"
 msgstr "1 - Today + 1 day"
 
-msgid "1. No API credentials configured\n"
-msgstr ""
-
 msgid "2 - Today + 2 days"
 msgstr "2 - Today + 2 days"
-
-msgid "2. API service temporarily unavailable\n"
-msgstr ""
 
 msgid "3 - Today + 3 days"
 msgstr "3 - Today + 3 days"
@@ -46,10 +40,6 @@ msgstr "6 - Today + 6 days"
 
 msgid "7 - Today + 7 days"
 msgstr "7 - Today + 7 days"
-
-#, fuzzy
-msgid "7-Day Detailed Forecast"
-msgstr "Foreca Weather Forecast"
 
 msgid "8 - Today + 8 days"
 msgstr "8 - Today + 8 days"
@@ -186,6 +176,9 @@ msgstr ""
 msgid "Data provided by Foreca"
 msgstr ""
 
+msgid "Day"
+msgstr ""
+
 msgid "Denmark"
 msgstr ""
 
@@ -196,9 +189,6 @@ msgid "Downloading images..."
 msgstr ""
 
 msgid "East Asia"
-msgstr ""
-
-msgid "Error displaying forecast"
 msgstr ""
 
 msgid "Error loading colors"
@@ -511,9 +501,6 @@ msgstr ""
 msgid "Play/Pause"
 msgstr ""
 
-msgid "Please check your api_config.txt file."
-msgstr ""
-
 msgid "Please wait ..."
 msgstr "Please wait ..."
 
@@ -523,8 +510,9 @@ msgstr ""
 msgid "Portugal"
 msgstr ""
 
-msgid "Possible reasons:\n"
-msgstr ""
+#, fuzzy
+msgid "Precip"
+msgstr "Precipitations:"
 
 #, fuzzy
 msgid "Previous"
@@ -624,6 +612,9 @@ msgstr ""
 msgid "Switzerland"
 msgstr ""
 
+msgid "Temp"
+msgstr ""
+
 msgid "Thin upper cloud"
 msgstr ""
 
@@ -651,6 +642,10 @@ msgid "Use arrow keys to scroll"
 msgstr ""
 
 #, fuzzy
+msgid "Weather"
+msgstr "Weather Radar"
+
+#, fuzzy
 msgid "Weather Maps"
 msgstr "Weather Radar"
 
@@ -675,6 +670,9 @@ msgstr "Weather tomorrow"
 #, fuzzy
 msgid "Weekly Forecast"
 msgstr "Foreca 4"
+
+msgid "Wind"
+msgstr "Wind"
 
 msgid "Window transparency"
 msgstr "Window transparency"
@@ -709,6 +707,10 @@ msgstr ""
 msgid "• YELLOW to save as Favorite 2\n"
 msgstr ""
 
+#, fuzzy
+#~ msgid "7-Day Detailed Forecast"
+#~ msgstr "Foreca Weather Forecast"
+
 #~ msgid "Feels like"
 #~ msgstr "Feels like"
 
@@ -717,16 +719,5 @@ msgstr ""
 #~ msgstr "Humidity:"
 
 #, fuzzy
-#~ msgid "Precipitation"
-#~ msgstr "Precipitations:"
-
-#, fuzzy
 #~ msgid "Sun"
 #~ msgstr "Sunset"
-
-#, fuzzy
-#~ msgid "Weather"
-#~ msgstr "Weather Radar"
-
-#~ msgid "Wind"
-#~ msgstr "Wind"
