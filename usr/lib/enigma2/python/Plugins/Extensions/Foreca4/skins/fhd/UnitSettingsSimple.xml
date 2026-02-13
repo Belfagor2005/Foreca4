@@ -1,15 +1,18 @@
 <screen name="UnitSettingsSimple" position="center,center" size="1100,700" title="Unit Settings">
-    <widget name="title" position="20,20" size="1060,70" font="Regular;42" halign="center" />
-    <widget name="info" position="20,120" size="1060,50" font="Regular;32" halign="center" />
+    <widget name="title" position="20,20" size="1060,70" font="Regular;42" halign="center" zPosition="2" />
+    <widget name="info" position="20,120" size="1060,50" font="Regular;32" halign="center" zPosition="2" />
     <!-- Button widgets with unified colors -->
-    <ePixmap name="red" position="45,625" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" />
-    <ePixmap name="green" position="744,625" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" />
-    <widget name="key_red" position="108,625" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
-    <widget name="key_green" position="805,625" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" />
-    <widget name="option_metric" position="150,230" size="700,70" font="Regular;38" halign="left" />
-    <widget name="metric_details" position="190,300" size="660,50" font="Regular;26" halign="left" />
-    <widget name="option_imperial" position="150,380" size="700,70" font="Regular;38" halign="left" />
-    <widget name="imperial_details" position="190,450" size="660,50" font="Regular;26" halign="left" />
-    <widget name="check_metric" position="90,230" size="50,50" alphatest="on" scale="1" />
-    <widget name="check_imperial" position="90,380" size="50,50" alphatest="on" scale="1" />
+    <ePixmap name="red" position="45,610" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_red.png" alphatest="on" zPosition="2" />
+    <ePixmap name="green" position="744,610" size="60,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_green.png" alphatest="on" zPosition="2" />
+    <widget name="key_red" position="108,610" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="key_green" position="805,610" size="250,60" font="Regular;28" halign="left" valign="center" backgroundColor="black" transparent="1" zPosition="3" />
+    <widget name="option_metric" position="150,230" size="700,70" font="Regular;38" halign="left" zPosition="3" />
+    <widget name="metric_details" position="190,300" size="660,50" font="Regular;26" halign="left" zPosition="3" />
+    <widget name="option_imperial" position="150,380" size="700,70" font="Regular;38" halign="left" zPosition="3" />
+    <widget name="imperial_details" position="190,450" size="660,50" font="Regular;26" halign="left" zPosition="3" />
+    <widget name="check_metric" position="90,230" size="50,50" alphatest="on" scale="1" zPosition="3" />
+    <widget name="check_imperial" position="90,380" size="50,50" alphatest="on" scale="1" zPosition="3" />
+    <!-- Preview plates -->
+    <widget name="background_plate" position="3,1" backgroundColor="#000050ef" size="1093,686" zPosition="0" cornerRadius="35" />
+    <widget name="selection_overlay" position="14,8" backgroundColor="#40000000" size="1075,671" zPosition="1" cornerRadius="35" />
 </screen>

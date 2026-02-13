@@ -40,7 +40,6 @@ class DailyForecast(Screen):
 
         self.setTitle(_("Weekly Forecast") + " - " + location_name)
 
-        # Widgets
         self["title"] = Label("")
         self["info"] = Label(_("Loading weekly forecast..."))
         self["list"] = DailyForecastList([])
@@ -69,8 +68,7 @@ class DailyForecast(Screen):
 
         try:
             if hasattr(self.api, 'get_daily_forecast'):
-                self.forecast_data = self.api.get_daily_forecast(
-                    self.location_id, days=7)
+                self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
         except Exception as e:
             print(f"[DailyForecast] API error: {e}")
             self.forecast_data = None
@@ -109,7 +107,7 @@ class DailyForecast(Screen):
         """Create header row"""
         return [
             None,  # No selection data
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 0 - Day
                 pos=(20, 5),
                 size=(200, 35),
                 font=0,
@@ -117,7 +115,7 @@ class DailyForecast(Screen):
                 color=0x00a0ff,
                 flags=RT_VALIGN_CENTER
             ),
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 1 - Temp
                 pos=(220, 5),
                 size=(200, 35),
                 font=0,
@@ -125,24 +123,24 @@ class DailyForecast(Screen):
                 color=0x00a0ff,
                 flags=RT_VALIGN_CENTER
             ),
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 2 - Weather
                 pos=(420, 5),
-                size=(300, 35),
+                size=(450, 35),
                 font=0,
                 text=_("Weather"),
                 color=0x00a0ff,
                 flags=RT_VALIGN_CENTER
             ),
-            MultiContentEntryText(
-                pos=(720, 5),
+            MultiContentEntryText(  # INDICE 3 - Precip
+                pos=(880, 5),
                 size=(150, 35),
                 font=0,
                 text=_("Precip"),
                 color=0x00a0ff,
                 flags=RT_VALIGN_CENTER
             ),
-            MultiContentEntryText(
-                pos=(870, 5),
+            MultiContentEntryText(  # INDICE 4 - Wind
+                pos=(1030, 5),
                 size=(200, 35),
                 font=0,
                 text=_("Wind"),
@@ -163,8 +161,8 @@ class DailyForecast(Screen):
 
         # Weather
         weather = _(day.get('description', 'N/A'))
-        if len(weather) > 15:
-            weather = weather[:15] + "..."
+        if len(weather) > 25:
+            weather = weather[:20] + "..."
 
         # Precipitation
         precip = f"{day.get('precip_prob', '0')}%"
@@ -188,13 +186,12 @@ class DailyForecast(Screen):
                 color = 0x55ff55  # Verde
             else:
                 color = 0x5555ff  # Blu
-        except BaseException:
+        except:
             color = 0xffffff  # Bianco
 
         return [
             None,
-            # Day
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 0 - Day (con valore)
                 pos=(20, 5),
                 size=(200, 35),
                 font=0,
@@ -202,8 +199,7 @@ class DailyForecast(Screen):
                 color=0xffffff,
                 flags=RT_VALIGN_CENTER
             ),
-            # Temperature
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 1 - Temperature
                 pos=(220, 5),
                 size=(200, 35),
                 font=0,
@@ -211,27 +207,24 @@ class DailyForecast(Screen):
                 color=color,
                 flags=RT_VALIGN_CENTER
             ),
-            # Weather
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 2 - Weather description
                 pos=(420, 5),
-                size=(300, 35),
+                size=(450, 35),
                 font=0,
                 text=weather,
                 color=0xffffff,
                 flags=RT_VALIGN_CENTER
             ),
-            # Precipitation
-            MultiContentEntryText(
-                pos=(720, 5),
+            MultiContentEntryText(  # INDICE 3 - Precipitation
+                pos=(880, 5),
                 size=(150, 35),
                 font=0,
                 text=precip,
                 color=0x55aaff,
                 flags=RT_VALIGN_CENTER
             ),
-            # Wind
-            MultiContentEntryText(
-                pos=(870, 5),
+            MultiContentEntryText(  # INDICE 4 - Wind
+                pos=(1030, 5),
                 size=(200, 35),
                 font=0,
                 text=wind_str,
@@ -244,7 +237,7 @@ class DailyForecast(Screen):
         """Create footer row"""
         return [
             None,
-            MultiContentEntryText(
+            MultiContentEntryText(  # INDICE 0 - Footer text
                 pos=(20, 5),
                 size=(1100, 35),
                 font=0,

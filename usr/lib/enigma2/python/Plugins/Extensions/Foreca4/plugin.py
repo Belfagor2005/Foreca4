@@ -297,31 +297,7 @@ size_w = getDesktop(0).size().width()
 size_h = getDesktop(0).size().height()
 
 
-# utils
-def conv_alpha(insel):
-    trspz = ' n/a'
-    if insel == "#90000000":
-        trspz = '56%'
-    elif insel == "#80000000":
-        trspz = '50%'
-    elif insel == "#70000000":
-        trspz = '44%'
-    elif insel == "#60000000":
-        trspz = '38%'
-    elif insel == "#50000000":
-        trspz = '31%'
-    elif insel == "#40000000":
-        trspz = '25%'
-    elif insel == "#30000000":
-        trspz = '19%'
-    elif insel == "#20000000":
-        trspz = '13%'
-    elif insel == "#10000000":
-        trspz = '6%'
-    return trspz
-
-
-def readsetalpha():
+def read_alpha():
     global alpha
     alpha = '#40000000'
     if os.path.exists(
@@ -336,10 +312,10 @@ def readsetalpha():
             alpha = '#40000000'
 
 
-readsetalpha()
+read_alpha()
 
 
-def savesetalpha(indata):
+def save_alpha(indata):
     f = open(
         '/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/set_alpha.conf',
         'w')
@@ -363,7 +339,7 @@ def is_valid(v):
     return bool(v) and str(v).strip().lower() != 'n/a'
 
 
-def mywindSpeed(indata, metka):
+def my_speed_wind(indata, metka):
     try:
         trspz = 0
         trspz = '%.01f' % float(int(indata) / 1)
@@ -499,7 +475,7 @@ def translate_batch_strings(texts):
     return results
 
 
-class ForecaPreview_4(Screen, HelpableScreen):
+class Foreca_Preview(Screen, HelpableScreen):
     def __init__(self, session):
         global town, cur_temp, fl_temp, dewpoint, pic, wind, wind_speed, wind_gust, rain_mm, hum, pressure, country
         global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
@@ -553,50 +529,61 @@ class ForecaPreview_4(Screen, HelpableScreen):
         else:
             print("[Foreca4] API credentials not configured for forecasts")
 
-        self.skin = load_skin_for_class(ForecaPreview_4)
+        self.skin = load_skin_for_class(Foreca_Preview)
         Screen.__init__(self, session)
         HelpableScreen.__init__(self)
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
         self.list = []
         self["menu"] = List(self.list)
-        self["Titel"] = StaticText()
-        self["mytitel2"] = StaticText()
-        self["Titel2"] = StaticText(_("Please wait ..."))
-        self["Titel3"] = StaticText()
-        self["Titel5"] = StaticText()
-        self["mytitel1"] = StaticText()
-        self["station"] = Label("N/A")
-        self["town"] = Label("N/A")
-        self["cur_temp"] = Label("N/A")
-        self["fl_temp"] = Label("N/A")
-        self["dewpoint"] = Label("N/A")
-        self["pic"] = Pixmap()
-        self["wind"] = Pixmap()
-        self["wind_speed"] = Label("N/A")
-        self["wind_gust"] = Label("N/A")
-        self["rain_mm"] = Label("N/A")
-        self["hum"] = Label("N/A")
-        self["pressure"] = Label("N/A")
-        self["description_w"] = Label('')
-        self["pressure_pic"] = Pixmap()
-        self["rain_mm_pic"] = Pixmap()
-        self["hum_pic"] = Pixmap()
-        self["plate1"] = Label("N/A")
-        self["plate2"] = Label("N/A")
-        self["plate3"] = Label("N/A")
-        self["plate4"] = Label("N/A")
-        self["plate5"] = Label("N/A")
-        self["plate11"] = Label("N/A")
-        self["plate22"] = Label("N/A")
-        self["plate33"] = Label("N/A")
-        self["plate44"] = Label("N/A")
-        self["plate55"] = Label("N/A")
-        self["day_len"] = Label('0 h 0 min')
-        self["sunrise_text"] = Label(_('Sunrise'))
-        self["sunrise_val"] = Label('00:00')
-        self["sunset_text"] = Label(_('Sunset'))
-        self["sunset_val"] = Label('00:00')
-        self["sun"] = Pixmap()
+        # Title widgets
+        self["title_main"] = StaticText()
+        self["title_version"] = StaticText()
+        self["title_loading"] = StaticText(_("Please wait ..."))
+        self["title_sub"] = StaticText()
+        self["title_section"] = StaticText()
+        self["title_section_weather"] = StaticText()
+
+        # Station info
+        self["station_name"] = Label("N/A")
+
+        # Current weather displays
+        self["city_name"] = Label("N/A")
+        self["temperature_current"] = Label("N/A")
+        self["temperature_feelslike"] = Label("N/A")
+        self["dewpoint_value"] = Label("N/A")
+        self["weather_icon"] = Pixmap()
+        self["wind_icon"] = Pixmap()
+        self["wind_speed_value"] = Label("N/A")
+        self["wind_gust_value"] = Label("N/A")
+        self["rain_value"] = Label("N/A")
+        self["humidity_value"] = Label("N/A")
+        self["pressure_value"] = Label("N/A")
+        self["weather_description"] = Label('')
+
+        # Icon pixmaps
+        self["icon_pressure"] = Pixmap()
+        self["icon_rain"] = Pixmap()
+        self["icon_humidity"] = Pixmap()
+
+        # Background plates (RINOMINATI!)
+        self["selection_overlay"] = Label("N/A")
+        self["color_bg_today"] = Label("N/A")
+        self["color_bg_forecast"] = Label("N/A")
+        self["color_bg_sun"] = Label("N/A")
+        self["color_bg_coords"] = Label("N/A")
+        self["transp_bg_today"] = Label("N/A")
+        self["transp_bg_forecast"] = Label("N/A")
+        self["transp_bg_sun"] = Label("N/A")
+        self["transp_bg_coords"] = Label("N/A")
+        self["transp_bg_header"] = Label("N/A")
+
+        # Sun info
+        self["day_length"] = Label('0 h 0 min')
+        self["sunrise_label"] = Label(_('Sunrise'))
+        self["sunrise_value"] = Label('00:00')
+        self["sunset_label"] = Label(_('Sunset'))
+        self["sunset_value"] = Label('00:00')
+        self["icon_sun"] = Pixmap()
 
         self.color = gRGB(255, 255, 255)
         self["actions"] = HelpableActionMap(
@@ -681,9 +668,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
         elif choice[1] == "colorselector":
             self.session.open(ColorSelector)
         elif choice[1] == "transparency":
-            self.session.open(TransparencyBox)
+            self.session.open(TransparencySelector)
         elif choice[1] == "info":
-            self.session.open(InfoBox1)
+            self.session.open(InfoDialog)
         elif choice[1] == "exit":
             self.exit()
 
@@ -799,8 +786,8 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
                     def update_ui():
                         try:
-                            if "station" in self:
-                                self["station"].setText(text)
+                            if "station_name" in self:
+                                self["station_name"].setText(text)
                                 print("[DEBUG] UI updated: {0}".format(text))
                         except Exception as e:
                             print("[DEBUG] UI update error: {0}".format(e))
@@ -968,9 +955,9 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def OK(self):
         PY3 = version_info[0] == 3
         if PY3:
-            self.session.open(ExtInfo_Foreca4, self.weather_api)
+            self.session.open(WeatherDetailView, self.weather_api)
         else:
-            self.session.open(ExtInfo_2_Foreca4)
+            self.session.open(RadarMapView)
 
     def savesetcolor(self, indata):
         f = open(
@@ -1001,17 +988,23 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 rgbmyb = 239
 
     def update_button(self):
+        """Update background colors for all plates"""
         self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate1"].instance.setBackgroundColor(self.color)
-        self["plate2"].instance.setBackgroundColor(self.color)
-        self["plate3"].instance.setBackgroundColor(self.color)
-        self["plate4"].instance.setBackgroundColor(self.color)
-        self["plate5"].instance.setBackgroundColor(self.color)
-        self["plate11"].instance.setBackgroundColor(parseColor(alpha))
-        self["plate22"].instance.setBackgroundColor(parseColor(alpha))
-        self["plate33"].instance.setBackgroundColor(parseColor(alpha))
-        self["plate44"].instance.setBackgroundColor(parseColor(alpha))
-        self["plate55"].instance.setBackgroundColor(parseColor(alpha))
+
+        # Update colored backgrounds
+        self["selection_overlay"].instance.setBackgroundColor(self.color)
+        self["color_bg_today"].instance.setBackgroundColor(self.color)
+        self["color_bg_forecast"].instance.setBackgroundColor(self.color)
+        self["color_bg_sun"].instance.setBackgroundColor(self.color)
+        self["color_bg_coords"].instance.setBackgroundColor(self.color)
+
+        # Update transparent overlays
+        transparent_color = parseColor(alpha)
+        self["transp_bg_today"].instance.setBackgroundColor(transparent_color)
+        self["transp_bg_forecast"].instance.setBackgroundColor(transparent_color)
+        self["transp_bg_sun"].instance.setBackgroundColor(transparent_color)
+        self["transp_bg_coords"].instance.setBackgroundColor(transparent_color)
+        self["transp_bg_header"].instance.setBackgroundColor(transparent_color)
 
         self.my_cur_weather()
         self.my_forecast_weather()
@@ -1019,32 +1012,32 @@ class ForecaPreview_4(Screen, HelpableScreen):
     def StartPageFirst(self):
         self.readsetcolor()
 
-        self["pic"].instance.setPixmapFromFile(
+        self["weather_icon"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/d000.png")
-        self["pic"].instance.show()
+        self["weather_icon"].instance.show()
 
-        self["wind"].instance.setPixmapFromFile(
+        self["wind_icon"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/wS.png")
-        self["wind"].instance.show()
+        self["wind_icon"].instance.show()
 
-        self["pressure_pic"].instance.setPixmapFromFile(
+        self["icon_pressure"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/barometer.png")
-        self["pressure_pic"].instance.show()
+        self["icon_pressure"].instance.show()
 
-        self["rain_mm_pic"].instance.setPixmapFromFile(
+        self["icon_rain"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/precipitation.png")
-        self["rain_mm_pic"].instance.show()
+        self["icon_rain"].instance.show()
 
-        self["hum_pic"].instance.setPixmapFromFile(
+        self["icon_humidity"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/humidity.png")
-        self["hum_pic"].instance.show()
+        self["icon_humidity"].instance.show()
 
-        self["sun"].instance.setPixmapFromFile(
+        self["icon_sun"].instance.setPixmapFromFile(
             "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/sun.png")
-        self["sun"].instance.show()
+        self["icon_sun"].instance.show()
 
-        self["mytitel1"].text = _("Current weather and forecast")
-        self["mytitel2"].text = "<< ver. " + str(VERSION) + " >>"
+        self["title_section_weather"].text = _("Current weather and forecast")
+        self["title_version"].text = "<< ver. " + str(VERSION) + " >>"
 
         # Date
         date_str = str(f_date[0]) if f_date and len(
@@ -1053,22 +1046,22 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # Day
         day_str = trans(f_day) if is_valid(f_day) else ""
 
-        self["Titel"].text = f"{trans(str(town))}, {trans(str(country))} - {date_str}"
+        self["title_main"].text = f"{trans(str(town))}, {trans(str(country))} - {date_str}"
         if day_str:
-            self["Titel"].text += " - " + day_str
+            self["title_main"].text += " - " + day_str
 
         # Day length
-        self["day_len"].setText(
+        self["day_length"].setText(
             str(conv_day_len(daylen)) if is_valid(daylen) else "N/A"
         )
 
         # Sunrise / Sunset
-        self["sunrise_val"].setText(
+        self["sunrise_value"].setText(
             str(sunrise) if is_valid(sunrise) else "N/A")
-        self["sunset_val"].setText(str(sunset) if is_valid(sunset) else "N/A")
+        self["sunset_value"].setText(str(sunset) if is_valid(sunset) else "N/A")
 
-        self["sunrise_text"].setText(_("Sunrise"))
-        self["sunset_text"].setText(_("Sunset"))
+        self["sunrise_label"].setText(_("Sunrise"))
+        self["sunset_label"].setText(_("Sunset"))
 
         self.my_cur_weather()
 
@@ -1129,7 +1122,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
             try:
                 f_w_s = str(
-                    mywindSpeed(
+                    my_speed_wind(
                         f_wind_speed[n],
                         for_wind_speed_recalc)) + ' ' + trans('km/h')
             except BaseException:
@@ -1177,12 +1170,12 @@ class ForecaPreview_4(Screen, HelpableScreen):
         unit_system = self.unit_manager.get_simple_system()
 
         # City name
-        self["town"].setText(str(town) if is_valid(town) else "N/A")
+        self["city_name"].setText(str(town) if is_valid(town) else "N/A")
 
-        # Current temperature - convert if needed
+        # Current temperature
         if is_valid(cur_temp):
             if unit_system == 'imperial':
-                # Convert Celsius to Fahrenheit
+
                 try:
                     temp_c = float(cur_temp)
                     temp_f = (temp_c * 9 / 5) + 32
@@ -1194,7 +1187,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         else:
             cur_temp_text = "N/A"
 
-        self["cur_temp"].setText(cur_temp_text)
+        self["temperature_current"].setText(cur_temp_text)
 
         # Feels like temperature
         if is_valid(fl_temp):
@@ -1202,72 +1195,67 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 try:
                     temp_c = float(fl_temp)
                     temp_f = (temp_c * 9 / 5) + 32
-                    self["fl_temp"].setText(
+                    self["temperature_feelslike"].setText(
                         trans("Feels like") + f" {temp_f:.1f}°F")
                 except BaseException:
-                    self["fl_temp"].setText(
+                    self["temperature_feelslike"].setText(
                         trans("Feels like") + f" {fl_temp}°C")
             else:
-                self["fl_temp"].setText(trans("Feels like") + f" {fl_temp}°C")
-
+                self["temperature_feelslike"].setText(
+                    trans("Feels like") + f" {fl_temp}°C")
         else:
-            self["fl_temp"].setText(trans("Feels like") + " N/A")
+            self["temperature_feelslike"].setText(trans("Feels like") + " N/A")
 
-        # Wind speed - needs conversion
+        # Wind speed
         if is_valid(wind_speed):
             try:
-                # wind_speed from scraping is in km/h
                 wind_kmh = float(wind_speed)
                 if unit_system == 'imperial':
-                    # Convert km/h to mph
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_speed"].setText(
+                    self["wind_speed_value"].setText(
                         trans("Wind speed") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_speed"].setText(
+                    self["wind_speed_value"].setText(
                         trans("Wind speed") + f" {wind_kmh:.1f} km/h")
             except BaseException:
-                self["wind_speed"].setText(
+                self["wind_speed_value"].setText(
                     trans("Wind speed") + f" {wind_speed}")
 
-        # Wind gust - same conversion
+        # Wind gust
         if is_valid(wind_gust):
             try:
                 wind_kmh = float(wind_gust)
                 if unit_system == 'imperial':
                     wind_mph = wind_kmh * 0.621371
-                    self["wind_gust"].setText(
+                    self["wind_gust_value"].setText(
                         trans("Gust") + f" {wind_mph:.1f} mph")
                 else:
-                    self["wind_gust"].setText(
+                    self["wind_gust_value"].setText(
                         trans("Gust") + f" {wind_kmh:.1f} km/h")
             except BaseException:
-                self["wind_gust"].setText(trans("Gust") + f" {wind_gust}")
+                self["wind_gust_value"].setText(trans("Gust") + f" {wind_gust}")
 
-        # Pressure - already handled in scraping (mmHg) but convert if needed
+        # Pressure
         if is_valid(pressure):
             try:
                 pressure_mmhg = float(pressure)
                 if unit_system == 'imperial':
                     # Convert mmHg to inHg
                     pressure_inhg = pressure_mmhg * 0.03937
-                    self["pressure"].setText(f"{pressure_inhg:.2f} inHg")
+                    self["pressure_value"].setText(f"{pressure_inhg:.2f} inHg")
                 else:
-                    # Convert mmHg to hPa (more standard for metric)
                     pressure_hpa = pressure_mmhg * 1.33322
-                    self["pressure"].setText(f"{pressure_hpa:.0f} hPa")
+                    self["pressure_value"].setText(f"{pressure_hpa:.0f} hPa")
             except BaseException:
-                self["pressure"].setText(f"{pressure}")
+                self["pressure_value"].setText(f"{pressure}")
 
         # Dewpoint
         if is_valid(dewpoint):
-            self["dewpoint"].setText(
+            self["dewpoint_value"].setText(
                 trans("Dewpoint") +
                 " {0}°C".format(dewpoint))
-            print(
-                "[WIDGET-FIX] dewpoint settato a: {0}{1}°C".format(trans("Dewpoint "), dewpoint))
         else:
-            self["dewpoint"].setText(trans("Dewpoint") + " N/A")
+            self["dewpoint_value"].setText(trans("Dewpoint") + " N/A")
 
         # Weather icon
         try:
@@ -1275,16 +1263,16 @@ class ForecaPreview_4(Screen, HelpableScreen):
             icon_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}".format(
                 icon)
             if os.path.exists(icon_path):
-                self["pic"].instance.setPixmapFromFile(icon_path)
+                self["weather_icon"].instance.setPixmapFromFile(icon_path)
         except Exception:
             pass
 
         # Weather description
         if is_valid(pic):
             description = self.symbolToCondition(str(pic))
-            self["description_w"].setText(trans(description))
+            self["weather_description"].setText(trans(description))
         else:
-            self["description_w"].setText("N/A")
+            self["weather_description"].setText("N/A")
 
         # Wind direction icon
         try:
@@ -1294,17 +1282,17 @@ class ForecaPreview_4(Screen, HelpableScreen):
                 wind_icon = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{0}.png".format(
                     myw1)
                 if os.path.exists(wind_icon):
-                    self["wind"].instance.setPixmapFromFile(wind_icon)
+                    self["wind_icon"].instance.setPixmapFromFile(wind_icon)
         except Exception:
             pass
 
         # Precipitation
-        self["rain_mm"].setText(
+        self["rain_value"].setText(
             "{0} ".format(rain_mm) +
             trans("mm") if is_valid(rain_mm) else "N/A")
 
         # Humidity
-        self["hum"].setText("{0}%".format(hum) if is_valid(hum) else "N/A")
+        self["humidity_value"].setText("{0}%".format(hum) if is_valid(hum) else "N/A")
 
         # Force immediate GUI update
         self.invalidate_current_weather_widgets()
@@ -1436,7 +1424,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         self.StartPage()
 
     def info(self):
-        self.session.open(InfoBox1)
+        self.session.open(InfoDialog)
 
     def left(self):
         if self.tag > 0:
@@ -1644,9 +1632,11 @@ class ForecaPreview_4(Screen, HelpableScreen):
 
     def invalidate_current_weather_widgets(self):
         """Force GUI update for current weather widgets"""
-        widget_names = ["fl_temp", "wind_speed", "wind_gust", "dewpoint",
-                        "town", "cur_temp", "description_w", "rain_mm",
-                        "hum", "pressure"]
+        widget_names = [
+            "temperature_feelslike", "wind_speed_value", "wind_gust_value",
+            "dewpoint_value", "city_name", "temperature_current",
+            "weather_description", "rain_value", "humidity_value", "pressure_value"
+        ]
 
         for name in widget_names:
             try:
@@ -1669,7 +1659,7 @@ class ForecaPreview_4(Screen, HelpableScreen):
         # Config Save
         trspz = str(rgbmyr) + ' ' + str(rgbmyg) + ' ' + str(rgbmyb)
         self.savesetcolor(trspz)
-        savesetalpha(alpha)
+        save_alpha(alpha)
 
         # Clean cache on exit (optional)
         self.clean_foreca_cache()
@@ -1697,7 +1687,7 @@ class ColorSelector(Screen):
 
         self["color_preview"] = Pixmap()
         self["background_plate"] = Label("N/A")
-        self["selection_plate"] = Label("N/A")
+        self["selection_overlay"] = Label("N/A")
 
         self["actions"] = ActionMap(
             [
@@ -1721,7 +1711,7 @@ class ColorSelector(Screen):
     def initialize_data(self):
         current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(current_color)
-        self["selection_plate"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
 
         self.color_list = []
         self.source_names = []
@@ -1771,8 +1761,7 @@ class ColorSelector(Screen):
         if self.color_list:
             for idx in range(0, min(30, len(self.source_names))):
                 if self.translated_names[idx] == self.source_names[idx]:
-                    translated_text = self.translate_color_name(
-                        self.source_names[idx])
+                    translated_text = self.translate_color_name(self.source_names[idx])
                     if translated_text != self.source_names[idx]:
                         self.translated_names[idx] = translated_text
                         self.color_list[idx] = f"{idx}. {translated_text}"
@@ -1790,8 +1779,7 @@ class ColorSelector(Screen):
         def translation_worker():
             nonlocal end_position  # Dichiara che stai usando la variabile esterna
             end_position = min(end_position, len(self.source_names))
-            print(
-                f"[ColorSelector] Processing range {start_position} - {end_position}")
+            print(f"[ColorSelector] Processing range {start_position} - {end_position}")
 
             batch_size = 20
             for batch_start in range(start_position, end_position, batch_size):
@@ -1800,8 +1788,7 @@ class ColorSelector(Screen):
 
                 for position in range(batch_start, batch_end):
                     if self.translated_names[position] == self.source_names[position]:
-                        translated_text = self.translate_color_name(
-                            self.source_names[position])
+                        translated_text = self.translate_color_name(self.source_names[position])
                         if translated_text != self.source_names[position]:
                             self.translated_names[position] = translated_text
                             self.color_list[position] = f"{position}. {translated_text}"
@@ -1818,16 +1805,12 @@ class ColorSelector(Screen):
                     update_timer.callback.append(safe_refresh)
                     update_timer.start(0, True)
 
-                print(
-                    f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
+                print(f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
 
-            print(
-                f"[ColorSelector] Completed range {start_position}-{end_position}")
-            self.last_processed_index = max(
-                self.last_processed_index, end_position)
+            print(f"[ColorSelector] Completed range {start_position}-{end_position}")
+            self.last_processed_index = max(self.last_processed_index, end_position)
 
-        worker_thread = threading.Thread(
-            target=translation_worker, daemon=True)
+        worker_thread = threading.Thread(target=translation_worker, daemon=True)
         worker_thread.start()
 
     def translate_color_name(self, original_text):
@@ -1849,26 +1832,22 @@ class ColorSelector(Screen):
                         translated_parts.append("")
 
                 final_text = '-'.join(translated_parts)
-                print(
-                    f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+                print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
                 return final_text
 
             final_text = trans(original_text)
-            print(
-                f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+            print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
             return final_text
 
         except Exception as error:
-            print(
-                f"[ColorSelector] ERROR translating '{original_text}': {error}")
+            print(f"[ColorSelector] ERROR translating '{original_text}': {error}")
             return original_text
 
     def update_current_selection(self, selected_index):
         print(f"[ColorSelector] Updating selection {selected_index}")
         if 0 <= selected_index < len(self.translated_names):
             if self.translated_names[selected_index] == self.source_names[selected_index]:
-                translated_text = self.translate_color_name(
-                    self.source_names[selected_index])
+                translated_text = self.translate_color_name(self.source_names[selected_index])
                 if translated_text != self.translated_names[selected_index]:
                     self.translated_names[selected_index] = translated_text
                     self.color_list[selected_index] = f"{selected_index}. {translated_text}"
@@ -1877,8 +1856,7 @@ class ColorSelector(Screen):
             display_name = self.translated_names[selected_index]
             self["color_name_label"].setText(display_name)
 
-            if selected_index < len(
-                    self.color_data) and self.color_data[selected_index]:
+            if selected_index < len(self.color_data) and self.color_data[selected_index]:
                 color_values = self.color_data[selected_index]
                 value_parts = color_values.split(' ')
 
@@ -1892,8 +1870,7 @@ class ColorSelector(Screen):
                     color_object = gRGB(red_value, green_value, blue_value)
 
                     # Calculate brightness for text contrast (0-255)
-                    brightness = (
-                        red_value * 299 + green_value * 587 + blue_value * 114) / 1000
+                    brightness = (red_value * 299 + green_value * 587 + blue_value * 114) / 1000
 
                     # Choose text color based on background brightness
                     if brightness > 128:
@@ -1905,21 +1882,17 @@ class ColorSelector(Screen):
 
                     # --- COLOR_NAME_LABEL (colored text) ---
                     # The color_name_label text takes the selected color
-                    self["color_name_label"].instance.setForegroundColor(
-                        color_object)
+                    self["color_name_label"].instance.setForegroundColor(color_object)
 
                     # --- COLOR_INFO_LABEL (colored background with contrasting text) ---
                     # Colored background
-                    self["color_info_label"].instance.setBackgroundColor(
-                        color_object)
+                    self["color_info_label"].instance.setBackgroundColor(color_object)
                     self["color_info_label"].instance.setTransparent(False)
                     # Contrasting text (white or black for readability)
-                    self["color_info_label"].instance.setForegroundColor(
-                        text_color)
+                    self["color_info_label"].instance.setForegroundColor(text_color)
 
                     # --- COLOR_PREVIEW ---
-                    self["color_preview"].instance.setBackgroundColor(
-                        color_object)
+                    self["color_preview"].instance.setBackgroundColor(color_object)
 
                     info_text = (_('HTML') + ' (' + html_code + ')   ' +
                                  _('Red') + ' (' + str(red_value) + ')   ' +
@@ -1935,8 +1908,7 @@ class ColorSelector(Screen):
             combined_data = list(zip(self.translated_names, self.color_list,
                                      self.source_names, self.color_data))
             combined_data.sort(key=lambda item: item[0].lower())
-            self.translated_names, self.color_list, self.source_names, self.color_data = zip(
-                *combined_data)
+            self.translated_names, self.color_list, self.source_names, self.color_data = zip(*combined_data)
             self.translated_names = list(self.translated_names)
             self.color_list = list(self.color_list)
             self.source_names = list(self.source_names)
@@ -1946,8 +1918,7 @@ class ColorSelector(Screen):
         current_position = self["menu"].getCurrentIndex()
 
         if current_position < len(self.translated_names):
-            self["color_name_label"].setText(
-                self.translated_names[current_position])
+            self["color_name_label"].setText(self.translated_names[current_position])
 
         self["menu"].instance.invalidate()
         self["color_name_label"].instance.invalidate()
@@ -1970,10 +1941,8 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index +
-                            100, len(self.source_names))
-            print(
-                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index + 100, len(self.source_names))
+            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1983,10 +1952,8 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index +
-                            100, len(self.source_names))
-            print(
-                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index + 100, len(self.source_names))
+            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1994,8 +1961,7 @@ class ColorSelector(Screen):
         global rgbmyr, rgbmyg, rgbmyb
         current_position = self["menu"].getCurrentIndex()
 
-        if current_position < len(
-                self.color_data) and self.color_data[current_position]:
+        if current_position < len(self.color_data) and self.color_data[current_position]:
             color_values = self.color_data[current_position]
             value_parts = color_values.split(' ')
 
@@ -2009,359 +1975,28 @@ class ColorSelector(Screen):
     def exit_screen(self):
         self.close()
 
-# class ColorSelector(Screen):
 
-    # def __init__(self, session, args=0):
-        # self.skin = load_skin_for_class(ColorSelector)
-        # self.session = session
-        # Screen.__init__(self, session)
-        # self.setTitle(_('Color selection'))
-        # self.Clist = []
-        # self.original_names = []
-        # self.display_names = []
-        # self.mydata = []
-
-        # self["Clist"] = MenuList([])
-        # self["colorname"] = Label()
-        # self["colorname"].setText(_('Color name'))
-        # self["colordatas"] = Label()
-        # self["colordatas"].setText(_('Color data'))
-        # self["pic1"] = Pixmap()
-        # self["plate0"] = Label("N/A")
-        # self["plate1"] = Label("N/A")
-        # self["actions"] = ActionMap(
-        # [
-        # "OkCancelActions",
-        # "DirectionActions",
-        # "HelpActions",
-        # "EPGSelectActions"
-        # ],
-        # {
-        # "cancel": self.Exit,
-        # "left": self.left,
-        # "right": self.right,
-        # "up": self.up,
-        # "down": self.down,
-        # "ok": self.OK,
-        # }, -1
-        # )
-        # self.onShown.append(self.prepare)
-
-    # def prepare(self):
-        # self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        # self["plate0"].instance.setBackgroundColor(self.color)
-        # self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-
-        # self.Clist = []
-        # self.original_names = []
-        # self.display_names = []
-        # self.mydata = []
-        # self.last_translated_idx = 0
-
-        # file_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/new_rgb_full.txt"
-
-        # if os.path.exists(file_path):
-        # try:
-        # with open(file_path, "r", encoding="utf-8") as f:
-        # lines = f.readlines()
-
-        # for i, line in enumerate(lines):
-        # line = line.strip()
-        # if not line:
-        # continue
-
-        # if " #" in line:
-        # name_part, data_part = line.split(" #", 1)
-        # name_part = name_part.strip()
-        # data_part = data_part.strip()
-        # else:
-        # name_part = line.strip()
-        # data_part = ""
-
-        # self.original_names.append(name_part)
-        # self.display_names.append(name_part)
-        # self.mydata.append(data_part)
-        # self.Clist.append(f"{i}. {name_part}")
-
-        # except Exception as e:
-        # print(f"[Foreca4] Error reading color file: {e}")
-        # self.Clist.append("0. " + _("Error loading colors"))
-        # self.original_names.append("")
-        # self.display_names.append("")
-        # self.mydata.append("")
-        # else:
-        # self.Clist.append("0. " + _("Color file not found"))
-        # self.original_names.append("")
-        # self.display_names.append("")
-        # self.mydata.append("")
-
-        # self["Clist"].l.setList(self.Clist)
-        # self["Clist"].selectionEnabled(1)
-
-        # print(f"[ColorSelector] Loaded items: {len(self.original_names)}")
-
-        # if self.Clist:
-        # print("[ColorSelector] Translating first 30 items synchronously...")
-        # for i in range(0, min(30, len(self.original_names))):
-        # if self.display_names[i] == self.original_names[i]:
-        # translated = self.translate_color(self.original_names[i])
-        # if translated != self.original_names[i]:
-        # self.display_names[i] = translated
-        # self.Clist[i] = f"{i}. {translated}"
-
-        # self.update_gui()
-        # self.update_display(0)
-
-        # if len(self.original_names) > 30:
-        # print(
-        # "[ColorSelector] Starting background translation for remaining items...")
-        # self.translate_range(30, 150)
-        # self.last_translated_idx = 150
-
-    # def translate_range(self, start_idx, end_idx):
-        # import threading
-
-        # def translate():
-        # end_idx_actual = min(end_idx, len(self.original_names))
-        # print(
-        # f"[ColorSelector] Translating range {start_idx} to {end_idx_actual}")
-
-        # # Translate in blocks of 20 items and update the GUI after each
-        # # block
-        # block_size = 20
-        # for block_start in range(start_idx, end_idx_actual, block_size):
-        # block_end = min(block_start + block_size, end_idx_actual)
-        # translated_in_block = False
-
-        # for i in range(block_start, block_end):
-        # if self.display_names[i] == self.original_names[i]:
-        # translated = self.translate_color(
-        # self.original_names[i])
-        # if translated != self.original_names[i]:
-        # self.display_names[i] = translated
-        # self.Clist[i] = f"{i}. {translated}"
-        # translated_in_block = True
-
-        # # Update the GUI after each block
-        # if translated_in_block:
-        # from enigma import eTimer
-
-        # def update_gui_safe():
-        # try:
-        # self.update_gui()
-        # except Exception as e:
-        # print(f"[ColorSelector] Error updating GUI: {e}")
-
-        # timer = eTimer()
-        # timer.callback.append(update_gui_safe)
-        # timer.start(0, True)
-
-        # print(
-        # f"[ColorSelector] Translated block {block_start}-{block_end}")
-
-        # print(
-        # f"[ColorSelector] Completed translation of range
-        # {start_idx}-{end_idx_actual}")
-
-        # # Update the index of the last translated item
-        # self.last_translated_idx = max(
-        # self.last_translated_idx, end_idx_actual)
-
-        # thread = threading.Thread(target=translate, daemon=True)
-        # thread.start()
-
-    # def translate_color(self, color_name):
-        # if not color_name:
-        # return color_name
-
-        # print("[ColorSelector] Translate: '{0}'".format(color_name))
-        # try:
-        # if '-' in color_name:
-        # parts = color_name.split('-')
-        # translated_parts = []
-
-        # for part in parts:
-        # part = part.strip()
-        # if part:
-        # translated_part = trans(part)
-        # translated_parts.append(translated_part)
-        # else:
-        # translated_parts.append("")
-
-        # result = '-'.join(translated_parts)
-        # print(
-        # "[ColorSelector] Result with iphen: '{0}' -> '{1}'".format(color_name, result))
-        # return result
-
-        # result = trans(color_name)
-        # print(
-        # "[ColorSelector] Result: '{0}' -> '{1}'".format(color_name, result))
-        # return result
-
-        # except Exception as e:
-        # print(
-        # "[ColorSelector] ERROR translating '{0}': {1}".format(
-        # color_name, e))
-        # return color_name
-
-    # def translate_all_async(self):
-        # """Translate all items in the background"""
-        # import threading
-
-        # def translate_all():
-        # total = len(self.original_names)
-        # block_size = 50
-
-        # for start in range(0, total, block_size):
-        # end = min(start + block_size, total)
-
-        # for i in range(start, end):
-        # if self.display_names[i] == self.original_names[i]:
-        # translated = self.translate_color(
-        # self.original_names[i])
-        # if translated != self.original_names[i]:
-        # self.display_names[i] = translated
-        # self.Clist[i] = f"{i}. {translated}"
-
-        # # Update the GUI after each block
-        # timer = eTimer()
-        # timer.callback.append(self.update_gui)
-        # timer.start(0, True)
-
-        # print(f"[ColorSelector] Translated block {start}-{end}")
-
-        # print(f"[ColorSelector] All {total} items translated")
-
-        # thread = threading.Thread(target=translate_all, daemon=True)
-        # thread.start()
-
-    # def update_display(self, index):
-        # print(f"[ColorSelector] update_display({index})")
-        # if 0 <= index < len(self.display_names):
-        # # self.translate_all_async()
-        # if self.display_names[index] == self.original_names[index]:
-        # translated = self.translate_color(self.original_names[index])
-        # if translated != self.display_names[index]:
-        # self.display_names[index] = translated
-        # self.Clist[index] = f"{index}. {translated}"
-        # self.update_gui()
-        # print(f"[ColorSelector] Translated item {index} on the fly")
-
-        # display_name = self.display_names[index]
-        # self["colorname"].setText(display_name)
-        # print(f"[ColorSelector] Set colorname: '{display_name}'")
-        # if index < len(self.mydata) and self.mydata[index]:
-        # color_info = self.mydata[index]
-        # parts = color_info.split(' ')
-        # if len(parts) >= 4:
-        # myhtml = '#' + parts[0]
-        # myr = parts[1]
-        # myg = parts[2]
-        # myb = parts[3]
-
-        # color_text = (_('HTML') + ' (' + myhtml + ')   ' +
-        # _('Red') + ' (' + myr + ')   ' +
-        # _('Green') + ' (' + myg + ')   ' +
-        # _('Blue') + ' (' + myb + ')')
-
-        # self["colordatas"].setText(color_text)
-        # img_path = f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/samples/{myhtml}.png"
-        # if os.path.exists(img_path):
-        # self["pic1"].instance.setPixmapFromFile(img_path)
-        # self["pic1"].instance.show()
-
-    # def update_gui(self, sort=False):
-        # print("[ColorSelector] update_gui()")
-
-        # if sort:
-        # combined = list(zip(self.display_names, self.Clist,
-        # self.original_names, self.mydata))
-        # combined.sort(key=lambda x: x[0].lower())
-        # self.display_names, self.Clist, self.original_names, self.mydata = zip(
-        # *combined)
-        # self.display_names = list(self.display_names)
-        # self.Clist = list(self.Clist)
-        # self.original_names = list(self.original_names)
-        # self.mydata = list(self.mydata)
-
-        # self["Clist"].l.setList(self.Clist)
-        # current_idx = self["Clist"].getCurrentIndex()
-        # if current_idx < len(self.display_names):
-        # self["colorname"].setText(self.display_names[current_idx])
-
-        # self["Clist"].instance.invalidate()
-        # self["colorname"].instance.invalidate()
-
-    # def up(self):
-        # current_idx = self["Clist"].getCurrentIndex()
-        # new_idx = max(0, current_idx - 1)
-        # self["Clist"].goLineUp()
-        # self.update_display(new_idx)
-
-    # def down(self):
-        # current_idx = self["Clist"].getCurrentIndex()
-        # new_idx = min(len(self.Clist) - 1, current_idx + 1)
-        # self["Clist"].goLineDown()
-        # self.update_display(new_idx)
-
-    # def left(self):
-        # self["Clist"].pageUp()
-        # current_idx = self["Clist"].getCurrentIndex()
-        # self.update_display(current_idx)
-
-        # if current_idx + 100 > self.last_translated_idx:
-        # new_end = min(self.last_translated_idx +
-        # 100, len(self.original_names))
-        # print(
-        # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
-        # self.translate_range(self.last_translated_idx, new_end)
-        # self.last_translated_idx = new_end
-
-    # def right(self):
-        # self["Clist"].pageDown()
-        # current_idx = self["Clist"].getCurrentIndex()
-        # self.update_display(current_idx)
-
-        # if current_idx + 100 > self.last_translated_idx:
-        # new_end = min(self.last_translated_idx +
-        # 100, len(self.original_names))
-        # print(
-        # f"[ColorSelector] Translating ahead: {self.last_translated_idx} to {new_end}")
-        # self.translate_range(self.last_translated_idx, new_end)
-        # self.last_translated_idx = new_end
-
-    # def OK(self):
-        # global rgbmyr, rgbmyg, rgbmyb
-        # current_idx = self["Clist"].getCurrentIndex()
-
-        # if current_idx < len(self.mydata) and self.mydata[current_idx]:
-        # color_info = self.mydata[current_idx]
-        # parts = color_info.split(' ')
-        # if len(parts) >= 4:
-        # rgbmyr = parts[1]
-        # rgbmyg = parts[2]
-        # rgbmyb = parts[3]
-
-        # self.close()
-
-    # def Exit(self):
-        # self.close()
-
-
-class InfoBox1(Screen):
+class InfoDialog(Screen):
 
     def __init__(self, session):
-        self.skin = load_skin_for_class(InfoBox1)
-
+        self.skin = load_skin_for_class(InfoDialog)
         Screen.__init__(self, session)
-
-        self['ver'] = StaticText(
+        self['version_label'] = Label(
             _('Foreca 4 Weather and Forecast') +
             ' ver. ' +
             str(VERSION))
 
-        self["plate0"] = Label("N/A")
-        self["plate1"] = Label("N/A")
+        self['author_label'] = Label(
+            _('Created by @Bauernbub'))
+
+        self['mod_label'] = Label(
+            _('mod Lululla, 2026'))
+
+        self['website_label'] = Label(
+            _('https://linuxsat-support.com'))
+
+        self["background_plate"] = Label("N/A")
+        self["selection_overlay"] = Label("N/A")
 
         self["actions"] = ActionMap(
             [
@@ -2371,263 +2006,408 @@ class InfoBox1(Screen):
                 "EPGSelectActions"
             ],
             {
-                "cancel": self.Exit,
-                'ok': self.Exit,
+                "cancel": self.exit_dialog,
+                'ok': self.exit_dialog,
             }, -1
         )
 
-        self.onShow.append(self.Start2)
+        self.onShow.append(self.initialize_colors)
 
-    def Start2(self):
-        self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate0"].instance.setBackgroundColor(self.color)
-        self["plate1"].instance.setBackgroundColor(parseColor(alpha))
+    def initialize_colors(self):
+        """Initialize the background colors using current RGB and alpha values"""
+        current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
+        self["background_plate"].instance.setBackgroundColor(current_color)
+        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
 
-    def Exit(self):
+        print(f"[InfoDialog] Colors initialized - RGB: {rgbmyr},{rgbmyg},{rgbmyb} Alpha: {alpha}")
+
+    def exit_dialog(self):
+        """Close the dialog"""
         self.close()
 
 
-class ExtInfo_Foreca4(Screen):
-    def __init__(self, session, weather_api):  # <-- add parameter
-        self.skin = load_skin_for_class(ExtInfo_Foreca4)
-        Screen.__init__(self, session)
-        self.weather_api = weather_api
-
-        # Determine location path
-        if myloc == 0:
-            location_path = path_loc0
-        elif myloc == 1:
-            location_path = path_loc1
-        else:
-            location_path = path_loc2
-
-        location_id = location_path.split(
-            '/')[0] if '/' in location_path else location_path
-
-        # Get weather data if API credentials exist
-        self.data = None
-        if self.weather_api and self.weather_api.check_credentials():
-            self.data = self.weather_api.get_today_tomorrow_details(
-                location_id)
-
-        # Fallback if data not available
-        if not self.data:
-            self.data = {
-                'town': 'N/A',
-                'country': 'N/A',
-                'lat': lat,  # fallback to global variables
-                'lon': lon,
-                'today': {}, 'tomorrow': {}
-            }
-
-        # UI Elements
-        self['title1'] = StaticText(_('Weather Radar'))
-        self['title2'] = StaticText()
-        self['title3'] = StaticText(_('Weather today'))
-        self['title4'] = StaticText(_('Weather tomorrow'))
-        self["pic"] = Pixmap()
-        self['text1'] = StaticText()
-        self['text2'] = StaticText()
-        self['mo1'] = StaticText()
-        self['mo2'] = StaticText()
-        self['af1'] = StaticText()
-        self['af2'] = StaticText()
-        self['ev1'] = StaticText()
-        self['ev2'] = StaticText()
-        self['ov1'] = StaticText()
-        self['ov2'] = StaticText()
-        self["pic_af1"] = Pixmap()
-        self["pic_ev1"] = Pixmap()
-        self["pic_ov1"] = Pixmap()
-        self["pic_mo1"] = Pixmap()
-        self['mo1_text'] = StaticText()
-        self['af1_text'] = StaticText()
-        self['ev1_text'] = StaticText()
-        self['ov1_text'] = StaticText()
-        self["pic_af2"] = Pixmap()
-        self["pic_ev2"] = Pixmap()
-        self["pic_ov2"] = Pixmap()
-        self["pic_mo2"] = Pixmap()
-        self['mo2'] = StaticText()
-        self['af2'] = StaticText()
-        self['ev2'] = StaticText()
-        self['ov2'] = StaticText()
-        self['mo2_text'] = StaticText()
-        self['af2_text'] = StaticText()
-        self['ev2_text'] = StaticText()
-        self['ov2_text'] = StaticText()
-        self["plate0"] = Label("N/A")
-        self["plate1"] = Label("N/A")
-        self["pic_lot"] = Pixmap()
-        self["pic_lat"] = Pixmap()
-        self['lat_val'] = StaticText()
-        self['lon_val'] = StaticText()
-
-        # Action map
-        self["actions"] = ActionMap(
-            ["OkCancelActions", "DirectionActions", "HelpActions", "EPGSelectActions"],
-            {
-                "cancel": self.Exit,
-                'ok': self.OK,
-            }, -1
-        )
-
-        self.onLayoutFinish.append(self.Start1)
-        self.onShow.append(self.Start2)
-
-    def OK(self):
-        self.session.open(Meteogram_Foreca4)
-
-    def Start2(self):
-        self['title3'].text = str(_('Weather today'))
-        self['title4'].text = str(_('Weather tomorrow'))
-        self['title2'].text = str(self.data.get('town', 'N/A'))
-
-        today = self.data.get('today', {})
-        tomorrow = self.data.get('tomorrow', {})
-
-        # Today summary
-        t1 = f"{today.get('text', 'N/A')} {today.get('max_temp', 'N/A')}°C, {today.get('min_temp', 'N/A')}°C. {today.get('rain_mm', '0')} mm."
-        self["text1"].text = t1
-
-        # Tomorrow summary
-        t2 = f"{tomorrow.get('text', 'N/A')} {tomorrow.get('max_temp', 'N/A')}°C, {tomorrow.get('min_temp', 'N/A')}°C. {tomorrow.get('rain_mm', '0')} mm."
-        self["text2"].text = t2
-
-        # Period labels
-        self['mo1'].text = _('Morning')
-        self['mo2'].text = _('Morning')
-        self['af1'].text = _('Afternoon')
-        self['af2'].text = _('Afternoon')
-        self['ev1'].text = _('Evening')
-        self['ev2'].text = _('Evening')
-        self['ov1'].text = _('Overnight')
-        self['ov2'].text = _('Overnight')
-
-        # Colors
-        self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate0"].instance.setBackgroundColor(self.color)
-        self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-
-        # Start translation thread
-        Thread(target=self.mytranslate).start()
-
-    def mytranslate(self):
-        # Translate UI texts
-        self['title3'].text = _('Weather today')
-        self['title4'].text = _('Weather tomorrow')
-        self['title2'].text = str(trans(self.data.get('town', 'N/A')))
-
-        today = self.data.get('today', {})
-        tomorrow = self.data.get('tomorrow', {})
-
-        t1 = f"{today.get('text', 'N/A')} {today.get('max_temp', 'N/A')}°C, {today.get('min_temp', 'N/A')}°C. {today.get('rain_mm', '0')} mm."
-        self["text1"].text = str(trans(t1))
-
-        t2 = f"{tomorrow.get('text', 'N/A')} {tomorrow.get('max_temp', 'N/A')}°C, {tomorrow.get('min_temp', 'N/A')}°C. {tomorrow.get('rain_mm', '0')} mm."
-        self["text2"].text = str(trans(t2))
-
-    def Start1(self):
-        # Radar map (if exists)
-        if os.path.exists("/tmp/385.png"):
-            self["pic"].instance.setPixmapFromFile("/tmp/385.png")
-            self["pic"].instance.show()
-
-        # Today - symbols and temperatures
-        today = self.data.get('today', {})
-        self._set_period_data(
-            '1', today.get(
-                'morning', {}), today.get(
-                'afternoon', {}), today.get(
-                'evening', {}), today.get(
-                    'overnight', {}))
-
-        # Tomorrow - symbols and temperatures
-        tomorrow = self.data.get('tomorrow', {})
-        self._set_period_data(
-            '2', tomorrow.get(
-                'morning', {}), tomorrow.get(
-                'afternoon', {}), tomorrow.get(
-                'evening', {}), tomorrow.get(
-                    'overnight', {}))
-
-        # Coordinate icons
-        self["pic_lot"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
-        self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
-        self["pic_lat"].instance.show()
-
-        self['lat_val'].text = str(self.data.get('lat', lat))
-        self['lon_val'].text = str(self.data.get('lon', lon))
-
-    def _set_period_data(self, suffix, morning, afternoon, evening, overnight):
-        """Helper to set symbols and temperatures"""
-        # Symbols
-        self[f"pic_mo{suffix}"].instance.setPixmapFromFile(
-            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{morning.get('symbol', 'd000')}.png")
-        self[f"pic_mo{suffix}"].instance.show()
-
-        self[f"pic_af{suffix}"].instance.setPixmapFromFile(
-            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{afternoon.get('symbol', 'd000')}.png")
-        self[f"pic_af{suffix}"].instance.show()
-
-        self[f"pic_ev{suffix}"].instance.setPixmapFromFile(
-            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{evening.get('symbol', 'd000')}.png")
-        self[f"pic_ev{suffix}"].instance.show()
-
-        self[f"pic_ov{suffix}"].instance.setPixmapFromFile(
-            f"/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/{overnight.get('symbol', 'd000')}.png")
-        self[f"pic_ov{suffix}"].instance.show()
-
-        # Temperatures
-        self[f'mo{suffix}_text'].text = str(morning.get('temp', 'N/A'))
-        self[f'af{suffix}_text'].text = str(afternoon.get('temp', 'N/A'))
-        self[f'ev{suffix}_text'].text = str(evening.get('temp', 'N/A'))
-        self[f'ov{suffix}_text'].text = str(overnight.get('temp', 'N/A'))
-
-    def Exit(self):
-        self.close()
-
-
-class ExtInfo_2_Foreca4(Screen):
+class WeatherDetailView(Screen):
+    """
+    Enhanced weather detail screen with today and tomorrow forecasts
+    """
 
     def __init__(self, session, weather_api):
-        self.skin = load_skin_for_class(ExtInfo_2_Foreca4)
-
+        self.skin = load_skin_for_class(WeatherDetailView)
         Screen.__init__(self, session)
 
+        # Core data
         self.weather_api = weather_api
+        self.location_data = self._load_location_data()
+        self.weather_data = self._fetch_weather_data()
 
-        if myloc == 0:
-            location_path = path_loc0
-        elif myloc == 1:
-            location_path = path_loc1
-        else:
-            location_path = path_loc2
+        # DEBUG: stampa i dati ricevuti
+        print(f"[WeatherDetailView] weather_data: {self.weather_data}")
+        print(f"[WeatherDetailView] town: {self.weather_data.get('town')}")
+        print(f"[WeatherDetailView] today keys: {self.weather_data.get('today', {}).keys()}")
 
-        location_id = location_path.split(
-            '/')[0] if '/' in location_path else location_path
+        # Initialize UI components
+        self._init_ui_elements()
+        self._setup_actions()
 
-        self.lat_val = lat
-        self.lon_val = lon
+        # Event hooks
+        self.onLayoutFinish.append(self._on_layout_finished)
+        self.onShow.append(self._on_screen_shown)
+
+    def _load_location_data(self):
+        """Load location based on myloc setting"""
+        global myloc, path_loc0, path_loc1, path_loc2, lat, lon
+
+        location_paths = [path_loc0, path_loc1, path_loc2]
+        selected_path = location_paths[myloc] if 0 <= myloc < 3 else path_loc0
+        location_id = selected_path.split('/')[0] if '/' in selected_path else selected_path
+
+        return {
+            'path': selected_path,
+            'id': location_id,
+            'lat': lat,
+            'lon': lon
+        }
+
+    def _fetch_weather_data(self):
+        """Fetch weather data from API or use fallback"""
+        default_data = {
+            'town': 'N/A',
+            'country': 'N/A',
+            'lat': self.location_data.get('lat', 'N/A'),
+            'lon': self.location_data.get('lon', 'N/A'),
+            'today': {},
+            'tomorrow': {}
+        }
+
+        if not (self.weather_api and self.weather_api.check_credentials()):
+            return default_data
+
+        try:
+            data = self.weather_api.get_today_tomorrow_details(self.location_data['id'])
+            return data if data else default_data
+        except Exception as e:
+            print(f"[WeatherDetailView] Error fetching data: {e}")
+            return default_data
+
+    def _init_ui_elements(self):
+        """Initialize all UI widgets"""
+        # Title section
+        self['title_main'] = Label(_('Weather Radar'))
+        self['title_location'] = Label()
+        self['title_today'] = Label(_('Weather today'))
+        self['title_tomorrow'] = Label(_('Weather tomorrow'))
+
+        # Summary text
+        self['summary_today'] = Label()
+        self['summary_tomorrow'] = Label()
+
+        # Period labels
+        self['label_morning_1'] = Label(_('Morning'))
+        self['label_morning_2'] = Label(_('Morning'))
+        self['label_afternoon_1'] = Label(_('Afternoon'))
+        self['label_afternoon_2'] = Label(_('Afternoon'))
+        self['label_evening_1'] = Label(_('Evening'))
+        self['label_evening_2'] = Label(_('Evening'))
+        self['label_overnight_1'] = Label(_('Overnight'))
+        self['label_overnight_2'] = Label(_('Overnight'))
+
+        # Temperature displays
+        self['temp_morning_1'] = Label()
+        self['temp_morning_2'] = Label()
+        self['temp_afternoon_1'] = Label()
+        self['temp_afternoon_2'] = Label()
+        self['temp_evening_1'] = Label()
+        self['temp_evening_2'] = Label()
+        self['temp_overnight_1'] = Label()
+        self['temp_overnight_2'] = Label()
+
+        # Temperature labels
+        self['temp_label_morning_1'] = Label()
+        self['temp_label_morning_2'] = Label()
+        self['temp_label_afternoon_1'] = Label()
+        self['temp_label_afternoon_2'] = Label()
+        self['temp_label_evening_1'] = Label()
+        self['temp_label_evening_2'] = Label()
+        self['temp_label_overnight_1'] = Label()
+        self['temp_label_overnight_2'] = Label()
+
+        # Symbol pixmaps
+        self['symbol_morning_1'] = Pixmap()
+        self['symbol_morning_2'] = Pixmap()
+        self['symbol_afternoon_1'] = Pixmap()
+        self['symbol_afternoon_2'] = Pixmap()
+        self['symbol_evening_1'] = Pixmap()
+        self['symbol_evening_2'] = Pixmap()
+        self['symbol_overnight_1'] = Pixmap()
+        self['symbol_overnight_2'] = Pixmap()
+
+        # Radar map
+        self['radar_map'] = Pixmap()
+
+        # Coordinate displays
+        self['icon_longitude'] = Pixmap()
+        self['icon_latitude'] = Pixmap()
+        self['value_longitude'] = Label()
+        self['value_latitude'] = Label()
+
+        # Background plates
+        self["background_plate"] = Label("N/A")
+        self["selection_overlay"] = Label("N/A")
+
+    def _setup_actions(self):
+        """Setup action map for navigation - METODO MANCANTE"""
+        self["actions"] = ActionMap(
+            ["OkCancelActions", "DirectionActions"],
+            {
+                "cancel": self._close_screen,
+                "ok": self._load_simple_radar,
+            }, -1
+        )
+
+    def _on_layout_finished(self):
+        """Called when layout is finished - load static content"""
+        self._load_radar_map()
+        self._load_coordinate_icons()
+        self._load_weather_symbols()
+        self._update_coordinate_values()
+        self._setup_temperature_labels()
+
+    def _on_screen_shown(self):
+        """Called when screen is shown - update dynamic content"""
+        print("[WeatherDetailView] _on_screen_shown START")
+
+        print(f"[WeatherDetailView] Widgets disponibili: {list(self.keys())}")
+
+        self._update_titles()
+        self._update_summaries()
+        self._update_temperature_values()
+        self._update_background_colors()
+        self._start_translation_thread()
+
+        if 'title_location' in self:
+            print(f"[WeatherDetailView] title_location text: {self['title_location'].text}")
+        if 'summary_today' in self:
+            print(f"[WeatherDetailView] summary_today text: {self['summary_today'].text}")
+        if 'temp_morning_1' in self:
+            print(f"[WeatherDetailView] temp_morning_1 text: {self['temp_morning_1'].text}")
+
+        print("[WeatherDetailView] _on_screen_shown END")
+
+    def _load_simple_radar(self):
+        self.session.open(RadarMapView)
+
+    def _load_radar_map(self):
+        """Load radar map if available"""
+        radar_path = "/tmp/385.png"
+        if os.path.exists(radar_path):
+            self['radar_map'].instance.setPixmapFromFile(radar_path)
+            self['radar_map'].instance.show()
+
+    def _load_coordinate_icons(self):
+        """Load longitude/latitude icons"""
+        base_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/"
+
+        lon_path = os.path.join(base_path, "longitude.png")
+        if os.path.exists(lon_path):
+            self['icon_longitude'].instance.setPixmapFromFile(lon_path)
+            self['icon_longitude'].instance.show()
+
+        lat_path = os.path.join(base_path, "latitude.png")
+        if os.path.exists(lat_path):
+            self['icon_latitude'].instance.setPixmapFromFile(lat_path)
+            self['icon_latitude'].instance.show()
+
+    def _load_weather_symbols(self):
+        """Load weather symbols for both days"""
+        today = self.weather_data.get('today', {})
+        tomorrow = self.weather_data.get('tomorrow', {})
+
+        self._set_symbols_for_day('1', today)
+        self._set_symbols_for_day('2', tomorrow)
+
+    def _setup_temperature_labels(self):
+        """Set up temperature unit labels"""
+        self['temp_label_morning_1'].setText("°C")
+        self['temp_label_morning_2'].setText("°C")
+        self['temp_label_afternoon_1'].setText("°C")
+        self['temp_label_afternoon_2'].setText("°C")
+        self['temp_label_evening_1'].setText("°C")
+        self['temp_label_evening_2'].setText("°C")
+        self['temp_label_overnight_1'].setText("°C")
+        self['temp_label_overnight_2'].setText("°C")
+
+    def _set_symbols_for_day(self, day_suffix, day_data):
+        """Set weather symbols for a specific day"""
+        periods = ['morning', 'afternoon', 'evening', 'overnight']
+        symbol_map = {
+            'morning': 'symbol_morning_',
+            'afternoon': 'symbol_afternoon_',
+            'evening': 'symbol_evening_',
+            'overnight': 'symbol_overnight_'
+        }
+
+        base_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/thumb/"
+
+        for period in periods:
+            period_data = day_data.get(period, {})
+            symbol_code = period_data.get('symbol', 'd000')
+            symbol_path = os.path.join(base_path, f"{symbol_code}.png")
+
+            widget_name = f"{symbol_map[period]}{day_suffix}"
+            if os.path.exists(symbol_path):
+                self[widget_name].instance.setPixmapFromFile(symbol_path)
+                self[widget_name].instance.show()
+
+    def _update_coordinate_values(self):
+        """Update latitude and longitude values"""
+        self['value_latitude'].text = str(self.weather_data.get('lat', 'N/A'))
+        self['value_longitude'].text = str(self.weather_data.get('lon', 'N/A'))
+
+    def _update_titles(self):
+        """Update all titles with translated text"""
+        self['title_today'].text = str(_('Weather today'))
+        self['title_tomorrow'].text = str(_('Weather tomorrow'))
+
+        town_name = self.weather_data.get('town', 'N/A')
+        self['title_location'].text = str(trans(town_name))
+
+    def _update_summaries(self):
+        """Update weather summaries for both days"""
+        today = self.weather_data.get('today', {})
+        tomorrow = self.weather_data.get('tomorrow', {})
+
+        self['summary_today'].text = self._format_summary(today)
+        self['summary_tomorrow'].text = self._format_summary(tomorrow)
+
+    def _format_summary(self, day_data):
+        """Format weather summary for a day"""
+        weather_text = day_data.get('text', 'N/A')
+        max_temp = day_data.get('max_temp', 'N/A')
+        min_temp = day_data.get('min_temp', 'N/A')
+        rain = day_data.get('rain_mm', '0')
+        return f"{weather_text} {max_temp}°C, {min_temp}°C. {rain} mm."
+
+    def _update_temperature_values(self):
+        """Update temperature values for all periods"""
+        today = self.weather_data.get('today', {})
+        tomorrow = self.weather_data.get('tomorrow', {})
+
+        # Today
+        self['temp_morning_1'].text = str(today.get('morning', {}).get('temp', 'N/A'))
+        self['temp_afternoon_1'].text = str(today.get('afternoon', {}).get('temp', 'N/A'))
+        self['temp_evening_1'].text = str(today.get('evening', {}).get('temp', 'N/A'))
+        self['temp_overnight_1'].text = str(today.get('overnight', {}).get('temp', 'N/A'))
+
+        # Tomorrow
+        self['temp_morning_2'].text = str(tomorrow.get('morning', {}).get('temp', 'N/A'))
+        self['temp_afternoon_2'].text = str(tomorrow.get('afternoon', {}).get('temp', 'N/A'))
+        self['temp_evening_2'].text = str(tomorrow.get('evening', {}).get('temp', 'N/A'))
+        self['temp_overnight_2'].text = str(tomorrow.get('overnight', {}).get('temp', 'N/A'))
+
+    def _update_background_colors(self):
+        """Update background colors with current settings"""
+        global rgbmyr, rgbmyg, rgbmyb, alpha
+        bg_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
+        self["background_plate"].instance.setBackgroundColor(bg_color)
+        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+
+    def _start_translation_thread(self):
+        """Start background thread for translations"""
+        from threading import Thread
+        Thread(target=self._translate_content).start()
+
+    def _translate_content(self):
+        """Translate dynamic content in background"""
+        try:
+            self['title_today'].text = _('Weather today')
+            self['title_tomorrow'].text = _('Weather tomorrow')
+            self['title_location'].text = str(trans(self.weather_data.get('town', 'N/A')))
+
+            today = self.weather_data.get('today', {})
+            tomorrow = self.weather_data.get('tomorrow', {})
+
+            self['summary_today'].text = str(trans(self._format_summary(today)))
+            self['summary_tomorrow'].text = str(trans(self._format_summary(tomorrow)))
+        except Exception as e:
+            print(f"[WeatherDetailView] Translation error: {e}")
+
+    def _close_screen(self):
+        """Close the screen"""
+        self.close()
+
+
+class RadarMapView(Screen):
+    """
+    Simple radar map view with location coordinates
+    """
+
+    def __init__(self, session, weather_api):
+        self.skin = load_skin_for_class(RadarMapView)
+        Screen.__init__(self, session)
+
+        # Core data
+        self.weather_api = weather_api
+        self.location_data = self._load_location_data()
+        self.coordinates = self._fetch_coordinates()
+
+        # Initialize UI
+        self._init_ui_elements()
+        self._setup_actions()
+
+        # Event hooks
+        self.onLayoutFinish.append(self._load_static_content)
+        self.onShow.append(self._update_dynamic_content)
+
+    def _load_location_data(self):
+        """Load location based on myloc setting"""
+        location_paths = [path_loc0, path_loc1, path_loc2]
+        selected_path = location_paths[myloc] if 0 <= myloc < 3 else path_loc0
+
+        location_id = selected_path.split('/')[0] if '/' in selected_path else selected_path
+
+        return {
+            'path': selected_path,
+            'id': location_id
+        }
+
+    def _fetch_coordinates(self):
+        """Fetch coordinates from API or use defaults"""
+        coordinates = {
+            'lat': lat,
+            'lon': lon
+        }
 
         if self.weather_api and self.weather_api.check_credentials():
-            location_data = self.weather_api._get_location_details(location_id)
-            if location_data:
-                self.lat_val = location_data.get('lat', lat)
-                self.lon_val = location_data.get('lon', lon)
+            try:
+                location_data = self.weather_api._get_location_details(self.location_data['id'])
+                if location_data:
+                    coordinates['lat'] = location_data.get('lat', lat)
+                    coordinates['lon'] = location_data.get('lon', lon)
+            except Exception as e:
+                print(f"[RadarMapView] Error fetching coordinates: {e}")
 
-        self['title1'] = StaticText(_('Weather Radar'))
-        self["pic"] = Pixmap()
-        self["plate0"] = Label("N/A")
-        self["plate1"] = Label("N/A")
-        self["pic_lot"] = Pixmap()
-        self["pic_lat"] = Pixmap()
-        self['lat_val'] = StaticText()
-        self['lon_val'] = StaticText()
+        return coordinates
 
+    def _init_ui_elements(self):
+        """Initialize all UI widgets"""
+        # Title
+        self['title'] = Label(_('Weather Radar'))
+
+        # Radar map
+        self['radar_map'] = Pixmap()
+
+        # Coordinate icons and values
+        self['icon_longitude'] = Pixmap()
+        self['icon_latitude'] = Pixmap()
+        self['value_latitude'] = Label()
+        self['value_longitude'] = Label()
+
+        # Background plates
+        self["background_plate"] = Label("N/A")
+        self["selection_overlay"] = Label("N/A")
+
+    def _setup_actions(self):
+        """Setup action map for navigation"""
         self["actions"] = ActionMap(
             [
                 "OkCancelActions",
@@ -2636,53 +2416,97 @@ class ExtInfo_2_Foreca4(Screen):
                 "EPGSelectActions"
             ],
             {
-                "cancel": self.Exit,
-                'ok': self.OK,
+                "cancel": self._close_screen,
+                "ok": self._show_info_dialog,
             }, -1
         )
 
-        self.onLayoutFinish.append(self.Start1)
-        self.onShow.append(self.Start2)
+    def _load_static_content(self):
+        """Load static content (images)"""
+        self._load_radar_map()
+        self._load_coordinate_icons()
+        self._update_coordinate_values()
 
-    def Start2(self):
-        self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate0"].instance.setBackgroundColor(self.color)
-        self["plate1"].instance.setBackgroundColor(parseColor(alpha))
+    def _update_dynamic_content(self):
+        """Update dynamic content (colors)"""
+        self._update_background_colors()
 
-    def Start1(self):
-        if os.path.exists("/tmp/385.png"):
-            self["pic"].instance.setPixmapFromFile("/tmp/385.png")
-            self["pic"].instance.show()
+    def _load_radar_map(self):
+        """Load radar map if available"""
+        radar_path = "/tmp/385.png"
+        if os.path.exists(radar_path):
+            self['radar_map'].instance.setPixmapFromFile(radar_path)
+            self['radar_map'].instance.show()
+        else:
+            print(f"[RadarMapView] Radar map not found: {radar_path}")
 
-        self["pic_lot"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/longitude.png")
-        self["pic_lot"].instance.show()
-        self["pic_lat"].instance.setPixmapFromFile(
-            "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/latitude.png")
-        self["pic_lat"].instance.show()
+    def _load_coordinate_icons(self):
+        """Load longitude/latitude icons"""
+        base_path = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/"
 
-        self['lat_val'].text = str(self.lat_val)
-        self['lon_val'].text = str(self.lon_val)
+        # Longitude icon
+        lon_path = os.path.join(base_path, "longitude.png")
+        if os.path.exists(lon_path):
+            self['icon_longitude'].instance.setPixmapFromFile(lon_path)
+            self['icon_longitude'].instance.show()
+        else:
+            print(f"[RadarMapView] Longitude icon not found: {lon_path}")
 
-    def OK(self):
-        self.session.open(Meteogram_Foreca4)
+        # Latitude icon
+        lat_path = os.path.join(base_path, "latitude.png")
+        if os.path.exists(lat_path):
+            self['icon_latitude'].instance.setPixmapFromFile(lat_path)
+            self['icon_latitude'].instance.show()
+        else:
+            print(f"[RadarMapView] Latitude icon not found: {lat_path}")
 
-    def Exit(self):
+    def _update_coordinate_values(self):
+        """Update latitude and longitude values"""
+        self['value_latitude'].text = str(self.coordinates['lat'])
+        self['value_longitude'].text = str(self.coordinates['lon'])
+
+        print(f"[RadarMapView] Coordinates: Lat={self.coordinates['lat']}, Lon={self.coordinates['lon']}")
+
+    def _update_background_colors(self):
+        """Update background colors with current settings"""
+        bg_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
+        self["background_plate"].instance.setBackgroundColor(bg_color)
+
+        selection_color = parseColor(alpha)
+        self["selection_overlay"].instance.setBackgroundColor(selection_color)
+
+    def _show_info_dialog(self):
+        """Show information dialog"""
+        self.session.open(InfoDialog)
+
+    def _close_screen(self):
+        """Close the screen"""
         self.close()
 
 
-class TransparencyBox(Screen):
+class TransparencySelector(Screen):
 
     def __init__(self, session):
-        self.skin = load_skin_for_class(TransparencyBox)
-
+        self.skin = load_skin_for_class(TransparencySelector)
         Screen.__init__(self, session)
 
-        self["list"] = MenuList([])
-        self['text1'] = StaticText(_('Window transparency'))
+        self.transparency_levels = [
+            {"name": "56%", "value": "#90000000"},
+            {"name": "50%", "value": "#80000000"},
+            {"name": "44%", "value": "#70000000"},
+            {"name": "38%", "value": "#60000000"},
+            {"name": "31%", "value": "#50000000"},
+            {"name": "25%", "value": "#40000000"},
+            {"name": "19%", "value": "#30000000"},
+            {"name": "13%", "value": "#20000000"},
+            {"name": "6%", "value": "#10000000"}
+        ]
 
-        self["plate0"] = Label("N/A")
-        self["plate1"] = Label("N/A")
+        self["menu"] = MenuList([])
+        self['title_label'] = Label(_('Window transparency'))
+
+        self["background_plate"] = Label("N/A")
+        self["selection_overlay"] = Label("N/A")
 
         self["actions"] = ActionMap(
             [
@@ -2694,122 +2518,89 @@ class TransparencyBox(Screen):
                 "WizardActions"
             ],
             {
-                "cancel": self.Exit,
-                "ok": self.Ok,
+                "cancel": self.exit_screen,
+                "ok": self.confirm_selection,
             }, -1
         )
 
-        self.onShow.append(self.Start2)
+        self.onShow.append(self.initialize_display)
 
-    def Ok(self):
+    def confirm_selection(self):
         global alpha
 
-        sel = self["list"].getCurrent().split(' ')[2]
-        if sel == "56%":
-            alpha = '#90000000'
-            self.close()
-        elif sel == "50%":
-            alpha = '#80000000'
-            self.close()
-        elif sel == "44%":
-            alpha = '#70000000'
-            self.close()
-        elif sel == "38%":
-            alpha = '#60000000'
-            self.close()
-        elif sel == "31%":
-            alpha = '#50000000'
-            self.close()
-        elif sel == "25%":
-            alpha = '#40000000'
-            self.close()
-        elif sel == "19%":
-            alpha = '#30000000'
-            self.close()
-        elif sel == "13%":
-            alpha = '#20000000'
-            self.close()
-        elif sel == "6%":
-            alpha = '#10000000'
-            self.close()
+        selected_item = self["menu"].getCurrent()
+        if selected_item:
+            # Extract percentage from the selected item
+            parts = selected_item.split(' ')
+            if len(parts) >= 3:
+                percentage = parts[2]  # Gets "56%" etc.
 
-    def Start2(self):
-        self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate0"].instance.setBackgroundColor(self.color)
-        self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-        self['text1'].text = (
+                # Find matching transparency value
+                for level in self.transparency_levels:
+                    if level["name"] == percentage:
+                        alpha = level["value"]
+                        print(f"[TransparencySelector] Selected: {percentage} -> {alpha}")
+                        break
+
+        self.close()
+
+    def initialize_display(self):
+        # Set background color using current RGB values
+        current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
+        self["background_plate"].instance.setBackgroundColor(current_color)
+        # Set selection plate with current transparency
+        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+
+        def conv_alpha(insel):
+            trspz = ' n/a'
+            if insel == "#90000000":
+                trspz = '56%'
+            elif insel == "#80000000":
+                trspz = '50%'
+            elif insel == "#70000000":
+                trspz = '44%'
+            elif insel == "#60000000":
+                trspz = '38%'
+            elif insel == "#50000000":
+                trspz = '31%'
+            elif insel == "#40000000":
+                trspz = '25%'
+            elif insel == "#30000000":
+                trspz = '19%'
+            elif insel == "#20000000":
+                trspz = '13%'
+            elif insel == "#10000000":
+                trspz = '6%'
+            return trspz
+
+        # Update title with current transparency
+        self['title_label'].setText(
             _('Window transparency') +
             ' - ' +
             conv_alpha(alpha))
 
-        list = []
+        # Build the menu list
+        menu_items = []
+        for level in self.transparency_levels:
+            menu_items.append(
+                _("Transparency level") +
+                f" {level['name']} ({level['value']})"
+            )
 
-        list.append(_("Transparency level") + " 56% (#90000000)")  # 90
-        list.append(_("Transparency level") + " 50% (#80000000)")  # 80
-        list.append(_("Transparency level") + " 44% (#70000000)")  # 70
-        list.append(_("Transparency level") + " 38% (#60000000)")  # 60
-        list.append(_("Transparency level") + " 31% (#50000000)")  # 50
-        list.append(_("Transparency level") + " 25% (#40000000)")  # 40
-        list.append(_("Transparency level") + " 19% (#30000000)")  # 30
-        list.append(_("Transparency level") + " 13% (#20000000)")  # 20
-        list.append(_("Transparency level") + " 6%  (#10000000)")  # 10
-        self["list"].setList(list)
+        self["menu"].setList(menu_items)
 
-    def Exit(self):
-        self.close()
+        # Optional: Set initial selection to current alpha value
+        self.select_current_transparency()
 
+    def select_current_transparency(self):
+        """Find and select the menu item matching current alpha value"""
+        for index, level in enumerate(self.transparency_levels):
+            if level["value"] == alpha:
+                self["menu"].setCurrentIndex(index)
+                print(f"[TransparencySelector] Current selection: {level['name']}")
+                break
 
-class Meteogram_Foreca4(Screen):
-
-    def __init__(self, session):
-        self.skin = load_skin_for_class(Meteogram_Foreca4)
-        Screen.__init__(self, session)
-
-        if myloc == 0:
-            self['title1'] = StaticText(_('Meteogram') + str(share_town0))
-        else:
-            self['title1'] = StaticText(_('Meteogram'))
-
-        self["pic"] = Pixmap()
-        self["plate0"] = Label("N/A")
-        self["plate1"] = Label("N/A")
-
-        self["actions"] = ActionMap(
-            [
-                "OkCancelActions",
-                "DirectionActions",
-                "HelpActions",
-                "EPGSelectActions"
-            ],
-            {
-                "cancel": self.Exit,
-                'ok': self.Exit,
-            }, -1
-        )
-        self.onLayoutFinish.append(self.Start1)
-        self.onShow.append(self.Start2)
-
-    def Start2(self):
-        self.color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
-        self["plate0"].instance.setBackgroundColor(self.color)
-        self["plate1"].instance.setBackgroundColor(parseColor(alpha))
-
-    def Start1(self):
-        if myloc == 0:
-            if os.path.exists("/tmp/foreca_com_2_w.png"):
-                self["pic"].instance.setPixmapFromFile(
-                    "/tmp/foreca_com_2_w.png")
-                self["pic"].instance.show()
-            else:
-                self["pic"].instance.setPixmapFromFile(
-                    "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
-                self["pic"].instance.show()
-        else:
-            self["pic"].instance.setPixmapFromFile(
-                "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/no_data.png")
-            self["pic"].instance.show()
-
-    def Exit(self):
+    def exit_screen(self):
         self.close()
 
 
@@ -2818,12 +2609,12 @@ class CityPanel4List(GUIComponent):
         GUIComponent.__init__(self)
         self.lst = eListboxPythonMultiContent()
         self.lst.setFont(0, gFont("Regular", 30))
-        self.foregroundColor = 0xffffff  # bianco
-        self.foregroundColorSelected = 0x00a0ff  # blu
-        self.backgroundColor = 0x000000  # nero
-        self.backgroundColorSelected = 0x2c2c2c  # grigio scuro
-        self.itemHeight = 40
-        self.column = 50
+        self.foregroundColor = 0xffffff  # white
+        self.foregroundColorSelected = 0x00a0ff  # blue
+        self.backgroundColor = 0x000000  # black
+        self.backgroundColorSelected = 0x2c2c2c  # dark gray
+        self.itemHeight = 45
+        self.column = 70
         self.setList(entries)
 
     GUI_WIDGET = eListbox
@@ -2881,7 +2672,7 @@ class CityPanel4(Screen):
         self["key_green"] = StaticText(_("Favorite 1"))
         self["key_yellow"] = StaticText(_("Favorite 2"))
         self["key_blue"] = StaticText(_("Home"))
-        self["key_ok"] = StaticText(_("Forecast"))
+        self["key_ok"] = Label(_("Forecast"))
         self["key_red"] = StaticText(_("Keyboard"))
         self["description"] = Label()
 
@@ -3337,7 +3128,7 @@ def main(session, **kwargs):
         )
         return
 
-    session.open(ForecaPreview_4)
+    session.open(Foreca_Preview)
 
 
 def Plugins(path, **kwargs):

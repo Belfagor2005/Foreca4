@@ -1,6 +1,0 @@
-<screen name="Meteogram_Foreca4" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1920,1080">
-    <widget name="plate0" size="1920,1080" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
-    <widget name="plate1" size="1894,1054" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
-    <widget position="center,40" size="800,56" zPosition="3" font="Regular;43" source="title1" render="Label" transparent="1" valign="center" halign="center" />
-    <widget name="pic" position="center,120" size="1800,900" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" borderColor="#000050ef" borderWidth="7" />
-</screen>

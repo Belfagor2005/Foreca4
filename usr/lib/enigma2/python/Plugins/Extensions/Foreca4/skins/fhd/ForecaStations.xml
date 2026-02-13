@@ -1,6 +1,6 @@
 <screen name="ForecaStations" position="center,center" size="1200,800" title="Station Observations">
-    <widget name="list" position="20,20" size="1160,220" scrollbarMode="showOnDemand" font="Regular; 34" itemHeight="40" transparent="0"/>
-    <widget name="distance" position="20,260" size="1160,40" font="Regular;32"/>
-    <widget name="details" position="20,310" size="1160,430" font="Regular;32"/>
-    <widget name="info" position="20,760" size="1160,40" font="Regular;30"/>
+    <widget name="list" position="20,15" size="1160,281" scrollbarMode="showOnDemand" font="Regular; 34" itemHeight="40" transparent="0" />
+    <widget name="distance" position="20,310" size="1160,40" font="Regular;32" />
+    <widget name="details" position="20,357" size="1160,383" font="Regular;32" />
+    <widget name="info" position="20,760" size="1160,40" font="Regular;30" />
 </screen>

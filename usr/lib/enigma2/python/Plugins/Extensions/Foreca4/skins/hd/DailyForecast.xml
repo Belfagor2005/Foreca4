@@ -6,6 +6,6 @@
     <ePixmap position="420,556" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_prev.png" scale="1" zPosition="3" />
     <ePixmap position="460,556" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_down.png" scale="1" zPosition="3" />
     <ePixmap position="500,556" size="40,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_up.png" scale="1" zPosition="3" />
-    <eLabel name="plate0" size="803,611" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
-    <eLabel name="plate1" size="774,569" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
+    <eLabel name="background_plate" size="803,611" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
+    <eLabel name="selection_overlay" size="774,569" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
 </screen>

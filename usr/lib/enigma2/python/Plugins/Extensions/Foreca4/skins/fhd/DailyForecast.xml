@@ -1,6 +1,6 @@
 <screen name="DailyForecast" position="center,center" size="1920,1080" title="Weekly Forecast">
-    <eLabel name="plate0" size="1920,1080" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
-    <eLabel name="plate1" size="1894,1054" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
+    <eLabel name="background_plate" size="1920,1080" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50" />
+    <eLabel name="selection_overlay" size="1894,1054" zPosition="2" position="13,13" backgroundColor="#40000000" cornerRadius="50" />
     <widget name="title" position="60,30" size="1800,60" font="Regular;42" foregroundColor="#ffffff" transparent="1" halign="center" valign="center" zPosition="3" />
     <widget name="info" position="60,100" size="1800,40" font="Regular;32" foregroundColor="#c0c0c0" transparent="1" halign="center" zPosition="3" />
     <widget name="list" position="60,160" size="1800,860" zPosition="3" />

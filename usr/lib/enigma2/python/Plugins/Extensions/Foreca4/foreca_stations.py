@@ -99,8 +99,10 @@ class ForecaStations(Screen):
         """Format station details with correct units"""
         lines = []
 
-        # Name and distance
-        lines.append(f"[b]{station.get('station', 'Unknown')}[/b]")
+        # Name and distance - formattazione pulita senza tag
+        station_name = station.get('station', 'Unknown')
+        lines.append(station_name.upper())  # Nome in maiuscolo per evidenziare
+        lines.append("─" * 40)  # Linea separatrice
         lines.append(f"{_('Distance')}: {station.get('distance', 'N/A')}")
         lines.append("")
 
