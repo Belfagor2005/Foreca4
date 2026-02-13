@@ -6,10 +6,24 @@
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.ScrollLabel import ScrollLabel
-import requests
+from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryText
+from enigma import eListboxPythonMultiContent, gFont, RT_VALIGN_CENTER
 
 from . import _, load_skin_for_class
+
+
+class DailyForecastList(MenuList):
+    """Custom MenuList for daily forecast with MultiContent"""
+
+    def __init__(self, list):
+        MenuList.__init__(self, list, False, eListboxPythonMultiContent)
+        self.l.setFont(0, gFont("Regular", 28))
+        self.l.setItemHeight(45)
+
+    def postWidgetCreate(self, instance):
+        MenuList.postWidgetCreate(self, instance)
+        instance.setItemHeight(45)
 
 
 class DailyForecast(Screen):
@@ -18,245 +32,238 @@ class DailyForecast(Screen):
     def __init__(self, session, api, location_id, location_name):
         self.skin = load_skin_for_class(DailyForecast)
         Screen.__init__(self, session)
+
         self.api = api
         self.location_id = location_id
         self.location_name = location_name
         self.forecast_data = None
 
         self.setTitle(_("Weekly Forecast") + " - " + location_name)
+
+        # Widgets
         self["title"] = Label("")
         self["info"] = Label(_("Loading weekly forecast..."))
-        self["forecast_text"] = ScrollLabel()
+        self["list"] = DailyForecastList([])
+
         self["actions"] = ActionMap(
             [
-                "OkCancelActions",
-                "DirectionActions"
+                "WizardActions",
+                "DirectionActions",
+                "OkCancelActions"
             ],
             {
                 "cancel": self.exit,
                 "ok": self.exit,
-                "up": self.page_up,
-                "down": self.page_down,
+                "up": self.up,
+                "down": self.down,
                 "left": self.page_up,
                 "right": self.page_down,
-            }, -1
+            }, -2
         )
+
         self.onLayoutFinish.append(self.load_forecast)
 
     def load_forecast(self):
         """Load and display the weekly forecast"""
         self["info"].setText(_("Loading weekly forecast..."))
+
         try:
             if hasattr(self.api, 'get_daily_forecast'):
-                print(
-                    f"[DailyForecast] Calling API for location: {self.location_id}")
-                self.forecast_data = self.api.get_daily_forecast(
-                    self.location_id, days=7)
-
-                if self.forecast_data:
-                    print(
-                        f"[DailyForecast] API returned {len(self.forecast_data.get('days', []))} days")
-                else:
-                    print("[DailyForecast] API returned None")
-            else:
-                print("[DailyForecast] API method get_daily_forecast not available")
-                self.forecast_data = None
+                self.forecast_data = self.api.get_daily_forecast(self.location_id, days=7)
         except Exception as e:
             print(f"[DailyForecast] API error: {e}")
-            import traceback
-            traceback.print_exc()
             self.forecast_data = None
 
-        # If API fails, show error message
-        if not self.forecast_data:
+        if not self.forecast_data or not self.forecast_data.get('days'):
             self["info"].setText(_("Could not load forecast data"))
-            self["forecast_text"].setText(
-                _("Weekly forecast data is not available.\n\n") +
-                _("Possible reasons:\n") +
-                _("1. No API credentials configured\n") +
-                _("2. API service temporarily unavailable\n") +
-                _("3. Location not supported\n\n") +
-                _("Please check your api_config.txt file.")
-            )
             return
 
-        self.display_forecast()
+        # Set title
+        town = self.forecast_data.get('town', self.location_name)
+        country = self.forecast_data.get('country', '')
+        self["title"].setText(f"{town}, {country} - {_('7 Day Forecast')}")
+        self["info"].setText(_("Use arrow keys to scroll"))
 
-    def create_sample_data(self):
-        """Create sample data for testing"""
-        from datetime import datetime, timedelta
-        sample_data = {
-            'town': self.location_name,
-            'country': 'N/A',
-            'days': []
-        }
-        today = datetime.now()
-        for i in range(7):
-            day_date = today + timedelta(days=i)
-            day_name = day_date.strftime("%A")
-            date_str = day_date.strftime("%Y-%m-%d")
+        # Create the list with MultiContent
+        self["list"].setList(self._create_forecast_list())
+        print("[DailyForecast] Display updated with MenuList")
 
-            sample_data['days'].append({
-                'date': date_str,
-                'day_name': day_name,
-                'max_temp': f"{10 + i}",
-                'min_temp': f"{5 + i}",
-                'precip_prob': f"{i * 10}",
-                'precip_mm': f"{i * 2}",
-                'wind_speed': f"{5 + i}",
-                'wind_dir_str': ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W'][i % 7],
-                'sunrise': '07:00',
-                'sunset': '19:00',
-                'uv_index': f"{i % 5}",
-                'description': ['Sunny', 'Cloudy', 'Rainy', 'Windy', 'Clear', 'Foggy', 'Stormy'][i % 7]
-            })
+    def _create_forecast_list(self):
+        """Create MultiContent list for forecast"""
+        list_data = []
 
-        return sample_data
+        # Header
+        list_data.append(self._create_header_entry())
 
-    def display_forecast(self):
-        """Format and display the forecast data without BBCode tags"""
+        # Days
+        for day in self.forecast_data.get('days', []):
+            list_data.append(self._create_day_entry(day))
+
+        # Footer
+        list_data.append(self._create_footer_entry())
+
+        return list_data
+
+    def _create_header_entry(self):
+        """Create header row"""
+        return [
+            None,  # No selection data
+            MultiContentEntryText(
+                pos=(20, 5),
+                size=(200, 35),
+                font=0,
+                text=_("Day"),
+                color=0x00a0ff,
+                flags=RT_VALIGN_CENTER
+            ),
+            MultiContentEntryText(
+                pos=(220, 5),
+                size=(200, 35),
+                font=0,
+                text=_("Temp"),
+                color=0x00a0ff,
+                flags=RT_VALIGN_CENTER
+            ),
+            MultiContentEntryText(
+                pos=(420, 5),
+                size=(300, 35),
+                font=0,
+                text=_("Weather"),
+                color=0x00a0ff,
+                flags=RT_VALIGN_CENTER
+            ),
+            MultiContentEntryText(
+                pos=(720, 5),
+                size=(150, 35),
+                font=0,
+                text=_("Precip"),
+                color=0x00a0ff,
+                flags=RT_VALIGN_CENTER
+            ),
+            MultiContentEntryText(
+                pos=(870, 5),
+                size=(200, 35),
+                font=0,
+                text=_("Wind"),
+                color=0x00a0ff,
+                flags=RT_VALIGN_CENTER
+            )
+        ]
+
+    def _create_day_entry(self, day):
+        """Create a day row"""
+        day_name = day.get('day_name', '')[:3]  # Abbreviazione
+        date_str = day.get('date', '').split('-')[2]  # Solo giorno
+
+        # Temperature
+        min_temp = day.get('min_temp', 'N/A')
+        max_temp = day.get('max_temp', 'N/A')
+        temp_str = f"{min_temp}°/{max_temp}°"
+
+        # Weather
+        weather = _(day.get('description', 'N/A'))
+        if len(weather) > 15:
+            weather = weather[:15] + "..."
+
+        # Precipitation
+        precip = f"{day.get('precip_prob', '0')}%"
+
+        # Wind
+        wind_speed = day.get('wind_speed', 'N/A')
+        wind_dir = day.get('wind_dir_str', '')
+        if wind_speed != 'N/A' and wind_speed != 0:
+            wind_str = f"{wind_speed} {wind_dir}"
+        else:
+            wind_str = "-"
+
+        # Color based on temperature
         try:
-            text_lines = []
-            text_lines.append(
-                f"{self.forecast_data['town']}, {self.forecast_data['country']}")
-            text_lines.append(_("7-Day Detailed Forecast"))
-            text_lines.append("=" * 40)
-
-            for day in self.forecast_data['days']:
-                text_lines.append(f"\n{day['day_name']} ({day['date']})")
-                temp_line = f"  {_('Temperature')}: {day['min_temp']}° / {day['max_temp']}°C"
-                text_lines.append(temp_line)
-                text_lines.append(f"  {_('Weather')}: {day['description']}")
-
-                # Precipitation
-                precip_line = f"  {_('Precipitation')}: {day['precip_prob']}% ({day['precip_mm']} mm)"
-                text_lines.append(precip_line)
-
-                # Wind
-                wind_line = f"  {_('Wind')}: {day['wind_speed']} km/h {day['wind_dir_str']}"
-                text_lines.append(wind_line)
-
-                # Sunrise/Sunset
-                if day['sunrise'] != 'N/A' and day['sunset'] != 'N/A':
-                    sun_line = f"  {_('Sun')}: ↑{day['sunrise']} ↓{day['sunset']}"
-                    text_lines.append(sun_line)
-
-                # UV Index
-                if day['uv_index'] != 'N/A':
-                    uv_line = f"  {_('UV Index')}: {day['uv_index']}"
-                    text_lines.append(uv_line)
-
-            # Footer
-            text_lines.append("\n" + "=" * 40)
-            text_lines.append(_("Data provided by Foreca"))
-
-            # Display
-            self["forecast_text"].setText("\n".join(text_lines))
-            self["info"].setText(_("Use arrow keys to scroll"))
-            self["title"].setText(
-                f"{self.location_name} - {_('Weekly Forecast')}")
-
-        except Exception as e:
-            print(f"[DailyForecast] Error displaying forecast: {e}")
-            self["info"].setText(_("Error displaying forecast"))
-            self["forecast_text"].setText(str(e))
-
-    def get_daily_forecast(self, location_id, days=7):
-        token = self.get_token()
-        if not token:
-            print("[ForecaWeatherAPI] No token for daily forecast")
-            return None
-
-        try:
-            headers = {"Authorization": f"Bearer {token}"}
-            params = {
-                "days": min(days, 10),
-                "lang": "it",  # Cambiato da 'en' a 'it'
-                "tempunit": "C",
-                "windunit": "KMH"
-            }
-
-            if self.unit_manager:
-                api_params = self.unit_manager.get_api_params()
-                params.update(api_params)
-
-            url = f"{self.base_url}/api/v1/forecast/daily/{location_id}"
-            print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
-            print(
-                f"[ForecaWeatherAPI] Response status: {response.status_code}")
-
-            if response.status_code == 200:
-                data = response.json()
-                print(
-                    f"[ForecaWeatherAPI] Daily forecast response received: {len(data.get('forecast', []))} days")
-                return self._parse_daily_forecast_response(data)
-            elif response.status_code == 401:
-                print("[ForecaWeatherAPI] Token expired, forcing new token...")
-                token = self.get_token(force_new=True)
-                if token:
-                    headers = {"Authorization": f"Bearer {token}"}
-                    response = requests.get(
-                        url, headers=headers, params=params, timeout=15)
-                    if response.status_code == 200:
-                        data = response.json()
-                        return self._parse_daily_forecast_response(data)
-                return None
+            temp_val = float(max_temp)
+            if temp_val >= 25:
+                color = 0xff5555  # Rosso
+            elif temp_val >= 15:
+                color = 0xffaa55  # Arancio
+            elif temp_val >= 5:
+                color = 0x55ff55  # Verde
             else:
-                print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
-                print(f"Response: {response.text[:200]}")
-                return None
+                color = 0x5555ff  # Blu
+        except:
+            color = 0xffffff  # Bianco
 
-        except Exception as e:
-            print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
-            import traceback
-            traceback.print_exc()
-            return None
+        return [
+            None,
+            # Day
+            MultiContentEntryText(
+                pos=(20, 5),
+                size=(200, 35),
+                font=0,
+                text=f"{day_name} {date_str}",
+                color=0xffffff,
+                flags=RT_VALIGN_CENTER
+            ),
+            # Temperature
+            MultiContentEntryText(
+                pos=(220, 5),
+                size=(200, 35),
+                font=0,
+                text=temp_str,
+                color=color,
+                flags=RT_VALIGN_CENTER
+            ),
+            # Weather
+            MultiContentEntryText(
+                pos=(420, 5),
+                size=(300, 35),
+                font=0,
+                text=weather,
+                color=0xffffff,
+                flags=RT_VALIGN_CENTER
+            ),
+            # Precipitation
+            MultiContentEntryText(
+                pos=(720, 5),
+                size=(150, 35),
+                font=0,
+                text=precip,
+                color=0x55aaff,
+                flags=RT_VALIGN_CENTER
+            ),
+            # Wind
+            MultiContentEntryText(
+                pos=(870, 5),
+                size=(200, 35),
+                font=0,
+                text=wind_str,
+                color=0xffffff,
+                flags=RT_VALIGN_CENTER
+            )
+        ]
 
-    def _parse_daily_forecast_response(self, data):
-        """Analyze API response for daily forecasts"""
-        try:
-            forecast = data.get('forecast', [])
-            location = data.get('location', {})
+    def _create_footer_entry(self):
+        """Create footer row"""
+        return [
+            None,
+            MultiContentEntryText(
+                pos=(20, 5),
+                size=(1100, 35),
+                font=0,
+                text=_("Data provided by Foreca"),
+                color=0xc0c0c0,
+                flags=RT_VALIGN_CENTER
+            )
+        ]
 
-            daily_data = {
-                'town': location.get('name', 'N/A'),
-                'country': location.get('country', 'N/A'),
-                'days': []
-            }
+    def up(self):
+        self["list"].up()
 
-            for day in forecast:
-                daily_data['days'].append({
-                    'date': day.get('date', ''),
-                    'day_name': self._get_day_name(day.get('date', '')),
-                    'symbol': self._api_symbol_to_icon(day.get('symbol', 'd000')),
-                    'max_temp': day.get('maxTemp', 'N/A'),
-                    'min_temp': day.get('minTemp', 'N/A'),
-                    'precip_prob': day.get('precipProb', '0'),
-                    'precip_mm': day.get('precipAccum', '0'),
-                    'wind_speed': day.get('windSpeed', 'N/A'),
-                    'wind_dir': day.get('windDir', 0),
-                    'wind_dir_str': self._degrees_to_direction(day.get('windDir', 0)),
-                    'sunrise': day.get('sunrise', 'N/A'),
-                    'sunset': day.get('sunset', 'N/A'),
-                    'uv_index': day.get('uvIndex', 'N/A'),
-                    'description': self._symbol_to_description(day.get('symbol', 'd000'))
-                })
-
-            print(
-                f"[ForecaWeatherAPI] Analizzate {len(daily_data['days'])} previsioni giornaliere")
-            return daily_data
-
-        except Exception as e:
-            print(f"[ForecaWeatherAPI] Errore nell'analisi: {e}")
-            return None
+    def down(self):
+        self["list"].down()
 
     def page_up(self):
-        self["forecast_text"].pageUp()
+        self["list"].pageUp()
 
     def page_down(self):
-        self["forecast_text"].pageDown()
+        self["list"].pageDown()
 
     def exit(self):
         self.close()

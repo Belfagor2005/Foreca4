@@ -8,6 +8,7 @@ import json
 import requests
 from time import time
 from . import _
+from .google_translate import _get_system_language
 
 CACHE_BASE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/foreca4_map_cache/"
 CONFIG_FILE = "/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/api_config.txt"
@@ -175,6 +176,27 @@ class ForecaWeatherAPI:
         }
         return descriptions.get(symbol_code, 'Unknown')
 
+    def _get_api_lang(self):
+        """Convert system language to Foreca API language code"""
+        lang = _get_system_language()
+        lang_map = {
+            'it': 'it',
+            'de': 'de',
+            'fr': 'fr',
+            'es': 'es',
+            'pl': 'pl',
+            'ru': 'ru',
+            'fi': 'fi',
+            'sv': 'sv',
+            'nl': 'nl',
+            'cs': 'cs',
+            'sk': 'sk',
+            'hu': 'hu',
+            'tr': 'tr',
+            'en': 'en'
+        }
+        return lang_map.get(lang, 'en')
+
     def _get_location_details(self, location_id):
         """Get location name, country, coordinates from API"""
         token = self.get_token()
@@ -323,13 +345,16 @@ class ForecaWeatherAPI:
             return None
         try:
             headers = {"Authorization": f"Bearer {token}"}
-            params = {"lang": "it", "tempunit": "C", "windunit": "KMH"}
+            params = {
+                "lang": self._get_api_lang(),
+                "tempunit": "C",
+                "windunit": "KMH"
+            }
             if self.unit_manager:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/current/{location_id}"
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -352,7 +377,7 @@ class ForecaWeatherAPI:
             headers = {"Authorization": f"Bearer {token}"}
             params = {
                 "days": min(days, 10),
-                "lang": "en",
+                "lang": self._get_api_lang(),
                 "tempunit": "C",
                 "windunit": "KMH"
             }
@@ -364,60 +389,53 @@ class ForecaWeatherAPI:
             url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
 
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
+                location_data = self._get_location_details(location_id)
+                data['location'] = location_data
+
                 print("[ForecaWeatherAPI] Daily forecast response received")
                 return self._parse_daily_forecast_response(data)
             else:
                 print(f"[ForecaWeatherAPI] HTTP error: {response.status_code}")
-                print(f"Response: {response.text[:200]}")
                 return None
 
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error getting daily forecast: {e}")
-            import traceback
-            traceback.print_exc()
             return None
 
     def get_today_tomorrow_details(self, location_id):
-        """
-        Returns the data required for ExtInfo_Foreca4:
-        - town, country
-        - today: weather text, max/min temperature, rain in mm, symbols and temperatures for 4 time slots
-        - tomorrow: same
-        - latitude, longitude
-        """
         token = self.get_token()
         if not token:
             return None
 
         try:
             headers = {"Authorization": f"Bearer {token}"}
+            lang = self._get_api_lang()
 
             # 1. Location details
             location = self._get_location_details(location_id)
 
-            # 2. Current weather (for radar map and coordinates)
+            # 2. Current weather
             current_url = f"{self.base_url}/api/v1/current/{location_id}"
             current_resp = requests.get(
-                current_url, headers=headers, params={
-                    "lang": "it", "tempunit": "C"}, timeout=10)
+                current_url,
+                headers=headers,
+                params={"lang": lang, "tempunit": "C"},
+                timeout=10
+            )
             current_data = current_resp.json() if current_resp.status_code == 200 else {}
 
-            # 3. Hourly forecast (at least 48h)
+            # 3. Hourly forecast (48h)
             hourly_url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
             hourly_resp = requests.get(
                 hourly_url,
                 headers=headers,
-                params={
-                    "periods": 48,
-                    "lang": "it",
-                    "tempunit": "C"},
-                timeout=15)
-
+                params={"periods": 48, "lang": lang, "tempunit": "C"},
+                timeout=15
+            )
             if hourly_resp.status_code != 200:
                 return None
 
@@ -521,7 +539,7 @@ class ForecaWeatherAPI:
             headers = {"Authorization": f"Bearer {token}"}
             params = {
                 "periods": 24 * days,
-                "lang": "it",
+                "lang": self._get_api_lang(),
                 "tempunit": "C",
                 "windunit": "KMH"
             }
@@ -529,8 +547,7 @@ class ForecaWeatherAPI:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
-            response = requests.get(
-                url, headers=headers, params=params, timeout=15)
+            response = requests.get(url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -680,66 +697,42 @@ class ForecaWeatherAPI:
         """Parse API /forecast/daily response"""
         try:
             forecast = data.get('forecast', [])
-            location = data.get('location', {})
-
+            location = data.get('location', {})  # <-- QUESTA RIGA È CRITICA!
             town = location.get('name', 'N/A')
             country = location.get('country', 'N/A')
-
+            print(f"[ForecaWeatherAPI] Location from daily forecast: {town}, {country}")  # DEBUG
             daily_data = {
                 'town': town,
                 'country': country,
                 'days': []
             }
-
             for day in forecast:
                 date_str = day.get('date', '')
                 symbol = day.get('symbol', 'd000')
 
-                # Temperatures
-                max_temp = day.get('maxTemp', 'N/A')
-                min_temp = day.get('minTemp', 'N/A')
-
-                # Precipitation
-                precip_prob = day.get('precipProb', '0')
-                precip_mm = day.get('precipAccum', '0')
-
-                # Wind
-                wind_speed = day.get('windSpeed', 'N/A')
-                wind_dir = day.get('windDir', 0)
-                wind_dir_str = self._degrees_to_direction(wind_dir)
-
-                # Sunrise/sunset (if available)
-                sunrise = day.get('sunrise', 'N/A')
-                sunset = day.get('sunset', 'N/A')
-
-                # UV index (if available)
-                uv_index = day.get('uvIndex', 'N/A')
-
-                # Day name (you can derive from date)
-                day_name = self._get_day_name(date_str)
-
                 daily_data['days'].append({
                     'date': date_str,
-                    'day_name': day_name,
+                    'day_name': self._get_day_name(date_str),
                     'symbol': self._api_symbol_to_icon(symbol),
-                    'max_temp': max_temp,
-                    'min_temp': min_temp,
-                    'precip_prob': precip_prob,
-                    'precip_mm': precip_mm,
-                    'wind_speed': wind_speed,
-                    'wind_dir': wind_dir,
-                    'wind_dir_str': wind_dir_str,
-                    'sunrise': sunrise,
-                    'sunset': sunset,
-                    'uv_index': uv_index,
+                    'max_temp': day.get('maxTemp', 'N/A'),
+                    'min_temp': day.get('minTemp', 'N/A'),
+                    'precip_prob': day.get('precipProb', '0'),
+                    'precip_mm': day.get('precipAccum', '0'),
+                    'wind_speed': day.get('windSpeed', 'N/A'),
+                    'wind_dir': day.get('windDir', 0),
+                    'wind_dir_str': self._degrees_to_direction(day.get('windDir', 0)),
+                    'sunrise': day.get('sunrise', 'N/A'),
+                    'sunset': day.get('sunset', 'N/A'),
+                    'uv_index': day.get('uvIndex', 'N/A'),
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print("[ForecaWeatherAPI] Parsed {} daily forecasts".format(
-                len(daily_data['days'])))
+            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
             return daily_data
+
         except Exception as e:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
             import traceback
             traceback.print_exc()
+            return Nonexc()
             return None
