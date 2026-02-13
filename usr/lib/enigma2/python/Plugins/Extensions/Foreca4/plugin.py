@@ -2055,7 +2055,7 @@ class WeatherDetailView(Screen):
 
     def _load_location_data(self):
         """Load location based on myloc setting"""
-        global myloc, path_loc0, path_loc1, path_loc2, lat, lon
+        # global myloc, path_loc0, path_loc1, path_loc2, lat, lon
 
         location_paths = [path_loc0, path_loc1, path_loc2]
         selected_path = location_paths[myloc] if 0 <= myloc < 3 else path_loc0
@@ -2306,7 +2306,7 @@ class WeatherDetailView(Screen):
 
     def _update_background_colors(self):
         """Update background colors with current settings"""
-        global rgbmyr, rgbmyg, rgbmyb, alpha
+        # global rgbmyr, rgbmyg, rgbmyb, alpha
         bg_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(bg_color)
         self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))

@@ -734,5 +734,4 @@ class ForecaWeatherAPI:
             print(f"[ForecaWeatherAPI] Error parsing daily forecast: {e}")
             import traceback
             traceback.print_exc()
-            return Nonexc()
             return None
