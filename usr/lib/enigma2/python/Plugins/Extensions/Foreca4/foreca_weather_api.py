@@ -354,7 +354,8 @@ class ForecaWeatherAPI:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/current/{location_id}"
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -389,7 +390,8 @@ class ForecaWeatherAPI:
             url = f"https://pfa.foreca.com/api/v1/forecast/daily/{location_id}"
             print(f"[ForecaWeatherAPI] Requesting daily forecast: {url}")
 
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -547,7 +549,8 @@ class ForecaWeatherAPI:
                 params.update(self.unit_manager.get_api_params())
 
             url = f"{self.base_url}/api/v1/forecast/hourly/{location_id}"
-            response = requests.get(url, headers=headers, params=params, timeout=15)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=15)
 
             if response.status_code == 200:
                 data = response.json()
@@ -700,7 +703,9 @@ class ForecaWeatherAPI:
             location = data.get('location', {})  # <-- QUESTA RIGA È CRITICA!
             town = location.get('name', 'N/A')
             country = location.get('country', 'N/A')
-            print(f"[ForecaWeatherAPI] Location from daily forecast: {town}, {country}")  # DEBUG
+            # DEBUG
+            print(
+                f"[ForecaWeatherAPI] Location from daily forecast: {town}, {country}")
             daily_data = {
                 'town': town,
                 'country': country,
@@ -727,7 +732,8 @@ class ForecaWeatherAPI:
                     'description': self._symbol_to_description(symbol)
                 })
 
-            print(f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
+            print(
+                f"[ForecaWeatherAPI] Parsed {len(daily_data['days'])} daily forecasts")
             return daily_data
 
         except Exception as e:

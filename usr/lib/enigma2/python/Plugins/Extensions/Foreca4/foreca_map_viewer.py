@@ -44,22 +44,22 @@ def get_background_for_layer(layer_title, region="europe"):
     """Select geographic background based on layer and region"""
     # layer_lower = layer_title.lower()
     # if any(
-        # word in layer_lower for word in [
-            # 'temp',
-            # 'temperature',
-            # 'warm',
-            # 'cold']):
-        # return 'temp_map.png'
+    # word in layer_lower for word in [
+    # 'temp',
+    # 'temperature',
+    # 'warm',
+    # 'cold']):
+    # return 'temp_map.png'
     # elif any(word in layer_lower for word in ['rain', 'precip', 'shower', 'snow']):
-        # return 'rain_map.png'
+    # return 'rain_map.png'
     # elif any(word in layer_lower for word in ['symb']):
-        # return 'symb.png'
+    # return 'symb.png'
     # elif any(word in layer_lower for word in ['cloud', 'fog', 'mist']):
-        # return 'cloud_map.png'
+    # return 'cloud_map.png'
     # elif any(word in layer_lower for word in ['pressure', 'baro', 'hpa']):
-        # return 'pressure_map.png'
+    # return 'pressure_map.png'
     # elif any(word in layer_lower for word in ['wind', 'gust', 'breeze']):
-        # return 'europa.png'
+    # return 'europa.png'
 
     region_lower = region.lower()
     if any(word in region_lower for word in ['italy', 'italia', 'italien']):

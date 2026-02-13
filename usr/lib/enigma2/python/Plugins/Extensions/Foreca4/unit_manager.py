@@ -228,7 +228,8 @@ class UnitSettingsSimple(Screen):
         current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(current_color)
         # Set selection plate with current transparency
-        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(
+            parseColor(alpha))
 
     def update_display(self):
         """Update checkboxes based on the current selection"""
@@ -247,7 +248,7 @@ class UnitSettingsSimple(Screen):
                 self["check_imperial"].instance.setPixmapFromFile(check_path)
             if os.path.exists(empty_path):
                 self["check_metric"].instance.setPixmapFromFile(empty_path)
-        
+
         self.initialize_display()
         self["check_metric"].show()
         self["check_imperial"].show()

@@ -1001,7 +1001,8 @@ class Foreca_Preview(Screen, HelpableScreen):
         # Update transparent overlays
         transparent_color = parseColor(alpha)
         self["transp_bg_today"].instance.setBackgroundColor(transparent_color)
-        self["transp_bg_forecast"].instance.setBackgroundColor(transparent_color)
+        self["transp_bg_forecast"].instance.setBackgroundColor(
+            transparent_color)
         self["transp_bg_sun"].instance.setBackgroundColor(transparent_color)
         self["transp_bg_coords"].instance.setBackgroundColor(transparent_color)
         self["transp_bg_header"].instance.setBackgroundColor(transparent_color)
@@ -1058,7 +1059,8 @@ class Foreca_Preview(Screen, HelpableScreen):
         # Sunrise / Sunset
         self["sunrise_value"].setText(
             str(sunrise) if is_valid(sunrise) else "N/A")
-        self["sunset_value"].setText(str(sunset) if is_valid(sunset) else "N/A")
+        self["sunset_value"].setText(
+            str(sunset) if is_valid(sunset) else "N/A")
 
         self["sunrise_label"].setText(_("Sunrise"))
         self["sunset_label"].setText(_("Sunset"))
@@ -1233,7 +1235,8 @@ class Foreca_Preview(Screen, HelpableScreen):
                     self["wind_gust_value"].setText(
                         trans("Gust") + f" {wind_kmh:.1f} km/h")
             except BaseException:
-                self["wind_gust_value"].setText(trans("Gust") + f" {wind_gust}")
+                self["wind_gust_value"].setText(
+                    trans("Gust") + f" {wind_gust}")
 
         # Pressure
         if is_valid(pressure):
@@ -1292,7 +1295,8 @@ class Foreca_Preview(Screen, HelpableScreen):
             trans("mm") if is_valid(rain_mm) else "N/A")
 
         # Humidity
-        self["humidity_value"].setText("{0}%".format(hum) if is_valid(hum) else "N/A")
+        self["humidity_value"].setText(
+            "{0}%".format(hum) if is_valid(hum) else "N/A")
 
         # Force immediate GUI update
         self.invalidate_current_weather_widgets()
@@ -1633,10 +1637,16 @@ class Foreca_Preview(Screen, HelpableScreen):
     def invalidate_current_weather_widgets(self):
         """Force GUI update for current weather widgets"""
         widget_names = [
-            "temperature_feelslike", "wind_speed_value", "wind_gust_value",
-            "dewpoint_value", "city_name", "temperature_current",
-            "weather_description", "rain_value", "humidity_value", "pressure_value"
-        ]
+            "temperature_feelslike",
+            "wind_speed_value",
+            "wind_gust_value",
+            "dewpoint_value",
+            "city_name",
+            "temperature_current",
+            "weather_description",
+            "rain_value",
+            "humidity_value",
+            "pressure_value"]
 
         for name in widget_names:
             try:
@@ -1711,7 +1721,8 @@ class ColorSelector(Screen):
     def initialize_data(self):
         current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(current_color)
-        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(
+            parseColor(alpha))
 
         self.color_list = []
         self.source_names = []
@@ -1761,7 +1772,8 @@ class ColorSelector(Screen):
         if self.color_list:
             for idx in range(0, min(30, len(self.source_names))):
                 if self.translated_names[idx] == self.source_names[idx]:
-                    translated_text = self.translate_color_name(self.source_names[idx])
+                    translated_text = self.translate_color_name(
+                        self.source_names[idx])
                     if translated_text != self.source_names[idx]:
                         self.translated_names[idx] = translated_text
                         self.color_list[idx] = f"{idx}. {translated_text}"
@@ -1779,7 +1791,8 @@ class ColorSelector(Screen):
         def translation_worker():
             nonlocal end_position  # Dichiara che stai usando la variabile esterna
             end_position = min(end_position, len(self.source_names))
-            print(f"[ColorSelector] Processing range {start_position} - {end_position}")
+            print(
+                f"[ColorSelector] Processing range {start_position} - {end_position}")
 
             batch_size = 20
             for batch_start in range(start_position, end_position, batch_size):
@@ -1788,7 +1801,8 @@ class ColorSelector(Screen):
 
                 for position in range(batch_start, batch_end):
                     if self.translated_names[position] == self.source_names[position]:
-                        translated_text = self.translate_color_name(self.source_names[position])
+                        translated_text = self.translate_color_name(
+                            self.source_names[position])
                         if translated_text != self.source_names[position]:
                             self.translated_names[position] = translated_text
                             self.color_list[position] = f"{position}. {translated_text}"
@@ -1805,12 +1819,16 @@ class ColorSelector(Screen):
                     update_timer.callback.append(safe_refresh)
                     update_timer.start(0, True)
 
-                print(f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
+                print(
+                    f"[ColorSelector] Processed batch {batch_start}-{batch_end}")
 
-            print(f"[ColorSelector] Completed range {start_position}-{end_position}")
-            self.last_processed_index = max(self.last_processed_index, end_position)
+            print(
+                f"[ColorSelector] Completed range {start_position}-{end_position}")
+            self.last_processed_index = max(
+                self.last_processed_index, end_position)
 
-        worker_thread = threading.Thread(target=translation_worker, daemon=True)
+        worker_thread = threading.Thread(
+            target=translation_worker, daemon=True)
         worker_thread.start()
 
     def translate_color_name(self, original_text):
@@ -1832,22 +1850,26 @@ class ColorSelector(Screen):
                         translated_parts.append("")
 
                 final_text = '-'.join(translated_parts)
-                print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+                print(
+                    f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
                 return final_text
 
             final_text = trans(original_text)
-            print(f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
+            print(
+                f"[ColorSelector] Result: '{original_text}' -> '{final_text}'")
             return final_text
 
         except Exception as error:
-            print(f"[ColorSelector] ERROR translating '{original_text}': {error}")
+            print(
+                f"[ColorSelector] ERROR translating '{original_text}': {error}")
             return original_text
 
     def update_current_selection(self, selected_index):
         print(f"[ColorSelector] Updating selection {selected_index}")
         if 0 <= selected_index < len(self.translated_names):
             if self.translated_names[selected_index] == self.source_names[selected_index]:
-                translated_text = self.translate_color_name(self.source_names[selected_index])
+                translated_text = self.translate_color_name(
+                    self.source_names[selected_index])
                 if translated_text != self.translated_names[selected_index]:
                     self.translated_names[selected_index] = translated_text
                     self.color_list[selected_index] = f"{selected_index}. {translated_text}"
@@ -1856,7 +1878,8 @@ class ColorSelector(Screen):
             display_name = self.translated_names[selected_index]
             self["color_name_label"].setText(display_name)
 
-            if selected_index < len(self.color_data) and self.color_data[selected_index]:
+            if selected_index < len(
+                    self.color_data) and self.color_data[selected_index]:
                 color_values = self.color_data[selected_index]
                 value_parts = color_values.split(' ')
 
@@ -1870,7 +1893,8 @@ class ColorSelector(Screen):
                     color_object = gRGB(red_value, green_value, blue_value)
 
                     # Calculate brightness for text contrast (0-255)
-                    brightness = (red_value * 299 + green_value * 587 + blue_value * 114) / 1000
+                    brightness = (
+                        red_value * 299 + green_value * 587 + blue_value * 114) / 1000
 
                     # Choose text color based on background brightness
                     if brightness > 128:
@@ -1882,17 +1906,21 @@ class ColorSelector(Screen):
 
                     # --- COLOR_NAME_LABEL (colored text) ---
                     # The color_name_label text takes the selected color
-                    self["color_name_label"].instance.setForegroundColor(color_object)
+                    self["color_name_label"].instance.setForegroundColor(
+                        color_object)
 
                     # --- COLOR_INFO_LABEL (colored background with contrasting text) ---
                     # Colored background
-                    self["color_info_label"].instance.setBackgroundColor(color_object)
+                    self["color_info_label"].instance.setBackgroundColor(
+                        color_object)
                     self["color_info_label"].instance.setTransparent(False)
                     # Contrasting text (white or black for readability)
-                    self["color_info_label"].instance.setForegroundColor(text_color)
+                    self["color_info_label"].instance.setForegroundColor(
+                        text_color)
 
                     # --- COLOR_PREVIEW ---
-                    self["color_preview"].instance.setBackgroundColor(color_object)
+                    self["color_preview"].instance.setBackgroundColor(
+                        color_object)
 
                     info_text = (_('HTML') + ' (' + html_code + ')   ' +
                                  _('Red') + ' (' + str(red_value) + ')   ' +
@@ -1908,7 +1936,8 @@ class ColorSelector(Screen):
             combined_data = list(zip(self.translated_names, self.color_list,
                                      self.source_names, self.color_data))
             combined_data.sort(key=lambda item: item[0].lower())
-            self.translated_names, self.color_list, self.source_names, self.color_data = zip(*combined_data)
+            self.translated_names, self.color_list, self.source_names, self.color_data = zip(
+                *combined_data)
             self.translated_names = list(self.translated_names)
             self.color_list = list(self.color_list)
             self.source_names = list(self.source_names)
@@ -1918,7 +1947,8 @@ class ColorSelector(Screen):
         current_position = self["menu"].getCurrentIndex()
 
         if current_position < len(self.translated_names):
-            self["color_name_label"].setText(self.translated_names[current_position])
+            self["color_name_label"].setText(
+                self.translated_names[current_position])
 
         self["menu"].instance.invalidate()
         self["color_name_label"].instance.invalidate()
@@ -1941,8 +1971,10 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index + 100, len(self.source_names))
-            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index +
+                            100, len(self.source_names))
+            print(
+                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1952,8 +1984,10 @@ class ColorSelector(Screen):
         self.update_current_selection(current_position)
 
         if current_position + 100 > self.last_processed_index:
-            new_limit = min(self.last_processed_index + 100, len(self.source_names))
-            print(f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
+            new_limit = min(self.last_processed_index +
+                            100, len(self.source_names))
+            print(
+                f"[ColorSelector] Preloading: {self.last_processed_index} -> {new_limit}")
             self.process_batch_async(self.last_processed_index, new_limit)
             self.last_processed_index = new_limit
 
@@ -1961,7 +1995,8 @@ class ColorSelector(Screen):
         global rgbmyr, rgbmyg, rgbmyb
         current_position = self["menu"].getCurrentIndex()
 
-        if current_position < len(self.color_data) and self.color_data[current_position]:
+        if current_position < len(
+                self.color_data) and self.color_data[current_position]:
             color_values = self.color_data[current_position]
             value_parts = color_values.split(' ')
 
@@ -2017,9 +2052,11 @@ class InfoDialog(Screen):
         """Initialize the background colors using current RGB and alpha values"""
         current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(current_color)
-        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(
+            parseColor(alpha))
 
-        print(f"[InfoDialog] Colors initialized - RGB: {rgbmyr},{rgbmyg},{rgbmyb} Alpha: {alpha}")
+        print(
+            f"[InfoDialog] Colors initialized - RGB: {rgbmyr},{rgbmyg},{rgbmyb} Alpha: {alpha}")
 
     def exit_dialog(self):
         """Close the dialog"""
@@ -2043,7 +2080,8 @@ class WeatherDetailView(Screen):
         # DEBUG: stampa i dati ricevuti
         print(f"[WeatherDetailView] weather_data: {self.weather_data}")
         print(f"[WeatherDetailView] town: {self.weather_data.get('town')}")
-        print(f"[WeatherDetailView] today keys: {self.weather_data.get('today', {}).keys()}")
+        print(
+            f"[WeatherDetailView] today keys: {self.weather_data.get('today', {}).keys()}")
 
         # Initialize UI components
         self._init_ui_elements()
@@ -2059,7 +2097,8 @@ class WeatherDetailView(Screen):
 
         location_paths = [path_loc0, path_loc1, path_loc2]
         selected_path = location_paths[myloc] if 0 <= myloc < 3 else path_loc0
-        location_id = selected_path.split('/')[0] if '/' in selected_path else selected_path
+        location_id = selected_path.split(
+            '/')[0] if '/' in selected_path else selected_path
 
         return {
             'path': selected_path,
@@ -2083,7 +2122,8 @@ class WeatherDetailView(Screen):
             return default_data
 
         try:
-            data = self.weather_api.get_today_tomorrow_details(self.location_data['id'])
+            data = self.weather_api.get_today_tomorrow_details(
+                self.location_data['id'])
             return data if data else default_data
         except Exception as e:
             print(f"[WeatherDetailView] Error fetching data: {e}")
@@ -2185,11 +2225,14 @@ class WeatherDetailView(Screen):
         self._start_translation_thread()
 
         if 'title_location' in self:
-            print(f"[WeatherDetailView] title_location text: {self['title_location'].text}")
+            print(
+                f"[WeatherDetailView] title_location text: {self['title_location'].text}")
         if 'summary_today' in self:
-            print(f"[WeatherDetailView] summary_today text: {self['summary_today'].text}")
+            print(
+                f"[WeatherDetailView] summary_today text: {self['summary_today'].text}")
         if 'temp_morning_1' in self:
-            print(f"[WeatherDetailView] temp_morning_1 text: {self['temp_morning_1'].text}")
+            print(
+                f"[WeatherDetailView] temp_morning_1 text: {self['temp_morning_1'].text}")
 
         print("[WeatherDetailView] _on_screen_shown END")
 
@@ -2293,23 +2336,48 @@ class WeatherDetailView(Screen):
         tomorrow = self.weather_data.get('tomorrow', {})
 
         # Today
-        self['temp_morning_1'].text = str(today.get('morning', {}).get('temp', 'N/A'))
-        self['temp_afternoon_1'].text = str(today.get('afternoon', {}).get('temp', 'N/A'))
-        self['temp_evening_1'].text = str(today.get('evening', {}).get('temp', 'N/A'))
-        self['temp_overnight_1'].text = str(today.get('overnight', {}).get('temp', 'N/A'))
+        self['temp_morning_1'].text = str(
+            today.get(
+                'morning', {}).get(
+                'temp', 'N/A'))
+        self['temp_afternoon_1'].text = str(
+            today.get(
+                'afternoon', {}).get(
+                'temp', 'N/A'))
+        self['temp_evening_1'].text = str(
+            today.get(
+                'evening', {}).get(
+                'temp', 'N/A'))
+        self['temp_overnight_1'].text = str(
+            today.get(
+                'overnight', {}).get(
+                'temp', 'N/A'))
 
         # Tomorrow
-        self['temp_morning_2'].text = str(tomorrow.get('morning', {}).get('temp', 'N/A'))
-        self['temp_afternoon_2'].text = str(tomorrow.get('afternoon', {}).get('temp', 'N/A'))
-        self['temp_evening_2'].text = str(tomorrow.get('evening', {}).get('temp', 'N/A'))
-        self['temp_overnight_2'].text = str(tomorrow.get('overnight', {}).get('temp', 'N/A'))
+        self['temp_morning_2'].text = str(
+            tomorrow.get(
+                'morning', {}).get(
+                'temp', 'N/A'))
+        self['temp_afternoon_2'].text = str(
+            tomorrow.get(
+                'afternoon', {}).get(
+                'temp', 'N/A'))
+        self['temp_evening_2'].text = str(
+            tomorrow.get(
+                'evening', {}).get(
+                'temp', 'N/A'))
+        self['temp_overnight_2'].text = str(
+            tomorrow.get(
+                'overnight', {}).get(
+                'temp', 'N/A'))
 
     def _update_background_colors(self):
         """Update background colors with current settings"""
         global rgbmyr, rgbmyg, rgbmyb, alpha
         bg_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(bg_color)
-        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(
+            parseColor(alpha))
 
     def _start_translation_thread(self):
         """Start background thread for translations"""
@@ -2321,13 +2389,16 @@ class WeatherDetailView(Screen):
         try:
             self['title_today'].text = _('Weather today')
             self['title_tomorrow'].text = _('Weather tomorrow')
-            self['title_location'].text = str(trans(self.weather_data.get('town', 'N/A')))
+            self['title_location'].text = str(
+                trans(self.weather_data.get('town', 'N/A')))
 
             today = self.weather_data.get('today', {})
             tomorrow = self.weather_data.get('tomorrow', {})
 
-            self['summary_today'].text = str(trans(self._format_summary(today)))
-            self['summary_tomorrow'].text = str(trans(self._format_summary(tomorrow)))
+            self['summary_today'].text = str(
+                trans(self._format_summary(today)))
+            self['summary_tomorrow'].text = str(
+                trans(self._format_summary(tomorrow)))
         except Exception as e:
             print(f"[WeatherDetailView] Translation error: {e}")
 
@@ -2363,7 +2434,8 @@ class RadarMapView(Screen):
         location_paths = [path_loc0, path_loc1, path_loc2]
         selected_path = location_paths[myloc] if 0 <= myloc < 3 else path_loc0
 
-        location_id = selected_path.split('/')[0] if '/' in selected_path else selected_path
+        location_id = selected_path.split(
+            '/')[0] if '/' in selected_path else selected_path
 
         return {
             'path': selected_path,
@@ -2379,7 +2451,8 @@ class RadarMapView(Screen):
 
         if self.weather_api and self.weather_api.check_credentials():
             try:
-                location_data = self.weather_api._get_location_details(self.location_data['id'])
+                location_data = self.weather_api._get_location_details(
+                    self.location_data['id'])
                 if location_data:
                     coordinates['lat'] = location_data.get('lat', lat)
                     coordinates['lon'] = location_data.get('lon', lon)
@@ -2465,7 +2538,8 @@ class RadarMapView(Screen):
         self['value_latitude'].text = str(self.coordinates['lat'])
         self['value_longitude'].text = str(self.coordinates['lon'])
 
-        print(f"[RadarMapView] Coordinates: Lat={self.coordinates['lat']}, Lon={self.coordinates['lon']}")
+        print(
+            f"[RadarMapView] Coordinates: Lat={self.coordinates['lat']}, Lon={self.coordinates['lon']}")
 
     def _update_background_colors(self):
         """Update background colors with current settings"""
@@ -2539,7 +2613,8 @@ class TransparencySelector(Screen):
                 for level in self.transparency_levels:
                     if level["name"] == percentage:
                         alpha = level["value"]
-                        print(f"[TransparencySelector] Selected: {percentage} -> {alpha}")
+                        print(
+                            f"[TransparencySelector] Selected: {percentage} -> {alpha}")
                         break
 
         self.close()
@@ -2549,7 +2624,8 @@ class TransparencySelector(Screen):
         current_color = gRGB(int(rgbmyr), int(rgbmyg), int(rgbmyb))
         self["background_plate"].instance.setBackgroundColor(current_color)
         # Set selection plate with current transparency
-        self["selection_overlay"].instance.setBackgroundColor(parseColor(alpha))
+        self["selection_overlay"].instance.setBackgroundColor(
+            parseColor(alpha))
 
         def conv_alpha(insel):
             trspz = ' n/a'
@@ -2597,7 +2673,8 @@ class TransparencySelector(Screen):
         for index, level in enumerate(self.transparency_levels):
             if level["value"] == alpha:
                 self["menu"].setCurrentIndex(index)
-                print(f"[TransparencySelector] Current selection: {level['name']}")
+                print(
+                    f"[TransparencySelector] Current selection: {level['name']}")
                 break
 
     def exit_screen(self):
