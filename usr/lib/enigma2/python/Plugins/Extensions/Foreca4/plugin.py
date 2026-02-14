@@ -482,10 +482,9 @@ class Foreca_Preview(Screen, HelpableScreen):
         global lon, lat, sunrise, daylen, sunset, f_day
 
         self.session = session
-        self.tag = 0
-
         self.unit_manager = UnitManager(PLUGIN_PATH)
         self.weather_api = ForecaWeatherAPI(self.unit_manager)
+        self.tag = 0
 
         # DETERMINE LOCATION ID FROM PATH
         location_id = path_loc0.split(
@@ -535,6 +534,7 @@ class Foreca_Preview(Screen, HelpableScreen):
         self.setTitle(_("Foreca Weather Forecast") + " " + _("v.") + VERSION)
         self.list = []
         self["menu"] = List(self.list)
+
         # Title widgets
         self["title_main"] = StaticText()
         self["title_version"] = StaticText()
@@ -875,7 +875,8 @@ class Foreca_Preview(Screen, HelpableScreen):
                 MessageBox,
                 _("API configuration file not found!\n\nPlease create file:\n{0}\n\nwith your Foreca API credentials.").format(config_file),
                 MessageBox.TYPE_ERROR,
-                timeout=10)
+                timeout=10
+            )
             return
 
         try:
@@ -884,7 +885,8 @@ class Foreca_Preview(Screen, HelpableScreen):
                 location_id=path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0,
                 country_name=country,
                 lon=lon,
-                lat=lat)
+                lat=lat
+            )
 
             print(f"[Foreca4] Using region: {region} for maps")
 
@@ -896,7 +898,8 @@ class Foreca_Preview(Screen, HelpableScreen):
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10)
+                    timeout=10
+                )
                 return
 
             # Use the unit_system property
@@ -919,17 +922,14 @@ class Foreca_Preview(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split(
-                '/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split(
-                '/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split(
-                '/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
 
-        print(
-            f"[DEBUG] Opening DailyForecast for location: {location_id}, name: {location_name}")
+        print("[DEBUG] Opening DailyForecast for location: {0}, name: {1}".format(
+            location_id, location_name))
 
         if not self.weather_api.check_credentials():
             print("[DEBUG] API credentials not configured")
@@ -1007,8 +1007,8 @@ class Foreca_Preview(Screen, HelpableScreen):
         self["transp_bg_coords"].instance.setBackgroundColor(transparent_color)
         self["transp_bg_header"].instance.setBackgroundColor(transparent_color)
 
-        self.my_cur_weather()
-        self.my_forecast_weather()
+        # self.my_cur_weather()
+        # self.my_forecast_weather()
 
     def StartPageFirst(self):
         self.readsetcolor()
@@ -1040,6 +1040,9 @@ class Foreca_Preview(Screen, HelpableScreen):
         self["title_section_weather"].text = _("Current weather and forecast")
         self["title_version"].text = "<< ver. " + str(VERSION) + " >>"
 
+        if "title_loading" in self:
+            self["title_loading"].text = ""
+
         # Date
         date_str = str(f_date[0]) if f_date and len(
             f_date) > 0 else _("No date available")
@@ -1065,6 +1068,7 @@ class Foreca_Preview(Screen, HelpableScreen):
         self["sunrise_label"].setText(_("Sunrise"))
         self["sunset_label"].setText(_("Sunset"))
 
+        self.my_forecast_weather()
         self.my_cur_weather()
 
         Thread(target=self.mypicload).start()
@@ -1142,13 +1146,14 @@ class Foreca_Preview(Screen, HelpableScreen):
             pos8 = trans('Feels like: ') + str(myf_flike_temp) + \
                 six.ensure_str(six.unichr(176)) + 'C'
 
-            pos9 = trans('Precipitations:') + ' ' + \
-                str(f_precipitation[n]) + '%'
+            precip = f_precipitation[n] if n < len(f_precipitation) else '0'
+            pos9 = trans('Precipitations:') + ' ' + str(precip) + '%'
 
-            pos10 = trans('Humidity:') + ' ' + str(f_rel_hum[n]) + '%'
+            hum_val = f_rel_hum[n] if n < len(f_rel_hum) else '0'
+            pos10 = trans('Humidity:') + ' ' + str(hum_val) + '%'
 
             self.list.append((
-                str(f_time[n]),
+                str(f_time[n]) if n < len(f_time) else '',
                 trans('Temp'),
                 minipng,
                 str(myf_cur_temp) + six.ensure_str(six.unichr(176)) + 'C',
@@ -1310,10 +1315,10 @@ class Foreca_Preview(Screen, HelpableScreen):
 
         day_str = trans(f_day) if is_valid(f_day) else ""
 
-        self["Titel"].text = str(town) + ', ' + \
+        self["title_main"].text = str(town) + ', ' + \
             trans(str(country)) + ' - ' + date_str
         if day_str:
-            self["Titel"].text += ' - ' + day_str
+            self["title_main"].text += ' - ' + day_str
 
         self["mytitel1"].text = _("Current weather and forecast")
         self["mytitel2"].text = "<< ver. " + str(VERSION) + ' >>'
@@ -1340,7 +1345,7 @@ class Foreca_Preview(Screen, HelpableScreen):
         global f_town, f_date, f_time, f_symb, f_cur_temp, f_flike_temp, f_wind, f_wind_speed, f_precipitation, f_rel_hum
         global lon, lat, sunrise, daylen, sunset, f_day
 
-        myloc = fav_index  # <-- THIS is the only real difference!
+        myloc = fav_index
         location_id = path_loc.split('/')[0] if '/' in path_loc else path_loc
 
         # 1. CURRENT WEATHER VIA API (or scraping fallback)
@@ -1646,7 +1651,16 @@ class Foreca_Preview(Screen, HelpableScreen):
             "weather_description",
             "rain_value",
             "humidity_value",
-            "pressure_value"]
+            "pressure_value",
+            "day_length",
+            "sunrise_value",
+            "sunset_value",
+            "sunrise_label",
+            "sunset_label",
+            "title_main",
+            "title_section_weather",
+            "title_version"
+        ]
 
         for name in widget_names:
             try:
@@ -2784,7 +2798,6 @@ class CityPanel4(Screen):
 
     def onFirstExec(self):
         """Called when screen is first shown"""
-        from enigma import eTimer
 
         def init_selection():
             if self.filtered_list:
@@ -2846,8 +2859,6 @@ class CityPanel4(Screen):
             self["Mlist"].setList(self.filtered_list)
 
             self["Mlist"].selectionEnabled(True)
-
-            from enigma import eTimer
 
             def select_first():
                 self.select_first_item()
