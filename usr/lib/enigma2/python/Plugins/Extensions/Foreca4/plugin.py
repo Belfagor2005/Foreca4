@@ -875,8 +875,7 @@ class Foreca_Preview(Screen, HelpableScreen):
                 MessageBox,
                 _("API configuration file not found!\n\nPlease create file:\n{0}\n\nwith your Foreca API credentials.").format(config_file),
                 MessageBox.TYPE_ERROR,
-                timeout=10
-            )
+                timeout=10)
             return
 
         try:
@@ -885,8 +884,7 @@ class Foreca_Preview(Screen, HelpableScreen):
                 location_id=path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0,
                 country_name=country,
                 lon=lon,
-                lat=lat
-            )
+                lat=lat)
 
             print(f"[Foreca4] Using region: {region} for maps")
 
@@ -898,8 +896,7 @@ class Foreca_Preview(Screen, HelpableScreen):
                     MessageBox,
                     _("API credentials not configured.\nPlease create api_config.txt file.\n\nExample file created: api_config.txt"),
                     MessageBox.TYPE_ERROR,
-                    timeout=10
-                )
+                    timeout=10)
                 return
 
             # Use the unit_system property
@@ -922,14 +919,19 @@ class Foreca_Preview(Screen, HelpableScreen):
         location_name = str(town) if is_valid(town) else "Unknown"
 
         if myloc == 0:
-            location_id = path_loc0.split('/')[0] if '/' in path_loc0 else path_loc0
+            location_id = path_loc0.split(
+                '/')[0] if '/' in path_loc0 else path_loc0
         elif myloc == 1:
-            location_id = path_loc1.split('/')[0] if '/' in path_loc1 else path_loc1
+            location_id = path_loc1.split(
+                '/')[0] if '/' in path_loc1 else path_loc1
         elif myloc == 2:
-            location_id = path_loc2.split('/')[0] if '/' in path_loc2 else path_loc2
+            location_id = path_loc2.split(
+                '/')[0] if '/' in path_loc2 else path_loc2
 
-        print("[DEBUG] Opening DailyForecast for location: {0}, name: {1}".format(
-            location_id, location_name))
+        print(
+            "[DEBUG] Opening DailyForecast for location: {0}, name: {1}".format(
+                location_id,
+                location_name))
 
         if not self.weather_api.check_credentials():
             print("[DEBUG] API credentials not configured")
