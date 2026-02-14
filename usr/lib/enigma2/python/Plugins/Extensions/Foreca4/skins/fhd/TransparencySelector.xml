@@ -1,0 +1,14 @@
+<screen name="TransparencySelector" position="center,center" backgroundColor="transparent" size="1100,850" flags="wfNoBorder">
+    <!-- Title -->
+    <widget name="title_label" position="60,40" size="980,60" font="Regular;42" transparent="1" zPosition="3" halign="center" valign="center" backgroundColor="black" foregroundColor="#00ff00"/>
+    
+    <!-- Menu list for transparency levels -->
+    <widget name="menu" itemHeight="55" position="60,120" size="980,550" enableWrapAround="1" scrollbarMode="showOnDemand" valign="center" font="Regular;34" transparent="1" backgroundColor="black" zPosition="3"/>
+    
+    <!-- Preview plates -->
+    <widget name="background_plate" position="20,20" backgroundColor="#000050ef" size="1060,810" zPosition="1" cornerRadius="35"/>
+    <widget name="selection_overlay" position="35,35" backgroundColor="#40000000" size="1030,780" zPosition="2" cornerRadius="35"/>
+    
+    <!-- Instructions -->
+    <eLabel text="▲/▼ to navigate - OK to select" position="60,700" size="980,50" font="Regular;26" halign="center" valign="center" zPosition="3" transparent="1" foregroundColor="#aaaaaa"/>
+</screen>

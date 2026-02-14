@@ -1,0 +1,79 @@
+<screen name="WeatherDetailView" position="center,center" backgroundColor="transparent" size="1600,950" flags="wfNoBorder">
+    
+    <!-- Main Titles -->
+    <widget name="title_main" position="70,30" size="1460,60" font="Regular;42" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00a0ff" />
+    <widget name="title_location" position="70,90" size="1460,50" font="Regular;38" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffffff" />
+    
+    <!-- Radar Map -->
+    <widget name="radar_map" position="70,160" size="429,544" zPosition="3" transparent="1" backgroundColor="black" />
+    
+    <!-- Today Section -->
+    <widget name="title_today" position="520,160" size="500,40" font="Regular;32" transparent="1" zPosition="3" halign="left" valign="center" foregroundColor="#00ff00" />
+    <widget name="summary_today" position="520,210" size="500,70" font="Regular;26" transparent="1" zPosition="3" halign="left" valign="top" foregroundColor="#ffffff" />
+    
+    <!-- Tomorrow Section -->
+    <widget name="title_tomorrow" position="1070,160" size="500,40" font="Regular;32" transparent="1" zPosition="3" halign="left" valign="center" foregroundColor="#00ff00" />
+    <widget name="summary_tomorrow" position="1070,210" size="500,70" font="Regular;26" transparent="1" zPosition="3" halign="left" valign="top" foregroundColor="#ffffff" />
+    
+    <!-- Day 1 Period Headers - AGGIUNTO foregroundColor -->
+    <widget name="label_morning_1" position="510,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_afternoon_1" position="640,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_evening_1" position="770,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_overnight_1" position="900,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    
+    <!-- Day 1 Symbols -->
+    <widget name="symbol_morning_1" position="520,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_afternoon_1" position="650,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_evening_1" position="780,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_overnight_1" position="910,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    
+    <!-- Day 1 Temperatures - AGGIUNTO foregroundColor -->
+    <widget name="temp_label_morning_1" position="520,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_morning_1" position="520,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_afternoon_1" position="650,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_afternoon_1" position="650,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_evening_1" position="780,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_evening_1" position="780,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_overnight_1" position="910,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_overnight_1" position="910,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <!-- Day 2 Period Headers - AGGIUNTO foregroundColor -->
+    <widget name="label_morning_2" position="1060,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_afternoon_2" position="1190,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_evening_2" position="1320,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    <widget name="label_overnight_2" position="1450,300" size="120,35" font="Regular;26" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffaa00" />
+    
+    <!-- Day 2 Symbols -->
+    <widget name="symbol_morning_2" position="1070,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_afternoon_2" position="1200,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_evening_2" position="1330,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    <widget name="symbol_overnight_2" position="1460,340" size="100,100" zPosition="3" transparent="1" backgroundColor="black" />
+    
+    <!-- Day 2 Temperatures - AGGIUNTO foregroundColor -->
+    <widget name="temp_label_morning_2" position="1070,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_morning_2" position="1070,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_afternoon_2" position="1200,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_afternoon_2" position="1200,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_evening_2" position="1330,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_evening_2" position="1330,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <widget name="temp_label_overnight_2" position="1460,450" size="100,35" font="Regular;24" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00ff00" />
+    <widget name="temp_overnight_2" position="1460,480" size="100,40" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#ffff00" />
+    
+    <!-- Coordinates Section - AGGIUNTO foregroundColor -->
+    <widget name="icon_latitude" position="170,750" size="42,42" zPosition="3" transparent="1" />
+    <widget name="value_latitude" position="219,750" size="200,42" font="Regular;26" transparent="1" zPosition="3" halign="left" valign="center" foregroundColor="#ffffff" />
+    
+    <widget name="icon_longitude" position="170,800" size="42,42" zPosition="3" transparent="1" />
+    <widget name="value_longitude" position="218,800" size="200,42" font="Regular;26" transparent="1" zPosition="3" halign="left" valign="center" foregroundColor="#ffffff" />
+    
+    <!-- Background Plates -->
+    <widget name="background_plate" position="15,15" backgroundColor="#000050ef" size="1570,920" zPosition="1" cornerRadius="35" />
+    <widget name="selection_overlay" position="30,30" backgroundColor="#40000000" size="1540,890" zPosition="2" cornerRadius="35" />
+    
+</screen>

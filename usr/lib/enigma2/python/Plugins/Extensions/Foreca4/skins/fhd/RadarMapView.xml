@@ -1,0 +1,22 @@
+<screen name="RadarMapView" position="center,center" backgroundColor="transparent" size="1200,800" flags="wfNoBorder">
+    
+    <!-- Title -->
+    <widget name="title" position="50,30" size="1100,60" font="Regular;42" transparent="1" zPosition="3" halign="center" valign="center" foregroundColor="#00a0ff"/>
+    
+    <!-- Radar Map -->
+    <widget name="radar_map" position="50,110" size="1100,550" zPosition="3" transparent="1" backgroundColor="black" scale="1"/>
+    
+    <!-- Coordinates Section -->
+    <!-- Latitude -->
+    <widget name="icon_latitude" position="400,680" size="40,40" zPosition="3" transparent="1"/>
+    <widget name="value_latitude" position="450,680" size="150,40" font="Regular;30" transparent="1" zPosition="3" halign="left" valign="center"/>
+    
+    <!-- Longitude -->
+    <widget name="icon_longitude" position="650,680" size="40,40" zPosition="3" transparent="1"/>
+    <widget name="value_longitude" position="700,680" size="150,40" font="Regular;30" transparent="1" zPosition="3" halign="left" valign="center"/>
+    
+    <!-- Background Plates -->
+    <widget name="background_plate" position="15,15" backgroundColor="#000050ef" size="1170,770" zPosition="1" cornerRadius="35"/>
+    <widget name="selection_overlay" position="30,30" backgroundColor="#40000000" size="1140,740" zPosition="2" cornerRadius="35"/>
+    
+</screen>

@@ -1,0 +1,8 @@
+<screen name="InfoDialog" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1800,800">
+    <widget name="version_label" position="200,80" size="1400,80" zPosition="3" font="Regular;58" transparent="1" valign="center" halign="center"/>
+    <widget name="author_label" position="500,180" size="800,60" zPosition="3" font="Regular;48" transparent="1" halign="center" valign="center"/>
+    <widget name="mod_label" position="500,280" size="800,60" zPosition="3" font="Regular;48" transparent="1" halign="center" valign="center"/>
+    <widget name="website_label" position="500,400" size="800,70" zPosition="3" font="Regular;46" transparent="1" halign="center" valign="center"/>
+    <widget name="selection_overlay" size="1740,740" zPosition="2" position="30,30" backgroundColor="#40000000" cornerRadius="60"/>
+    <widget name="background_plate" size="1800,800" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="60"/>
+</screen>

@@ -1,0 +1,19 @@
+<screen name="InfoDialog" position="center,center" flags="wfNoBorder" backgroundColor="transparent" size="1280,534">
+    <!-- Version label -->
+    <widget name="version_label" position="140,54" size="1000,56" zPosition="3" font="Regular;43" transparent="1" valign="center" halign="center"/>
+    
+    <!-- Author label -->
+    <widget name="author_label" position="330,120" size="600,42" zPosition="3" font="Regular;43" transparent="1" halign="center" valign="center"/>
+    
+    <!-- Mod label -->
+    <widget name="mod_label" position="330,220" size="600,42" zPosition="3" font="Regular;43" transparent="1" halign="center" valign="center"/>
+    
+    <!-- Website label -->
+    <widget name="website_label" position="330,330" size="600,50" zPosition="3" font="Regular;43" transparent="1" halign="center" valign="center"/>
+    
+    <!-- Selection plate (semi-transparent overlay) -->
+    <widget name="selection_overlay" size="1240,494" zPosition="2" position="20,20" backgroundColor="#40000000" cornerRadius="50"/>
+    
+    <!-- Background plate -->
+    <widget name="background_plate" size="1280,534" zPosition="1" position="0,0" backgroundColor="#000050ef" cornerRadius="50"/>
+</screen>

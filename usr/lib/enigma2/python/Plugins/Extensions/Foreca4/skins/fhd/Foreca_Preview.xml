@@ -1,0 +1,107 @@
+<screen name="Foreca_Preview" position="center,center" size="1920,1080" title="Foreca Weather Preview" flags="wfNoBorder" backgroundColor="transparent">
+    
+    <!-- Logo -->
+    <ePixmap name="" position="205,140" size="400,86" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/forecalogo.png" zPosition="3" scale="1" transparent="1" />
+    
+    <!-- Version -->
+    <widget source="title_version" render="Label" position="245,1005" size="300,43" font="Regular;32" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    
+    <!-- Titles -->
+    <widget source="title_section_weather" render="Label" position="30,26" size="750,56" font="Regular;34" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    <widget source="title_main" render="Label" position="848,26" size="985,56" font="Regular;34" foregroundColor="#0053a9ff" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="center" />
+    <widget source="title_loading" render="Label" position="1398,26" size="985,56" font="Regular;34" foregroundColor="black" backgroundColor="black" transparent="1" valign="center" zPosition="3" halign="right" />
+    
+    <!-- Location and current weather -->
+    <widget name="city_name" position="155,260" size="500,40" zPosition="3" font="Regular;28" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="temperature_current" position="60,395" size="200,70" zPosition="3" font="Regular;50" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="temperature_feelslike" position="40,575" size="300,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" />
+    
+    <!-- Icons -->
+    <widget name="icon_pressure" position="371,695" size="48,48" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="icon_rain" position="112,695" size="48,48" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="icon_humidity" position="665,695" size="48,48" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    
+    <!-- Weather description and details -->
+    <widget name="weather_description" position="40,510" size="730,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="dewpoint_value" position="40,630" size="300,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="weather_icon" position="355,380" size="100,100" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="icon_sun" position="295,827" size="200,63" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    <widget name="wind_icon" position="592,385" size="40,41" scale="1" zPosition="3" backgroundColor="#40000000" transparent="1" alphatest="on" />
+    
+    <!-- Wind values -->
+    <widget name="wind_speed_value" position="440,575" size="330,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" />
+    <widget name="wind_gust_value" position="440,630" size="330,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" />
+    
+    <!-- Precipitation, humidity, pressure -->
+    <widget name="rain_value" position="50,765" size="170,40" zPosition="3" font="Regular;26" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="humidity_value" position="610,765" size="160,40" zPosition="3" font="Regular;26" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="pressure_value" position="270,765" size="250,40" zPosition="3" font="Regular;24" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    
+    <!-- Sun info -->
+    <widget name="day_length" position="270,900" size="250,38" zPosition="3" font="Regular;22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunrise_label" position="50,900" size="170,38" zPosition="3" font="Regular;22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunrise_value" position="50,850" size="170,38" zPosition="3" font="Regular;22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunset_label" position="570,900" size="160,38" zPosition="3" font="Regular;22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    <widget name="sunset_value" position="570,850" size="160,38" zPosition="3" font="Regular;22" backgroundColor="black" transparent="1" valign="center" halign="center" />
+    
+    <!-- Station -->
+    <ePixmap name="" position="48,323" size="48,48" alphatest="on" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/images/observation.png" zPosition="3" scale="1" transparent="1" />
+    <widget name="station_name" position="100,325" size="400,48" font="Regular;24" halign="left" backgroundColor="black" transparent="1" valign="center" zPosition="3" />
+    
+    <!-- Button icons -->
+    <ePixmap position="65,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_ok.png" scale="1" zPosition="3" />
+    <ePixmap position="150,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_menu.png" scale="1" zPosition="3" />
+    <ePixmap position="555,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_info.png" scale="1" zPosition="3" />
+    <ePixmap position="640,1004" size="80,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/Foreca4/buttons/key_help.png" scale="1" zPosition="3" />
+    
+    <!-- Compass directions -->
+    <eLabel position="598,315" size="28,28" transparent="1" backgroundColor="#000080" text="N" foregroundColor="#0053a9ff" font="Regular;18" zPosition="3" halign="center" valign="center" />
+    <eLabel position="598,471" size="28,28" transparent="1" backgroundColor="#000080" text="S" foregroundColor="#0053a9ff" font="Regular;18" zPosition="3" halign="center" valign="center" />
+    <eLabel position="673,391" size="28,28" transparent="1" backgroundColor="#000080" text="E" foregroundColor="#0053a9ff" font="Regular;18" zPosition="3" halign="center" valign="center" />
+    <eLabel position="523,391" size="28,28" transparent="1" backgroundColor="#000080" text="W" foregroundColor="#0053a9ff" font="Regular;18" zPosition="3" halign="center" valign="center" />
+    
+    <!-- BACKGROUND PLATES (RINOMINATI) -->
+    
+    <!-- Right side - Forecast section (seems misaligned in original, adjusting) -->
+    <widget name="selection_overlay" zPosition="1" size="1100,960" position="810,110" backgroundColor="#000050ef" cornerRadius="50" />
+    <widget name="transp_bg_forecast" size="1080,940" zPosition="2" position="820,120" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="color_bg_forecast" size="790,860" zPosition="1" position="10,110" backgroundColor="#000050ef" cornerRadius="50" />
+    
+    <!-- Left side - Today section -->
+    <widget name="transp_bg_today" size="770,840" zPosition="2" position="20,120" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="color_bg_today" size="790,90" zPosition="1" position="10,980" backgroundColor="#000050ef" cornerRadius="50" />
+    
+    <!-- Sun section -->
+    <widget name="transp_bg_sun" size="770,70" zPosition="2" position="20,990" backgroundColor="#40000000" cornerRadius="50" />
+    <widget name="color_bg_sun" size="1100,90" zPosition="1" position="810,10" backgroundColor="#000050ef" cornerRadius="50" />
+    
+    <!-- Coordinates section -->
+    <widget name="color_bg_coords" size="790,90" zPosition="1" position="10,10" backgroundColor="#000050ef" cornerRadius="50" />
+    <widget name="transp_bg_coords" size="1080,70" zPosition="2" position="820,20" backgroundColor="#40000000" cornerRadius="50" />
+    
+    <!-- Header -->
+    <widget name="transp_bg_header" size="770,70" zPosition="2" position="20,20" backgroundColor="#40000000" cornerRadius="50" />
+    
+    <!-- Forecast Menu -->
+    <widget source="menu" render="Listbox" position="833,143" size="1055,885" scrollbarMode="showOnDemand" zPosition="3" transparent="1" backgroundColor="black">
+        <convert type="TemplatedMultiContent">
+            {"template": [
+                MultiContentEntryText(pos = (40, 49), size = (90, 30), font=0, flags = RT_HALIGN_LEFT, text = 0),
+                MultiContentEntryText(pos = (270, 20), size = (120, 30), font=0, flags = RT_HALIGN_LEFT, text = 1),
+                MultiContentEntryPixmapAlphaTest(pos = (155, 24), size = (70, 70), png = 2),
+                MultiContentEntryText(pos = (270, 64), size = (120, 30), font=0, flags = RT_HALIGN_LEFT, text = 3),
+                MultiContentEntryPixmapAlphaTest(pos = (390, 41), size = (27, 28), png = 4),
+                MultiContentEntryText(pos = (455, 20), size = (120, 30), font=0, flags = RT_HALIGN_LEFT, text = 5),
+                MultiContentEntryText(pos = (455, 64), size = (120, 30), font=0, flags = RT_HALIGN_LEFT, text = 6),
+                MultiContentEntryText(pos = (580, 1), size = (470, 30), font=0, flags = RT_HALIGN_LEFT, text = 7),
+                MultiContentEntryText(pos = (580, 31), size = (470, 24), font=1, flags = RT_HALIGN_LEFT, text = 8),
+                MultiContentEntryText(pos = (580, 56), size = (470, 24), font=1, flags = RT_HALIGN_LEFT, text = 9),
+                MultiContentEntryText(pos = (580, 81), size = (470, 24), font=1, flags = RT_HALIGN_LEFT, text = 10),
+            ],
+            "fonts": [gFont("Regular", 26), gFont("Regular", 20)],
+            "itemHeight": 110
+            }
+        </convert>
+    </widget>
+    
+</screen>

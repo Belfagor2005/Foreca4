@@ -1,0 +1,9 @@
+<screen name="ColorSelector" position="center,center" backgroundColor="transparent" size="1000,780" flags="wfNoBorder">
+    <widget name="menu" itemHeight="30" position="40,90" size="920,490" enableWrapAround="1" scrollbarMode="showOnDemand" valign="center" font="Console;24" transparent="1" backgroundColor="black" zPosition="3"/>
+    <widget name="color_info_label" position="40,700" size="920,36" font="Regular;28" transparent="0" zPosition="3" halign="center" valign="center" backgroundColor="black"/>
+    <widget name="color_name_label" position="40,650" size="920,36" font="Regular;28" transparent="1" zPosition="3" halign="center" valign="center" backgroundColor="black"/>
+    <widget name="color_preview" position="40,590" zPosition="3" size="920,45" transparent="1" backgroundColor="black"/>
+    <widget name="background_plate" position="8,8" backgroundColor="#000050ef" size="984,764" zPosition="1" cornerRadius="25"/>
+    <widget name="selection_overlay" position="16,16" backgroundColor="#40000000" size="968,748" zPosition="2" cornerRadius="25"/>
+    <eLabel text="Color selection" position="40,35" font="Regular;28" valign="center" halign="center" size="920,36" zPosition="3" transparent="1"/>
+</screen>
